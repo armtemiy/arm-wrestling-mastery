@@ -64,8 +64,9 @@ const Navbar = () => {
           {/* CTA Button */}
           <Button
             asChild
+            variant="cta"
             size="sm"
-            className="hidden md:inline-flex ml-2 rounded-full bg-primary hover:bg-primary/90"
+            className="hidden md:inline-flex ml-2 rounded-full"
           >
             <a
               href="https://t.me/assistemiy"
@@ -101,8 +102,9 @@ const Navbar = () => {
             ))}
             <Button
               asChild
+              variant="cta"
               size="lg"
-              className="mt-4 rounded-full bg-primary hover:bg-primary/90"
+              className="mt-4 rounded-full"
             >
               <a
                 href="https://t.me/assistemiy"
