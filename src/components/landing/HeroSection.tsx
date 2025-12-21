@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-
 const HeroSection = () => {
-  return (
-    <section className="relative min-h-screen hero-gradient overflow-hidden">
+  return <section className="relative min-h-screen hero-gradient overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[120px]" />
@@ -14,7 +12,7 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            
             <span className="text-sm font-medium text-[hsl(var(--hero-foreground)/0.8)]">
               Армрестлинг • Тула
             </span>
@@ -34,30 +32,19 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Button
-              asChild
-              variant="cta"
-              size="xl"
-              className="rounded-full shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.6)] transition-all"
-            >
-              <a
-                href="https://t.me/assistemiy?text=Хочу%20программу"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+            <Button asChild variant="cta" size="xl" className="rounded-full shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.6)] transition-all">
+              <a href="https://t.me/assistemiy?text=Хочу%20программу" target="_blank" rel="noopener noreferrer">
                 Получить программу
                 <ArrowRight className="ml-2" size={20} />
               </a>
             </Button>
 
-            <Button
-              variant="ghost-cta"
-              onClick={() => {
-                const el = document.querySelector("#training");
-                el?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="flex items-center gap-2 px-6 py-3 text-[hsl(var(--hero-foreground)/0.8)] hover:text-primary transition-all"
-            >
+            <Button variant="ghost-cta" onClick={() => {
+            const el = document.querySelector("#training");
+            el?.scrollIntoView({
+              behavior: "smooth"
+            });
+          }} className="flex items-center gap-2 px-6 py-3 text-[hsl(var(--hero-foreground)/0.8)] hover:text-primary transition-all">
               <Play size={18} className="text-primary" />
               <span>Или запишись на тренировку</span>
             </Button>
@@ -90,8 +77,6 @@ const HeroSection = () => {
           <div className="w-1 h-2 rounded-full bg-current animate-bounce" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
