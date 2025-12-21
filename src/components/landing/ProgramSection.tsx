@@ -32,7 +32,7 @@ const ProgramSection = () => {
     <section 
       id="program" 
       ref={ref}
-      className={`relative py-24 md:py-32 section-fade transition-all duration-700 ${
+      className={`relative py-24 md:py-32 section-dark transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
