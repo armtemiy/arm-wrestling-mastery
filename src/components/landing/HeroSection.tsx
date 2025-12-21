@@ -50,16 +50,17 @@ const HeroSection = () => {
               </a>
             </Button>
 
-            <button
+            <Button
+              variant="ghost-cta"
               onClick={() => {
                 const el = document.querySelector("#training");
                 el?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="flex items-center gap-2 px-6 py-3 text-[hsl(var(--hero-foreground)/0.7)] hover:text-[hsl(var(--hero-foreground))] transition-colors"
+              className="flex items-center gap-2 px-6 py-3 text-[hsl(var(--hero-foreground)/0.8)] hover:text-primary transition-all"
             >
               <Play size={18} className="text-primary" />
               <span>Или запишись на тренировку</span>
-            </button>
+            </Button>
           </div>
 
           {/* Hero image placeholder */}

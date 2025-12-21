@@ -49,9 +49,9 @@ const CTASection = () => {
 
                 <Button
                   asChild
+                  variant="cta"
                   size="lg"
-                  variant="outline"
-                  className="rounded-full border-[hsl(0_0%_100%/0.2)] bg-[hsl(0_0%_100%/0.05)] text-[hsl(var(--hero-foreground))] hover:bg-[hsl(0_0%_100%/0.1)] hover:text-[hsl(var(--hero-foreground))] px-8 py-6 text-lg"
+                  className="rounded-full border-2 border-[hsl(0_0%_100%/0.2)] bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] text-[hsl(var(--hero-foreground))]"
                 >
                   <a
                     href="https://t.me/assistemiy"

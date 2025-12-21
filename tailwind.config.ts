@@ -100,7 +100,7 @@ export default {
 				'sans-serif'
 			],
 			display: [
-				'Anton',
+				'Bebas Neue',
 				'Impact',
 				'Haettenschweiler',
 				'Arial Narrow Bold',
