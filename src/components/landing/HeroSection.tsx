@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 const HeroSection = () => {
   return <section className="relative min-h-screen hero-gradient overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="absolute -bottom-1/4 -left-1/4 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px]" />
+      {/* Background decoration - subtle glow effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full bg-[hsl(25_70%_45%/0.12)] blur-[150px]" />
+        <div className="absolute top-1/3 right-0 w-[400px] h-[400px] rounded-full bg-[hsl(25_60%_50%/0.08)] blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-[hsl(25_50%_40%/0.06)] blur-[80px]" />
       </div>
 
       <div className="relative container mx-auto px-4 pt-32 pb-20 md:pt-40 md:pb-32">

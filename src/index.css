@@ -166,12 +166,33 @@
     @apply bg-gradient-to-r from-primary to-[hsl(35_95%_60%)] bg-clip-text text-transparent;
   }
 
+  /* Hero section - тёмный градиент с точками как на референсе */
   .hero-gradient {
-    background: linear-gradient(180deg, hsl(var(--hero-bg)) 0%, hsl(220 20% 12%) 100%);
+    background: 
+      radial-gradient(circle at 50% 0%, hsl(25 80% 50% / 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(25 70% 45% / 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 20% 30%, hsl(25 60% 40% / 0.08) 0%, transparent 35%),
+      linear-gradient(180deg, hsl(0 0% 8%) 0%, hsl(0 0% 10%) 100%);
   }
 
-  .section-fade {
-    background: linear-gradient(180deg, hsl(220 20% 12%) 0%, hsl(var(--background)) 100%);
+  /* Плавный переход из hero в следующую секцию */
+  .section-dark {
+    background: hsl(0 0% 10%);
+  }
+
+  /* Светлая секция */
+  .section-light {
+    background: hsl(30 20% 96%);
+  }
+
+  /* Нейтральная тёплая секция */
+  .section-warm {
+    background: hsl(30 15% 94%);
+  }
+
+  /* Тёмная секция для контраста */
+  .section-charcoal {
+    background: hsl(0 0% 12%);
   }
 }
 

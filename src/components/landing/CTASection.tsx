@@ -7,13 +7,13 @@ const CTASection = () => {
   return (
     <section 
       ref={ref}
-      className={`relative py-24 md:py-32 overflow-hidden bg-[hsl(var(--hero-bg))] transition-all duration-700 ${
+      className={`relative py-24 md:py-32 overflow-hidden section-charcoal transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
       {/* Background decorations */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-primary/10 blur-[150px]" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-[hsl(25_60%_45%/0.1)] blur-[120px]" />
       </div>
 
       <div className="relative container mx-auto px-4">
