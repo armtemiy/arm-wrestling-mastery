@@ -1,23 +1,32 @@
 import { Award, BookOpen, Dumbbell } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 const AboutSection = () => {
-  const {
-    ref,
-    isVisible
-  } = useScrollAnimation({
-    threshold: 0.2
-  });
-  const highlights = [{
-    icon: BookOpen,
-    text: "3 года глубокого изучения армрестлинга"
-  }, {
-    icon: Dumbbell,
-    text: "Опыт в пауэрлифтинге и стритлифтинге"
-  }, {
-    icon: Award,
-    text: "КМС по акробатическому рок-н-роллу"
-  }];
-  return <section id="about" ref={ref} className={`py-24 md:py-32 bg-background transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  
+  const highlights = [
+    {
+      icon: BookOpen,
+      text: "3 года глубокого изучения армрестлинга",
+    },
+    {
+      icon: Dumbbell,
+      text: "Опыт в пауэрлифтинге и стритлифтинге",
+    },
+    {
+      icon: Award,
+      text: "КМС по акробатическому рок-н-роллу",
+    },
+  ];
+
+  return (
+    <section 
+      id="about" 
+      ref={ref}
+      className={`py-24 md:py-32 bg-background transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -42,7 +51,7 @@ const AboutSection = () => {
 
             {/* Content */}
             <div className="order-1 md:order-2">
-              <span className="inline-block px-4 py-1 rounded-full text-sm font-medium mb-4 bg-red-600 text-primary-foreground">
+              <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
                 Обо мне
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
@@ -59,17 +68,21 @@ const AboutSection = () => {
               </p>
 
               <div className="space-y-4">
-                {highlights.map((item, index) => <div key={index} className="flex items-center gap-3">
+                {highlights.map((item, index) => (
+                  <div key={index} className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                       <item.icon className="text-primary" size={20} />
                     </div>
                     <span className="text-foreground">{item.text}</span>
-                  </div>)}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default AboutSection;
