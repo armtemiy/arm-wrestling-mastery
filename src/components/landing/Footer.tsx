@@ -39,10 +39,10 @@ const TikTokIcon = () => (
 
 const Footer = () => {
   const navLinks = [
-    { label: "Обо мне", href: "#about" },
-    { label: "Для кого", href: "#for-whom" },
     { label: "Программа", href: "#program" },
     { label: "Тренировки", href: "#training" },
+    { label: "О себе", href: "#about" },
+    { label: "Для кого", href: "#for-whom" },
     { label: "FAQ", href: "#faq" },
   ];
 
@@ -62,26 +62,30 @@ const Footer = () => {
   };
 
   return (
-    <footer className="px-8 py-12 bg-[hsl(15,25%,18%)]">
+    <footer className="px-8 py-16 section-charcoal border-t border-[hsl(0_0%_100%/0.1)]">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-8 items-start">
+        <div className="grid md:grid-cols-3 gap-12 items-start">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex flex-col gap-4">
             <span
-              className="text-4xl text-white"
+              className="text-4xl text-[hsl(0_0%_98%)]"
               style={{ fontFamily: "\"Charlie Don't Surf\", cursive" }}
             >
               Armtemiy
             </span>
+            <p className="text-[hsl(0_0%_98%/0.5)] text-sm max-w-xs">
+              Системный подход к армрестлингу. От основ до продвинутых техник.
+            </p>
           </div>
 
           {/* Navigation */}
-          <div className="space-y-3 h-full flex flex-col justify-between">
+          <div className="space-y-3">
+            <p className="text-[hsl(0_0%_98%/0.4)] text-xs uppercase tracking-wider mb-4">Навигация</p>
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="block text-white/70 hover:text-white transition-colors text-left"
+                className="block text-[hsl(0_0%_98%/0.7)] hover:text-[hsl(0_0%_98%)] transition-colors text-left text-sm"
               >
                 {link.label}
               </button>
@@ -89,17 +93,17 @@ const Footer = () => {
           </div>
 
           {/* Social & Copyright */}
-          <div className="space-y-6 h-full flex flex-col justify-between">
+          <div className="space-y-6">
             <div>
-              <p className="text-white/70 mb-3">Подписывайся</p>
-              <div className="flex gap-3">
+              <p className="text-[hsl(0_0%_98%/0.4)] text-xs uppercase tracking-wider mb-4">Социальные сети</p>
+              <div className="flex gap-4">
                 {socialLinks.map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:opacity-80 transition-opacity"
+                    className="w-10 h-10 rounded-full bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] flex items-center justify-center transition-colors"
                     aria-label={social.label}
                   >
                     <social.icon />
@@ -108,22 +112,18 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="w-full h-px bg-white/20" />
-
-            <div className="space-y-2">
-              <p className="text-white/50 text-sm">
-                © {new Date().getFullYear()} Armtemiy. Все права защищены.
+            <div className="pt-6 border-t border-[hsl(0_0%_100%/0.1)]">
+              <p className="text-[hsl(0_0%_98%/0.4)] text-sm">
+                © {new Date().getFullYear()} Armtemiy
               </p>
-              <div className="flex gap-4 text-sm">
-                <a
-                  href="https://t.me/assistemiy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/50 hover:text-white/80 transition-colors"
-                >
-                  Написать
-                </a>
-              </div>
+              <a
+                href="https://t.me/assistemiy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[hsl(30_80%_55%)] hover:text-[hsl(30_80%_65%)] transition-colors text-sm mt-2 inline-block"
+              >
+                Написать в Telegram →
+              </a>
             </div>
           </div>
         </div>
