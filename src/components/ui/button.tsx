@@ -15,10 +15,10 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:scale-[1.02] active:scale-[0.98]",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // CTA variant with Bebas Neue font for bold call-to-action
-        cta: "bg-primary text-primary-foreground font-display text-xl uppercase tracking-wider hover:bg-primary/90 hover:scale-[1.03] hover:shadow-[0_0_40px_hsl(var(--primary)/0.5)] active:scale-[0.98]",
+        // CTA variant with Montserrat Bold for strong call-to-action
+        cta: "bg-primary text-primary-foreground font-display font-bold text-base uppercase tracking-wide hover:bg-primary/90 hover:scale-[1.03] hover:shadow-[0_0_40px_hsl(var(--primary)/0.5)] active:scale-[0.98]",
         // Ghost CTA for secondary actions with display font
-        "ghost-cta": "font-display text-lg uppercase tracking-wide hover:text-primary hover:scale-[1.02] active:scale-[0.98]",
+        "ghost-cta": "font-display font-semibold text-base uppercase tracking-wide hover:text-primary hover:scale-[1.02] active:scale-[0.98]",
       },
       size: {
         default: "h-10 px-4 py-2",
