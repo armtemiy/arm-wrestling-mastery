@@ -62,7 +62,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="px-8 py-12 bg-[hsl(15,25%,18%)]">
+    <footer className="px-8 py-12 bg-[hsl(15,25%,18%)] rounded-t-[2rem]">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-8 items-start">
           {/* Logo */}
