@@ -34,7 +34,7 @@ const FAQSection = () => {
   return (
     <section 
       ref={ref}
-      className={`py-24 md:py-32 bg-muted/30 transition-all duration-700 ${
+      className={`py-24 md:py-32 bg-background transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >

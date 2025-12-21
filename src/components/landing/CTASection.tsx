@@ -7,7 +7,7 @@ const CTASection = () => {
   return (
     <section 
       ref={ref}
-      className={`relative py-24 md:py-32 overflow-hidden bg-[hsl(var(--hero-bg))] transition-all duration-700 ${
+      className={`relative py-24 md:py-32 overflow-hidden bg-background transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
@@ -22,11 +22,11 @@ const CTASection = () => {
           <div className="relative">
             <div className="absolute -inset-4 rounded-[2rem] bg-primary/10 blur-2xl" />
 
-            <div className="relative glass-strong rounded-3xl p-8 md:p-12 text-center">
-              <h2 className="text-3xl md:text-5xl font-bold text-[hsl(var(--hero-foreground))] mb-4">
+            <div className="relative border border-border bg-card rounded-3xl p-8 md:p-12 text-center shadow-lg">
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
                 Готов начать?
               </h2>
-              <p className="text-[hsl(var(--hero-foreground)/0.7)] text-lg mb-10 max-w-lg mx-auto">
+              <p className="text-muted-foreground text-lg mb-10 max-w-lg mx-auto">
                 Выбери что ближе: полная программа или личная тренировка в Туле
               </p>
 
@@ -51,7 +51,7 @@ const CTASection = () => {
                   asChild
                   variant="cta"
                   size="lg"
-                  className="rounded-full border-2 border-[hsl(0_0%_100%/0.2)] bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] text-[hsl(var(--hero-foreground))]"
+                  className="rounded-full border-2 border-border bg-muted/50 hover:bg-muted text-foreground"
                 >
                   <a
                     href="https://t.me/assistemiy"
@@ -65,7 +65,7 @@ const CTASection = () => {
               </div>
 
               {/* Social links */}
-              <div className="flex items-center justify-center gap-6 text-[hsl(var(--hero-foreground)/0.6)]">
+              <div className="flex items-center justify-center gap-6 text-muted-foreground">
                 <a
                   href="https://t.me/armtemiy"
                   target="_blank"
