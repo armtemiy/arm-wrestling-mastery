@@ -15,8 +15,10 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:scale-[1.02] active:scale-[0.98]",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // CTA variant with Montserrat Bold for strong call-to-action
-        cta: "bg-primary text-primary-foreground font-display font-bold text-base uppercase tracking-wide hover:bg-primary/90 hover:scale-[1.03] hover:shadow-[0_0_40px_hsl(var(--primary)/0.5)] active:scale-[0.98]",
+        // CTA for dark backgrounds - light button with dark text
+        cta: "bg-[hsl(30_20%_96%)] text-[hsl(0_0%_12%)] font-display font-bold text-base uppercase tracking-wide hover:bg-white hover:scale-[1.03] hover:shadow-[0_0_40px_hsl(0_0%_100%/0.3)] active:scale-[0.98]",
+        // CTA for light backgrounds - dark button with light text  
+        "cta-dark": "bg-[hsl(0_0%_12%)] text-[hsl(30_20%_96%)] font-display font-bold text-base uppercase tracking-wide hover:bg-[hsl(0_0%_8%)] hover:scale-[1.03] hover:shadow-[0_0_40px_hsl(0_0%_0%/0.3)] active:scale-[0.98]",
         // Ghost CTA for secondary actions with display font
         "ghost-cta": "font-display font-semibold text-base uppercase tracking-wide hover:text-primary hover:scale-[1.02] active:scale-[0.98]",
       },

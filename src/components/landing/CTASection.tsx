@@ -20,13 +20,13 @@ const CTASection = () => {
         <div className="max-w-3xl mx-auto">
           {/* Glass card */}
           <div className="relative">
-            <div className="absolute -inset-4 rounded-[2rem] bg-primary/10 blur-2xl" />
+            <div className="absolute -inset-4 rounded-[2rem] bg-[hsl(30_80%_60%/0.1)] blur-2xl" />
 
             <div className="relative glass-strong rounded-3xl p-8 md:p-12 text-center">
-              <h2 className="text-3xl md:text-5xl font-bold text-[hsl(var(--hero-foreground))] mb-4">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
                 Готов начать?
               </h2>
-              <p className="text-[hsl(var(--hero-foreground)/0.7)] text-lg mb-10 max-w-lg mx-auto">
+              <p className="text-[hsl(0_0%_100%/0.7)] text-lg mb-10 max-w-lg mx-auto">
                 Выбери что ближе: полная программа или личная тренировка в Туле
               </p>
 
@@ -35,7 +35,7 @@ const CTASection = () => {
                   asChild
                   variant="cta"
                   size="xl"
-                  className="rounded-full shadow-[0_0_30px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_40px_hsl(var(--primary)/0.6)] transition-all"
+                  className="rounded-full"
                 >
                   <a
                     href="https://t.me/assistemiy?text=Хочу%20программу"
@@ -49,9 +49,8 @@ const CTASection = () => {
 
                 <Button
                   asChild
-                  variant="cta"
                   size="lg"
-                  className="rounded-full border-2 border-[hsl(0_0%_100%/0.2)] bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] text-[hsl(var(--hero-foreground))]"
+                  className="rounded-full border-2 border-[hsl(0_0%_100%/0.2)] bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] text-white font-display font-semibold uppercase tracking-wide"
                 >
                   <a
                     href="https://t.me/assistemiy"
@@ -65,12 +64,12 @@ const CTASection = () => {
               </div>
 
               {/* Social links */}
-              <div className="flex items-center justify-center gap-6 text-[hsl(var(--hero-foreground)/0.6)]">
+              <div className="flex items-center justify-center gap-6 text-[hsl(0_0%_100%/0.6)]">
                 <a
                   href="https://t.me/armtemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
+                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
                 >
                   Канал @armtemiy
                 </a>
@@ -79,7 +78,7 @@ const CTASection = () => {
                   href="https://t.me/assistemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
+                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
                 >
                   Личка @assistemiy
                 </a>

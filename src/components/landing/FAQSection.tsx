@@ -34,14 +34,14 @@ const FAQSection = () => {
   return (
     <section 
       ref={ref}
-      className={`py-24 md:py-32 section-warm transition-all duration-700 ${
+      className={`relative py-24 md:py-32 section-warm transition-all duration-700 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-[hsl(0_0%_12%)] mb-4">
               Частые вопросы
             </h2>
           </div>
@@ -51,12 +51,12 @@ const FAQSection = () => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="border border-border rounded-2xl px-6 bg-card data-[state=open]:border-primary/30 transition-colors"
+                className="border border-[hsl(0_0%_12%/0.1)] rounded-2xl px-6 bg-white data-[state=open]:border-[hsl(30_80%_60%/0.3)] transition-colors"
               >
-                <AccordionTrigger className="text-left text-foreground hover:no-underline py-5">
+                <AccordionTrigger className="text-left text-[hsl(0_0%_12%)] hover:no-underline py-5">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5">
+                <AccordionContent className="text-[hsl(0_0%_12%/0.6)] pb-5">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -64,6 +64,9 @@ const FAQSection = () => {
           </Accordion>
         </div>
       </div>
+
+      {/* Section divider */}
+      <div className="absolute bottom-0 left-0 right-0 section-divider" />
     </section>
   );
 };
