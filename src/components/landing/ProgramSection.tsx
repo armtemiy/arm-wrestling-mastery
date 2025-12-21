@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Target, Dumbbell, Brain, RefreshCw, ArrowRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const ProgramSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  
   const features = [
     {
       icon: Target,
@@ -26,7 +29,13 @@ const ProgramSection = () => {
   ];
 
   return (
-    <section id="program" className="relative py-24 md:py-32 section-fade">
+    <section 
+      id="program" 
+      ref={ref}
+      className={`relative py-24 md:py-32 section-fade transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">

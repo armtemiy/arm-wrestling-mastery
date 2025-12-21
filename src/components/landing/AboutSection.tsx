@@ -1,6 +1,9 @@
 import { Award, BookOpen, Dumbbell } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const AboutSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  
   const highlights = [
     {
       icon: BookOpen,
@@ -17,7 +20,13 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-background">
+    <section 
+      id="about" 
+      ref={ref}
+      className={`py-24 md:py-32 bg-background transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
