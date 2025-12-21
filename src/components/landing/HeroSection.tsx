@@ -1,15 +1,27 @@
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import Particles from "./Particles";
+import { useParallax } from "@/hooks/useParallax";
 
 const HeroSection = () => {
+  const heroImageRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  
+  const imageParallax = useParallax(heroImageRef, { speed: 0.15, direction: "up" });
+  const glowParallax = useParallax(glowRef, { speed: 0.08, direction: "down" });
+
   return (
     <section className="relative min-h-screen hero-gradient overflow-hidden">
       {/* Animated particles */}
       <Particles />
       
-      {/* Background decoration - subtle glow effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Background decoration - subtle glow effects with parallax */}
+      <div 
+        ref={glowRef}
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        style={{ transform: `translateY(${glowParallax}px)` }}
+      >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full bg-[hsl(25_70%_45%/0.12)] blur-[150px]" />
         <div className="absolute top-1/3 right-0 w-[400px] h-[400px] rounded-full bg-[hsl(25_60%_50%/0.08)] blur-[100px]" />
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-[hsl(25_50%_40%/0.06)] blur-[80px]" />
@@ -58,8 +70,12 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          {/* Hero image placeholder */}
-          <div className="relative mx-auto max-w-3xl">
+          {/* Hero image placeholder with parallax */}
+          <div 
+            ref={heroImageRef}
+            className="relative mx-auto max-w-3xl"
+            style={{ transform: `translateY(${imageParallax}px)` }}
+          >
             <div className="aspect-video rounded-2xl glass-strong overflow-hidden">
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[hsl(0_0%_8%)] to-[hsl(0_0%_15%)]">
                 <div className="text-center p-8">

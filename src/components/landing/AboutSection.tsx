@@ -1,8 +1,12 @@
+import { useRef } from "react";
 import { Award, BookOpen, Dumbbell } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useParallax } from "@/hooks/useParallax";
 
 const AboutSection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  const photoRef = useRef<HTMLDivElement>(null);
+  const photoParallax = useParallax(photoRef, { speed: 0.1, direction: "up" });
   
   const highlights = [
     {
@@ -30,8 +34,12 @@ const AboutSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Photo placeholder */}
-            <div className="relative order-2 md:order-1">
+            {/* Photo placeholder with parallax */}
+            <div 
+              ref={photoRef}
+              className="relative order-2 md:order-1"
+              style={{ transform: `translateY(${photoParallax}px)` }}
+            >
               <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-[hsl(30_20%_92%)] to-[hsl(30_20%_88%)] border border-[hsl(0_0%_12%/0.1)] overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-center p-8">
@@ -52,7 +60,7 @@ const AboutSection = () => {
             {/* Content */}
             <div className="order-1 md:order-2">
               <span className="inline-block px-4 py-1 rounded-full bg-[hsl(30_80%_60%/0.1)] text-[hsl(30_70%_50%)] text-sm font-medium mb-4">
-                Обо мне
+                О себе
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-[hsl(0_0%_12%)] mb-6">
                 Артемий Кривошапов

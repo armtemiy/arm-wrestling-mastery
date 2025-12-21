@@ -5,10 +5,22 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOnLightSection, setIsOnLightSection] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Check if navbar is over light section
+      const lightSections = document.querySelectorAll('.section-light, .section-warm');
+      let onLight = false;
+      lightSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 80 && rect.bottom >= 80) {
+          onLight = true;
+        }
+      });
+      setIsOnLightSection(onLight);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -17,7 +29,7 @@ const Navbar = () => {
   const navLinks = [
     { href: "#program", label: "Программа" },
     { href: "#training", label: "Тренировки" },
-    { href: "#about", label: "Обо мне" },
+    { href: "#about", label: "О себе" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -30,7 +42,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`island-nav transition-all duration-300 ${isScrolled ? "shadow-lg" : ""}`}>
+      <nav className={`island-nav transition-all duration-300 ${isScrolled ? "shadow-lg" : ""} ${isOnLightSection ? "island-nav-light" : ""}`}>
         <div className="flex items-center gap-1 md:gap-2">
           {/* Logo */}
           <a
