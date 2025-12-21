@@ -87,7 +87,7 @@ export default {
   		},
 		fontFamily: {
 			sans: [
-				'Space Grotesk',
+				'Inter',
 				'ui-sans-serif',
 				'system-ui',
 				'-apple-system',
@@ -100,10 +100,9 @@ export default {
 				'sans-serif'
 			],
 			display: [
-				'Bebas Neue',
-				'Impact',
-				'Haettenschweiler',
-				'Arial Narrow Bold',
+				'Montserrat',
+				'ui-sans-serif',
+				'system-ui',
 				'sans-serif'
 			],
 			serif: [
