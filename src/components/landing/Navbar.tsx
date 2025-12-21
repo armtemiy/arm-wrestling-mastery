@@ -39,7 +39,7 @@ const Navbar = () => {
           {/* Logo */}
           <a
             href="#"
-            className="px-4 py-2 text-lg font-bold text-[hsl(var(--hero-foreground))] font-['Space_Grotesk']"
+            className="px-4 py-2 text-xl text-[hsl(var(--hero-foreground))] font-['Charlie_Don\\'t_Surf',_cursive]"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
