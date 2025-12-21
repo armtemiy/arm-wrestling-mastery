@@ -30,11 +30,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav
-        className={`island-nav transition-all duration-300 ${
-          isScrolled ? "shadow-lg" : ""
-        }`}
-      >
+      <nav className={`island-nav transition-all duration-300 ${isScrolled ? "shadow-lg" : ""}`}>
         <div className="flex items-center gap-1 md:gap-2">
           {/* Logo */}
           <a
@@ -45,7 +41,7 @@ const Navbar = () => {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            Армтемий
+            Armtemiy
           </a>
 
           {/* Desktop Links */}
@@ -62,17 +58,8 @@ const Navbar = () => {
           </div>
 
           {/* CTA Button */}
-          <Button
-            asChild
-            variant="cta"
-            size="sm"
-            className="hidden md:inline-flex ml-2 rounded-full"
-          >
-            <a
-              href="https://t.me/assistemiy"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          <Button asChild variant="cta" size="sm" className="hidden md:inline-flex ml-2 rounded-full">
+            <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer">
               Написать
             </a>
           </Button>
@@ -100,17 +87,8 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
-            <Button
-              asChild
-              variant="cta"
-              size="lg"
-              className="mt-4 rounded-full"
-            >
-              <a
-                href="https://t.me/assistemiy"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+            <Button asChild variant="cta" size="lg" className="mt-4 rounded-full">
+              <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer">
                 Написать в Telegram
               </a>
             </Button>
