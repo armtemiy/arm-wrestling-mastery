@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Users, ArrowRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const TrainingSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
   const details = [
     { icon: MapPin, text: "Тула, оборудованная комната" },
     { icon: Clock, text: "От 500₽/час" },
@@ -9,7 +11,13 @@ const TrainingSection = () => {
   ];
 
   return (
-    <section id="training" className="py-24 md:py-32 bg-muted/30">
+    <section 
+      id="training" 
+      ref={ref}
+      className={`py-24 md:py-32 bg-muted/30 transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">

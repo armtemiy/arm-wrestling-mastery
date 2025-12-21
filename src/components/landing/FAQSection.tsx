@@ -4,8 +4,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const FAQSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
   const faqs = [
     {
       question: "Подойдёт ли новичку?",
@@ -30,7 +32,12 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-muted/30">
+    <section 
+      ref={ref}
+      className={`py-24 md:py-32 bg-muted/30 transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">

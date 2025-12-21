@@ -1,9 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Send } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const CTASection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-[hsl(var(--hero-bg))]">
+    <section 
+      ref={ref}
+      className={`relative py-24 md:py-32 overflow-hidden bg-[hsl(var(--hero-bg))] transition-all duration-700 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       {/* Background decorations */}
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-primary/10 blur-[150px]" />
