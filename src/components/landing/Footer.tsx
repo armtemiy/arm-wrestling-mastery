@@ -4,7 +4,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-foreground font-['Space_Grotesk']">
+            <span className="text-xl text-foreground font-['Charlie_Don\\'t_Surf',_cursive]">
               Армтемий
             </span>
             <span className="text-muted-foreground">
