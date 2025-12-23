@@ -3,14 +3,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import Particles from "./Particles";
 import { useParallax } from "@/hooks/useParallax";
-import MarqueeTicker from "./MarqueeTicker";
 
 const HeroSection = () => {
   const glowRef = useRef<HTMLDivElement>(null);
   const glowParallax = useParallax(glowRef, { speed: 0.08, direction: "down" });
 
   return (
-    <section className="relative min-h-screen hero-gradient overflow-hidden">
+    <section className="relative min-h-screen hero-gradient overflow-hidden flex flex-col">
       {/* Animated particles */}
       <Particles />
       
@@ -25,7 +24,7 @@ const HeroSection = () => {
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-[hsl(25_50%_40%/0.06)] blur-[80px]" />
       </div>
 
-      <div className="relative container mx-auto px-4 pt-32 pb-20 md:pt-40 md:pb-32">
+      <div className="relative container mx-auto px-4 pt-32 pb-20 md:pt-40 md:pb-24 flex-1 flex flex-col justify-center">
         <div className="max-w-4xl mx-auto text-center">
 
           {/* Main heading */}
@@ -83,15 +82,12 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[hsl(0_0%_100%/0.4)]">
+      <div className="relative pb-8 flex flex-col items-center gap-2 text-[hsl(0_0%_100%/0.4)]">
         <span className="text-xs uppercase tracking-widest">Листай вниз</span>
         <div className="w-6 h-10 rounded-full border-2 border-current flex justify-center pt-2">
           <div className="w-1 h-2 rounded-full bg-current animate-bounce" />
         </div>
       </div>
-
-      {/* Marquee ticker at the bottom of hero */}
-      <MarqueeTicker />
     </section>
   );
 };
