@@ -109,8 +109,13 @@ const ProgramSection = () => {
         </div>
       </div>
 
-      {/* Section divider */}
-      <div className="absolute bottom-0 left-0 right-0 section-divider-dark" />
+      {/* Scroll indicator as divider */}
+      <div className="relative py-10 flex flex-col items-center gap-2 text-[hsl(0_0%_100%/0.4)]">
+        <span className="text-xs uppercase tracking-widest">Листай вниз</span>
+        <div className="w-6 h-10 rounded-full border-2 border-current flex justify-center pt-2">
+          <div className="w-1 h-2 rounded-full bg-current animate-bounce" />
+        </div>
+      </div>
     </section>
   );
 };

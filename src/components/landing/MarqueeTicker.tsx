@@ -10,8 +10,8 @@ const MarqueeTicker = () => {
       const currentScrollY = window.scrollY;
       const scrollDelta = Math.abs(currentScrollY - lastScrollY.current);
       
-      // Increase speed based on scroll velocity
-      const newSpeed = Math.min(1 + scrollDelta * 0.05, 5);
+      // Gentler speed increase - max 2x speed
+      const newSpeed = Math.min(1 + scrollDelta * 0.015, 2);
       setScrollSpeed(newSpeed);
       
       lastScrollY.current = currentScrollY;
@@ -42,7 +42,7 @@ const MarqueeTicker = () => {
     "ТРЕНИРОВКИ",
   ];
 
-  const animationDuration = 30 / scrollSpeed;
+  const animationDuration = 35 / scrollSpeed;
 
   return (
     <div className="w-full overflow-hidden bg-[hsl(0_0%_6%)] border-t border-b border-[hsl(0_0%_100%/0.05)] py-5">
