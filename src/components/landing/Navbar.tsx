@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [isOnLightSection, setIsOnLightSection] = useState(false);
 
   useEffect(() => {
@@ -37,7 +38,23 @@ const Navbar = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMobileMenuOpen(false);
+    handleCloseMobileMenu();
+  };
+
+  const handleCloseMobileMenu = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsMobileMenuOpen(false);
+      setIsClosing(false);
+    }, 200);
+  };
+
+  const toggleMobileMenu = () => {
+    if (isMobileMenuOpen) {
+      handleCloseMobileMenu();
+    } else {
+      setIsMobileMenuOpen(true);
+    }
   };
 
   return (
@@ -79,7 +96,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={toggleMobileMenu}
             className="md:hidden p-2 text-[hsl(var(--hero-foreground))] hover:bg-[hsl(0_0%_100%/0.1)] rounded-full transition-colors"
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -89,18 +106,23 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 pt-20 px-4 bg-[hsl(var(--hero-bg)/0.98)] backdrop-blur-xl md:hidden">
-          <div className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={() => scrollToSection(link.href)}
-                className="px-6 py-4 text-lg font-medium text-[hsl(var(--hero-foreground))] hover:bg-[hsl(0_0%_100%/0.1)] rounded-xl transition-colors text-left"
-              >
-                {link.label}
-              </button>
+        <div className={`fixed inset-0 z-40 pt-20 px-4 bg-[hsl(var(--hero-bg)/0.98)] backdrop-blur-xl md:hidden ${isClosing ? 'mobile-menu-exit' : 'mobile-menu-enter'}`}>
+          <div className="flex flex-col">
+            {navLinks.map((link, index) => (
+              <div key={link.href}>
+                <button
+                  onClick={() => scrollToSection(link.href)}
+                  className="w-full px-6 py-4 text-lg font-medium text-[hsl(var(--hero-foreground))] hover:bg-[hsl(0_0%_100%/0.1)] rounded-xl transition-colors text-left"
+                >
+                  {link.label}
+                </button>
+                {index < navLinks.length - 1 && (
+                  <div className="mx-6 h-px bg-[hsl(0_0%_100%/0.1)]" />
+                )}
+              </div>
             ))}
-            <Button asChild variant="cta" size="lg" className="mt-4 rounded-full">
+            <div className="mx-6 h-px bg-[hsl(0_0%_100%/0.1)]" />
+            <Button asChild variant="cta" size="lg" className="mt-4 mx-6 rounded-full">
               <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer">
                 Написать в Telegram
               </a>

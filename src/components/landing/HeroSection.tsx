@@ -3,12 +3,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
 import Particles from "./Particles";
 import { useParallax } from "@/hooks/useParallax";
+import MarqueeTicker from "./MarqueeTicker";
 
 const HeroSection = () => {
-  const heroImageRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
-  
-  const imageParallax = useParallax(heroImageRef, { speed: 0.15, direction: "up" });
   const glowParallax = useParallax(glowRef, { speed: 0.08, direction: "down" });
 
   return (
@@ -29,12 +27,6 @@ const HeroSection = () => {
 
       <div className="relative container mx-auto px-4 pt-32 pb-20 md:pt-40 md:pb-32">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8">
-            <span className="text-sm font-medium text-[hsl(0_0%_100%/0.8)]">
-              Армрестлинг • Тула
-            </span>
-          </div>
 
           {/* Main heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
@@ -70,12 +62,8 @@ const HeroSection = () => {
             </Button>
           </div>
 
-          {/* Hero image placeholder with parallax */}
-          <div 
-            ref={heroImageRef}
-            className="relative mx-auto max-w-3xl"
-            style={{ transform: `translateY(${imageParallax}px)` }}
-          >
+          {/* Hero image placeholder - NO parallax */}
+          <div className="relative mx-auto max-w-3xl">
             <div className="aspect-video rounded-2xl glass-strong overflow-hidden">
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[hsl(0_0%_8%)] to-[hsl(0_0%_15%)]">
                 <div className="text-center p-8">
@@ -101,6 +89,9 @@ const HeroSection = () => {
           <div className="w-1 h-2 rounded-full bg-current animate-bounce" />
         </div>
       </div>
+
+      {/* Marquee ticker at the bottom of hero */}
+      <MarqueeTicker />
     </section>
   );
 };

@@ -1,15 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Send } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const CTASection = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
   return (
     <section 
-      ref={ref}
-      className={`relative py-24 md:py-32 overflow-hidden section-charcoal transition-all duration-700 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-      }`}
+      className="relative py-24 md:py-32 overflow-hidden section-charcoal"
     >
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
