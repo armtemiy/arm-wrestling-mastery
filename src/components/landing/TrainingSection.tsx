@@ -60,9 +60,9 @@ const TrainingSection = () => {
 
               <Button
                 asChild
-                variant="cta-dark"
-                size="lg"
-                className="rounded-full"
+                variant="cta"
+                size="xl"
+                className="rounded-full shadow-[0_0_30px_hsl(30_80%_55%/0.3)] hover:shadow-[0_0_50px_hsl(30_80%_55%/0.5)]"
               >
                 <a
                   href="https://t.me/assistemiy?text=Хочу%20на%20тренировку"

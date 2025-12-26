@@ -2,35 +2,49 @@ import { useEffect, useRef, useState } from "react";
 
 const MarqueeTicker = () => {
   const [scrollSpeed, setScrollSpeed] = useState(1);
-  const lastScrollY = useRef(0);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const targetSpeed = useRef(1);
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
+    // Smooth interpolation towards target speed
+    const animate = () => {
+      setScrollSpeed((prev) => {
+        const diff = targetSpeed.current - prev;
+        // Smooth easing - move 8% towards target each frame
+        if (Math.abs(diff) < 0.01) return targetSpeed.current;
+        return prev + diff * 0.08;
+      });
+      animationRef.current = requestAnimationFrame(animate);
+    };
+    animationRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let scrollTimeout: NodeJS.Timeout | null = null;
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      const scrollDelta = Math.abs(currentScrollY - lastScrollY.current);
+      const scrollDelta = Math.abs(currentScrollY - lastScrollY);
       
-      // Gentler speed increase - max 2x speed
-      const newSpeed = Math.min(1 + scrollDelta * 0.015, 2);
-      setScrollSpeed(newSpeed);
-      
-      lastScrollY.current = currentScrollY;
+      // Gentle speed increase - max 1.5x speed
+      targetSpeed.current = Math.min(1 + scrollDelta * 0.008, 1.5);
+      lastScrollY = currentScrollY;
 
       // Reset speed after scrolling stops
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-      scrollTimeout.current = setTimeout(() => {
-        setScrollSpeed(1);
-      }, 150);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        targetSpeed.current = 1;
+      }, 200);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
+      if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, []);
 
