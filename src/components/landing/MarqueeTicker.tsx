@@ -59,7 +59,7 @@ const MarqueeTicker = () => {
   const animationDuration = 35 / scrollSpeed;
 
   return (
-    <div className="w-full overflow-hidden bg-[hsl(0_0%_6%)] border-t border-b border-[hsl(0_0%_100%/0.05)] py-5">
+    <div className="w-full overflow-hidden bg-[hsl(0_0%_6%)] border-t border-b border-[hsl(0_0%_100%/0.05)] py-6 my-12 md:my-16">
       <div 
         className="flex whitespace-nowrap"
         style={{

@@ -85,7 +85,7 @@ const Footer = () => {
               <button
                 key={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="block text-[hsl(0_0%_98%/0.7)] hover:text-[hsl(0_0%_98%)] transition-colors text-left text-sm"
+                className="block text-[hsl(0_0%_98%/0.7)] hover:text-[hsl(30_80%_60%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_60%/0.6)] transition-all duration-300 text-left text-sm"
               >
                 {link.label}
               </button>

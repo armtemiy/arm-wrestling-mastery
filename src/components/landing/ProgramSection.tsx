@@ -28,7 +28,7 @@ const ProgramSection = () => {
   return (
     <section 
       id="program" 
-      className="relative py-24 md:py-32 section-dark"
+      className="relative pt-24 pb-12 md:pt-32 md:pb-16 section-dark"
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -109,8 +109,8 @@ const ProgramSection = () => {
         </div>
       </div>
 
-      {/* Scroll indicator as divider */}
-      <div className="relative py-10 flex flex-col items-center gap-2 text-[hsl(0_0%_100%/0.4)]">
+      {/* Scroll indicator as divider - centered in spacing area */}
+      <div className="relative py-12 md:py-16 flex flex-col items-center gap-2 text-[hsl(0_0%_100%/0.4)]">
         <span className="text-xs uppercase tracking-widest">Листай вниз</span>
         <div className="w-6 h-10 rounded-full border-2 border-current flex justify-center pt-2">
           <div className="w-1 h-2 rounded-full bg-current animate-bounce" />

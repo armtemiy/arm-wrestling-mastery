@@ -25,7 +25,7 @@ const HeroSection = () => {
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full bg-[hsl(25_50%_40%/0.06)] blur-[80px]" />
       </div>
 
-      <div className="relative container mx-auto px-4 pt-32 pb-16 md:pt-40 md:pb-20">
+      <div className="relative container mx-auto px-4 pt-32 pb-12 md:pt-40 md:pb-16">
         <div className="max-w-4xl mx-auto text-center">
 
           {/* Main heading */}

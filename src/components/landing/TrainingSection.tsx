@@ -10,8 +10,8 @@ const TrainingSection = () => {
 
   return (
     <section 
-      id="training" 
-      className="relative py-24 md:py-32 section-warm"
+      id="training"
+      className="relative py-24 md:py-32 section-warm overflow-hidden"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
