@@ -180,14 +180,14 @@
     background: linear-gradient(180deg, hsl(0 0% 10%) 0%, hsl(0 0% 12%) 100%);
   }
 
-  /* Светлая секция */
+  /* Тёмная секция alt */
   .section-light {
-    background: hsl(30 20% 96%);
+    background: hsl(0 0% 10%);
   }
 
-  /* Нейтральная тёплая секция */
+  /* Нейтральная тёмная секция */
   .section-warm {
-    background: hsl(25 15% 92%);
+    background: hsl(0 0% 11%);
   }
 
   /* Тёмная секция для контраста */
