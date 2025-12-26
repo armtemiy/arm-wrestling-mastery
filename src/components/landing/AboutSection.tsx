@@ -19,7 +19,7 @@ const AboutSection = () => {
   return (
     <section 
       id="about" 
-      className="relative py-24 md:py-32 section-light"
+      className="relative py-24 md:py-32 section-light overflow-hidden"
     >
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
