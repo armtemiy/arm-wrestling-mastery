@@ -55,9 +55,9 @@ const HeroSection = () => {
                 const el = document.querySelector("#training");
                 el?.scrollIntoView({ behavior: "smooth" });
               }} 
-              className="flex items-center gap-2 px-6 py-3 text-[hsl(0_0%_100%/0.8)] hover:text-white transition-all"
+              className="group flex items-center gap-2 px-6 py-3 text-[hsl(0_0%_100%/0.8)] hover:text-white transition-all border border-[hsl(0_0%_100%/0.15)] rounded-full hover:border-[hsl(30_80%_60%/0.5)] hover:shadow-[0_0_20px_hsl(30_80%_60%/0.2)]"
             >
-              <Play size={18} className="text-[hsl(30_80%_60%)]" />
+              <Play size={18} className="text-[hsl(30_80%_60%)] group-hover:scale-110 transition-transform" />
               <span>Или запишись на тренировку</span>
             </Button>
           </div>

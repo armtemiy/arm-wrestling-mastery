@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Send } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const CTASection = () => {
+  const { ref: sectionRef, isVisible } = useScrollReveal();
+
   return (
     <section 
       className="relative py-24 md:py-32 overflow-hidden section-charcoal"
@@ -11,7 +14,12 @@ const CTASection = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-[hsl(25_60%_45%/0.1)] blur-[120px]" />
       </div>
 
-      <div className="relative container mx-auto px-4">
+      <div 
+        ref={sectionRef}
+        className={`relative container mx-auto px-4 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         <div className="max-w-3xl mx-auto">
           {/* Glass card */}
           <div className="relative">
@@ -45,14 +53,14 @@ const CTASection = () => {
                 <Button
                   asChild
                   size="lg"
-                  className="rounded-full border-2 border-[hsl(0_0%_100%/0.2)] bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] text-white font-display font-semibold uppercase tracking-wide"
+                  className="group rounded-full border-2 border-[hsl(0_0%_100%/0.2)] bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] hover:border-[hsl(30_80%_60%/0.4)] text-white font-display font-semibold uppercase tracking-wide transition-all duration-300"
                 >
                   <a
                     href="https://t.me/assistemiy"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Send className="mr-2" size={20} />
+                    <Send className="mr-2 group-hover:rotate-12 transition-transform duration-300" size={20} />
                     Написать мне
                   </a>
                 </Button>
@@ -64,7 +72,7 @@ const CTASection = () => {
                   href="https://t.me/armtemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
+                  className="hover:text-[hsl(30_80%_60%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_60%/0.5)] transition-all duration-300"
                 >
                   Канал @armtemiy
                 </a>
@@ -73,7 +81,7 @@ const CTASection = () => {
                   href="https://t.me/assistemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
+                  className="hover:text-[hsl(30_80%_60%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_60%/0.5)] transition-all duration-300"
                 >
                   Личка @assistemiy
                 </a>

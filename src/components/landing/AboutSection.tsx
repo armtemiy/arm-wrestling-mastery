@@ -1,6 +1,9 @@
 import { Award, BookOpen, Dumbbell } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const AboutSection = () => {
+  const { ref: sectionRef, isVisible } = useScrollReveal();
+
   const highlights = [
     {
       icon: BookOpen,
@@ -21,7 +24,12 @@ const AboutSection = () => {
       id="about" 
       className="relative py-24 md:py-32 section-light overflow-hidden"
     >
-      <div className="container mx-auto px-4">
+      <div 
+        ref={sectionRef}
+        className={`container mx-auto px-4 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Photo placeholder */}
@@ -63,9 +71,13 @@ const AboutSection = () => {
 
               <div className="space-y-4">
                 {highlights.map((item, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[hsl(30_80%_60%/0.15)] flex items-center justify-center">
-                      <item.icon className="text-[hsl(30_70%_55%)]" size={20} />
+                  <div 
+                    key={index} 
+                    className="group flex items-center gap-3"
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[hsl(30_80%_60%/0.15)] flex items-center justify-center group-hover:bg-[hsl(30_80%_60%/0.25)] group-hover:scale-110 transition-all duration-300">
+                      <item.icon className="text-[hsl(30_70%_55%)] group-hover:rotate-6 transition-transform duration-300" size={20} />
                     </div>
                     <span className="text-[hsl(0_0%_98%)]">{item.text}</span>
                   </div>
