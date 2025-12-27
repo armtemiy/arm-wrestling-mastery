@@ -67,7 +67,7 @@ const Footer = () => {
   return (
     <footer 
       ref={ref}
-      className="relative overflow-hidden py-8 md:py-12 bg-[hsl(0_0%_6%)]"
+      className="relative overflow-hidden py-8 md:py-12 bg-[hsl(0_0%_10%)]"
     >
       {/* Liquid glass card with animation */}
       <div 
