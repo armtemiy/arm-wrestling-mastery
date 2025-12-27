@@ -61,15 +61,21 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden mt-16 md:mt-24">
-      {/* Liquid glass container */}
-      <div className="relative mx-4 md:mx-8 mb-4 md:mb-8 rounded-3xl overflow-hidden">
-        {/* Glass effect background */}
-        <div className="absolute inset-0 bg-[hsl(0_0%_12%)]" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.06)] via-transparent to-[hsl(30_80%_50%/0.03)]" />
-        <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.1)] rounded-3xl" />
-        {/* Inner highlight */}
-        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(0_0%_100%/0.08)]" />
+    <footer className="relative overflow-hidden mt-16 md:mt-24 pb-4 md:pb-8">
+      {/* Dark background base */}
+      <div className="absolute inset-0 bg-background" />
+      
+      {/* Liquid glass container - LIGHT glass on dark */}
+      <div className="relative mx-4 md:mx-8 rounded-3xl overflow-hidden">
+        {/* Light glass effect layers */}
+        <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.06)] backdrop-blur-2xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.12)] via-[hsl(0_0%_100%/0.04)] to-[hsl(30_80%_60%/0.06)]" />
+        <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.18)] rounded-3xl" />
+        {/* Top/left highlight for glass depth */}
+        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(0_0%_100%/0.2)]" />
+        {/* Subtle glow orbs */}
+        <div className="absolute top-0 left-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(30_80%_60%/0.08)] blur-[80px]" />
+        <div className="absolute bottom-0 right-1/4 w-[200px] h-[100px] rounded-full bg-[hsl(200_60%_60%/0.05)] blur-[60px]" />
         
         {/* Content */}
         <div className="relative px-8 md:px-12 py-12 md:py-16">
@@ -78,83 +84,94 @@ const Footer = () => {
               {/* Logo */}
               <div className="flex flex-col gap-4">
                 <span
-                  className="text-4xl text-[hsl(0_0%_98%)]"
+                  className="text-4xl text-white"
                   style={{ fontFamily: "\"Charlie Don't Surf\", cursive" }}
                 >
                   Armtemiy
                 </span>
-                <p className="text-[hsl(0_0%_98%/0.5)] text-sm max-w-xs">
+                <p className="text-[hsl(0_0%_100%/0.5)] text-sm max-w-xs leading-relaxed">
                   Системный подход к армрестлингу. От основ до продвинутых техник.
                 </p>
               </div>
 
-              {/* Navigation */}
-              <div className="space-y-3">
-                <p className="text-[hsl(0_0%_98%/0.4)] text-xs uppercase tracking-wider mb-4">Навигация</p>
-                {navLinks.map((link) => (
-                  <button
-                    key={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="block text-[hsl(0_0%_98%/0.7)] hover:text-[hsl(30_80%_60%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_60%/0.6)] transition-all duration-300 text-left text-sm"
-                  >
-                    {link.label}
-                  </button>
-                ))}
+              {/* Navigation with creative styling */}
+              <div className="space-y-4">
+                <p className="text-[hsl(0_0%_100%/0.4)] text-xs uppercase tracking-[0.2em] font-semibold mb-5">
+                  Навигация
+                </p>
+                <nav className="flex flex-col space-y-3">
+                  {navLinks.map((link, index) => (
+                    <button
+                      key={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="group relative text-left w-fit overflow-hidden"
+                    >
+                      <span 
+                        className="relative inline-flex items-center gap-3 text-base font-medium text-[hsl(0_0%_100%/0.7)] group-hover:text-white transition-all duration-300"
+                        style={{ 
+                          animationDelay: `${index * 50}ms`,
+                        }}
+                      >
+                        {/* Animated gradient number */}
+                        <span className="text-xs font-mono text-[hsl(30_80%_55%/0.6)] group-hover:text-[hsl(30_80%_60%)] transition-colors duration-300">
+                          0{index + 1}
+                        </span>
+                        {link.label}
+                        {/* Underline animation */}
+                        <span className="absolute -bottom-1 left-7 w-0 h-[2px] bg-gradient-to-r from-[hsl(30_80%_55%)] to-[hsl(30_90%_70%)] group-hover:w-[calc(100%-1.75rem)] transition-all duration-300 ease-out" />
+                      </span>
+                    </button>
+                  ))}
+                </nav>
               </div>
 
-              {/* Social & Contact */}
-              <div className="space-y-6">
-                <div>
-                  <p className="text-[hsl(0_0%_98%/0.4)] text-xs uppercase tracking-wider mb-4">Социальные сети</p>
-                  <div className="flex gap-3">
-                    {socialLinks.map((social) => (
-                      <a
-                        key={social.label}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-xl bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] border border-[hsl(0_0%_100%/0.08)] hover:border-[hsl(0_0%_100%/0.15)] flex items-center justify-center transition-all duration-300 hover:scale-105"
-                        aria-label={social.label}
-                      >
+              {/* Social */}
+              <div className="space-y-5">
+                <p className="text-[hsl(0_0%_100%/0.4)] text-xs uppercase tracking-[0.2em] font-semibold mb-5">
+                  Социальные сети
+                </p>
+                <div className="flex gap-3">
+                  {socialLinks.map((social) => (
+                    <a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 overflow-hidden hover:scale-105"
+                      aria-label={social.label}
+                    >
+                      {/* Button glass background */}
+                      <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.08)] group-hover:bg-[hsl(0_0%_100%/0.15)] transition-colors duration-300" />
+                      <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.12)] group-hover:border-[hsl(0_0%_100%/0.25)] rounded-xl transition-colors duration-300" />
+                      <span className="relative">
                         <social.icon />
-                      </a>
-                    ))}
-                  </div>
+                      </span>
+                    </a>
+                  ))}
                 </div>
-
-                {/* Contact CTA */}
-                <a
-                  href="https://t.me/assistemiy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(30_80%_55%/0.15)] hover:bg-[hsl(30_80%_55%/0.25)] border border-[hsl(30_80%_55%/0.3)] text-[hsl(30_80%_60%)] hover:text-[hsl(30_80%_70%)] transition-all duration-300 text-sm font-medium"
-                >
-                  <TelegramIcon />
-                  Написать в Telegram
-                </a>
               </div>
             </div>
 
             {/* Bottom bar */}
-            <div className="mt-12 pt-8 border-t border-[hsl(0_0%_100%/0.08)] flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-[hsl(0_0%_98%/0.4)] text-sm">
+            <div className="mt-12 pt-8 border-t border-[hsl(0_0%_100%/0.1)] flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="text-[hsl(0_0%_100%/0.4)] text-sm">
                 © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
-              <div className="flex items-center gap-6 text-[hsl(0_0%_98%/0.4)] text-sm">
+              <div className="flex items-center gap-6 text-sm">
                 <a
                   href="https://t.me/armtemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
+                  className="text-[hsl(0_0%_100%/0.5)] hover:text-[hsl(30_80%_60%)] transition-colors duration-300"
                 >
                   @armtemiy
                 </a>
-                <span className="w-1 h-1 rounded-full bg-current opacity-50" />
+                <span className="text-[hsl(0_0%_100%/0.2)]">•</span>
                 <a
                   href="https://t.me/assistemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
+                  className="text-[hsl(0_0%_100%/0.5)] hover:text-[hsl(30_80%_60%)] transition-colors duration-300"
                 >
                   @assistemiy
                 </a>
