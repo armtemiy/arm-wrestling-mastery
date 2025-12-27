@@ -1,3 +1,5 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 // Telegram icon - brand color
 const TelegramIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#26A5E4">
@@ -38,6 +40,8 @@ const TikTokIcon = () => (
 );
 
 const Footer = () => {
+  const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
+
   const navLinks = [
     { label: "Программа", href: "#program" },
     { label: "Тренировки", href: "#training" },
@@ -61,27 +65,39 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden mt-16 md:mt-24 pb-4 md:pb-8">
-      {/* Liquid glass container with solid dark base */}
-      <div className="relative mx-4 md:mx-8 rounded-3xl overflow-hidden">
-        {/* Solid dark base for visibility */}
-        <div className="absolute inset-0 bg-[hsl(0_0%_10%)]" />
-        {/* Subtle glass gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.08)] via-transparent to-[hsl(30_80%_60%/0.05)]" />
+    <footer 
+      ref={ref}
+      className="relative overflow-hidden mt-16 md:mt-24 py-8 md:py-12 bg-[hsl(0_0%_6%)]"
+    >
+      {/* Liquid glass card with animation */}
+      <div 
+        className={`relative mx-4 md:mx-8 rounded-3xl overflow-hidden transition-all duration-700 ease-out ${
+          isVisible 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-8'
+        }`}
+      >
+        {/* Glass background layers */}
+        <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.04)] backdrop-blur-xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.1)] via-[hsl(0_0%_100%/0.03)] to-[hsl(30_80%_60%/0.05)]" />
         {/* Border for glass edge */}
-        <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.12)] rounded-3xl" />
+        <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.15)] rounded-3xl" />
         {/* Top/left highlight for glass depth */}
-        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(0_0%_100%/0.15)]" />
+        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(0_0%_100%/0.2)]" />
         {/* Subtle glow orbs */}
-        <div className="absolute top-0 left-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(30_80%_60%/0.1)] blur-[80px]" />
-        <div className="absolute bottom-0 right-1/4 w-[200px] h-[100px] rounded-full bg-[hsl(200_60%_60%/0.08)] blur-[60px]" />
+        <div className="absolute top-0 left-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(30_80%_60%/0.08)] blur-[80px]" />
+        <div className="absolute bottom-0 right-1/4 w-[200px] h-[100px] rounded-full bg-[hsl(200_60%_60%/0.06)] blur-[60px]" />
         
         {/* Content */}
         <div className="relative px-8 md:px-12 py-12 md:py-16">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-3 gap-12 items-start">
               {/* Logo */}
-              <div className="flex flex-col gap-4">
+              <div 
+                className={`flex flex-col gap-4 transition-all duration-500 delay-100 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
                 <span
                   className="text-4xl text-white"
                   style={{ fontFamily: "\"Charlie Don't Surf\", cursive" }}
@@ -94,7 +110,11 @@ const Footer = () => {
               </div>
 
               {/* Navigation with creative styling */}
-              <div className="space-y-4">
+              <div 
+                className={`space-y-4 transition-all duration-500 delay-200 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
                 <p className="text-[hsl(0_0%_100%/0.4)] text-xs uppercase tracking-[0.2em] font-semibold mb-5">
                   Навигация
                 </p>
@@ -107,9 +127,6 @@ const Footer = () => {
                     >
                       <span 
                         className="relative inline-flex items-center gap-3 text-base font-medium text-[hsl(0_0%_100%/0.7)] group-hover:text-white transition-all duration-300"
-                        style={{ 
-                          animationDelay: `${index * 50}ms`,
-                        }}
                       >
                         {/* Animated gradient number */}
                         <span className="text-xs font-mono text-[hsl(30_80%_55%/0.6)] group-hover:text-[hsl(30_80%_60%)] transition-colors duration-300">
@@ -125,18 +142,25 @@ const Footer = () => {
               </div>
 
               {/* Social */}
-              <div className="space-y-5">
+              <div 
+                className={`space-y-5 transition-all duration-500 delay-300 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+              >
                 <p className="text-[hsl(0_0%_100%/0.4)] text-xs uppercase tracking-[0.2em] font-semibold mb-5">
                   Социальные сети
                 </p>
                 <div className="flex gap-3">
-                  {socialLinks.map((social) => (
+                  {socialLinks.map((social, index) => (
                     <a
                       key={social.label}
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 overflow-hidden hover:scale-105"
+                      className={`group relative w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 overflow-hidden hover:scale-105 ${
+                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                      }`}
+                      style={{ transitionDelay: isVisible ? `${350 + index * 50}ms` : '0ms' }}
                       aria-label={social.label}
                     >
                       {/* Button glass background */}
@@ -152,7 +176,11 @@ const Footer = () => {
             </div>
 
             {/* Bottom bar */}
-            <div className="mt-12 pt-8 border-t border-[hsl(0_0%_100%/0.1)] flex flex-col md:flex-row items-center justify-between gap-4">
+            <div 
+              className={`mt-12 pt-8 border-t border-[hsl(0_0%_100%/0.1)] flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500 delay-500 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
+            >
               <p className="text-[hsl(0_0%_100%/0.4)] text-sm">
                 © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
