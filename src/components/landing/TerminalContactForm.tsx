@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, CheckCircle2, Terminal, Loader2 } from "lucide-react";
+import { Send, CheckCircle2, Terminal, Loader2, XCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-type FormStep = "name" | "phone" | "message" | "sending" | "success";
+type FormStep = "name" | "phone" | "message" | "sending" | "success" | "error";
 
 interface TerminalLine {
   type: "system" | "prompt" | "input" | "success" | "error";
@@ -42,6 +43,21 @@ const TerminalContactForm = () => {
     setLines(prev => [...prev, line]);
   };
 
+  const sendToTelegram = async () => {
+    try {
+      const { data, error } = await supabase.functions.invoke("send-telegram", {
+        body: { name, phone, message },
+      });
+
+      if (error) throw error;
+      
+      return { success: true };
+    } catch (err: any) {
+      console.error("Telegram send error:", err);
+      return { success: false, error: err.message };
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -63,26 +79,30 @@ const TerminalContactForm = () => {
       addLine({ type: "input", content: `> ${message}` });
       setStep("sending");
       
-      setTimeout(() => {
-        addLine({ type: "system", content: "Отправка заявки..." });
-      }, 200);
+      addLine({ type: "system", content: "Отправка заявки..." });
       
       setTimeout(() => {
         addLine({ type: "system", content: "Шифрование данных..." });
-      }, 600);
+      }, 400);
       
       setTimeout(() => {
         addLine({ type: "system", content: "Передача на сервер..." });
-      }, 1000);
+      }, 800);
+
+      // Actually send to Telegram
+      const result = await sendToTelegram();
       
-      // Simulate API call
-      setTimeout(() => {
+      if (result.success) {
         addLine({ type: "success", content: "✓ ЗАЯВКА УСПЕШНО ОТПРАВЛЕНА" });
         addLine({ type: "system", content: `Данные: ${name} | ${phone}` });
         addLine({ type: "system", content: "Ожидайте ответа в течение 24 часов." });
         addLine({ type: "system", content: "Спасибо за интерес к армрестлингу!" });
         setStep("success");
-      }, 1800);
+      } else {
+        addLine({ type: "error", content: "✗ ОШИБКА ОТПРАВКИ" });
+        addLine({ type: "system", content: "Попробуйте ещё раз или напишите напрямую в Telegram." });
+        setStep("error");
+      }
     }
   };
 
@@ -179,14 +199,17 @@ const TerminalContactForm = () => {
                 </div>
               )}
               {line.type === "error" && (
-                <div className="text-[hsl(0_70%_50%)]">{line.content}</div>
+                <div className="text-[hsl(0_70%_50%)] font-bold mt-3 flex items-center gap-2">
+                  <XCircle className="w-4 h-4" />
+                  {line.content}
+                </div>
               )}
             </div>
           ))}
         </div>
 
         {/* Input area */}
-        {step !== "sending" && step !== "success" && (
+        {step !== "sending" && step !== "success" && step !== "error" && (
           <form onSubmit={handleSubmit} className="mt-4 flex items-center gap-2">
             <span className="text-[hsl(142_76%_45%)]">{">"}</span>
             <input
@@ -217,8 +240,8 @@ const TerminalContactForm = () => {
           </div>
         )}
 
-        {/* Success state - new session button */}
-        {step === "success" && (
+        {/* Success/Error state - new session button */}
+        {(step === "success" || step === "error") && (
           <button
             onClick={resetForm}
             className="mt-6 text-sm text-[hsl(0_0%_100%/0.4)] hover:text-[hsl(0_0%_100%/0.7)] transition-colors underline underline-offset-4"
