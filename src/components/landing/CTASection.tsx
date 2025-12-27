@@ -23,6 +23,9 @@ const CTASection = () => {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
+            <span className="inline-block px-4 py-2 rounded-full bg-[hsl(30_80%_55%/0.15)] text-[hsl(30_80%_55%)] text-sm font-medium mb-6">
+              Связаться
+            </span>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
               Оставить заявку
             </h2>
