@@ -71,7 +71,7 @@ const Footer = () => {
     >
       {/* Liquid glass card with animation */}
       <div 
-        className={`relative mx-4 md:mx-8 rounded-3xl overflow-hidden transition-all duration-700 ease-out ${
+        className={`relative max-w-4xl mx-auto rounded-3xl overflow-hidden transition-all duration-700 ease-out ${
           isVisible 
             ? 'opacity-100 translate-y-0' 
             : 'opacity-0 translate-y-8'
@@ -89,8 +89,8 @@ const Footer = () => {
         <div className="absolute bottom-0 right-1/4 w-[200px] h-[100px] rounded-full bg-[hsl(200_60%_60%/0.06)] blur-[60px]" />
         
         {/* Content */}
-        <div className="relative px-8 md:px-12 py-12 md:py-16">
-          <div className="max-w-6xl mx-auto">
+        <div className="relative px-6 md:px-10 py-10 md:py-14">
+          <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-3 gap-12 items-start">
               {/* Logo */}
               <div 
