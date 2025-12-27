@@ -62,20 +62,19 @@ const Footer = () => {
 
   return (
     <footer className="relative overflow-hidden mt-16 md:mt-24 pb-4 md:pb-8">
-      {/* Dark background base */}
-      <div className="absolute inset-0 bg-background" />
-      
-      {/* Liquid glass container - LIGHT glass on dark */}
+      {/* Liquid glass container with solid dark base */}
       <div className="relative mx-4 md:mx-8 rounded-3xl overflow-hidden">
-        {/* Light glass effect layers */}
-        <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.06)] backdrop-blur-2xl" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.12)] via-[hsl(0_0%_100%/0.04)] to-[hsl(30_80%_60%/0.06)]" />
-        <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.18)] rounded-3xl" />
+        {/* Solid dark base for visibility */}
+        <div className="absolute inset-0 bg-[hsl(0_0%_10%)]" />
+        {/* Subtle glass gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.08)] via-transparent to-[hsl(30_80%_60%/0.05)]" />
+        {/* Border for glass edge */}
+        <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.12)] rounded-3xl" />
         {/* Top/left highlight for glass depth */}
-        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(0_0%_100%/0.2)]" />
+        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(0_0%_100%/0.15)]" />
         {/* Subtle glow orbs */}
-        <div className="absolute top-0 left-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(30_80%_60%/0.08)] blur-[80px]" />
-        <div className="absolute bottom-0 right-1/4 w-[200px] h-[100px] rounded-full bg-[hsl(200_60%_60%/0.05)] blur-[60px]" />
+        <div className="absolute top-0 left-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(30_80%_60%/0.1)] blur-[80px]" />
+        <div className="absolute bottom-0 right-1/4 w-[200px] h-[100px] rounded-full bg-[hsl(200_60%_60%/0.08)] blur-[60px]" />
         
         {/* Content */}
         <div className="relative px-8 md:px-12 py-12 md:py-16">
