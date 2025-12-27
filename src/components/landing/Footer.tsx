@@ -61,22 +61,15 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden">
-      {/* Liquid glass background */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient orbs for liquid glass effect */}
-        <div className="absolute top-0 left-1/4 w-[400px] h-[200px] rounded-full bg-[hsl(30_80%_50%/0.08)] blur-[80px]" />
-        <div className="absolute bottom-0 right-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(200_60%_50%/0.05)] blur-[60px]" />
-      </div>
-
+    <footer className="relative overflow-hidden mt-16 md:mt-24">
       {/* Liquid glass container */}
       <div className="relative mx-4 md:mx-8 mb-4 md:mb-8 rounded-3xl overflow-hidden">
-        {/* Glass effect layers */}
-        <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.03)] backdrop-blur-xl" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.08)] via-transparent to-[hsl(0_0%_100%/0.02)]" />
+        {/* Glass effect background */}
+        <div className="absolute inset-0 bg-[hsl(0_0%_12%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.06)] via-transparent to-[hsl(30_80%_50%/0.03)]" />
         <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.1)] rounded-3xl" />
-        {/* Inner glow */}
-        <div className="absolute inset-[1px] rounded-3xl border border-[hsl(0_0%_100%/0.05)]" />
+        {/* Inner highlight */}
+        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(0_0%_100%/0.08)]" />
         
         {/* Content */}
         <div className="relative px-8 md:px-12 py-12 md:py-16">
