@@ -42,12 +42,16 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Button asChild variant="cta" size="xl" className="rounded-full">
-              <a href="https://t.me/assistemiy?text=Хочу%20программу" target="_blank" rel="noopener noreferrer">
-                Получить программу
-                <ArrowRight className="ml-2" size={20} />
-              </a>
-            </Button>
+            <div className="relative">
+              <Button asChild variant="cta" size="xl" className="rounded-full">
+                <a href="https://t.me/assistemiy?text=Хочу%20программу" target="_blank" rel="noopener noreferrer">
+                  Получить программу
+                  <ArrowRight className="ml-2" size={20} />
+                </a>
+              </Button>
+              {/* Pulsing indicator */}
+              <span className="absolute -top-1 -right-1 pulse-dot" />
+            </div>
 
             <Button 
               variant="ghost-cta" 

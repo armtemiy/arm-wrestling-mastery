@@ -1,32 +1,36 @@
 import { Button } from "@/components/ui/button";
 import { Target, Dumbbell, Brain, RefreshCw, ArrowRight } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
+
+const features = [
+  {
+    icon: Target,
+    title: "Техника и биомеханика",
+    description: "Как бороться правильно: постановка руки, углы, рычаги",
+  },
+  {
+    icon: Dumbbell,
+    title: "Тренировки",
+    description: "Упражнения, периодизация, тренировочные циклы",
+  },
+  {
+    icon: Brain,
+    title: "Тактика",
+    description: "Фишки старта, захват, легальные приёмы",
+  },
+  {
+    icon: RefreshCw,
+    title: "Восстановление",
+    description: "Как не убить руки и тренироваться стабильно",
+  },
+];
 
 const ProgramSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
-
-  const features = [
-    {
-      icon: Target,
-      title: "Техника и биомеханика",
-      description: "Как бороться правильно: постановка руки, углы, рычаги",
-    },
-    {
-      icon: Dumbbell,
-      title: "Тренировки",
-      description: "Упражнения, периодизация, тренировочные циклы",
-    },
-    {
-      icon: Brain,
-      title: "Тактика",
-      description: "Фишки старта, захват, легальные приёмы",
-    },
-    {
-      icon: RefreshCw,
-      title: "Восстановление",
-      description: "Как не убить руки и тренироваться стабильно",
-    },
-  ];
+  const { containerRef: cardsRef, visibleItems } = useStaggeredReveal(features.length, {
+    staggerDelay: 120,
+  });
 
   return (
     <section 
@@ -57,12 +61,13 @@ const ProgramSection = () => {
           <div className="absolute -inset-4 rounded-3xl bg-[hsl(30_80%_60%/0.05)] blur-2xl" />
 
           <div className="relative glass-strong rounded-3xl p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-8 mb-10">
+            <div ref={cardsRef} className="grid md:grid-cols-2 gap-8 mb-10">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="group flex gap-4 p-4 rounded-2xl bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_hsl(0_0%_0%/0.3)]"
-                  style={{ transitionDelay: `${index * 75}ms` }}
+                  className={`stagger-item group flex gap-4 p-4 rounded-2xl bg-[hsl(0_0%_100%/0.05)] card-lift hover:bg-[hsl(0_0%_100%/0.08)] ${
+                    visibleItems[index] ? 'visible' : ''
+                  }`}
                 >
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[hsl(30_80%_60%/0.2)] flex items-center justify-center group-hover:bg-[hsl(30_80%_60%/0.3)] group-hover:scale-110 transition-all duration-300">
                     <feature.icon className="text-[hsl(30_80%_60%)] group-hover:rotate-6 transition-transform duration-300" size={24} />
