@@ -84,26 +84,6 @@ const FAQSection = () => {
             </Accordion>
           </div>
 
-          {/* Divider after accordion */}
-          <div className="h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_100%/0.1)] to-transparent my-12" />
-
-          {/* CTA under FAQ */}
-          <div className="text-center">
-            <p className="text-[hsl(0_0%_98%/0.5)] mb-4">
-              Остались вопросы? Напиши — отвечу лично
-            </p>
-            <a
-              href="https://t.me/assistemiy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[hsl(30_80%_55%)] hover:text-[hsl(30_80%_65%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_55%/0.5)] transition-all font-medium"
-            >
-              Написать в Telegram
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          </div>
         </div>
       </div>
     </section>

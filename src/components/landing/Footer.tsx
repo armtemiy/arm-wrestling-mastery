@@ -42,7 +42,6 @@ const Footer = () => {
     { label: "Программа", href: "#program" },
     { label: "Тренировки", href: "#training" },
     { label: "О себе", href: "#about" },
-    { label: "Для кого", href: "#for-whom" },
     { label: "FAQ", href: "#faq" },
   ];
 
@@ -62,68 +61,111 @@ const Footer = () => {
   };
 
   return (
-    <footer className="px-8 py-16 section-charcoal border-t border-[hsl(0_0%_100%/0.1)]">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-12 items-start">
-          {/* Logo */}
-          <div className="flex flex-col gap-4">
-            <span
-              className="text-4xl text-[hsl(0_0%_98%)]"
-              style={{ fontFamily: "\"Charlie Don't Surf\", cursive" }}
-            >
-              Armtemiy
-            </span>
-            <p className="text-[hsl(0_0%_98%/0.5)] text-sm max-w-xs">
-              Системный подход к армрестлингу. От основ до продвинутых техник.
-            </p>
-          </div>
+    <footer className="relative overflow-hidden">
+      {/* Liquid glass background */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Gradient orbs for liquid glass effect */}
+        <div className="absolute top-0 left-1/4 w-[400px] h-[200px] rounded-full bg-[hsl(30_80%_50%/0.08)] blur-[80px]" />
+        <div className="absolute bottom-0 right-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(200_60%_50%/0.05)] blur-[60px]" />
+      </div>
 
-          {/* Navigation */}
-          <div className="space-y-3">
-            <p className="text-[hsl(0_0%_98%/0.4)] text-xs uppercase tracking-wider mb-4">Навигация</p>
-            {navLinks.map((link) => (
-              <button
-                key={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="block text-[hsl(0_0%_98%/0.7)] hover:text-[hsl(30_80%_60%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_60%/0.6)] transition-all duration-300 text-left text-sm"
-              >
-                {link.label}
-              </button>
-            ))}
-          </div>
+      {/* Liquid glass container */}
+      <div className="relative mx-4 md:mx-8 mb-4 md:mb-8 rounded-3xl overflow-hidden">
+        {/* Glass effect layers */}
+        <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.03)] backdrop-blur-xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.08)] via-transparent to-[hsl(0_0%_100%/0.02)]" />
+        <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.1)] rounded-3xl" />
+        {/* Inner glow */}
+        <div className="absolute inset-[1px] rounded-3xl border border-[hsl(0_0%_100%/0.05)]" />
+        
+        {/* Content */}
+        <div className="relative px-8 md:px-12 py-12 md:py-16">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-12 items-start">
+              {/* Logo */}
+              <div className="flex flex-col gap-4">
+                <span
+                  className="text-4xl text-[hsl(0_0%_98%)]"
+                  style={{ fontFamily: "\"Charlie Don't Surf\", cursive" }}
+                >
+                  Armtemiy
+                </span>
+                <p className="text-[hsl(0_0%_98%/0.5)] text-sm max-w-xs">
+                  Системный подход к армрестлингу. От основ до продвинутых техник.
+                </p>
+              </div>
 
-          {/* Social & Copyright */}
-          <div className="space-y-6">
-            <div>
-              <p className="text-[hsl(0_0%_98%/0.4)] text-xs uppercase tracking-wider mb-4">Социальные сети</p>
-              <div className="flex gap-4">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] flex items-center justify-center transition-colors"
-                    aria-label={social.label}
+              {/* Navigation */}
+              <div className="space-y-3">
+                <p className="text-[hsl(0_0%_98%/0.4)] text-xs uppercase tracking-wider mb-4">Навигация</p>
+                {navLinks.map((link) => (
+                  <button
+                    key={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="block text-[hsl(0_0%_98%/0.7)] hover:text-[hsl(30_80%_60%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_60%/0.6)] transition-all duration-300 text-left text-sm"
                   >
-                    <social.icon />
-                  </a>
+                    {link.label}
+                  </button>
                 ))}
+              </div>
+
+              {/* Social & Contact */}
+              <div className="space-y-6">
+                <div>
+                  <p className="text-[hsl(0_0%_98%/0.4)] text-xs uppercase tracking-wider mb-4">Социальные сети</p>
+                  <div className="flex gap-3">
+                    {socialLinks.map((social) => (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-xl bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] border border-[hsl(0_0%_100%/0.08)] hover:border-[hsl(0_0%_100%/0.15)] flex items-center justify-center transition-all duration-300 hover:scale-105"
+                        aria-label={social.label}
+                      >
+                        <social.icon />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Contact CTA */}
+                <a
+                  href="https://t.me/assistemiy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(30_80%_55%/0.15)] hover:bg-[hsl(30_80%_55%/0.25)] border border-[hsl(30_80%_55%/0.3)] text-[hsl(30_80%_60%)] hover:text-[hsl(30_80%_70%)] transition-all duration-300 text-sm font-medium"
+                >
+                  <TelegramIcon />
+                  Написать в Telegram
+                </a>
               </div>
             </div>
 
-            <div className="pt-6 border-t border-[hsl(0_0%_100%/0.1)]">
+            {/* Bottom bar */}
+            <div className="mt-12 pt-8 border-t border-[hsl(0_0%_100%/0.08)] flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-[hsl(0_0%_98%/0.4)] text-sm">
-                © {new Date().getFullYear()} Armtemiy
+                © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
-              <a
-                href="https://t.me/assistemiy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[hsl(30_80%_55%)] hover:text-[hsl(30_80%_65%)] transition-colors text-sm mt-2 inline-block"
-              >
-                Написать в Telegram →
-              </a>
+              <div className="flex items-center gap-6 text-[hsl(0_0%_98%/0.4)] text-sm">
+                <a
+                  href="https://t.me/armtemiy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
+                >
+                  @armtemiy
+                </a>
+                <span className="w-1 h-1 rounded-full bg-current opacity-50" />
+                <a
+                  href="https://t.me/assistemiy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
+                >
+                  @assistemiy
+                </a>
+              </div>
             </div>
           </div>
         </div>

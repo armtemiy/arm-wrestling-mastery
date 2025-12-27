@@ -10,12 +10,40 @@ interface TerminalLine {
   timestamp?: string;
 }
 
+// Rate limiting: track submission timestamps in memory
+const submissionTimestamps: number[] = [];
+const RATE_LIMIT_WINDOW = 60000; // 1 minute
+const MAX_SUBMISSIONS_PER_WINDOW = 3;
+
+// Simple phone validation
+const isValidPhone = (phone: string): boolean => {
+  const cleaned = phone.replace(/[\s\-\(\)]/g, "");
+  return /^\+?[0-9]{10,15}$/.test(cleaned);
+};
+
+// Name validation (no links, scripts, etc.)
+const isValidName = (name: string): boolean => {
+  if (name.length < 2 || name.length > 50) return false;
+  // Block URLs, scripts, SQL injection attempts
+  const suspicious = /<|>|javascript:|http:|https:|www\.|SELECT|INSERT|DELETE|DROP|UNION/i;
+  return !suspicious.test(name);
+};
+
+// Message validation
+const isValidMessage = (message: string): boolean => {
+  if (message.length < 2 || message.length > 500) return false;
+  const suspicious = /<script|javascript:|onclick|onerror/i;
+  return !suspicious.test(message);
+};
+
 const TerminalContactForm = () => {
   const [step, setStep] = useState<FormStep>("name");
   const [isActive, setIsActive] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [honeypot, setHoneypot] = useState(""); // Honeypot field
+  const [formLoadTime] = useState(Date.now()); // Track when form loaded
   const [lines, setLines] = useState<TerminalLine[]>([
     { type: "system", content: "ARMWRESTLING TULA // Система заявок v2.0", timestamp: getCurrentTime() },
     { type: "system", content: "Инициализация соединения..." },
@@ -30,8 +58,6 @@ const TerminalContactForm = () => {
     return new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
   }
 
-  // IMPORTANT: don't auto-focus on page load (it scrolls the whole page to the form)
-  // Only focus when the terminal is in view (e.g., user reloaded near this section) or after user interaction.
   useEffect(() => {
     const el = terminalRef.current;
     if (!el) return;
@@ -59,13 +85,32 @@ const TerminalContactForm = () => {
     setLines(prev => [...prev, line]);
   };
 
+  // Check rate limiting
+  const isRateLimited = (): boolean => {
+    const now = Date.now();
+    // Clean old timestamps
+    while (submissionTimestamps.length > 0 && submissionTimestamps[0] < now - RATE_LIMIT_WINDOW) {
+      submissionTimestamps.shift();
+    }
+    return submissionTimestamps.length >= MAX_SUBMISSIONS_PER_WINDOW;
+  };
+
+  // Anti-bot check: form filled too quickly (less than 3 seconds)
+  const isBot = (): boolean => {
+    const timeSinceLoad = Date.now() - formLoadTime;
+    return timeSinceLoad < 3000 || honeypot.length > 0;
+  };
+
   const sendToTelegram = async () => {
     try {
       const { data, error } = await supabase.functions.invoke("send-telegram", {
-        body: { name, phone, message },
+        body: { name: name.trim(), phone: phone.trim(), message: message.trim() },
       });
 
       if (error) throw error;
+      
+      // Record successful submission for rate limiting
+      submissionTimestamps.push(Date.now());
       
       return { success: true };
     } catch (err: any) {
@@ -78,6 +123,10 @@ const TerminalContactForm = () => {
     e.preventDefault();
     
     if (step === "name" && name.trim()) {
+      if (!isValidName(name.trim())) {
+        addLine({ type: "error", content: "✗ Некорректное имя. Попробуйте ещё раз." });
+        return;
+      }
       addLine({ type: "input", content: `> ${name}` });
       setTimeout(() => {
         addLine({ type: "system", content: `Привет, ${name}! Рад знакомству.` });
@@ -85,6 +134,10 @@ const TerminalContactForm = () => {
         setStep("phone");
       }, 300);
     } else if (step === "phone" && phone.trim()) {
+      if (!isValidPhone(phone.trim())) {
+        addLine({ type: "error", content: "✗ Неверный формат телефона. Пример: +7 999 123-45-67" });
+        return;
+      }
       addLine({ type: "input", content: `> ${phone}` });
       setTimeout(() => {
         addLine({ type: "system", content: "Номер записан." });
@@ -92,20 +145,38 @@ const TerminalContactForm = () => {
         setStep("message");
       }, 300);
     } else if (step === "message" && message.trim()) {
+      if (!isValidMessage(message.trim())) {
+        addLine({ type: "error", content: "✗ Некорректное сообщение. Попробуйте ещё раз." });
+        return;
+      }
+
+      // Anti-bot checks
+      if (isBot()) {
+        addLine({ type: "error", content: "✗ Ошибка проверки безопасности." });
+        setStep("error");
+        return;
+      }
+
+      // Rate limiting
+      if (isRateLimited()) {
+        addLine({ type: "error", content: "✗ Слишком много заявок. Подождите минуту." });
+        setStep("error");
+        return;
+      }
+
       addLine({ type: "input", content: `> ${message}` });
       setStep("sending");
       
       addLine({ type: "system", content: "Отправка заявки..." });
       
       setTimeout(() => {
-        addLine({ type: "system", content: "Шифрование данных..." });
+        addLine({ type: "system", content: "Проверка безопасности..." });
       }, 400);
       
       setTimeout(() => {
         addLine({ type: "system", content: "Передача на сервер..." });
       }, 800);
 
-      // Actually send to Telegram
       const result = await sendToTelegram();
       
       if (result.success) {
@@ -239,6 +310,16 @@ const TerminalContactForm = () => {
               className="terminal-input flex-1 text-[hsl(0_0%_100%)] text-sm md:text-base placeholder:text-[hsl(0_0%_100%/0.2)]"
               autoComplete="off"
             />
+            {/* Honeypot field - invisible to users */}
+            <input
+              type="text"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              className="absolute -left-[9999px] opacity-0 pointer-events-none"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
             <span className="terminal-cursor w-2 h-5 bg-[hsl(30_80%_55%)]" />
             <button
               type="submit"
@@ -271,7 +352,7 @@ const TerminalContactForm = () => {
       {/* Hints */}
       <div className="mt-3 flex items-center justify-between text-xs text-[hsl(0_0%_100%/0.3)] terminal-form">
         <span>Press Enter to submit</span>
-        <span>Шифрование: AES-256</span>
+        <span>Защита: активна</span>
       </div>
     </div>
   );
