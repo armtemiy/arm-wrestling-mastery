@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Target, Dumbbell, Brain, RefreshCw, ArrowRight } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const ProgramSection = () => {
+  const { ref: sectionRef, isVisible } = useScrollReveal();
+
   const features = [
     {
       icon: Target,
@@ -30,7 +33,12 @@ const ProgramSection = () => {
       id="program" 
       className="relative pt-24 pb-12 md:pt-32 md:pb-16 section-dark"
     >
-      <div className="container mx-auto px-4">
+      <div 
+        ref={sectionRef}
+        className={`container mx-auto px-4 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1 rounded-full bg-[hsl(30_80%_60%/0.15)] text-[hsl(30_80%_60%)] text-sm font-medium mb-4">
             Главный продукт
@@ -53,10 +61,11 @@ const ProgramSection = () => {
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex gap-4 p-4 rounded-2xl bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.08)] transition-colors"
+                  className="group flex gap-4 p-4 rounded-2xl bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_hsl(0_0%_0%/0.3)]"
+                  style={{ transitionDelay: `${index * 75}ms` }}
                 >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[hsl(30_80%_60%/0.2)] flex items-center justify-center">
-                    <feature.icon className="text-[hsl(30_80%_60%)]" size={24} />
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[hsl(30_80%_60%/0.2)] flex items-center justify-center group-hover:bg-[hsl(30_80%_60%/0.3)] group-hover:scale-110 transition-all duration-300">
+                    <feature.icon className="text-[hsl(30_80%_60%)] group-hover:rotate-6 transition-transform duration-300" size={24} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">

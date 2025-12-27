@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Users, ArrowRight } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const TrainingSection = () => {
+  const { ref: sectionRef, isVisible } = useScrollReveal();
+
   const details = [
     { icon: MapPin, text: "Тула, оборудованная комната" },
     { icon: Clock, text: "От 500₽/час" },
@@ -13,7 +16,12 @@ const TrainingSection = () => {
       id="training"
       className="relative py-24 md:py-32 section-warm overflow-hidden"
     >
-      <div className="container mx-auto px-4">
+      <div 
+        ref={sectionRef}
+        className={`container mx-auto px-4 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Image placeholder */}
@@ -49,9 +57,13 @@ const TrainingSection = () => {
 
               <div className="space-y-4 mb-8">
                 {details.map((detail, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[hsl(30_80%_60%/0.15)] flex items-center justify-center">
-                      <detail.icon className="text-[hsl(30_70%_55%)]" size={20} />
+                  <div 
+                    key={index} 
+                    className="group flex items-center gap-3"
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-[hsl(30_80%_60%/0.15)] flex items-center justify-center group-hover:bg-[hsl(30_80%_60%/0.25)] group-hover:scale-110 transition-all duration-300">
+                      <detail.icon className="text-[hsl(30_70%_55%)] group-hover:rotate-6 transition-transform duration-300" size={20} />
                     </div>
                     <span className="text-[hsl(0_0%_98%)]">{detail.text}</span>
                   </div>

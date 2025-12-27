@@ -4,8 +4,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const FAQSection = () => {
+  const { ref: sectionRef, isVisible } = useScrollReveal();
+
   const faqs = [
     {
       question: "Подойдёт ли новичку?",
@@ -34,7 +37,12 @@ const FAQSection = () => {
       id="faq"
       className="relative py-24 md:py-32 section-charcoal overflow-hidden"
     >
-      <div className="container mx-auto px-4">
+      <div 
+        ref={sectionRef}
+        className={`container mx-auto px-4 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
@@ -46,26 +54,31 @@ const FAQSection = () => {
             </h2>
           </div>
 
-          {/* Accordion */}
-          <Accordion type="single" collapsible className="space-y-4">
+          {/* Accordion with dividers */}
+          <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="border border-[hsl(0_0%_100%/0.1)] rounded-2xl px-6 bg-[hsl(0_0%_100%/0.03)] data-[state=open]:bg-[hsl(0_0%_100%/0.05)] data-[state=open]:border-[hsl(30_80%_55%/0.3)] transition-all duration-300"
+                className="border border-[hsl(0_0%_100%/0.1)] rounded-2xl px-6 bg-[hsl(0_0%_100%/0.03)] data-[state=open]:bg-[hsl(0_0%_100%/0.05)] data-[state=open]:border-[hsl(30_80%_55%/0.3)] transition-all duration-300 hover:border-[hsl(0_0%_100%/0.2)] relative overflow-hidden group"
               >
-                <AccordionTrigger className="text-left text-[hsl(0_0%_98%)] hover:no-underline py-6 text-lg font-medium">
+                {/* Subtle glow on hover */}
+                <div className="absolute inset-0 bg-[hsl(30_80%_55%/0.02)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <AccordionTrigger className="relative z-10 text-left text-[hsl(0_0%_98%)] hover:no-underline py-6 text-lg font-medium">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-[hsl(0_0%_98%/0.6)] pb-6 text-base leading-relaxed">
+                <AccordionContent className="relative z-10 text-[hsl(0_0%_98%/0.6)] pb-6 text-base leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
 
+          {/* Divider after accordion */}
+          <div className="h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_100%/0.1)] to-transparent my-12" />
+
           {/* CTA under FAQ */}
-          <div className="text-center mt-12">
+          <div className="text-center">
             <p className="text-[hsl(0_0%_98%/0.5)] mb-4">
               Остались вопросы? Напиши — отвечу лично
             </p>
@@ -73,7 +86,7 @@ const FAQSection = () => {
               href="https://t.me/assistemiy"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[hsl(30_80%_55%)] hover:text-[hsl(30_80%_65%)] transition-colors font-medium"
+              className="inline-flex items-center gap-2 text-[hsl(30_80%_55%)] hover:text-[hsl(30_80%_65%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_55%/0.5)] transition-all font-medium"
             >
               Написать в Telegram
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
