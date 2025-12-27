@@ -12,6 +12,7 @@ interface TerminalLine {
 
 const TerminalContactForm = () => {
   const [step, setStep] = useState<FormStep>("name");
+  const [isActive, setIsActive] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
@@ -29,9 +30,24 @@ const TerminalContactForm = () => {
     return new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
   }
 
+  // IMPORTANT: don't auto-focus on page load (it scrolls the whole page to the form)
+  // Only focus when the terminal is in view (e.g., user reloaded near this section) or after user interaction.
   useEffect(() => {
+    const el = terminalRef.current;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) {
+      setIsActive(true);
+      requestAnimationFrame(() => inputRef.current?.focus());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isActive) return;
     inputRef.current?.focus();
-  }, [step]);
+  }, [step, isActive]);
 
   useEffect(() => {
     if (terminalRef.current) {
@@ -216,6 +232,7 @@ const TerminalContactForm = () => {
               ref={inputRef}
               type={step === "phone" ? "tel" : "text"}
               value={getCurrentValue()}
+              onFocus={() => setIsActive(true)}
               onChange={(e) => setCurrentValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={getPlaceholder()}
