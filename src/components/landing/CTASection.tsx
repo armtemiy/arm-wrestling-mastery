@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Send } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import TerminalContactForm from "./TerminalContactForm";
 
 const CTASection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
 
   return (
     <section 
+      id="contact"
       className="relative py-24 md:py-32 overflow-hidden section-charcoal"
     >
       {/* Background decorations */}
@@ -20,59 +22,78 @@ const CTASection = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        <div className="max-w-3xl mx-auto">
-          {/* Glass card */}
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Оставить заявку
+            </h2>
+            <p className="text-[hsl(0_0%_100%/0.6)] text-lg max-w-lg mx-auto">
+              Заполни форму или напиши напрямую — отвечу в течение 24 часов
+            </p>
+          </div>
+
+          {/* Terminal Form */}
+          <div className="mb-16">
+            <TerminalContactForm />
+          </div>
+
+          {/* Alternative CTA */}
           <div className="relative">
-            <div className="absolute -inset-4 rounded-[2rem] bg-[hsl(30_80%_60%/0.1)] blur-2xl" />
+            <div className="absolute -inset-4 rounded-[2rem] bg-[hsl(30_80%_60%/0.05)] blur-2xl" />
 
-            <div className="relative glass-strong rounded-3xl p-8 md:p-12 text-center">
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                Готов начать?
-              </h2>
-              <p className="text-[hsl(0_0%_100%/0.7)] text-lg mb-10 max-w-lg mx-auto">
-                Выбери что ближе: полная программа или личная тренировка в Туле
-              </p>
+            <div className="relative glass rounded-2xl p-6 md:p-8">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-white mb-1">
+                    Предпочитаешь напрямую?
+                  </h3>
+                  <p className="text-[hsl(0_0%_100%/0.5)] text-sm">
+                    Пиши в Telegram — там быстрее всего
+                  </p>
+                </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-                <Button
-                  asChild
-                  variant="cta"
-                  size="xl"
-                  className="rounded-full"
-                >
-                  <a
-                    href="https://t.me/assistemiy?text=Хочу%20программу"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <div className="flex flex-col sm:flex-row items-center gap-3">
+                  <Button
+                    asChild
+                    variant="cta"
+                    size="lg"
+                    className="rounded-full"
                   >
-                    Получить программу
-                    <ArrowRight className="ml-2" size={20} />
-                  </a>
-                </Button>
+                    <a
+                      href="https://t.me/assistemiy?text=Хочу%20программу"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Получить программу
+                      <ArrowRight className="ml-2" size={18} />
+                    </a>
+                  </Button>
 
-                <Button
-                  asChild
-                  size="lg"
-                  className="group rounded-full border-2 border-[hsl(0_0%_100%/0.2)] bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.1)] hover:border-[hsl(30_80%_60%/0.4)] text-white font-display font-semibold uppercase tracking-wide transition-all duration-300"
-                >
-                  <a
-                    href="https://t.me/assistemiy"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <Button
+                    asChild
+                    size="lg"
+                    className="group rounded-full border border-[hsl(0_0%_100%/0.15)] bg-transparent hover:bg-[hsl(0_0%_100%/0.05)] text-white transition-all duration-300"
                   >
-                    <Send className="mr-2 group-hover:rotate-12 transition-transform duration-300" size={20} />
-                    Написать мне
-                  </a>
-                </Button>
+                    <a
+                      href="https://t.me/assistemiy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Send className="mr-2 group-hover:rotate-12 transition-transform duration-300" size={18} />
+                      Написать
+                    </a>
+                  </Button>
+                </div>
               </div>
 
               {/* Social links */}
-              <div className="flex items-center justify-center gap-6 text-[hsl(0_0%_100%/0.6)]">
+              <div className="mt-6 pt-6 border-t border-[hsl(0_0%_100%/0.1)] flex items-center justify-center gap-6 text-sm text-[hsl(0_0%_100%/0.5)]">
                 <a
                   href="https://t.me/armtemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[hsl(30_80%_60%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_60%/0.5)] transition-all duration-300"
+                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
                 >
                   Канал @armtemiy
                 </a>
@@ -81,7 +102,7 @@ const CTASection = () => {
                   href="https://t.me/assistemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[hsl(30_80%_60%)] hover:drop-shadow-[0_0_8px_hsl(30_80%_60%/0.5)] transition-all duration-300"
+                  className="hover:text-[hsl(30_80%_60%)] transition-colors"
                 >
                   Личка @assistemiy
                 </a>

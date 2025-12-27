@@ -290,22 +290,75 @@
     }
   }
 
-  /* Marquee animation */
-  @keyframes marquee {
+  /* Marquee - smooth infinite scroll */
+  .marquee-track {
+    animation: marquee-scroll 30s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes marquee-scroll {
     0% {
       transform: translateX(0);
     }
     100% {
-      transform: translateX(-100%);
+      transform: translateX(-50%);
     }
   }
 
-  .animate-marquee {
-    animation: marquee 25s linear infinite;
+  /* Terminal form styles */
+  .terminal-form {
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
   }
 
-  .marquee-container:hover .animate-marquee {
-    animation-play-state: paused;
+  .terminal-cursor {
+    animation: terminal-blink 1s step-end infinite;
+  }
+
+  @keyframes terminal-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .terminal-line {
+    animation: terminal-type 0.3s var(--ease-out) forwards;
+  }
+
+  @keyframes terminal-type {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .terminal-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    caret-color: hsl(30 80% 55%);
+  }
+
+  .terminal-input::placeholder {
+    color: hsl(0 0% 100% / 0.2);
+  }
+
+  .terminal-success {
+    animation: terminal-success-glow 0.5s var(--ease-out);
+  }
+
+  @keyframes terminal-success-glow {
+    0% {
+      box-shadow: 0 0 0 0 hsl(142 76% 36% / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 20px 5px hsl(142 76% 36% / 0.2);
+    }
+    100% {
+      box-shadow: 0 0 0 0 hsl(142 76% 36% / 0);
+    }
   }
 }
 
