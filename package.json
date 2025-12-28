@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://armtemiy.github.io/arm-wrestling-mastery",
+  "homepage": "https://armtemiy.ru",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

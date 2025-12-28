@@ -5,8 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Base path for GitHub Pages
-  base: mode === 'production' ? '/arm-wrestling-mastery/' : '/',
+  // Base path - корень для кастомного домена
+  base: '/',
   server: {
     host: "::",
     port: 8080,

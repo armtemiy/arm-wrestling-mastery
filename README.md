@@ -2,7 +2,7 @@
 
 Лендинг для продажи программы тренировок и записи на персональные тренировки по армрестлингу в Туле.
 
-🌐 **Сайт:** https://armtemiy.github.io/arm-wrestling-mastery/
+🌐 **Сайт:** https://armtemiy.ru/
 
 ## 🚀 Быстрый старт
 
@@ -111,7 +111,7 @@ npm run deploy
    - Save
 
 3. Сайт будет доступен по адресу:
-   https://armtemiy.github.io/arm-wrestling-mastery/
+   https://armtemiy.ru/
 
 ### Обновление сайта
 
