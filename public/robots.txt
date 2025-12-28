@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /*.json$
+
+Sitemap: https://armtemiy.lovable.app/sitemap.xml
+
+# Crawl-delay для вежливого краулинга
+Crawl-delay: 1
