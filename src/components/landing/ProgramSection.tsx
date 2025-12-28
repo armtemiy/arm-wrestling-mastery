@@ -6,23 +6,23 @@ import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 const features = [
   {
     icon: Target,
-    title: "Техника и биомеханика",
-    description: "Как бороться правильно: постановка руки, углы, рычаги",
+    title: "Техника, которая работает",
+    description: "Постановка руки, углы атаки, рычаги — разложено по полочкам",
   },
   {
     icon: Dumbbell,
-    title: "Тренировки",
-    description: "Упражнения, периодизация, тренировочные циклы",
+    title: "Тренировки под армрестлинг",
+    description: "Не качалка ради качалки, а упражнения для победы за столом",
   },
   {
     icon: Brain,
-    title: "Тактика",
-    description: "Фишки старта, захват, легальные приёмы",
+    title: "Тактика и фишки",
+    description: "Старт, захват, психология — то, что отличает победителя",
   },
   {
     icon: RefreshCw,
-    title: "Восстановление",
-    description: "Как не убить руки и тренироваться стабильно",
+    title: "Без травм и выгорания",
+    description: "Как тренироваться стабильно и не убить локти через месяц",
   },
 ];
 
@@ -45,13 +45,13 @@ const ProgramSection = () => {
       >
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1 rounded-full bg-[hsl(30_80%_60%/0.15)] text-[hsl(30_80%_60%)] text-sm font-medium mb-4">
-            Главный продукт
+            Программа
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            Что внутри программы
+            Перестань гуглить — начни побеждать
           </h2>
           <p className="text-[hsl(0_0%_100%/0.6)] text-lg max-w-xl mx-auto">
-            Полный гайд по армрестлингу: от азов до продвинутых техник
+            Всё, что нужно знать об армрестлинге, собрано в одном месте. Без воды, без «посмотри ещё 50 видео»
           </p>
         </div>
 
@@ -91,14 +91,14 @@ const ProgramSection = () => {
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
                 <p className="text-[hsl(0_0%_100%/0.6)] text-sm mb-1">
-                  Формат: текст + видео в Telegram
+                  Текст + видео в Telegram. Доступ навсегда.
                 </p>
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-bold text-white">
                     1500₽
                   </span>
                   <span className="text-[hsl(0_0%_100%/0.5)]">
-                    разовый платёж
+                    один раз
                   </span>
                 </div>
               </div>
@@ -114,7 +114,7 @@ const ProgramSection = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Получить программу
+                  Забрать программу
                   <ArrowRight className="ml-2" size={20} />
                 </a>
               </Button>

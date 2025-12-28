@@ -6,9 +6,9 @@ const TrainingSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
 
   const details = [
-    { icon: MapPin, text: "Тула, оборудованная комната" },
-    { icon: Clock, text: "От 500₽/час" },
-    { icon: Users, text: "Можно вдвоём или втроём" },
+    { icon: MapPin, text: "Тула, своя комната с оборудованием" },
+    { icon: Clock, text: "От 500₽ за час работы" },
+    { icon: Users, text: "Можно прийти с другом" },
   ];
 
   return (
@@ -45,14 +45,13 @@ const TrainingSection = () => {
             {/* Content */}
             <div>
               <span className="inline-block px-4 py-1 rounded-full bg-[hsl(30_80%_60%/0.15)] text-[hsl(30_70%_55%)] text-sm font-medium mb-4">
-                Офлайн
+                Живые тренировки
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-[hsl(0_0%_98%)] mb-4">
-                Персональные тренировки
+                Разберём твою технику вживую
               </h2>
               <p className="text-[hsl(0_0%_100%/0.6)] text-lg mb-8">
-                Для тех, кому важно разобрать технику вживую. Покажу на
-                практике, поправлю ошибки, дам упражнения под тебя.
+                Видео — это хорошо, но ничто не заменит живую работу. Увижу твои ошибки, поставлю руку, покажу как чувствовать рычаг. За одну тренировку поймёшь больше, чем за месяц самостоятельных попыток.
               </p>
 
               <div className="space-y-4 mb-8">
@@ -81,7 +80,7 @@ const TrainingSection = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Записаться
+                  Записаться на тренировку
                   <ArrowRight className="ml-2" size={20} />
                 </a>
               </Button>

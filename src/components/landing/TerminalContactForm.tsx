@@ -45,10 +45,10 @@ const TerminalContactForm = () => {
   const [honeypot, setHoneypot] = useState(""); // Honeypot field
   const [formLoadTime] = useState(Date.now()); // Track when form loaded
   const [lines, setLines] = useState<TerminalLine[]>([
-    { type: "system", content: "ARMWRESTLING TULA // Система заявок v2.0", timestamp: getCurrentTime() },
-    { type: "system", content: "Инициализация соединения..." },
-    { type: "system", content: "Соединение установлено. Готов к приёму данных." },
-    { type: "prompt", content: "Введите ваше имя:" },
+    { type: "system", content: "ARMTEMIY // Форма связи", timestamp: getCurrentTime() },
+    { type: "system", content: "Подключение..." },
+    { type: "system", content: "Готов. Давай знакомиться." },
+    { type: "prompt", content: "Как тебя зовут?" },
   ]);
   
   const inputRef = useRef<HTMLInputElement>(null);
@@ -124,42 +124,42 @@ const TerminalContactForm = () => {
     
     if (step === "name" && name.trim()) {
       if (!isValidName(name.trim())) {
-        addLine({ type: "error", content: "✗ Некорректное имя. Попробуйте ещё раз." });
+        addLine({ type: "error", content: "✗ Хм, что-то не так с именем. Попробуй ещё раз." });
         return;
       }
       addLine({ type: "input", content: `> ${name}` });
       setTimeout(() => {
-        addLine({ type: "system", content: `Привет, ${name}! Рад знакомству.` });
-        addLine({ type: "prompt", content: "Введите номер телефона:" });
+        addLine({ type: "system", content: `Приятно познакомиться, ${name}!` });
+        addLine({ type: "prompt", content: "Куда позвонить или написать?" });
         setStep("phone");
       }, 300);
     } else if (step === "phone" && phone.trim()) {
       if (!isValidPhone(phone.trim())) {
-        addLine({ type: "error", content: "✗ Неверный формат телефона. Пример: +7 999 123-45-67" });
+        addLine({ type: "error", content: "✗ Не похоже на номер. Пример: +7 999 123-45-67" });
         return;
       }
       addLine({ type: "input", content: `> ${phone}` });
       setTimeout(() => {
-        addLine({ type: "system", content: "Номер записан." });
-        addLine({ type: "prompt", content: "Опишите вашу цель (можно кратко):" });
+        addLine({ type: "system", content: "Записал." });
+        addLine({ type: "prompt", content: "Что тебя интересует? (программа, тренировки, вопрос)" });
         setStep("message");
       }, 300);
     } else if (step === "message" && message.trim()) {
       if (!isValidMessage(message.trim())) {
-        addLine({ type: "error", content: "✗ Некорректное сообщение. Попробуйте ещё раз." });
+        addLine({ type: "error", content: "✗ Что-то пошло не так. Попробуй переформулировать." });
         return;
       }
 
       // Anti-bot checks
       if (isBot()) {
-        addLine({ type: "error", content: "✗ Ошибка проверки безопасности." });
+        addLine({ type: "error", content: "✗ Ошибка проверки." });
         setStep("error");
         return;
       }
 
       // Rate limiting
       if (isRateLimited()) {
-        addLine({ type: "error", content: "✗ Слишком много заявок. Подождите минуту." });
+        addLine({ type: "error", content: "✗ Слишком много заявок. Подожди минутку." });
         setStep("error");
         return;
       }
@@ -167,27 +167,22 @@ const TerminalContactForm = () => {
       addLine({ type: "input", content: `> ${message}` });
       setStep("sending");
       
-      addLine({ type: "system", content: "Отправка заявки..." });
+      addLine({ type: "system", content: "Отправляю..." });
       
       setTimeout(() => {
-        addLine({ type: "system", content: "Проверка безопасности..." });
-      }, 400);
-      
-      setTimeout(() => {
-        addLine({ type: "system", content: "Передача на сервер..." });
-      }, 800);
+        addLine({ type: "system", content: "Почти готово..." });
+      }, 600);
 
       const result = await sendToTelegram();
       
       if (result.success) {
-        addLine({ type: "success", content: "✓ ЗАЯВКА УСПЕШНО ОТПРАВЛЕНА" });
-        addLine({ type: "system", content: `Данные: ${name} | ${phone}` });
-        addLine({ type: "system", content: "Ожидайте ответа в течение 24 часов." });
-        addLine({ type: "system", content: "Спасибо за интерес к армрестлингу!" });
+        addLine({ type: "success", content: "✓ ЗАЯВКА УЛЕТЕЛА" });
+        addLine({ type: "system", content: `${name}, жди ответа в течение дня.` });
+        addLine({ type: "system", content: "Скоро свяжусь!" });
         setStep("success");
       } else {
-        addLine({ type: "error", content: "✗ ОШИБКА ОТПРАВКИ" });
-        addLine({ type: "system", content: "Попробуйте ещё раз или напишите напрямую в Telegram." });
+        addLine({ type: "error", content: "✗ ЧТО-ТО ПОШЛО НЕ ТАК" });
+        addLine({ type: "system", content: "Напиши напрямую в Telegram: @assistemiy" });
         setStep("error");
       }
     }
@@ -205,9 +200,9 @@ const TerminalContactForm = () => {
     setPhone("");
     setMessage("");
     setLines([
-      { type: "system", content: "ARMWRESTLING TULA // Система заявок v2.0", timestamp: getCurrentTime() },
-      { type: "system", content: "Сессия сброшена. Готов к новой заявке." },
-      { type: "prompt", content: "Введите ваше имя:" },
+      { type: "system", content: "ARMTEMIY // Форма связи", timestamp: getCurrentTime() },
+      { type: "system", content: "Начинаем заново. Готов." },
+      { type: "prompt", content: "Как тебя зовут?" },
     ]);
   };
 
@@ -230,9 +225,9 @@ const TerminalContactForm = () => {
 
   const getPlaceholder = () => {
     switch (step) {
-      case "name": return "Александр";
-      case "phone": return "+7 (999) 123-45-67";
-      case "message": return "Хочу начать тренировки";
+      case "name": return "Саша";
+      case "phone": return "+7 999 123-45-67";
+      case "message": return "Хочу программу / на тренировку";
       default: return "";
     }
   };
@@ -248,7 +243,7 @@ const TerminalContactForm = () => {
         </div>
         <div className="flex items-center gap-2 ml-4 text-[hsl(0_0%_100%/0.5)] text-sm terminal-form">
           <Terminal className="w-4 h-4" />
-          <span>contact@armwrestling.tula</span>
+          <span>armtemiy.contact</span>
         </div>
       </div>
 

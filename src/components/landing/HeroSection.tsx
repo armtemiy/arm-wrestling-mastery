@@ -30,14 +30,13 @@ const HeroSection = () => {
 
           {/* Main heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            Всё об армрестлинге —{" "}
-            <span className="text-gradient">от техники до готовых программ</span>
+            Побеждай за столом,{" "}
+            <span className="text-gradient">а не гадай как</span>
           </h1>
 
           {/* Subheading */}
           <p className="text-lg md:text-xl text-[hsl(0_0%_100%/0.7)] max-w-2xl mx-auto mb-10">
-            Систематизированные знания от топовых рукоборцев. Без воды, без
-            догадок — только то, что работает
+            Готовая система тренировок и техники армрестлинга. Без YouTube-мусора и догадок — только проверенные методы, которые дают результат
           </p>
 
           {/* CTA Buttons */}
@@ -45,7 +44,7 @@ const HeroSection = () => {
             <div className="relative">
               <Button asChild variant="cta" size="xl" className="rounded-full">
                 <a href="https://t.me/assistemiy?text=Хочу%20программу" target="_blank" rel="noopener noreferrer">
-                  Получить программу
+                  Хочу побеждать
                   <ArrowRight className="ml-2" size={20} />
                 </a>
               </Button>
@@ -62,7 +61,7 @@ const HeroSection = () => {
               className="group flex items-center gap-2 px-6 py-3 text-[hsl(0_0%_100%/0.8)] hover:text-white transition-all border border-[hsl(0_0%_100%/0.15)] rounded-full hover:border-[hsl(30_80%_60%/0.5)] hover:shadow-[0_0_20px_hsl(30_80%_60%/0.2)]"
             >
               <Play size={18} className="text-[hsl(30_80%_60%)] group-hover:scale-110 transition-transform" />
-              <span>Или запишись на тренировку</span>
+              <span>Тренировки в Туле</span>
             </Button>
           </div>
 
