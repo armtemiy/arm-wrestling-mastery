@@ -1,10 +1,15 @@
 # Welcome to your Lovable project
 
-## 🎉 Git проблемы исправлены!
+## ✅ GitHub подключен успешно!
 
-**👉 [СЛЕДУЮЩИЕ ШАГИ - NEXT_STEPS.md](./NEXT_STEPS.md) 👈**
+**👉 [GITHUB_SETUP_COMPLETE.md](./GITHUB_SETUP_COMPLETE.md) 👈**
 
-Коммит создан успешно! Осталось настроить remote и сделать push.
+Репозиторий: https://github.com/armtemiy/arm-wrestling-mastery
+
+Теперь можете работать с Git из IDE:
+```bash
+git add . && git commit -m "update" && git push
+```
 
 ---
 
