@@ -2,6 +2,8 @@
 
 Лендинг для продажи программы тренировок и записи на персональные тренировки по армрестлингу в Туле.
 
+🌐 **Сайт:** https://armtemiy.github.io/arm-wrestling-mastery/
+
 ## 🚀 Быстрый старт
 
 ### Локальный запуск
@@ -49,14 +51,11 @@ src/
 │   │   ├── CTASection.tsx
 │   │   ├── Navbar.tsx
 │   │   ├── Footer.tsx
-│   │   └── ...
+│   │   └── TerminalContactForm.tsx
 │   ├── ui/               # shadcn/ui компоненты
 │   ├── SEO.tsx           # Динамические мета-теги
 │   └── OptimizedImage.tsx
 ├── hooks/                # Кастомные хуки
-│   ├── useScrollReveal.ts
-│   ├── useParallax.ts
-│   └── ...
 ├── integrations/
 │   └── supabase/         # Supabase клиент
 ├── pages/
@@ -65,16 +64,6 @@ src/
 └── lib/
     └── utils.ts
 ```
-
-## 🎨 Секции лендинга
-
-1. **Hero** — главный экран с заголовком и CTA
-2. **Program** — описание программы тренировок (1500₽)
-3. **Training** — персональные тренировки в Туле (от 500₽/час)
-4. **About** — информация об авторе
-5. **FAQ** — частые вопросы
-6. **CTA** — форма обратной связи (терминал)
-7. **Footer** — навигация и соцсети
 
 ## ⚙️ Конфигурация
 
@@ -93,36 +82,46 @@ VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-key
 - `TELEGRAM_BOT_TOKEN` — токен бота
 - `TELEGRAM_CHAT_ID` — ID чата для уведомлений
 
-## 📱 Деплой
+## 📱 Деплой на GitHub Pages
 
-### Railway (рекомендуется)
+### Автоматический деплой
 
-1. Создай проект на [railway.app](https://railway.app)
-2. Подключи GitHub репозиторий
-3. Добавь переменные окружения:
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_PUBLISHABLE_KEY`
-4. Railway автоматически задеплоит при push в main
+```bash
+# Сборка и деплой одной командой
+npm run deploy
+```
 
-Проект настроен:
-- `railway.json` — конфигурация деплоя
-- `nixpacks.toml` — настройки сборки
-- `server.js` — Express сервер для раздачи статики
+Эта команда:
+1. Соберёт проект (`npm run build`)
+2. Опубликует папку `dist` в ветку `gh-pages`
+3. GitHub Pages автоматически обновит сайт
 
-### Netlify
+### Первоначальная настройка
 
-Проект также работает на Netlify:
-- Автоматическая сборка при push в main
-- Настроено кеширование и security headers
-- SPA редиректы через `netlify.toml`
+1. Убедись, что репозиторий подключен:
+   ```bash
+   git remote -v
+   # origin  https://github.com/armtemiy/arm-wrestling-mastery.git
+   ```
 
-### Другие платформы
+2. После первого `npm run deploy` зайди в настройки репозитория:
+   - Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: `gh-pages` / `/ (root)`
+   - Save
 
-Работает на любой платформе:
-- Vercel
-- Render
-- Fly.io
-- DigitalOcean App Platform
+3. Сайт будет доступен по адресу:
+   https://armtemiy.github.io/arm-wrestling-mastery/
+
+### Обновление сайта
+
+После любых изменений:
+```bash
+git add .
+git commit -m "описание изменений"
+git push origin main
+npm run deploy
+```
 
 ## 🔧 Команды
 
@@ -131,6 +130,7 @@ npm run dev      # Запуск dev-сервера (localhost:8080)
 npm run build    # Сборка для продакшена
 npm run preview  # Предпросмотр сборки
 npm run lint     # Проверка кода
+npm run deploy   # Деплой на GitHub Pages
 ```
 
 ## 📊 SEO
@@ -143,22 +143,10 @@ npm run lint     # Проверка кода
 - robots.txt и sitemap.xml
 - Оптимизация производительности
 
-## 🎯 Особенности
-
-- **Адаптивный дизайн** — работает на всех устройствах
-- **Тёмная тема** — современный дизайн
-- **Анимации** — плавные переходы и эффекты
-- **Оптимизация** — code splitting, lazy loading
-- **Безопасность** — защита формы от спама
-
 ## 📞 Контакты
 
 - Telegram: [@armtemiy](https://t.me/armtemiy)
 - Заявки: [@assistemiy](https://t.me/assistemiy)
-
-## 📝 Лицензия
-
-Проприетарный проект. Все права защищены.
 
 ---
 

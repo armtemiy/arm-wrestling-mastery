@@ -3,7 +3,7 @@ Allow: /
 Disallow: /api/
 Disallow: /*.json$
 
-Sitemap: https://armtemiy.lovable.app/sitemap.xml
+Sitemap: https://armtemiy.github.io/arm-wrestling-mastery/sitemap.xml
 
 # Crawl-delay для вежливого краулинга
 Crawl-delay: 1
