@@ -21,6 +21,7 @@ const Navbar = () => {
     { href: "#program", label: "Программа" },
     { href: "#training", label: "Тренировки" },
     { href: "#about", label: "О себе" },
+    { href: "#faq", label: "FAQ" },
   ];
 
   const scrollToSection = (href: string) => {

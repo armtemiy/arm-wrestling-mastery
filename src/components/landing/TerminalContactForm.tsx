@@ -17,7 +17,7 @@ const MAX_SUBMISSIONS_PER_WINDOW = 3;
 
 // Simple phone validation
 const isValidPhone = (phone: string): boolean => {
-  const cleaned = phone.replace(/[\s\-\(\)]/g, "");
+  const cleaned = phone.replace(/[\s\-()]/g, "");
   return /^\+?[0-9]{10,15}$/.test(cleaned);
 };
 
@@ -113,9 +113,10 @@ const TerminalContactForm = () => {
       submissionTimestamps.push(Date.now());
       
       return { success: true };
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Telegram send error:", err);
-      return { success: false, error: err.message };
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      return { success: false, error: errorMessage };
     }
   };
 

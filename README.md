@@ -1,133 +1,157 @@
-# Welcome to your Lovable project
+# Armtemiy — Лендинг по армрестлингу
 
-## ✅ GitHub подключен успешно!
+Лендинг для продажи программы тренировок и записи на персональные тренировки по армрестлингу в Туле.
 
-**👉 [GITHUB_SETUP_COMPLETE.md](./GITHUB_SETUP_COMPLETE.md) 👈**
+## 🚀 Быстрый старт
 
-Репозиторий: https://github.com/armtemiy/arm-wrestling-mastery
+### Локальный запуск
 
-Теперь можете работать с Git из IDE:
 ```bash
-git add . && git commit -m "update" && git push
-```
-
----
-
-## 🎯 SEO Оптимизация завершена!
-
-**👉 [НАЧНИТЕ ЗДЕСЬ - START_HERE.md](./START_HERE.md) 👈**
-
-Ваш сайт полностью оптимизирован для поисковых систем!
-
----
-
-## Project info
-
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
-
-## 🚀 SEO Оптимизация
-
-**👉 [НАЧНИТЕ ЗДЕСЬ - START_HERE.md](./START_HERE.md) 👈**
-
-Этот проект полностью оптимизирован для поисковых систем! 
-
-### ✅ Что включено:
-- Мета-теги (Title, Description, Keywords, Open Graph, Twitter Cards)
-- robots.txt и sitemap.xml
-- Structured Data (JSON-LD)
-- Производительность (Code splitting, минификация, кеширование)
-- Security headers
-- Компоненты для SEO (SEO.tsx, OptimizedImage.tsx)
-
-### 📚 Документация:
-- **[START_HERE.md](./START_HERE.md)** - 🎯 **НАЧНИТЕ ЗДЕСЬ!**
-- **[SEO_INDEX.md](./SEO_INDEX.md)** - навигация по всей документации
-- **[QUICK_START_SEO.md](./QUICK_START_SEO.md)** - быстрый старт (10 минут)
-- **[SEO_INSTALLATION.md](./SEO_INSTALLATION.md)** - установка и настройка
-- **[SEO_GUIDE.md](./SEO_GUIDE.md)** - руководство разработчика
-- **[SEO_CHECKLIST.md](./SEO_CHECKLIST.md)** - чек-лист проверки
-
-### 🎯 Быстрый старт SEO:
-```bash
-# 1. Установите зависимости
+# 1. Установить зависимости
 npm install
 
-# 2. Соберите проект
-npm run build
+# 2. Запустить dev-сервер
+npm run dev
 
-# 3. Задеплойте и проверьте:
-# - https://armtemiy.lovable.app/robots.txt
-# - https://armtemiy.lovable.app/sitemap.xml
+# 3. Открыть в браузере
+http://localhost:8080
 ```
 
-Подробнее: **[START_HERE.md](./START_HERE.md)**
+### Сборка для продакшена
+
+```bash
+npm run build
+npm run preview  # предпросмотр сборки
+```
+
+## 🛠 Технологии
+
+- **React 18** + TypeScript
+- **Vite** — сборка и dev-сервер
+- **Tailwind CSS** — стилизация
+- **shadcn/ui** — UI компоненты (Radix UI)
+- **React Router** — роутинг
+- **React Query** — управление состоянием
+- **Supabase** — бэкенд (отправка заявок в Telegram)
+- **Lucide React** — иконки
+
+## 📁 Структура проекта
+
+```
+src/
+├── components/
+│   ├── landing/          # Секции лендинга
+│   │   ├── HeroSection.tsx
+│   │   ├── ProgramSection.tsx
+│   │   ├── TrainingSection.tsx
+│   │   ├── AboutSection.tsx
+│   │   ├── FAQSection.tsx
+│   │   ├── CTASection.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── Footer.tsx
+│   │   └── ...
+│   ├── ui/               # shadcn/ui компоненты
+│   ├── SEO.tsx           # Динамические мета-теги
+│   └── OptimizedImage.tsx
+├── hooks/                # Кастомные хуки
+│   ├── useScrollReveal.ts
+│   ├── useParallax.ts
+│   └── ...
+├── integrations/
+│   └── supabase/         # Supabase клиент
+├── pages/
+│   ├── Index.tsx         # Главная страница
+│   └── NotFound.tsx      # 404
+└── lib/
+    └── utils.ts
+```
+
+## 🎨 Секции лендинга
+
+1. **Hero** — главный экран с заголовком и CTA
+2. **Program** — описание программы тренировок (1500₽)
+3. **Training** — персональные тренировки в Туле (от 500₽/час)
+4. **About** — информация об авторе
+5. **FAQ** — частые вопросы
+6. **CTA** — форма обратной связи (терминал)
+7. **Footer** — навигация и соцсети
+
+## ⚙️ Конфигурация
+
+### Переменные окружения (.env)
+
+```env
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-key
+```
+
+### Supabase Edge Function
+
+Форма отправляет заявки в Telegram через Supabase Edge Function `send-telegram`.
+
+Необходимые секреты в Supabase:
+- `TELEGRAM_BOT_TOKEN` — токен бота
+- `TELEGRAM_CHAT_ID` — ID чата для уведомлений
+
+## 📱 Деплой
+
+### Netlify (рекомендуется)
+
+Проект настроен для деплоя на Netlify:
+- Автоматическая сборка при push в main
+- Настроено кеширование и security headers
+- SPA редиректы
+
+```bash
+# Деплой вручную
+npm run build
+# Загрузить папку dist/ на Netlify
+```
+
+### Другие платформы
+
+Работает на любой платформе, поддерживающей статические сайты:
+- Vercel
+- GitHub Pages
+- Cloudflare Pages
+
+## 🔧 Команды
+
+```bash
+npm run dev      # Запуск dev-сервера (localhost:8080)
+npm run build    # Сборка для продакшена
+npm run preview  # Предпросмотр сборки
+npm run lint     # Проверка кода
+```
+
+## 📊 SEO
+
+Проект оптимизирован для поисковых систем:
+- Мета-теги (title, description, keywords)
+- Open Graph для соцсетей
+- Twitter Cards
+- Structured Data (JSON-LD)
+- robots.txt и sitemap.xml
+- Оптимизация производительности
+
+## 🎯 Особенности
+
+- **Адаптивный дизайн** — работает на всех устройствах
+- **Тёмная тема** — современный дизайн
+- **Анимации** — плавные переходы и эффекты
+- **Оптимизация** — code splitting, lazy loading
+- **Безопасность** — защита формы от спама
+
+## 📞 Контакты
+
+- Telegram: [@armtemiy](https://t.me/armtemiy)
+- Заявки: [@assistemiy](https://t.me/assistemiy)
+
+## 📝 Лицензия
+
+Проприетарный проект. Все права защищены.
 
 ---
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+**Версия:** 1.0.0  
+**Последнее обновление:** Декабрь 2025
