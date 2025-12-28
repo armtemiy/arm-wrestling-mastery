@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /*.json$
+
+Sitemap: https://armtemiy.ru/sitemap.xml
+
+# Crawl-delay для вежливого краулинга
+Crawl-delay: 1
