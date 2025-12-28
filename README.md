@@ -95,25 +95,34 @@ VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-key
 
 ## 📱 Деплой
 
-### Netlify (рекомендуется)
+### Railway (рекомендуется)
 
-Проект настроен для деплоя на Netlify:
+1. Создай проект на [railway.app](https://railway.app)
+2. Подключи GitHub репозиторий
+3. Добавь переменные окружения:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_PUBLISHABLE_KEY`
+4. Railway автоматически задеплоит при push в main
+
+Проект настроен:
+- `railway.json` — конфигурация деплоя
+- `nixpacks.toml` — настройки сборки
+- `server.js` — Express сервер для раздачи статики
+
+### Netlify
+
+Проект также работает на Netlify:
 - Автоматическая сборка при push в main
 - Настроено кеширование и security headers
-- SPA редиректы
-
-```bash
-# Деплой вручную
-npm run build
-# Загрузить папку dist/ на Netlify
-```
+- SPA редиректы через `netlify.toml`
 
 ### Другие платформы
 
-Работает на любой платформе, поддерживающей статические сайты:
+Работает на любой платформе:
 - Vercel
-- GitHub Pages
-- Cloudflare Pages
+- Render
+- Fly.io
+- DigitalOcean App Platform
 
 ## 🔧 Команды
 
