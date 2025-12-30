@@ -37,8 +37,8 @@ const AboutSection = () => {
               <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-[hsl(0_0%_15%)] to-[hsl(0_0%_12%)] border border-[hsl(0_0%_100%/0.1)] overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-center p-8">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[hsl(30_80%_60%/0.15)] flex items-center justify-center">
-                      <span className="text-3xl font-bold text-[hsl(30_70%_55%)]">А</span>
+                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[hsl(150_70%_45%/0.15)] flex items-center justify-center">
+                      <span className="text-3xl font-bold text-[hsl(150_70%_50%)]">А</span>
                     </div>
                     <p className="text-[hsl(0_0%_100%/0.4)] text-sm">
                       Твоё фото
@@ -53,7 +53,7 @@ const AboutSection = () => {
 
             {/* Content */}
             <div className="order-1 md:order-2">
-              <span className="inline-block px-4 py-1 rounded-full bg-[hsl(30_80%_60%/0.15)] text-[hsl(30_70%_55%)] text-sm font-medium mb-4">
+              <span className="inline-block px-4 py-1 rounded-full bg-[hsl(150_70%_45%/0.15)] text-[hsl(150_70%_50%)] text-sm font-medium mb-4">
                 Кто я
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-[hsl(0_0%_98%)] mb-6">
@@ -73,8 +73,8 @@ const AboutSection = () => {
                     className="group flex items-center gap-3"
                     style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[hsl(30_80%_60%/0.15)] flex items-center justify-center group-hover:bg-[hsl(30_80%_60%/0.25)] group-hover:scale-110 transition-all duration-300">
-                      <item.icon className="text-[hsl(30_70%_55%)] group-hover:rotate-6 transition-transform duration-300" size={20} />
+                    <div className="w-10 h-10 rounded-xl bg-[hsl(150_70%_45%/0.15)] flex items-center justify-center group-hover:bg-[hsl(150_70%_45%/0.25)] group-hover:scale-110 transition-all duration-300">
+                      <item.icon className="text-[hsl(150_70%_50%)] group-hover:rotate-6 transition-transform duration-300" size={20} />
                     </div>
                     <span className="text-[hsl(0_0%_98%)]">{item.text}</span>
                   </div>
@@ -84,9 +84,6 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Section divider */}
-      <div className="absolute bottom-0 left-0 right-0 section-divider-dark" />
     </section>
   );
 };

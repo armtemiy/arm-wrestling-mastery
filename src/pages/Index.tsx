@@ -1,8 +1,11 @@
 import Navbar from "@/components/landing/Navbar";
 import HeroSection from "@/components/landing/HeroSection";
+import StatsSection from "@/components/landing/StatsSection";
 import ProgramSection from "@/components/landing/ProgramSection";
 import TrainingSection from "@/components/landing/TrainingSection";
+import LeadMagnetSection from "@/components/landing/LeadMagnetSection";
 import AboutSection from "@/components/landing/AboutSection";
+import MarqueeTicker from "@/components/landing/MarqueeTicker";
 import FAQSection from "@/components/landing/FAQSection";
 import CTASection from "@/components/landing/CTASection";
 import Footer from "@/components/landing/Footer";
@@ -12,16 +15,19 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="Armtemiy — Побеждай за столом, а не гадай как | Армрестлинг Тула"
-        description="Готовая система тренировок и техники армрестлинга. Без YouTube-мусора и догадок — только проверенные методы. Персональные тренировки в Туле."
+        title="Armtemiy — Выигрывай борьбу, а не надейся на удачу | Армрестлинг Тула"
+        description="Система тренировок и техники армрестлинга. Без догадок — только методы, которые работают. Персональные тренировки в Туле."
         keywords="армрестлинг, тренировки армрестлинг, техника армрестлинга, программа тренировок, армрестлинг Тула, как побеждать в армрестлинге"
       />
       <div className="min-h-screen">
         <Navbar />
         <HeroSection />
+        <StatsSection />
         <ProgramSection />
         <TrainingSection />
+        <LeadMagnetSection />
         <AboutSection />
+        <MarqueeTicker />
         <FAQSection />
         <CTASection />
         <Footer />

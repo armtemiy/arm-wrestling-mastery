@@ -270,7 +270,7 @@ const TerminalContactForm = () => {
                 </div>
               )}
               {line.type === "prompt" && (
-                <div className="text-[hsl(30_80%_55%)] mt-3">{line.content}</div>
+                <div className="text-[hsl(150_70%_50%)] mt-3">{line.content}</div>
               )}
               {line.type === "input" && (
                 <div className="text-[hsl(0_0%_100%/0.9)] font-medium">{line.content}</div>
@@ -316,10 +316,10 @@ const TerminalContactForm = () => {
               autoComplete="off"
               aria-hidden="true"
             />
-            <span className="terminal-cursor w-2 h-5 bg-[hsl(30_80%_55%)]" />
+            <span className="terminal-cursor w-2 h-5 bg-[hsl(150_70%_50%)]" />
             <button
               type="submit"
-              className="ml-2 p-2 rounded bg-[hsl(30_80%_55%/0.2)] hover:bg-[hsl(30_80%_55%/0.3)] text-[hsl(30_80%_55%)] transition-colors"
+              className="ml-2 p-2 rounded bg-[hsl(150_70%_45%/0.2)] hover:bg-[hsl(150_70%_45%/0.3)] text-[hsl(150_70%_50%)] transition-colors"
             >
               <Send className="w-4 h-4" />
             </button>

@@ -55,7 +55,7 @@ const FAQSection = () => {
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full bg-[hsl(30_80%_55%/0.15)] text-[hsl(30_80%_55%)] text-sm font-medium mb-6">
+            <span className="inline-block px-4 py-2 rounded-full bg-[hsl(150_70%_45%/0.15)] text-[hsl(150_70%_50%)] text-sm font-medium mb-6">
               Вопросы
             </span>
             <h2 className="text-3xl md:text-5xl font-bold text-[hsl(0_0%_98%)]">
@@ -73,10 +73,10 @@ const FAQSection = () => {
                 >
                   <AccordionItem
                     value={`item-${index}`}
-                    className="border border-[hsl(0_0%_100%/0.1)] rounded-2xl px-6 bg-[hsl(0_0%_100%/0.03)] data-[state=open]:bg-[hsl(0_0%_100%/0.05)] data-[state=open]:border-[hsl(30_80%_55%/0.3)] transition-all duration-300 hover:border-[hsl(0_0%_100%/0.2)] relative overflow-hidden group card-lift"
+                    className="border border-[hsl(0_0%_100%/0.1)] rounded-2xl px-6 bg-[hsl(0_0%_100%/0.03)] data-[state=open]:bg-[hsl(0_0%_100%/0.05)] data-[state=open]:border-[hsl(150_70%_45%/0.3)] transition-all duration-300 hover:border-[hsl(0_0%_100%/0.2)] relative overflow-hidden group card-lift"
                   >
                     {/* Subtle glow on hover */}
-                    <div className="absolute inset-0 bg-[hsl(30_80%_55%/0.02)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <div className="absolute inset-0 bg-[hsl(150_70%_45%/0.02)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                     <AccordionTrigger className="relative z-10 text-left text-[hsl(0_0%_98%)] hover:no-underline py-6 text-lg font-medium">
                       {faq.question}
                     </AccordionTrigger>
@@ -91,6 +91,9 @@ const FAQSection = () => {
 
         </div>
       </div>
+
+      {/* Section divider */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_100%/0.15)] to-transparent" />
     </section>
   );
 };

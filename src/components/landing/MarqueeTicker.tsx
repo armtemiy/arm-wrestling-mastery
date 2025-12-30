@@ -1,28 +1,46 @@
 const MarqueeTicker = () => {
   const items = [
-    "СИЛА",
-    "ТЕХНИКА",
-    "ПОБЕДА",
-    "ТУЛА",
-    "АРМРЕСТЛИНГ",
+    { text: "СИЛА", emoji: "💪" },
+    { text: "ТЕХНИКА", emoji: "🎯" },
+    { text: "ПОБЕДА", emoji: "🏆" },
+    { text: "НАБОР ОТКРЫТ", emoji: "🔥" },
+    { text: "ТУЛА", emoji: "📍" },
+    { text: "АРМРЕСТЛИНГ", emoji: "🤝" },
+    { text: "РЕЗУЛЬТАТ", emoji: "⚡" },
   ];
 
   return (
-    <div className="w-full overflow-hidden bg-[hsl(0_0%_6%)] border-t border-b border-[hsl(0_0%_100%/0.05)] py-6 my-12 md:my-16">
-      <div className="marquee-track flex">
-        {[...Array(4)].map((_, setIndex) => (
-          <div key={setIndex} className="flex shrink-0">
-            {items.map((item, index) => (
-              <span
-                key={`${setIndex}-${index}`}
-                className="flex items-center mx-6 md:mx-10 text-sm md:text-base font-medium uppercase tracking-[0.2em] text-[hsl(0_0%_100%/0.4)]"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[hsl(30_80%_55%/0.6)] mr-6 md:mr-10" />
-                {item}
-              </span>
+    <div className="relative overflow-hidden bg-[hsl(0_0%_10%)]">
+      {/* Diagonal stripe effect */}
+      <div className="relative -rotate-2 scale-110 my-6">
+        {/* Main gradient background with glow */}
+        <div className="relative bg-gradient-to-r from-[#36E2A8] via-[#2BC295] to-[#36E2A8] py-5 shadow-[0_0_80px_rgba(54,226,168,0.4)]">
+          {/* Top edge highlight */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+          
+          {/* Animated marquee */}
+          <div className="marquee-track flex">
+            {[...Array(4)].map((_, setIndex) => (
+              <div key={setIndex} className="flex shrink-0">
+                {items.map((item, index) => (
+                  <span
+                    key={`${setIndex}-${index}`}
+                    className="flex items-center mx-8 md:mx-12 text-sm md:text-base font-black uppercase tracking-[0.2em] text-black drop-shadow-sm"
+                  >
+                    <span className="mr-3 text-xl drop-shadow-lg">{item.emoji}</span>
+                    {item.text}
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
-        ))}
+          
+          {/* Bottom edge highlight */}
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+        </div>
+        
+        {/* Shine effect overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shine pointer-events-none" />
       </div>
     </div>
   );

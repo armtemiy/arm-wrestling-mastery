@@ -129,12 +129,12 @@ const Footer = () => {
                         className="relative inline-flex items-center gap-3 text-base font-medium text-[hsl(0_0%_100%/0.7)] group-hover:text-white transition-all duration-300"
                       >
                         {/* Animated gradient number */}
-                        <span className="text-xs font-mono text-[hsl(30_80%_55%/0.6)] group-hover:text-[hsl(30_80%_60%)] transition-colors duration-300">
+                        <span className="text-xs font-mono text-[hsl(150_70%_45%/0.6)] group-hover:text-[hsl(150_70%_50%)] transition-colors duration-300">
                           0{index + 1}
                         </span>
                         {link.label}
                         {/* Underline animation */}
-                        <span className="absolute -bottom-1 left-7 w-0 h-[2px] bg-gradient-to-r from-[hsl(30_80%_55%)] to-[hsl(30_90%_70%)] group-hover:w-[calc(100%-1.75rem)] transition-all duration-300 ease-out" />
+                        <span className="absolute -bottom-1 left-7 w-0 h-[2px] bg-gradient-to-r from-[hsl(150_70%_45%)] to-[hsl(85_90%_60%)] group-hover:w-[calc(100%-1.75rem)] transition-all duration-300 ease-out" />
                       </span>
                     </button>
                   ))}
@@ -189,7 +189,7 @@ const Footer = () => {
                   href="https://t.me/armtemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[hsl(0_0%_100%/0.5)] hover:text-[hsl(30_80%_60%)] transition-colors duration-300"
+                  className="text-[hsl(0_0%_100%/0.5)] hover:text-[hsl(150_70%_50%)] transition-colors duration-300"
                 >
                   @armtemiy
                 </a>
@@ -198,7 +198,7 @@ const Footer = () => {
                   href="https://t.me/assistemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[hsl(0_0%_100%/0.5)] hover:text-[hsl(30_80%_60%)] transition-colors duration-300"
+                  className="text-[hsl(0_0%_100%/0.5)] hover:text-[hsl(150_70%_50%)] transition-colors duration-300"
                 >
                   @assistemiy
                 </a>
