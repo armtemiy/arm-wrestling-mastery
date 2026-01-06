@@ -1,0 +1,437 @@
+/**
+ * BRUTALIST UTILITY CLASSES
+ * =========================
+ * Custom utilities beyond Tailwind for industrial aesthetic
+ * All utilities follow BEM-like naming: .brutal-{variant}-{modifier}
+ */
+
+@layer utilities {
+  /* ============================================
+     BACKGROUND UTILITIES
+     ============================================ */
+
+  /* Noise texture overlay */
+  .bg-noise {
+    position: relative;
+  }
+
+  .bg-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--overlay-noise);
+    background-size: 200px 200px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: var(--z-above);
+  }
+
+  /* Grid pattern background */
+  .bg-grid {
+    background-image: var(--overlay-grid);
+    background-size: 60px 60px;
+  }
+
+  /* Stripe pattern */
+  .bg-stripe {
+    background-image: var(--overlay-stripe);
+  }
+
+  /* Gradient mesh backgrounds */
+  .bg-mesh-rust {
+    background:
+      radial-gradient(circle at 20% 30%, hsl(24, 100%, 18%) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, hsl(24, 95%, 15%) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, hsl(210, 15%, 6%) 0%, hsl(210, 15%, 4%) 100%);
+  }
+
+  .bg-mesh-metal {
+    background:
+      radial-gradient(circle at 30% 20%, hsl(210, 10%, 12%) 0%, transparent 40%),
+      radial-gradient(circle at 70% 80%, hsl(210, 8%, 10%) 0%, transparent 40%),
+      linear-gradient(180deg, hsl(210, 15%, 6%) 0%, hsl(210, 15%, 4%) 100%);
+  }
+
+  /* ============================================
+     BORDER UTILITIES
+     ============================================ */
+
+  /* Brutal borders */
+  .brutal-border {
+    border: var(--border-brutal);
+  }
+
+  .brutal-border-accent {
+    border: var(--border-accent);
+  }
+
+  .brutal-border-heavy {
+    border: var(--border-heavy);
+  }
+
+  /* Offset border effect */
+  .brutal-offset {
+    position: relative;
+  }
+
+  .brutal-offset::before {
+    content: '';
+    position: absolute;
+    inset: -4px -4px -4px -4px;
+    background: var(--rust-700);
+    z-index: -1;
+    transition: transform var(--duration-normal) var(--ease-mechanical);
+  }
+
+  .brutal-offset:hover::before {
+    transform: translate(4px, 4px);
+  }
+
+  /* Corner accents */
+  .corner-accent {
+    position: relative;
+  }
+
+  .corner-accent::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 32px;
+    height: 32px;
+    border-bottom: 4px solid var(--rust-600);
+    border-right: 4px solid var(--rust-600);
+  }
+
+  /* ============================================
+     TYPOGRAPHY UTILITIES
+     ============================================ */
+
+  /* Display text - Heavy impact */
+  .text-display {
+    font-family: var(--font-display);
+    font-weight: var(--font-black);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    text-transform: uppercase;
+  }
+
+  /* Body text - Industrial clarity */
+  .text-industrial {
+    font-family: var(--font-body);
+    font-weight: var(--font-normal);
+    line-height: var(--leading-normal);
+  }
+
+  /* Mono text - Technical details */
+  .text-technical {
+    font-family: var(--font-mono);
+    font-weight: var(--font-normal);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Accent text - Emphasis */
+  .text-accent-font {
+    font-family: var(--font-accent);
+    font-weight: var(--font-bold);
+  }
+
+  /* Gradient text */
+  .text-gradient-rust {
+    background: linear-gradient(135deg, var(--rust-500), var(--rust-700));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-metal {
+    background: linear-gradient(135deg, var(--metal-300), var(--metal-500));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Stroke text outline effect */
+  .text-stroke {
+    -webkit-text-stroke: 2px var(--color-fg-primary);
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ============================================
+     SHADOW UTILITIES
+     ============================================ */
+
+  .shadow-brutal-sm {
+    box-shadow: var(--shadow-brutal);
+  }
+
+  .shadow-brutal-lg {
+    box-shadow: var(--shadow-brutal-lg);
+  }
+
+  .shadow-brutal-accent {
+    box-shadow: var(--shadow-brutal-accent);
+  }
+
+  /* ============================================
+     LAYOUT UTILITIES
+     ============================================ */
+
+  /* Brutal grid - Visible grid lines */
+  .brutal-grid {
+    display: grid;
+    gap: 1px;
+    background-color: var(--color-border);
+  }
+
+  .brutal-grid > * {
+    background-color: var(--color-bg-primary);
+  }
+
+  /* Asymmetric grid */
+  .grid-asymmetric {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-8);
+  }
+
+  @media (max-width: 768px) {
+    .grid-asymmetric {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Overlap sections */
+  .section-overlap {
+    margin-top: -80px;
+    position: relative;
+    z-index: var(--z-above);
+  }
+
+  /* ============================================
+     COMPONENT UTILITIES
+     ============================================ */
+
+  /* Brutal card */
+  .brutal-card {
+    background: var(--color-bg-secondary);
+    border: var(--border-heavy);
+    box-shadow: var(--shadow-brutal);
+    transition: transform var(--duration-normal) var(--ease-mechanical),
+                box-shadow var(--duration-normal) var(--ease-mechanical);
+  }
+
+  .brutal-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: var(--shadow-brutal-lg);
+  }
+
+  /* Brutal button base */
+  .brutal-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4) var(--space-8);
+    font-family: var(--font-body);
+    font-weight: var(--font-bold);
+    font-size: var(--text-base);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-fg-primary);
+    background: var(--rust-600);
+    border: none;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-brutal);
+    cursor: pointer;
+    transition: all var(--duration-normal) var(--ease-mechanical);
+  }
+
+  .brutal-button:hover {
+    background: var(--rust-500);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 hsl(0 0% 0%);
+  }
+
+  .brutal-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 hsl(0 0% 0%);
+  }
+
+  /* Brutal button outline */
+  .brutal-button-outline {
+    background: transparent;
+    border: 3px solid var(--rust-600);
+  }
+
+  .brutal-button-outline:hover {
+    background: var(--rust-600);
+  }
+
+  /* ============================================
+     DECORATIVE UTILITIES
+     ============================================ */
+
+  /* Diagonal stripe decoration */
+  .diagonal-stripe {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .diagonal-stripe::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      hsl(24, 98%, 32%, 0.1) 10px,
+      hsl(24, 98%, 32%, 0.1) 20px
+    );
+    pointer-events: none;
+  }
+
+  /* Corner brackets */
+  .corner-brackets {
+    position: relative;
+    padding: var(--space-4);
+  }
+
+  .corner-brackets::before,
+  .corner-brackets::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: var(--rust-600);
+    border-style: solid;
+  }
+
+  .corner-brackets::before {
+    top: 0;
+    left: 0;
+    border-width: 3px 0 0 3px;
+  }
+
+  .corner-brackets::after {
+    bottom: 0;
+    right: 0;
+    border-width: 0 3px 3px 0;
+  }
+
+  /* ============================================
+     RESPONSIVE UTILITIES
+     ============================================ */
+
+  /* Hide scrollbar but keep functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Container queries utility */
+  .container-narrow {
+    max-width: var(--container-lg);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .container-wide {
+    max-width: var(--container-2xl);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  /* ============================================
+     PRINT UTILITIES
+     ============================================ */
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+
+    .print-only {
+      display: block !important;
+    }
+  }
+
+  .print-only {
+    display: none;
+  }
+
+  @media screen {
+    .screen-only {
+      display: block;
+    }
+  }
+
+  /* ============================================
+     ACCESSIBILITY UTILITIES
+     ============================================ */
+
+  /* Focus visible for keyboard navigation */
+  .focus-ring {
+    outline: none;
+  }
+
+  .focus-ring:focus-visible {
+    outline: 3px solid var(--rust-600);
+    outline-offset: 4px;
+  }
+
+  /* Skip to content link */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    background: var(--rust-600);
+    color: var(--color-fg-primary);
+    font-weight: var(--font-bold);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    z-index: var(--z-modal);
+  }
+
+  .skip-link:focus {
+    top: var(--space-4);
+  }
+
+  /* Screen reader only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}

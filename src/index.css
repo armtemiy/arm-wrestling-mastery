@@ -1,4 +1,13 @@
-/* Fonts loaded via index.html for better performance */
+/**
+ * INDUSTRIAL BRUTALIST LANDING
+ * ===========================
+ * Main stylesheet with design system integration
+ */
+
+/* Import design system tokens first */
+@import './design-system/tokens.css';
+@import './design-system/animations.css';
+@import './design-system/utilities.css';
 
 @tailwind base;
 @tailwind components;

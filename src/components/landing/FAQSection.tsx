@@ -9,61 +9,65 @@ import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 
 const faqs = [
   {
-    question: "Я полный ноль в армрестлинге. Мне подойдёт?",
-    answer:
-      "Именно для тебя и делал. Программа идёт от основ: как ставить руку, какие мышцы качать, как не травмироваться. Начнёшь с нуля и сразу будешь делать правильно, а не переучиваться потом.",
+    question: "НУЛЬ В АРМРЕСТЛИНГЕ — ПОЙДЁТ?",
+    answer: "Именно для тебя. От основ: постановка руки, мышцы, травмы. Начнёшь правильно — не переучиваешься потом.",
   },
   {
-    question: "А если у меня нет стола и специального оборудования?",
-    answer:
-      "Есть целый раздел про тренировки без стола. Конечно, со столом лучше, но начать можно с минимумом — турник, резина, гантели. Главное — понимать что и зачем делаешь.",
+    question: "НЕТ СТОЛА И ОБОРУДОВАНИЯ?",
+    answer: "Есть раздел про тренировки без стола. Турник, резина, гантели — минимум для старта. Главное — понимать что делаешь.",
   },
   {
-    question: "Как получу доступ после оплаты?",
-    answer:
-      "Сразу после оплаты получишь ссылку на закрытый Telegram-канал. Там текст, видео, разборы. Доступ навсегда — можешь возвращаться когда угодно.",
+    question: "КАК ПОЛУЧИТЬ ДОСТУП?",
+    answer: "После оплаты — ссылка на закрытый Telegram-канал. Текст, видео, разборы. Доступ навсегда.",
   },
   {
-    question: "Что если не понравится?",
-    answer:
-      "Если за 3 дня поймёшь, что это не твоё — напиши, верну деньги без вопросов. Мне важно, чтобы программа реально помогала, а не просто продавалась.",
+    question: "А ЕСЛИ НЕ ЗАЙДЁТ?",
+    answer: "3 дня на тест. Не зашло — пишу, возвращаю деньги. Без вопросов. Мне важно, чтобы программа помогала.",
   },
   {
-    question: "Чем это лучше бесплатных видео на YouTube?",
-    answer:
-      "На YouTube куча противоречивой информации. Один говорит одно, другой — другое. Здесь всё собрано в систему: что делать, в какой последовательности, почему именно так. Экономишь месяцы проб и ошибок.",
+    question: "ЧЕМ ЛУЧШЕ YOUTUBE?",
+    answer: "На YouTube — противоречия. Здесь — система: что, в какой порядок, почему. Экономишь месяцы проб и ошибок.",
   },
 ];
 
 const FAQSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
   const { containerRef: faqsRef, visibleItems } = useStaggeredReveal(faqs.length, {
-    staggerDelay: 100,
+    staggerDelay: 80,
   });
 
   return (
-    <section 
+    <section
       id="faq"
-      className="relative py-24 md:py-32 section-charcoal overflow-hidden"
+      className="relative py-20 md:py-28 bg-metal-900 bg-noise overflow-hidden"
     >
-      <div 
+      {/* Background grid */}
+      <div className="absolute inset-0 bg-grid opacity-[0.03]" />
+
+      {/* Corner accent */}
+      <div className="absolute top-0 right-0 w-24 h-24 border-r-2 border-t-2 border-rust-600 opacity-10" />
+
+      <div
         ref={sectionRef}
         className={`container mx-auto px-4 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
         <div className="max-w-3xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full bg-[hsl(150_70%_45%/0.15)] text-[hsl(150_70%_50%)] text-sm font-medium mb-6">
-              Вопросы
-            </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-[hsl(0_0%_98%)]">
-              Отвечаю на главное
+          {/* Section header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-metal-800 border border-rust-600 mb-4">
+              <div className="w-1.5 h-1.5 rounded-full bg-rust-600 animate-pulse" />
+              <span className="font-mono text-xs text-rust-500 uppercase tracking-widest">
+                FAQ
+              </span>
+            </div>
+            <h2 className="font-display text-4xl md:text-5xl text-metal-50" style={{ textShadow: '3px 3px 0 hsl(24 98% 32%)' }}>
+              ВОПРОСЫ
             </h2>
           </div>
 
-          {/* Accordion with staggered animations */}
+          {/* Brutal accordion */}
           <div ref={faqsRef}>
             <Accordion type="single" collapsible className="space-y-3">
               {faqs.map((faq, index) => (
@@ -73,27 +77,33 @@ const FAQSection = () => {
                 >
                   <AccordionItem
                     value={`item-${index}`}
-                    className="border border-[hsl(0_0%_100%/0.1)] rounded-2xl px-6 bg-[hsl(0_0%_100%/0.03)] data-[state=open]:bg-[hsl(0_0%_100%/0.05)] data-[state=open]:border-[hsl(150_70%_45%/0.3)] transition-all duration-300 hover:border-[hsl(0_0%_100%/0.2)] relative overflow-hidden group card-lift"
+                    className="bg-metal-800 border-2 border-metal-700 data-[state=open]:border-rust-600 transition-all duration-200"
                   >
-                    {/* Subtle glow on hover */}
-                    <div className="absolute inset-0 bg-[hsl(150_70%_45%/0.02)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                    <AccordionTrigger className="relative z-10 text-left text-[hsl(0_0%_98%)] hover:no-underline py-6 text-lg font-medium">
-                      {faq.question}
+                    <AccordionTrigger className="relative text-left px-6 py-5 hover:no-underline">
+                      <div className="flex items-center gap-4">
+                        <div className="font-mono text-xs text-metal-600">
+                          0{index + 1}
+                        </div>
+                        <span className="font-mono text-sm md:text-base text-metal-200 uppercase tracking-wider font-bold">
+                          {faq.question}
+                        </span>
+                      </div>
                     </AccordionTrigger>
-                    <AccordionContent className="relative z-10 text-[hsl(0_0%_98%/0.6)] pb-6 text-base leading-relaxed">
-                      {faq.answer}
+                    <AccordionContent className="px-6 pb-6 text-metal-400 font-body leading-relaxed">
+                      <div className="pl-10 border-l-2 border-rust-600">
+                        {faq.answer}
+                      </div>
                     </AccordionContent>
                   </AccordionItem>
                 </div>
               ))}
             </Accordion>
           </div>
-
         </div>
       </div>
 
       {/* Section divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_100%/0.15)] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-metal-800 via-rust-600 to-metal-800" />
     </section>
   );
 };
