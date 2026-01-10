@@ -1,0 +1,223 @@
+/**
+ * TYPOGRAPHY SYSTEM
+ * =================
+ * Distinctive fonts and text utility classes
+ * Fonts: Clash Display (display), Satoshi (body), JetBrains Mono (mono)
+ */
+
+/* ============================================
+   FONT FACE DECLARATIONS
+   ============================================ */
+
+/* Clash Display - Display font for headings */
+@font-face {
+  font-family: 'Clash Display';
+  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/WNZPLTBMGJSGPPMGA6IOVVJZWU3QPEHK/YZFHXHKLMNEOTPF7AGLXV6UXCY6PKPVG.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/WNZPLTBMGJSGPPMGA6IOVVJZWU3QPEHK/YZFHXHKLMNEOTPF7AGLXV6UXCY6PKPVG.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/WNZPLTBMGJSGPPMGA6IOVVJZWU3QPEHK/YZFHXHKLMNEOTPF7AGLXV6UXCY6PKPVG.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Display';
+  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/WNZPLTBMGJSGPPMGA6IOVVJZWU3QPEHK/YZFHXHKLMNEOTPF7AGLXV6UXCY6PKPVG.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Satoshi - Body font for paragraphs and UI */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/GXPUQZS3BMHFPNHQK5YPTXQT3SPNPDHK/SATOSHI-VARIABLE.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/GXPUQZS3BMHFPNHQK5YPTXQT3SPNPDHK/SATOSHI-VARIABLEITALIC.woff2') format('woff2');
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============================================
+   TEXT UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+  /* Display Text - Large headings with impact */
+  .text-display-xl {
+    font-family: var(--font-display);
+    font-size: var(--font-size-8xl);
+    font-weight: 700;
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tighter);
+  }
+
+  .text-display-lg {
+    font-family: var(--font-display);
+    font-size: var(--font-size-6xl);
+    font-weight: 700;
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-tighter);
+  }
+
+  .text-display-md {
+    font-family: var(--font-display);
+    font-size: var(--font-size-4xl);
+    font-weight: 600;
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+
+  .text-display-sm {
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: 600;
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+
+  /* Body Text - Readable paragraphs */
+  .text-body-lg {
+    font-family: var(--font-body);
+    font-size: var(--font-size-lg);
+    font-weight: 400;
+    line-height: var(--line-height-relaxed);
+  }
+
+  .text-body {
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    line-height: var(--line-height-normal);
+  }
+
+  .text-body-sm {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    line-height: var(--line-height-normal);
+  }
+
+  /* Label Text - UI elements, buttons, navigation */
+  .text-label {
+    font-family: var(--font-body);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    letter-spacing: var(--letter-spacing-wider);
+    text-transform: uppercase;
+  }
+
+  .text-label-sm {
+    font-family: var(--font-body);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    letter-spacing: var(--letter-spacing-widest);
+    text-transform: uppercase;
+  }
+
+  /* Mono Text - Code, technical details */
+  .text-mono {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    letter-spacing: var(--letter-spacing-wide);
+  }
+
+  /* Responsive display sizes */
+  @media (max-width: 768px) {
+    .text-display-xl {
+      font-size: var(--font-size-5xl);
+    }
+
+    .text-display-lg {
+      font-size: var(--font-size-4xl);
+    }
+
+    .text-display-md {
+      font-size: var(--font-size-3xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .text-display-xl {
+      font-size: var(--font-size-4xl);
+    }
+
+    .text-display-lg {
+      font-size: var(--font-size-3xl);
+    }
+
+    .text-display-md {
+      font-size: var(--font-size-2xl);
+    }
+  }
+}
+
+/* ============================================
+   HEADING DEFAULTS
+   ============================================ */
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: var(--line-height-snug);
+    letter-spacing: var(--letter-spacing-tight);
+  }
+
+  h1 {
+    font-size: var(--font-size-5xl);
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: var(--font-size-4xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-3xl);
+  }
+
+  h4 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h5 {
+    font-size: var(--font-size-xl);
+  }
+
+  h6 {
+    font-size: var(--font-size-lg);
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-mono);
+  }
+}

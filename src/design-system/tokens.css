@@ -1,111 +1,108 @@
 /**
- * INDUSTRIAL BRUTALIST DESIGN TOKENS
- * ==================================
- * Aesthetic: Raw Power • Mechanical • Industrial
- * Philosophy: Intentional constraints, high contrast, mechanical precision
+ * DESIGN SYSTEM TOKENS
+ * ====================
+ * Unified design tokens for armtemiy.ru landing refactor
+ * Aesthetic: Avant-garde • Warm Industrial • Distinctive
  */
 
 @layer base {
   :root {
     /* ============================================
-       COLOR PALETTE - Industrial Brutalist
+       COLOR PALETTE
        ============================================ */
 
-    /* Primary - Rust Orange (The accent of power) */
-    --rust-50: hsl(24, 100%, 97%);
-    --rust-100: hsl(24, 95%, 90%);
-    --rust-200: hsl(24, 92%, 78%);
-    --rust-300: hsl(24, 88%, 62%);
-    --rust-400: hsl(24, 90%, 48%);
-    --rust-500: hsl(24, 95%, 38%);  /* Primary brand */
-    --rust-600: hsl(24, 98%, 32%);  /* Primary action */
-    --rust-700: hsl(24, 100%, 25%);
-    --rust-800: hsl(24, 100%, 18%);
-    --rust-900: hsl(24, 100%, 12%);
+    /* Primary - Rust/Copper tones (warm, powerful accent) */
+    --color-primary-50: hsl(24 95% 95%);
+    --color-primary-100: hsl(24 92% 88%);
+    --color-primary-200: hsl(24 90% 78%);
+    --color-primary-300: hsl(24 88% 65%);
+    --color-primary-400: hsl(24 85% 55%);
+    --color-primary-500: hsl(24 82% 45%);   /* Main accent */
+    --color-primary-600: hsl(24 80% 38%);
+    --color-primary-700: hsl(24 78% 30%);
+    --color-primary-800: hsl(24 76% 22%);
+    --color-primary-900: hsl(24 74% 15%);
 
-    /* Neutral - Raw Metal (Steel, iron, concrete) */
-    --metal-50: hsl(210, 10%, 98%);
-    --metal-100: hsl(210, 8%, 93%);
-    --metal-200: hsl(210, 6%, 84%);
-    --metal-300: hsl(210, 5%, 68%);
-    --metal-400: hsl(210, 5%, 48%);
-    --metal-500: hsl(210, 6%, 32%);
-    --metal-600: hsl(210, 8%, 22%);
-    --metal-700: hsl(210, 10%, 15%);
-    --metal-800: hsl(210, 12%, 10%);
-    --metal-900: hsl(210, 15%, 6%);
+    /* Neutral - Warm Charcoal (deep, sophisticated) */
+    --color-neutral-50: hsl(30 5% 96%);
+    --color-neutral-100: hsl(30 5% 90%);
+    --color-neutral-200: hsl(30 4% 80%);
+    --color-neutral-300: hsl(30 3% 65%);
+    --color-neutral-400: hsl(30 3% 50%);
+    --color-neutral-500: hsl(30 3% 35%);
+    --color-neutral-600: hsl(30 4% 22%);
+    --color-neutral-700: hsl(30 5% 14%);
+    --color-neutral-800: hsl(30 6% 10%);
+    --color-neutral-900: hsl(30 8% 6%);
 
     /* Semantic Colors */
-    --color-bg-primary: var(--metal-900);
-    --color-bg-secondary: var(--metal-800);
-    --color-bg-tertiary: var(--metal-700);
-    --color-fg-primary: var(--metal-50);
-    --color-fg-secondary: var(--metal-300);
-    --color-fg-tertiary: var(--metal-400);
-    --color-accent: var(--rust-600);
-    --color-accent-hover: var(--rust-500);
-    --color-border: var(--metal-600);
-    --color-border-subtle: hsl(210, 8%, 22%, 0.5);
+    --color-background: var(--color-neutral-900);
+    --color-surface: var(--color-neutral-800);
+    --color-surface-elevated: var(--color-neutral-700);
+    --color-text-primary: var(--color-neutral-50);
+    --color-text-secondary: var(--color-neutral-300);
+    --color-text-muted: var(--color-neutral-400);
+    --color-accent: var(--color-primary-500);
+    --color-accent-hover: var(--color-primary-400);
+    --color-accent-active: var(--color-primary-600);
+    --color-border: var(--color-neutral-600);
+    --color-border-subtle: hsl(30 4% 22% / 0.5);
 
     /* Status Colors */
-    --color-success: hsl(142, 76%, 36%);
-    --color-warning: hsl(38, 92%, 50%);
-    --color-error: hsl(0, 84%, 60%);
-    --color-info: hsl(199, 89%, 48%);
+    --color-success: hsl(142 76% 36%);
+    --color-warning: hsl(38 92% 50%);
+    --color-error: hsl(0 84% 60%);
+    --color-info: hsl(199 89% 48%);
 
     /* ============================================
-       TYPOGRAPHY - Industrial Display System
+       TYPOGRAPHY
        ============================================ */
 
-    /* Font Families */
-    --font-display: 'Anton', 'Impact', 'Arial Black', sans-serif;
-    --font-body: 'Oswald', 'Inter', system-ui, sans-serif;
-    --font-mono: 'Share Tech Mono', 'Courier New', monospace;
-    --font-accent: 'Russo One', 'Arial', sans-serif;
+    /* Font Families - Distinctive, NOT generic */
+    --font-display: 'Clash Display', system-ui, sans-serif;
+    --font-body: 'Satoshi', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
 
-    /* Font Sizes - Scale (major third for bold impact) */
-    --text-xs: 0.75rem;      /* 12px */
-    --text-sm: 0.875rem;     /* 14px */
-    --text-base: 1rem;       /* 16px */
-    --text-lg: 1.125rem;     /* 18px */
-    --text-xl: 1.25rem;      /* 20px */
-    --text-2xl: 1.5rem;      /* 24px */
-    --text-3xl: 1.875rem;    /* 30px */
-    --text-4xl: 2.25rem;     /* 36px */
-    --text-5xl: 3rem;        /* 48px */
-    --text-6xl: 3.75rem;     /* 60px */
-    --text-7xl: 4.5rem;      /* 72px */
-    --text-8xl: 6rem;        /* 96px */
-    --text-9xl: 8rem;        /* 128px */
+    /* Font Sizes - Modular scale */
+    --font-size-xs: 0.75rem;      /* 12px */
+    --font-size-sm: 0.875rem;     /* 14px */
+    --font-size-base: 1rem;       /* 16px */
+    --font-size-lg: 1.125rem;     /* 18px */
+    --font-size-xl: 1.25rem;      /* 20px */
+    --font-size-2xl: 1.5rem;      /* 24px */
+    --font-size-3xl: 1.875rem;    /* 30px */
+    --font-size-4xl: 2.25rem;     /* 36px */
+    --font-size-5xl: 3rem;        /* 48px */
+    --font-size-6xl: 3.75rem;     /* 60px */
+    --font-size-7xl: 4.5rem;      /* 72px */
+    --font-size-8xl: 6rem;        /* 96px */
 
     /* Font Weights */
-    --font-light: 300;
-    --font-normal: 400;
-    --font-medium: 500;
-    --font-semibold: 600;
-    --font-bold: 700;
-    --font-black: 900;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 
     /* Line Heights */
-    --leading-tight: 1.1;
-    --leading-snug: 1.25;
-    --leading-normal: 1.5;
-    --leading-relaxed: 1.75;
-    --leading-loose: 2;
+    --line-height-tight: 0.9;
+    --line-height-snug: 1.1;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.6;
+    --line-height-loose: 1.75;
 
-    /* Letter Spacing (Industrial = wide/condensed contrast) */
-    --tracking-tighter: -0.05em;
-    --tracking-tight: -0.025em;
-    --tracking-normal: 0;
-    --tracking-wide: 0.05em;
-    --tracking-wider: 0.1em;
-    --tracking-widest: 0.2em;
+    /* Letter Spacing */
+    --letter-spacing-tighter: -0.02em;
+    --letter-spacing-tight: -0.01em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+    --letter-spacing-wider: 0.05em;
+    --letter-spacing-widest: 0.1em;
 
     /* ============================================
-       SPACING - Industrial Grid System
+       SPACING
        ============================================ */
 
-    --space-0: 0;
     --space-1: 0.25rem;   /* 4px */
     --space-2: 0.5rem;    /* 8px */
     --space-3: 0.75rem;   /* 12px */
@@ -118,148 +115,88 @@
     --space-16: 4rem;     /* 64px */
     --space-20: 5rem;     /* 80px */
     --space-24: 6rem;     /* 96px */
-    --space-32: 8rem;     /* 128px */
-    --space-40: 10rem;    /* 160px */
-    --space-48: 12rem;    /* 192px */
-    --space-64: 16rem;    /* 256px */
-
-    /* Container */
-    --container-sm: 640px;
-    --container-md: 768px;
-    --container-lg: 1024px;
-    --container-xl: 1280px;
-    --container-2xl: 1536px;
 
     /* ============================================
-       BORDER RADIUS - Brutalist Edges
+       MOTION
        ============================================ */
 
-    --radius-none: 0;
-    --radius-sm: 0.125rem;    /* 2px - minimal */
-    --radius-md: 0.25rem;     /* 4px - subtle */
-    --radius-lg: 0.5rem;      /* 8px - moderate */
-    --radius-xl: 1rem;        /* 16px - noticeable */
-    --radius-2xl: 1.5rem;     /* 24px - large */
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+    --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* ============================================
+       BORDERS & SHADOWS
+       ============================================ */
+
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
     --radius-full: 9999px;
 
-    /* ============================================
-       SHADOWS - Industrial Depth
-       ============================================ */
-
-    --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.5);
-    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.6), 0 2px 4px -2px hsl(0 0% 0% / 0.6);
-    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.7), 0 4px 6px -4px hsl(0 0% 0% / 0.7);
-    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.75), 0 8px 10px -6px hsl(0 0% 0% / 0.75);
-    --shadow-2xl: 0 25px 50px -12px hsl(0 0% 0% / 0.8);
-    --shadow-brutal: 8px 8px 0 hsl(0 0% 0%);
-    --shadow-brutal-lg: 12px 12px 0 hsl(0 0% 0%);
-    --shadow-brutal-accent: 8px 8px 0 var(--rust-700);
-    --shadow-inner: inset 0 2px 4px 0 hsl(0 0% 0% / 0.5);
-
-    /* ============================================
-       ANIMATION - Mechanical Timing
-       ============================================ */
-
-    /* Durations */
-    --duration-instant: 50ms;
-    --duration-fast: 100ms;
-    --duration-normal: 200ms;
-    --duration-slow: 300ms;
-    --duration-slower: 500ms;
-    --duration-slowest: 800ms;
-
-    /* Easing - Mechanical feel */
-    --ease-linear: linear;
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-mechanical: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --ease-brutal: cubic-bezier(0.08, 0.74, 0.34, 1);
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-    /* ============================================
-       Z-INDEX - Stacking Context
-       ============================================ */
-
-    --z-base: 0;
-    --z-above: 10;
-    --z-dropdown: 100;
-    --z-sticky: 200;
-    --z-fixed: 300;
-    --z-modal-backdrop: 400;
-    --z-modal: 500;
-    --z-popover: 600;
-    --z-tooltip: 700;
-
-    /* ============================================
-       BRUTALIST-SPECIFIC TOKENS
-       ============================================ */
-
-    /* Borders - Heavy, visible */
-    --border-heavy: 3px solid var(--color-border);
-    --border-brutal: 4px solid var(--color-fg-primary);
-    --border-accent: 3px solid var(--rust-600);
-
-    /* Overlays */
-    --overlay-noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    --overlay-grid: linear-gradient(var(--metal-700) 1px, transparent 1px), linear-gradient(90deg, var(--metal-700) 1px, transparent 1px);
-    --overlay-stripe: repeating-linear-gradient(45deg, transparent, transparent 10px, hsl(0 0% 0% / 0.03) 10px, hsl(0 0% 0% / 0.03) 20px);
+    --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 4px 6px hsl(0 0% 0% / 0.15);
+    --shadow-lg: 0 10px 15px hsl(0 0% 0% / 0.2);
+    --shadow-glow: 0 0 40px hsl(24 82% 45% / 0.3);
   }
 }
 
 /* ============================================
-   TIERED TOKEN ALIASES FOR MIGRATION
+   SHADCN/TAILWIND COMPATIBILITY TOKENS
    ============================================ */
 @layer base {
   :root {
     /* Background */
-    --background: 210 15% 6%;
-    --foreground: 210 10% 98%;
+    --background: 30 8% 6%;
+    --foreground: 30 5% 96%;
 
     /* Card */
-    --card: 210 12% 10%;
-    --card-foreground: 210 10% 98%;
+    --card: 30 6% 10%;
+    --card-foreground: 30 5% 96%;
 
     /* Popover */
-    --popover: 210 12% 10%;
-    --popover-foreground: 210 10% 98%;
+    --popover: 30 6% 10%;
+    --popover-foreground: 30 5% 96%;
 
     /* Primary */
-    --primary: 24 98% 32%;
-    --primary-foreground: 210 10% 98%;
+    --primary: 24 82% 45%;
+    --primary-foreground: 30 5% 96%;
 
     /* Secondary */
-    --secondary: 210 8% 22%;
-    --secondary-foreground: 210 10% 98%;
+    --secondary: 30 4% 22%;
+    --secondary-foreground: 30 5% 96%;
 
     /* Muted */
-    --muted: 210 8% 22%;
-    --muted-foreground: 210 5% 68%;
+    --muted: 30 4% 22%;
+    --muted-foreground: 30 3% 65%;
 
     /* Accent */
-    --accent: 210 8% 22%;
-    --accent-foreground: 210 10% 98%;
+    --accent: 30 4% 22%;
+    --accent-foreground: 30 5% 96%;
 
     /* Destructive */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 10% 98%;
+    --destructive-foreground: 30 5% 96%;
 
     /* Border & Input */
-    --border: 210 8% 22%;
-    --input: 210 8% 22%;
-    --ring: 24 98% 32%;
+    --border: 30 4% 22%;
+    --input: 30 4% 22%;
+    --ring: 24 82% 45%;
 
     /* Radius */
     --radius: 0.5rem;
 
     /* Sidebar */
-    --sidebar-background: 210 12% 10%;
-    --sidebar-foreground: 210 10% 98%;
-    --sidebar-primary: 24 98% 32%;
-    --sidebar-primary-foreground: 210 10% 98%;
-    --sidebar-accent: 210 8% 22%;
-    --sidebar-accent-foreground: 210 10% 98%;
-    --sidebar-border: 210 8% 22%;
-    --sidebar-ring: 24 98% 32%;
+    --sidebar-background: 30 6% 10%;
+    --sidebar-foreground: 30 5% 96%;
+    --sidebar-primary: 24 82% 45%;
+    --sidebar-primary-foreground: 30 5% 96%;
+    --sidebar-accent: 30 4% 22%;
+    --sidebar-accent-foreground: 30 5% 96%;
+    --sidebar-border: 30 4% 22%;
+    --sidebar-ring: 24 82% 45%;
   }
 }

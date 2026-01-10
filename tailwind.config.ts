@@ -22,7 +22,17 @@ export default {
         foreground: 'hsl(var(--foreground))',
         primary: {
           DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
+          foreground: 'hsl(var(--primary-foreground))',
+          50: 'var(--color-primary-50)',
+          100: 'var(--color-primary-100)',
+          200: 'var(--color-primary-200)',
+          300: 'var(--color-primary-300)',
+          400: 'var(--color-primary-400)',
+          500: 'var(--color-primary-500)',
+          600: 'var(--color-primary-600)',
+          700: 'var(--color-primary-700)',
+          800: 'var(--color-primary-800)',
+          900: 'var(--color-primary-900)',
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -37,8 +47,10 @@ export default {
           foreground: 'hsl(var(--muted-foreground))'
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
+          DEFAULT: 'var(--color-accent)',
+          foreground: 'hsl(var(--accent-foreground))',
+          hover: 'var(--color-accent-hover)',
+          active: 'var(--color-accent-active)',
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -58,56 +70,104 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))'
         },
-        // Industrial Brutalist colors
-        rust: {
-          50: 'hsl(var(--rust-50))',
-          100: 'hsl(var(--rust-100))',
-          200: 'hsl(var(--rust-200))',
-          300: 'hsl(var(--rust-300))',
-          400: 'hsl(var(--rust-400))',
-          500: 'hsl(var(--rust-500))',
-          600: 'hsl(var(--rust-600))',
-          700: 'hsl(var(--rust-700))',
-          800: 'hsl(var(--rust-800))',
-          900: 'hsl(var(--rust-900))',
+        // Design System - Neutral palette (warm charcoal)
+        neutral: {
+          50: 'var(--color-neutral-50)',
+          100: 'var(--color-neutral-100)',
+          200: 'var(--color-neutral-200)',
+          300: 'var(--color-neutral-300)',
+          400: 'var(--color-neutral-400)',
+          500: 'var(--color-neutral-500)',
+          600: 'var(--color-neutral-600)',
+          700: 'var(--color-neutral-700)',
+          800: 'var(--color-neutral-800)',
+          900: 'var(--color-neutral-900)',
         },
-        metal: {
-          50: 'hsl(var(--metal-50))',
-          100: 'hsl(var(--metal-100))',
-          200: 'hsl(var(--metal-200))',
-          300: 'hsl(var(--metal-300))',
-          400: 'hsl(var(--metal-400))',
-          500: 'hsl(var(--metal-500))',
-          600: 'hsl(var(--metal-600))',
-          700: 'hsl(var(--metal-700))',
-          800: 'hsl(var(--metal-800))',
-          900: 'hsl(var(--metal-900))',
-        }
+        // Semantic colors from design system
+        surface: {
+          DEFAULT: 'var(--color-surface)',
+          elevated: 'var(--color-surface-elevated)',
+        },
+        text: {
+          primary: 'var(--color-text-primary)',
+          secondary: 'var(--color-text-secondary)',
+          muted: 'var(--color-text-muted)',
+        },
+        // Status colors
+        success: 'var(--color-success)',
+        warning: 'var(--color-warning)',
+        error: 'var(--color-error)',
+        info: 'var(--color-info)',
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        lg: 'var(--radius-lg)',
+        md: 'var(--radius-md)',
+        sm: 'var(--radius-sm)',
+        xl: 'var(--radius-xl)',
+        full: 'var(--radius-full)',
       },
       fontFamily: {
-        // Industrial Brutalist font system
-        display: ['Anton', 'Impact', 'Arial Black', 'sans-serif'],
-        body: ['Oswald', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['Share Tech Mono', 'Courier New', 'monospace'],
-        accent: ['Russo One', 'Arial', 'sans-serif'],
-        // Legacy aliases (to be phased out)
-        sans: ['Oswald', 'Inter', 'system-ui', 'sans-serif'],
-        serif: ['Lora', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+        // Design System fonts - mapped to CSS variables
+        display: ['var(--font-display)'],
+        body: ['var(--font-body)'],
+        mono: ['var(--font-mono)'],
+        // Aliases for convenience
+        sans: ['var(--font-body)'],
       },
       fontSize: {
-        'display-xs': '4.5rem',   /* 72px */
-        'display-sm': '6rem',     /* 96px */
-        'display-md': '8rem',     /* 128px */
-        'display-lg': '10rem',    /* 160px */
+        // Design System font sizes - mapped to CSS variables
+        'xs': 'var(--font-size-xs)',
+        'sm': 'var(--font-size-sm)',
+        'base': 'var(--font-size-base)',
+        'lg': 'var(--font-size-lg)',
+        'xl': 'var(--font-size-xl)',
+        '2xl': 'var(--font-size-2xl)',
+        '3xl': 'var(--font-size-3xl)',
+        '4xl': 'var(--font-size-4xl)',
+        '5xl': 'var(--font-size-5xl)',
+        '6xl': 'var(--font-size-6xl)',
+        '7xl': 'var(--font-size-7xl)',
+        '8xl': 'var(--font-size-8xl)',
+      },
+      spacing: {
+        // Design System spacing - mapped to CSS variables
+        '1': 'var(--space-1)',
+        '2': 'var(--space-2)',
+        '3': 'var(--space-3)',
+        '4': 'var(--space-4)',
+        '5': 'var(--space-5)',
+        '6': 'var(--space-6)',
+        '8': 'var(--space-8)',
+        '10': 'var(--space-10)',
+        '12': 'var(--space-12)',
+        '16': 'var(--space-16)',
+        '20': 'var(--space-20)',
+        '24': 'var(--space-24)',
       },
       letterSpacing: {
-        'ultra-tight': '-0.05em',
-        'ultra-wide': '0.2em',
+        'tighter': 'var(--letter-spacing-tighter)',
+        'tight': 'var(--letter-spacing-tight)',
+        'normal': 'var(--letter-spacing-normal)',
+        'wide': 'var(--letter-spacing-wide)',
+        'wider': 'var(--letter-spacing-wider)',
+        'widest': 'var(--letter-spacing-widest)',
+      },
+      lineHeight: {
+        'tight': 'var(--line-height-tight)',
+        'snug': 'var(--line-height-snug)',
+        'normal': 'var(--line-height-normal)',
+        'relaxed': 'var(--line-height-relaxed)',
+        'loose': 'var(--line-height-loose)',
+      },
+      transitionDuration: {
+        'fast': 'var(--duration-fast)',
+        'normal': 'var(--duration-normal)',
+        'slow': 'var(--duration-slow)',
+      },
+      transitionTimingFunction: {
+        'out': 'var(--ease-out)',
+        'in-out': 'var(--ease-in-out)',
+        'spring': 'var(--ease-spring)',
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -183,17 +243,10 @@ export default {
         }
       },
       boxShadow: {
-        'brutal': '8px 8px 0 hsl(0 0% 0%)',
-        'brutal-lg': '12px 12px 0 hsl(0 0% 0%)',
-        'brutal-accent': '8px 8px 0 var(--rust-700)',
-        'brutal-sm': '4px 4px 0 hsl(0 0% 0%)',
-        '2xs': 'var(--shadow-2xs)',
-        'xs': 'var(--shadow-xs)',
         'sm': 'var(--shadow-sm)',
         'md': 'var(--shadow-md)',
         'lg': 'var(--shadow-lg)',
-        'xl': 'var(--shadow-xl)',
-        '2xl': 'var(--shadow-2xl)'
+        'glow': 'var(--shadow-glow)',
       }
     }
   },

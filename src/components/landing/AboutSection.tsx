@@ -4,118 +4,79 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 const AboutSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
 
-  const credentials = [
+  const highlights = [
     {
       icon: BookOpen,
-      text: "3+ ГОДА АРМРЕСТЛИНГА",
-      sub: "Биомеханика • Техника • Тактика",
+      text: "3 года изучения армрестлинга от и до",
     },
     {
       icon: Dumbbell,
-      text: "ПАУЭРЛИФТИНГ + СТРИТЛИФТИНГ",
-      sub: "База силы и понимания работы мышц",
+      text: "Опыт в пауэрлифтинге и стритлифтинге",
     },
     {
       icon: Award,
-      text: "КМС АКРОБАТИЧЕСКИЙ РОК-Н-РОЛЛ",
-      sub: "Спортивная дисциплина",
+      text: "КМС по акробатическому рок-н-роллу",
     },
   ];
 
   return (
-    <section
-      id="about"
-      className="relative py-20 md:py-28 bg-metal-800 bg-noise overflow-hidden"
+    <section 
+      id="about" 
+      className="relative py-24 md:py-32 section-light overflow-hidden"
     >
-      {/* Background grid */}
-      <div className="absolute inset-0 bg-grid opacity-[0.03]" />
-
-      {/* Corner accent */}
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 border-rust-600 opacity-10" />
-
-      <div
+      <div 
         ref={sectionRef}
         className={`container mx-auto px-4 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        <div className="max-w-5xl mx-auto">
-          {/* Section header */}
-          <div className="mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-metal-900 border border-rust-600 mb-4">
-              <div className="w-1.5 h-1.5 rounded-full bg-rust-600 animate-pulse" />
-              <span className="font-mono text-xs text-rust-500 uppercase tracking-widest">
-                Автор
-              </span>
-            </div>
-            <h2 className="font-display text-4xl md:text-5xl text-metal-50 mb-4" style={{ textShadow: '3px 3px 0 hsl(24 98% 32%)' }}>
-              КТО Я
-            </h2>
-          </div>
-
-          {/* Content grid */}
-          <div className="grid md:grid-cols-12 gap-8 items-start">
-            {/* Photo placeholder - 4 cols */}
-            <div className="md:col-span-4 md:order-1">
-              <div className="aspect-[4/5] bg-metal-900 border-2 border-metal-700 p-8 shadow-brutal-sm relative">
-                {/* Decorative elements */}
-                <div className="absolute top-0 right-0 w-12 h-12 border-r-2 border-t-2 border-rust-600" />
-                <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-rust-600" />
-
-                <div className="w-full h-full flex flex-col items-center justify-center text-center">
-                  <div className="w-24 h-24 bg-metal-800 border-2 border-metal-600 flex items-center justify-center mb-4">
-                    <span className="font-display text-4xl text-rust-600" style={{ textShadow: '2px 2px 0 hsl(0 0% 0%)' }}>
-                      А
-                    </span>
+        <div className="max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Photo placeholder */}
+            <div className="relative order-2 md:order-1">
+              <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-[hsl(0_0%_15%)] to-[hsl(0_0%_12%)] border border-[hsl(0_0%_100%/0.1)] overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center">
+                  <div className="text-center p-8">
+                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[hsl(150_70%_45%/0.15)] flex items-center justify-center">
+                      <span className="text-3xl font-bold text-[hsl(150_70%_50%)]">А</span>
+                    </div>
+                    <p className="text-[hsl(0_0%_100%/0.4)] text-sm">
+                      Твоё фото
+                    </p>
                   </div>
-                  <p className="font-mono text-xs text-metal-600 uppercase tracking-widest">
-                    // ФОТО
-                  </p>
                 </div>
               </div>
+              {/* Decorative elements */}
+              <div className="absolute -top-4 -left-4 w-20 h-20 rounded-2xl bg-[hsl(30_80%_60%/0.1)] -z-10" />
+              <div className="absolute -bottom-4 -right-4 w-32 h-32 rounded-full bg-[hsl(30_80%_60%/0.05)] -z-10" />
             </div>
 
-            {/* Content - 8 cols */}
-            <div className="md:col-span-8 md:order-2 space-y-6">
-              {/* Name block */}
-              <div className="bg-metal-900 border-2 border-metal-700 p-6 shadow-brutal-sm">
-                <p className="font-display text-3xl md:text-4xl text-metal-50 mb-2" style={{ textShadow: '2px 2px 0 hsl(24 98% 32%)' }}>
-                  АРТЕМИЙ КРИВОШАПОВ
-                </p>
-                <p className="font-mono text-sm text-rust-500 uppercase tracking-widest">
-                  Тренер по армрестлингу • Тула
-                </p>
-              </div>
+            {/* Content */}
+            <div className="order-1 md:order-2">
+              <span className="inline-block px-4 py-1 rounded-full bg-[hsl(150_70%_45%/0.15)] text-[hsl(150_70%_50%)] text-sm font-medium mb-4">
+                Кто я
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-[hsl(0_0%_98%)] mb-6">
+                Артемий Кривошапов
+              </h2>
+              <p className="text-[hsl(0_0%_100%/0.6)] text-lg mb-6">
+                Я не чемпион мира. Но я перелопатил тонну информации: от учебников по биомеханике до разборов топовых спортсменов. Тренировался сам, общался с профессионалами, набивал шишки.
+              </p>
+              <p className="text-[hsl(0_0%_100%/0.6)] text-lg mb-8">
+                Теперь делюсь тем, что реально работает. Без понтов, без «секретных техник» — просто система, которая даёт результат.
+              </p>
 
-              {/* Bio */}
-              <div className="bg-metal-900 border-l-4 border-rust-600 p-6">
-                <p className="font-body text-metal-300 leading-relaxed mb-4">
-                  Не чемпион мира. Но перелопатил тонну информации — от учебников по биомеханике до разборов топовых спортсменов. Тренировался сам, общался с профи, набивал шишки.
-                </p>
-                <p className="font-body text-metal-300 leading-relaxed">
-                  Теперь делюсь <span className="text-rust-500 font-bold">тем, что работает</span>. Без понтов, без «секретных техник» — просто система, которая даёт результат.
-                </p>
-              </div>
-
-              {/* Credentials */}
-              <div className="space-y-3">
-                {credentials.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-4 px-4 py-3 bg-metal-900 border border-metal-700 hover:border-rust-600 transition-all duration-200"
-                    style={{ transitionDelay: `${index * 50}ms` }}
+              <div className="space-y-4">
+                {highlights.map((item, index) => (
+                  <div 
+                    key={index} 
+                    className="group flex items-center gap-3"
+                    style={{ transitionDelay: `${index * 100}ms` }}
                   >
-                    <div className="w-12 h-12 bg-metal-800 border border-metal-600 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="text-rust-600" size={22} />
+                    <div className="w-10 h-10 rounded-xl bg-[hsl(150_70%_45%/0.15)] flex items-center justify-center group-hover:bg-[hsl(150_70%_45%/0.25)] group-hover:scale-110 transition-all duration-300">
+                      <item.icon className="text-[hsl(150_70%_50%)] group-hover:rotate-6 transition-transform duration-300" size={20} />
                     </div>
-                    <div className="flex-1">
-                      <p className="font-mono text-sm text-metal-200 uppercase tracking-wider font-bold">
-                        {item.text}
-                      </p>
-                      <p className="font-body text-xs text-metal-500 mt-1">
-                        {item.sub}
-                      </p>
-                    </div>
+                    <span className="text-[hsl(0_0%_98%)]">{item.text}</span>
                   </div>
                 ))}
               </div>
@@ -123,9 +84,6 @@ const AboutSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Section divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-metal-800 via-rust-600 to-metal-800" />
     </section>
   );
 };

@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const progress = Math.min(window.scrollY / 300, 1);
+      const progress = Math.min(window.scrollY / 200, 1);
       setScrollProgress(progress);
 
       // Detect active section
@@ -17,7 +20,7 @@ const Navbar = () => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
+          if (rect.top <= 150 && rect.bottom >= 150) {
             setActiveSection(`#${section}`);
             return;
           }
@@ -32,9 +35,9 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { href: "#program", label: "ПРОГРАММА" },
-    { href: "#training", label: "ТРЕНИРОВКИ" },
-    { href: "#about", label: "О СЕБЕ" },
+    { href: "#program", label: "Программа" },
+    { href: "#training", label: "Тренировки" },
+    { href: "#about", label: "О себе" },
     { href: "#faq", label: "FAQ" },
   ];
 
@@ -43,137 +46,154 @@ const Navbar = () => {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMobileMenuOpen(false);
+    handleCloseMobileMenu();
   };
 
-  // Brutal navbar styling based on scroll
+  const handleCloseMobileMenu = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsMobileMenuOpen(false);
+      setIsClosing(false);
+    }, 200);
+  };
+
+  const toggleMobileMenu = () => {
+    if (isMobileMenuOpen) {
+      handleCloseMobileMenu();
+    } else {
+      setIsMobileMenuOpen(true);
+    }
+  };
+
   const navbarStyle = {
-    backgroundColor: scrollProgress > 0.1
-      ? `hsl(210 15% 6% / ${0.95 + scrollProgress * 0.05})`
-      : `hsl(210 15% 6% / 0.9)`,
+    padding: `${12 - scrollProgress * 4}px ${16 - scrollProgress * 4}px`,
+    backgroundColor: `hsl(0 0% 8% / ${0.7 + scrollProgress * 0.25})`,
     backdropFilter: `blur(${12 + scrollProgress * 8}px)`,
-    borderBottom: scrollProgress > 0.1 ? '2px solid hsl(24 98% 32%)' : '2px solid transparent',
-    boxShadow: scrollProgress > 0.1
-      ? `0 ${4 + scrollProgress * 4}px ${16 + scrollProgress * 8}px hsl(0 0% 0% / ${0.3 + scrollProgress * 0.2})`
+    boxShadow: scrollProgress > 0.1 
+      ? `0 ${4 + scrollProgress * 8}px ${16 + scrollProgress * 16}px hsl(0 0% 0% / ${0.15 + scrollProgress * 0.15})`
       : 'none',
   };
 
+  // Get the current indicator target (hovered or active)
+  const indicatorTarget = hoveredLink || activeSection;
+
   return (
     <>
-      {/* Brutal industrial navbar */}
-      <nav
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-200"
+      <nav 
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-full border border-[hsl(0_0%_100%/0.1)] transition-all duration-300 ease-out"
         style={navbarStyle}
       >
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between">
-            {/* Logo - Brutal display */}
-            <a
-              href="#"
-              className="font-display text-2xl text-metal-50 tracking-tight"
-              style={{ textShadow: '2px 2px 0 hsl(24 98% 32%)' }}
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-            >
-              ARMTEMIY
-            </a>
+        <div className="flex items-center gap-1 md:gap-2">
+          {/* Logo */}
+          <a
+            href="#"
+            className="px-3 py-1.5 text-lg md:text-xl text-[hsl(0_0%_98%)] font-medium whitespace-nowrap"
+            style={{ fontFamily: "\"Charlie Don't Surf\", cursive" }}
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            Armtemiy
+          </a>
 
-            {/* Desktop navigation */}
-            <div className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.href;
-
-                return (
-                  <button
-                    key={link.href}
-                    onClick={() => scrollToSection(link.href)}
-                    className={`relative px-4 py-2 font-mono text-xs uppercase tracking-widest transition-all duration-200 ${
-                      isActive
-                        ? 'text-rust-500'
-                        : 'text-metal-400 hover:text-metal-200'
+          {/* Desktop Links with Tubelight Effect */}
+          <div className="hidden md:flex items-center gap-0.5 relative">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              const isHovered = hoveredLink === link.href;
+              
+              return (
+                <button
+                  key={link.href}
+                  onClick={() => scrollToSection(link.href)}
+                  onMouseEnter={() => setHoveredLink(link.href)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                  className={`relative px-3 py-1.5 text-sm font-medium transition-all duration-300 rounded-full ${
+                    isActive || isHovered
+                      ? 'text-white'
+                      : 'text-[hsl(0_0%_98%/0.7)] hover:text-[hsl(0_0%_98%)]'
+                  }`}
+                >
+                  {/* Background glow for active/hovered */}
+                  <span 
+                    className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                      isActive || isHovered ? 'opacity-100' : 'opacity-0'
                     }`}
-                  >
-                    {/* Active indicator line */}
-                    {isActive && (
-                      <div className="absolute bottom-0 left-2 right-2 h-[2px] bg-rust-600" />
-                    )}
-                    {link.label}
-                  </button>
-                );
-              })}
-            </div>
+                    style={{
+                      background: isActive || isHovered 
+                        ? 'radial-gradient(ellipse at bottom, rgba(54,226,168,0.15) 0%, transparent 70%)'
+                        : 'transparent',
+                    }}
+                  />
+                  
+                  {/* Tubelight glow (bottom light) */}
+                  <span 
+                    className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[3px] rounded-full transition-all duration-300 ${
+                      isActive || isHovered ? 'opacity-100 w-8' : 'opacity-0 w-0'
+                    }`}
+                    style={{
+                      background: 'linear-gradient(90deg, transparent, #36E2A8, transparent)',
+                      boxShadow: isActive || isHovered 
+                        ? '0 0 10px #36E2A8, 0 0 20px #36E2A8, 0 0 30px rgba(54,226,168,0.5)'
+                        : 'none',
+                    }}
+                  />
+                  
+                  {/* Text */}
+                  <span className="relative z-10">{link.label}</span>
+                </button>
+              );
+            })}
+          </div>
 
-            {/* CTA Button */}
-            <a
-              href="https://t.me/assistemiy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center justify-center px-6 py-2 bg-rust-600 text-metal-50 font-mono text-xs uppercase tracking-wider font-bold rounded-sm shadow-brutal-sm hover:bg-rust-500 hover:shadow-brutal hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all duration-200"
-            >
+          {/* CTA Button */}
+          <Button asChild variant="cta" size="sm" className="hidden md:inline-flex ml-1 rounded-full text-sm px-4 py-1.5 h-auto">
+            <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer">
               Написать
             </a>
+          </Button>
 
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden w-10 h-10 bg-metal-800 border border-metal-700 flex items-center justify-center text-metal-300 hover:border-rust-600 hover:text-rust-500 transition-all duration-200"
-            >
-              {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden p-2 text-[hsl(0_0%_98%)] hover:bg-[hsl(0_0%_100%/0.1)] rounded-full transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
       </nav>
 
-      {/* Mobile menu - Brutal full-screen overlay */}
+      {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 pt-20 bg-metal-900 md:hidden">
-          {/* Grid pattern background */}
-          <div className="absolute inset-0 bg-grid opacity-[0.05]" />
-
-          {/* Corner decoration */}
-          <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-rust-600 opacity-20" />
-
-          <div className="relative container mx-auto px-4 py-8">
-            <div className="space-y-2">
-              {navLinks.map((link, index) => {
-                const isActive = activeSection === link.href;
-
-                return (
-                  <button
-                    key={link.href}
-                    onClick={() => scrollToSection(link.href)}
-                    className={`w-full flex items-center gap-4 px-4 py-4 border-2 transition-all duration-200 ${
-                      isActive
-                        ? 'bg-metal-800 border-rust-600'
-                        : 'bg-metal-800 border-metal-700 hover:border-rust-600'
-                    }`}
-                  >
-                    <span className="font-mono text-xs text-metal-600">
-                      0{index + 1}
-                    </span>
-                    <span className={`font-mono text-sm uppercase tracking-wider ${
-                      isActive ? 'text-rust-500' : 'text-metal-300'
-                    }`}>
-                      {link.label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Mobile CTA */}
-            <div className="mt-8">
-              <a
-                href="https://t.me/assistemiy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full px-8 py-5 bg-rust-600 text-metal-50 font-mono text-sm uppercase tracking-wider font-bold border-none rounded-sm shadow-brutal hover:bg-rust-500 hover:shadow-brutal-lg hover:-translate-x-1 hover:-translate-y-1 transition-all duration-200"
-              >
+        <div className={`fixed inset-0 z-40 pt-20 px-4 bg-[hsl(0_0%_8%/0.98)] backdrop-blur-xl md:hidden ${isClosing ? 'mobile-menu-exit' : 'mobile-menu-enter'}`}>
+          <div className="flex flex-col">
+            {navLinks.map((link, index) => (
+              <div key={link.href}>
+                <button
+                  onClick={() => scrollToSection(link.href)}
+                  className={`w-full px-6 py-4 text-lg font-medium rounded-xl transition-colors text-left flex items-center gap-3 ${
+                    activeSection === link.href 
+                      ? 'text-[#36E2A8] bg-[#36E2A8]/10' 
+                      : 'text-[hsl(0_0%_98%)] hover:bg-[hsl(0_0%_100%/0.1)]'
+                  }`}
+                >
+                  {activeSection === link.href && (
+                    <span className="w-2 h-2 rounded-full bg-[#36E2A8] animate-pulse" />
+                  )}
+                  {link.label}
+                </button>
+                {index < navLinks.length - 1 && (
+                  <div className="mx-6 h-px bg-[hsl(0_0%_100%/0.1)]" />
+                )}
+              </div>
+            ))}
+            <div className="mx-6 h-px bg-[hsl(0_0%_100%/0.1)]" />
+            <Button asChild variant="cta" size="lg" className="mt-4 mx-6 rounded-full">
+              <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer">
                 Написать в Telegram
               </a>
-            </div>
+            </Button>
           </div>
         </div>
       )}

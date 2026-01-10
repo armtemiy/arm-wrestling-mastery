@@ -3,7 +3,13 @@
     "allow": [
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(npm run build)"
+      "Bash(npm run build)",
+      "Bash(where:*)",
+      "Bash(npm install -g:*)",
+      "Bash(npm view:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp list:*)",
+      "Bash(claude mcp remove:*)"
     ]
   }
 }
