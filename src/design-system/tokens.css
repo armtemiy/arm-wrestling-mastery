@@ -1,8 +1,9 @@
 /**
  * DESIGN SYSTEM TOKENS
  * ====================
- * Unified design tokens for armtemiy.ru landing refactor
- * Aesthetic: Avant-garde • Warm Industrial • Distinctive
+ * Unified design tokens for armtemiy.ru landing
+ * Aesthetic: The Underground Forge • Dark • High-contrast • Aggressive
+ * Color Philosophy: Red + Black = Power, Domination, Victory
  */
 
 @layer base {
@@ -11,29 +12,41 @@
        COLOR PALETTE
        ============================================ */
 
-    /* Primary - Rust/Copper tones (warm, powerful accent) */
-    --color-primary-50: hsl(24 95% 95%);
-    --color-primary-100: hsl(24 92% 88%);
-    --color-primary-200: hsl(24 90% 78%);
-    --color-primary-300: hsl(24 88% 65%);
-    --color-primary-400: hsl(24 85% 55%);
-    --color-primary-500: hsl(24 82% 45%);   /* Main accent */
-    --color-primary-600: hsl(24 80% 38%);
-    --color-primary-700: hsl(24 78% 30%);
-    --color-primary-800: hsl(24 76% 22%);
-    --color-primary-900: hsl(24 74% 15%);
+    /* Primary - Crimson Red (power, victory, fight) */
+    --color-primary-50: hsl(5 100% 97%);
+    --color-primary-100: hsl(5 95% 90%);
+    --color-primary-200: hsl(5 90% 80%);
+    --color-primary-300: hsl(5 88% 68%);
+    --color-primary-400: hsl(5 85% 58%);
+    --color-primary-500: hsl(5 85% 60%);   /* Main accent - #E63946 */
+    --color-primary-600: hsl(5 80% 52%);
+    --color-primary-700: hsl(5 78% 42%);
+    --color-primary-800: hsl(5 75% 32%);
+    --color-primary-900: hsl(5 70% 22%);
 
-    /* Neutral - Warm Charcoal (deep, sophisticated) */
-    --color-neutral-50: hsl(30 5% 96%);
-    --color-neutral-100: hsl(30 5% 90%);
-    --color-neutral-200: hsl(30 4% 80%);
-    --color-neutral-300: hsl(30 3% 65%);
-    --color-neutral-400: hsl(30 3% 50%);
-    --color-neutral-500: hsl(30 3% 35%);
-    --color-neutral-600: hsl(30 4% 22%);
-    --color-neutral-700: hsl(30 5% 14%);
-    --color-neutral-800: hsl(30 6% 10%);
-    --color-neutral-900: hsl(30 8% 6%);
+    /* Secondary - Orange-Red (energy, fire, intensity) */
+    --color-secondary-50: hsl(15 100% 96%);
+    --color-secondary-100: hsl(15 95% 88%);
+    --color-secondary-200: hsl(15 92% 78%);
+    --color-secondary-300: hsl(15 90% 65%);
+    --color-secondary-400: hsl(15 88% 55%);
+    --color-secondary-500: hsl(15 90% 50%);  /* #FF4500 - orange-red */
+    --color-secondary-600: hsl(15 85% 45%);
+    --color-secondary-700: hsl(15 80% 35%);
+    --color-secondary-800: hsl(15 75% 25%);
+    --color-secondary-900: hsl(15 70% 18%);
+
+    /* Neutral - Warm Black (depth, sophistication) */
+    --color-neutral-50: hsl(15 10% 96%);
+    --color-neutral-100: hsl(15 10% 90%);
+    --color-neutral-200: hsl(15 8% 78%);
+    --color-neutral-300: hsl(15 6% 60%);
+    --color-neutral-400: hsl(15 5% 45%);
+    --color-neutral-500: hsl(15 4% 30%);
+    --color-neutral-600: hsl(15 4% 20%);
+    --color-neutral-700: hsl(15 5% 14%);
+    --color-neutral-800: hsl(15 6% 10%);
+    --color-neutral-900: hsl(15 8% 6%);
 
     /* Semantic Colors */
     --color-background: var(--color-neutral-900);
@@ -45,13 +58,13 @@
     --color-accent: var(--color-primary-500);
     --color-accent-hover: var(--color-primary-400);
     --color-accent-active: var(--color-primary-600);
-    --color-border: var(--color-neutral-600);
-    --color-border-subtle: hsl(30 4% 22% / 0.5);
+    --color-border: var(--color-neutral-700);
+    --color-border-subtle: hsl(15 5% 14% / 0.5);
 
     /* Status Colors */
     --color-success: hsl(142 76% 36%);
     --color-warning: hsl(38 92% 50%);
-    --color-error: hsl(0 84% 60%);
+    --color-error: hsl(5 85% 60%);
     --color-info: hsl(199 89% 48%);
 
     /* ============================================
@@ -140,7 +153,7 @@
     --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.1);
     --shadow-md: 0 4px 6px hsl(0 0% 0% / 0.15);
     --shadow-lg: 0 10px 15px hsl(0 0% 0% / 0.2);
-    --shadow-glow: 0 0 40px hsl(24 82% 45% / 0.3);
+    --shadow-glow: 0 0 40px hsl(5 85% 60% / 0.3);
   }
 }
 
@@ -150,53 +163,53 @@
 @layer base {
   :root {
     /* Background */
-    --background: 30 8% 6%;
-    --foreground: 30 5% 96%;
+    --background: 15 8% 6%;
+    --foreground: 15 10% 96%;
 
     /* Card */
-    --card: 30 6% 10%;
-    --card-foreground: 30 5% 96%;
+    --card: 15 6% 10%;
+    --card-foreground: 15 10% 96%;
 
     /* Popover */
-    --popover: 30 6% 10%;
-    --popover-foreground: 30 5% 96%;
+    --popover: 15 6% 10%;
+    --popover-foreground: 15 10% 96%;
 
-    /* Primary */
-    --primary: 24 82% 45%;
-    --primary-foreground: 30 5% 96%;
+    /* Primary - Crimson Red */
+    --primary: 5 85% 60%;
+    --primary-foreground: 15 10% 96%;
 
-    /* Secondary */
-    --secondary: 30 4% 22%;
-    --secondary-foreground: 30 5% 96%;
+    /* Secondary - Orange-Red */
+    --secondary: 15 90% 50%;
+    --secondary-foreground: 15 10% 96%;
 
     /* Muted */
-    --muted: 30 4% 22%;
-    --muted-foreground: 30 3% 65%;
+    --muted: 15 4% 20%;
+    --muted-foreground: 15 6% 60%;
 
     /* Accent */
-    --accent: 30 4% 22%;
-    --accent-foreground: 30 5% 96%;
+    --accent: 15 4% 20%;
+    --accent-foreground: 15 10% 96%;
 
     /* Destructive */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 30 5% 96%;
+    --destructive: 5 85% 60%;
+    --destructive-foreground: 15 10% 96%;
 
     /* Border & Input */
-    --border: 30 4% 22%;
-    --input: 30 4% 22%;
-    --ring: 24 82% 45%;
+    --border: 15 5% 14%;
+    --input: 15 5% 14%;
+    --ring: 5 85% 60%;
 
     /* Radius */
     --radius: 0.5rem;
 
     /* Sidebar */
-    --sidebar-background: 30 6% 10%;
-    --sidebar-foreground: 30 5% 96%;
-    --sidebar-primary: 24 82% 45%;
-    --sidebar-primary-foreground: 30 5% 96%;
-    --sidebar-accent: 30 4% 22%;
-    --sidebar-accent-foreground: 30 5% 96%;
-    --sidebar-border: 30 4% 22%;
-    --sidebar-ring: 24 82% 45%;
+    --sidebar-background: 15 6% 10%;
+    --sidebar-foreground: 15 10% 96%;
+    --sidebar-primary: 5 85% 60%;
+    --sidebar-primary-foreground: 15 10% 96%;
+    --sidebar-accent: 15 4% 20%;
+    --sidebar-accent-foreground: 15 10% 96%;
+    --sidebar-border: 15 5% 14%;
+    --sidebar-ring: 5 85% 60%;
   }
 }

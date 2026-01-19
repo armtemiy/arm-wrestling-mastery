@@ -1,4 +1,5 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { COMMON_STYLES } from "./common-styles";
 
 const Footer = () => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
@@ -11,8 +12,8 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { 
-      name: "Telegram", 
+    {
+      name: "Telegram",
       href: "https://t.me/armtemiy",
       color: "#26A5E4",
       icon: (
@@ -21,8 +22,8 @@ const Footer = () => {
         </svg>
       )
     },
-    { 
-      name: "YouTube", 
+    {
+      name: "YouTube",
       href: "#",
       color: "#FF0000",
       icon: (
@@ -31,8 +32,8 @@ const Footer = () => {
         </svg>
       )
     },
-    { 
-      name: "Instagram", 
+    {
+      name: "Instagram",
       href: "#",
       color: "#E4405F",
       icon: (
@@ -41,8 +42,8 @@ const Footer = () => {
         </svg>
       )
     },
-    { 
-      name: "TikTok", 
+    {
+      name: "TikTok",
       href: "#",
       color: "#00F2EA",
       icon: (
@@ -62,23 +63,23 @@ const Footer = () => {
   };
 
   return (
-    <footer 
+    <footer
       ref={ref}
-      className="relative overflow-hidden py-8 md:py-12 bg-[hsl(0_0%_10%)]"
+      className="relative overflow-hidden py-8 md:py-12 bg-[hsl(15_8%_6%)]"
     >
-      <div 
+      <div
         className={`relative max-w-4xl mx-auto rounded-3xl overflow-hidden transition-all duration-700 ease-out ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
         {/* Glass background */}
-        <div className="absolute inset-0 bg-[hsl(0_0%_100%/0.04)] backdrop-blur-xl" />
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%/0.1)] via-[hsl(0_0%_100%/0.03)] to-[hsl(30_80%_60%/0.05)]" />
-        <div className="absolute inset-0 border border-[hsl(0_0%_100%/0.15)] rounded-3xl" />
-        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(0_0%_100%/0.2)]" />
-        <div className="absolute top-0 left-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(30_80%_60%/0.08)] blur-[80px]" />
-        <div className="absolute bottom-0 right-1/4 w-[200px] h-[100px] rounded-full bg-[hsl(200_60%_60%/0.06)] blur-[60px]" />
-        
+        <div className="absolute inset-0 bg-[hsl(15_5%_15%)/0.6] backdrop-blur-xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(15_5%_20%/0.3)] via-[hsl(15_5%_10%/0.1)] to-[hsl(5_85%_60%/0.05)]" />
+        <div className="absolute inset-0 border border-[hsl(15_5%_20%)] rounded-3xl" />
+        <div className="absolute inset-[1px] rounded-3xl border-t border-l border-[hsl(5_85%_60%/0.2)]" />
+        <div className="absolute top-0 left-1/4 w-[300px] h-[150px] rounded-full bg-[hsl(5_85%_60%/0.08)] blur-[80px]" />
+        <div className="absolute bottom-0 right-1/4 w-[200px] h-[100px] rounded-full bg-[hsl(15_90%_50%/0.06)] blur-[60px]" />
+
         {/* Content */}
         <div className="relative px-6 md:px-10 py-10 md:py-14">
           <div className="max-w-4xl mx-auto">
@@ -88,12 +89,12 @@ const Footer = () => {
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}>
                 <span
-                  className="text-4xl text-white"
-                  style={{ fontFamily: "\"Charlie Don't Surf\", cursive" }}
+                  className="text-4xl text-white font-bold"
+                  style={COMMON_STYLES.clashDisplay}
                 >
                   Armtemiy
                 </span>
-                <p className="text-[hsl(0_0%_100%/0.5)] text-sm max-w-xs leading-relaxed">
+                <p className="text-[hsl(15_10%_60%)] text-sm max-w-xs leading-relaxed" style={COMMON_STYLES.satoshi}>
                   Побеждай за столом, а не гадай как. Система тренировок и техники армрестлинга.
                 </p>
               </div>
@@ -102,7 +103,7 @@ const Footer = () => {
               <div className={`space-y-4 transition-all duration-500 delay-200 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}>
-                <p className="text-[hsl(0_0%_100%/0.4)] text-xs uppercase tracking-[0.2em] font-semibold mb-5">
+                <p className="text-[hsl(15_10%_50%)] text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
                   Навигация
                 </p>
                 <nav className="flex flex-col space-y-3">
@@ -112,12 +113,12 @@ const Footer = () => {
                       onClick={(e) => handleNavClick(e, link.href)}
                       className="group relative text-left w-fit overflow-hidden"
                     >
-                      <span className="relative inline-flex items-center gap-3 text-base font-medium text-[hsl(0_0%_100%/0.7)] group-hover:text-white transition-all duration-300">
-                        <span className="text-xs font-mono text-[hsl(150_70%_45%/0.6)] group-hover:text-[hsl(150_70%_50%)] transition-colors duration-300">
+                      <span className="relative inline-flex items-center gap-3 text-base font-medium text-[hsl(15_10%_70%)] group-hover:text-white transition-all duration-300" style={COMMON_STYLES.satoshi}>
+                        <span className="text-xs font-mono text-[hsl(5_85%_60%/0.6)] group-hover:text-[hsl(5_85%_60%)] transition-colors duration-300">
                           0{index + 1}
                         </span>
                         {link.label}
-                        <span className="absolute -bottom-1 left-7 w-0 h-[2px] bg-gradient-to-r from-[hsl(150_70%_45%)] to-[hsl(85_90%_60%)] group-hover:w-[calc(100%-1.75rem)] transition-all duration-300 ease-out" />
+                        <span className="absolute -bottom-1 left-7 w-0 h-[2px] bg-gradient-to-r from-[hsl(5_85%_60%)] to-[hsl(15_90%_60%)] group-hover:w-[calc(100%-1.75rem)] transition-all duration-300 ease-out" />
                       </span>
                     </button>
                   ))}
@@ -128,7 +129,7 @@ const Footer = () => {
               <div className={`space-y-5 transition-all duration-500 delay-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}>
-                <p className="text-[hsl(0_0%_100%/0.4)] text-xs uppercase tracking-[0.2em] font-semibold mb-5">
+                <p className="text-[hsl(15_10%_50%)] text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
                   Социальные сети
                 </p>
                 <div className="flex gap-3">
@@ -139,7 +140,7 @@ const Footer = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative"
-                      style={{ 
+                      style={{
                         transitionDelay: isVisible ? `${350 + index * 50}ms` : '0ms',
                         ['--social-color' as string]: social.color,
                       }}
@@ -151,43 +152,43 @@ const Footer = () => {
                       >
                         {social.name}
                         {/* Arrow */}
-                        <span 
+                        <span
                           className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 rotate-45"
                           style={{ backgroundColor: social.color }}
                         />
                       </span>
-                      
+
                       {/* Button */}
-                      <span className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-[hsl(0_0%_15%)] border border-[hsl(0_0%_100%/0.1)] overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:border-transparent"
+                      <span className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-[hsl(15_8%_12%)] border border-[hsl(15_5%_20%)] overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:border-[hsl(5_85%_60%)]"
                         style={{
                           boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.2)',
                         }}
                       >
                         {/* Glow background on hover */}
-                        <span 
+                        <span
                           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                          style={{ 
+                          style={{
                             background: `radial-gradient(circle at center, ${social.color}30 0%, transparent 70%)`,
                           }}
                         />
-                        
+
                         {/* Bottom glow line */}
-                        <span 
+                        <span
                           className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300"
-                          style={{ 
+                          style={{
                             background: `linear-gradient(90deg, transparent, ${social.color}, transparent)`,
                             boxShadow: `0 0 10px ${social.color}, 0 0 20px ${social.color}`,
                           }}
                         />
-                        
+
                         {/* Icon */}
-                        <span 
-                          className="relative z-10 text-[hsl(0_0%_100%/0.7)] group-hover:text-white transition-all duration-300 group-hover:scale-110"
-                          style={{ 
+                        <span
+                          className="relative z-10 text-[hsl(15_10%_60%)] group-hover:text-white transition-all duration-300 group-hover:scale-110"
+                          style={{
                             filter: 'drop-shadow(0 0 0px transparent)',
                           }}
                         >
-                          <span 
+                          <span
                             className="block transition-all duration-300"
                             style={{
                               color: 'currentColor',
@@ -204,10 +205,10 @@ const Footer = () => {
             </div>
 
             {/* Bottom bar */}
-            <div className={`mt-12 pt-8 border-t border-[hsl(0_0%_100%/0.1)] flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500 delay-500 ${
+            <div className={`mt-12 pt-8 border-t border-[hsl(15_5%_20%)] flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500 delay-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>
-              <p className="text-[hsl(0_0%_100%/0.4)] text-sm">
+              <p className="text-[hsl(15_10%_50%)] text-sm" style={COMMON_STYLES.satoshi}>
                 © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
               <div className="flex items-center gap-6 text-sm">
@@ -215,16 +216,16 @@ const Footer = () => {
                   href="https://t.me/armtemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[hsl(0_0%_100%/0.5)] hover:text-[hsl(150_70%_50%)] transition-colors duration-300"
+                  className="text-[hsl(15_10%_60%)] hover:text-[hsl(5_85%_60%)] transition-colors duration-300"
                 >
                   @armtemiy
                 </a>
-                <span className="text-[hsl(0_0%_100%/0.2)]">•</span>
+                <span className="text-[hsl(15_10%_30%)]">•</span>
                 <a
                   href="https://t.me/assistemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[hsl(0_0%_100%/0.5)] hover:text-[hsl(150_70%_50%)] transition-colors duration-300"
+                  className="text-[hsl(15_10%_60%)] hover:text-[hsl(5_85%_60%)] transition-colors duration-300"
                 >
                   @assistemiy
                 </a>

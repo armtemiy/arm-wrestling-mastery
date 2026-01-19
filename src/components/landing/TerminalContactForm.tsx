@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from "react";
-import { Send, CheckCircle2, Terminal, Loader2, XCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import { Send, CheckCircle2, Terminal, Loader2, XCircle, ExternalLink } from "lucide-react";
+import { COMMON_STYLES } from "./common-styles";
 
 type FormStep = "name" | "phone" | "message" | "sending" | "success" | "error";
 
@@ -36,6 +36,41 @@ const isValidMessage = (message: string): boolean => {
   return !suspicious.test(message);
 };
 
+// Memoized TerminalLine component
+const TerminalLineComponent = React.memo(({ line, index }: { line: TerminalLine; index: number }) => (
+  <div
+    className="terminal-line"
+    style={{ animationDelay: `${index * 50}ms` }}
+  >
+    {line.type === "system" && (
+      <div className="flex gap-2">
+        {line.timestamp && (
+          <span className="text-[hsl(0_0%_100%/0.3)]">[{line.timestamp}]</span>
+        )}
+        <span className="text-[hsl(0_0%_100%/0.6)]">{line.content}</span>
+      </div>
+    )}
+    {line.type === "prompt" && (
+      <div className="text-[hsl(150_70%_50%)] mt-3">{line.content}</div>
+    )}
+    {line.type === "input" && (
+      <div className="text-[hsl(0_0%_100%/0.9)] font-medium">{line.content}</div>
+    )}
+    {line.type === "success" && (
+      <div className="text-[hsl(142_76%_45%)] font-bold mt-3 flex items-center gap-2">
+        <CheckCircle2 className="w-4 h-4" />
+        {line.content}
+      </div>
+    )}
+    {line.type === "error" && (
+      <div className="text-[hsl(0_70%_50%)] font-bold mt-3 flex items-center gap-2">
+        <XCircle className="w-4 h-4" />
+        {line.content}
+      </div>
+    )}
+  </div>
+));
+
 const TerminalContactForm = () => {
   const [step, setStep] = useState<FormStep>("name");
   const [isActive, setIsActive] = useState(false);
@@ -50,7 +85,7 @@ const TerminalContactForm = () => {
     { type: "system", content: "Готов. Давай знакомиться." },
     { type: "prompt", content: "Как тебя зовут?" },
   ]);
-  
+
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
 
@@ -81,48 +116,58 @@ const TerminalContactForm = () => {
     }
   }, [lines]);
 
-  const addLine = (line: TerminalLine) => {
+  const addLine = useCallback((line: TerminalLine) => {
     setLines(prev => [...prev, line]);
-  };
+  }, []);
 
   // Check rate limiting
-  const isRateLimited = (): boolean => {
+  const isRateLimited = useCallback((): boolean => {
     const now = Date.now();
     // Clean old timestamps
     while (submissionTimestamps.length > 0 && submissionTimestamps[0] < now - RATE_LIMIT_WINDOW) {
       submissionTimestamps.shift();
     }
     return submissionTimestamps.length >= MAX_SUBMISSIONS_PER_WINDOW;
-  };
+  }, []);
 
   // Anti-bot check: form filled too quickly (less than 3 seconds)
-  const isBot = (): boolean => {
+  const isBot = useCallback((): boolean => {
     const timeSinceLoad = Date.now() - formLoadTime;
     return timeSinceLoad < 3000 || honeypot.length > 0;
-  };
+  }, [formLoadTime, honeypot]);
 
-  const sendToTelegram = async () => {
+  const sendToTelegram = useCallback(async () => {
     try {
-      const { data, error } = await supabase.functions.invoke("send-telegram", {
-        body: { name: name.trim(), phone: phone.trim(), message: message.trim() },
-      });
+      // Build the Telegram message with all form data
+      const telegramMessage = `*Новая заявка с сайта*
 
-      if (error) throw error;
-      
+*Имя:* ${name.trim()}
+*Телефон:* ${phone.trim()}
+*Сообщение:* ${message.trim()}`;
+
+      // Open Telegram with pre-filled message
+      const encodedMessage = encodeURIComponent(telegramMessage);
+      const telegramUrl = `https://t.me/assistemiy?text=${encodedMessage}`;
+
       // Record successful submission for rate limiting
       submissionTimestamps.push(Date.now());
-      
+
+      // Open in new tab after a short delay
+      setTimeout(() => {
+        window.open(telegramUrl, '_blank');
+      }, 1000);
+
       return { success: true };
     } catch (err: unknown) {
       console.error("Telegram send error:", err);
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
       return { success: false, error: errorMessage };
     }
-  };
+  }, [name, phone, message]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (step === "name" && name.trim()) {
       if (!isValidName(name.trim())) {
         addLine({ type: "error", content: "✗ Хм, что-то не так с именем. Попробуй ещё раз." });
@@ -167,15 +212,15 @@ const TerminalContactForm = () => {
 
       addLine({ type: "input", content: `> ${message}` });
       setStep("sending");
-      
+
       addLine({ type: "system", content: "Отправляю..." });
-      
+
       setTimeout(() => {
         addLine({ type: "system", content: "Почти готово..." });
       }, 600);
 
       const result = await sendToTelegram();
-      
+
       if (result.success) {
         addLine({ type: "success", content: "✓ ЗАЯВКА УЛЕТЕЛА" });
         addLine({ type: "system", content: `${name}, жди ответа в течение дня.` });
@@ -187,15 +232,15 @@ const TerminalContactForm = () => {
         setStep("error");
       }
     }
-  };
+  }, [step, name, phone, message, addLine, isBot, isRateLimited, sendToTelegram]);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       handleSubmit(e);
     }
-  };
+  }, [handleSubmit]);
 
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     setStep("name");
     setName("");
     setPhone("");
@@ -205,33 +250,36 @@ const TerminalContactForm = () => {
       { type: "system", content: "Начинаем заново. Готов." },
       { type: "prompt", content: "Как тебя зовут?" },
     ]);
-  };
+  }, []);
 
-  const getCurrentValue = () => {
+  const getCurrentValue = useCallback(() => {
     switch (step) {
       case "name": return name;
       case "phone": return phone;
       case "message": return message;
       default: return "";
     }
-  };
+  }, [step, name, phone, message]);
 
-  const setCurrentValue = (value: string) => {
+  const setCurrentValue = useCallback((value: string) => {
     switch (step) {
       case "name": setName(value); break;
       case "phone": setPhone(value); break;
       case "message": setMessage(value); break;
     }
-  };
+  }, [step]);
 
-  const getPlaceholder = () => {
+  const getPlaceholder = useCallback(() => {
     switch (step) {
       case "name": return "Саша";
       case "phone": return "+7 999 123-45-67";
       case "message": return "Хочу программу / на тренировку";
       default: return "";
     }
-  };
+  }, [step]);
+
+  const placeholder = useMemo(() => getPlaceholder(), [getPlaceholder]);
+  const currentValue = useMemo(() => getCurrentValue(), [getCurrentValue]);
 
   return (
     <div className="w-full max-w-2xl mx-auto">
@@ -249,45 +297,14 @@ const TerminalContactForm = () => {
       </div>
 
       {/* Terminal body */}
-      <div 
+      <div
         ref={terminalRef}
         className="bg-[hsl(0_0%_8%)] border border-[hsl(0_0%_100%/0.1)] rounded-b-lg p-4 md:p-6 min-h-[300px] max-h-[400px] overflow-y-auto terminal-form"
       >
         {/* Terminal lines */}
         <div className="space-y-2 text-sm md:text-base">
           {lines.map((line, index) => (
-            <div 
-              key={index} 
-              className="terminal-line"
-              style={{ animationDelay: `${index * 50}ms` }}
-            >
-              {line.type === "system" && (
-                <div className="flex gap-2">
-                  {line.timestamp && (
-                    <span className="text-[hsl(0_0%_100%/0.3)]">[{line.timestamp}]</span>
-                  )}
-                  <span className="text-[hsl(0_0%_100%/0.6)]">{line.content}</span>
-                </div>
-              )}
-              {line.type === "prompt" && (
-                <div className="text-[hsl(150_70%_50%)] mt-3">{line.content}</div>
-              )}
-              {line.type === "input" && (
-                <div className="text-[hsl(0_0%_100%/0.9)] font-medium">{line.content}</div>
-              )}
-              {line.type === "success" && (
-                <div className="text-[hsl(142_76%_45%)] font-bold mt-3 flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4" />
-                  {line.content}
-                </div>
-              )}
-              {line.type === "error" && (
-                <div className="text-[hsl(0_70%_50%)] font-bold mt-3 flex items-center gap-2">
-                  <XCircle className="w-4 h-4" />
-                  {line.content}
-                </div>
-              )}
-            </div>
+            <TerminalLineComponent key={index} line={line} index={index} />
           ))}
         </div>
 
@@ -298,11 +315,11 @@ const TerminalContactForm = () => {
             <input
               ref={inputRef}
               type={step === "phone" ? "tel" : "text"}
-              value={getCurrentValue()}
+              value={currentValue}
               onFocus={() => setIsActive(true)}
               onChange={(e) => setCurrentValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={getPlaceholder()}
+              placeholder={placeholder}
               className="terminal-input flex-1 text-[hsl(0_0%_100%)] text-sm md:text-base placeholder:text-[hsl(0_0%_100%/0.2)]"
               autoComplete="off"
             />
@@ -354,4 +371,5 @@ const TerminalContactForm = () => {
   );
 };
 
-export default TerminalContactForm;
+const MemoizedTerminalContactForm = React.memo(TerminalContactForm);
+export default MemoizedTerminalContactForm;

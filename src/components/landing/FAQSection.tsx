@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
+import { COMMON_STYLES } from "./common-styles";
 
 const faqs = [
   {
@@ -42,11 +43,11 @@ const FAQSection = () => {
   });
 
   return (
-    <section 
+    <section
       id="faq"
-      className="relative py-24 md:py-32 section-charcoal overflow-hidden"
+      className="relative py-24 md:py-32 bg-[hsl(15_5%_10%)] overflow-hidden"
     >
-      <div 
+      <div
         ref={sectionRef}
         className={`container mx-auto px-4 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -55,10 +56,10 @@ const FAQSection = () => {
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full bg-[hsl(150_70%_45%/0.15)] text-[hsl(150_70%_50%)] text-sm font-medium mb-6">
-              Вопросы
+            <span className="inline-block px-4 py-2 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-6" style={COMMON_STYLES.satoshi}>
+              ВОПРОСЫ
             </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-[hsl(0_0%_98%)]">
+            <h2 className="text-3xl md:text-5xl font-bold text-white" style={COMMON_STYLES.clashDisplay}>
               Отвечаю на главное
             </h2>
           </div>
@@ -73,14 +74,14 @@ const FAQSection = () => {
                 >
                   <AccordionItem
                     value={`item-${index}`}
-                    className="border border-[hsl(0_0%_100%/0.1)] rounded-2xl px-6 bg-[hsl(0_0%_100%/0.03)] data-[state=open]:bg-[hsl(0_0%_100%/0.05)] data-[state=open]:border-[hsl(150_70%_45%/0.3)] transition-all duration-300 hover:border-[hsl(0_0%_100%/0.2)] relative overflow-hidden group card-lift"
+                    className="border border-[hsl(15_5%_20%)] rounded-2xl px-6 bg-[hsl(15_8%_8%)] data-[state=open]:bg-[hsl(15_8%_12%)] data-[state=open]:border-[hsl(5_85%_60%/0.4)] transition-all duration-300 hover:border-[hsl(15_5%_25%)] relative overflow-hidden group card-lift"
                   >
-                    {/* Subtle glow on hover */}
-                    <div className="absolute inset-0 bg-[hsl(150_70%_45%/0.02)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                    <AccordionTrigger className="relative z-10 text-left text-[hsl(0_0%_98%)] hover:no-underline py-6 text-lg font-medium">
+                    {/* Red glow on hover */}
+                    <div className="absolute inset-0 bg-[hsl(5_85%_60%/0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-6 text-lg font-medium" style={COMMON_STYLES.satoshi}>
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="relative z-10 text-[hsl(0_0%_98%/0.6)] pb-6 text-base leading-relaxed">
+                    <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -93,7 +94,7 @@ const FAQSection = () => {
       </div>
 
       {/* Section divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_100%/0.15)] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(15_5%_20%)] to-transparent" />
     </section>
   );
 };

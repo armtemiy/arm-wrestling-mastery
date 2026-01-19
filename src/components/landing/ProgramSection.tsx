@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Target, Dumbbell, Brain, RefreshCw, ArrowRight, Check, BookOpen, Video, MessageCircle } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
+import { COMMON_STYLES } from "./common-styles";
 
 const features = [
   {
@@ -50,24 +51,24 @@ const ProgramSection = () => {
   });
 
   return (
-    <section 
-      id="program" 
-      className="relative pt-24 pb-12 md:pt-32 md:pb-16 section-dark"
+    <section
+      id="program"
+      className="relative pt-24 pb-12 md:pt-32 md:pb-16 bg-[hsl(15_6%_8%)]"
     >
-      <div 
+      <div
         ref={sectionRef}
         className={`container mx-auto px-4 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1 rounded-full bg-[hsl(150_70%_45%/0.15)] text-[hsl(150_70%_50%)] text-sm font-medium mb-4">
-            Программа
+          <span className="inline-block px-4 py-1 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-4" style={COMMON_STYLES.satoshi}>
+            ПРОГРАММА
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4" style={COMMON_STYLES.clashDisplay}>
             Перестань гуглить — <span className="text-gradient">начни побеждать</span>
           </h2>
-          <p className="text-[hsl(0_0%_100%/0.6)] text-lg max-w-xl mx-auto">
+          <p className="text-[hsl(15_10%_60%)] text-lg max-w-xl mx-auto" style={COMMON_STYLES.satoshi}>
             Всё, что нужно знать об армрестлинге, собрано в одном месте. Без воды, без «посмотри ещё 50 видео»
           </p>
         </div>
@@ -76,25 +77,25 @@ const ProgramSection = () => {
           <div className="grid lg:grid-cols-2 gap-8 mb-12 items-stretch">
             {/* Left: Features */}
             <div className="relative h-full">
-              <div className="absolute -inset-4 rounded-3xl bg-[hsl(150_70%_45%/0.03)] blur-2xl" />
+              <div className="absolute -inset-4 rounded-3xl bg-[hsl(5_85%_60%/0.03)] blur-2xl" />
               <div className="relative glass-strong rounded-3xl p-8 h-full flex flex-col">
-                <h3 className="text-xl font-bold text-white mb-6">Что ты получишь</h3>
+                <h3 className="text-xl font-bold text-white mb-6" style={COMMON_STYLES.clashDisplay}>Что ты получишь</h3>
                 <div ref={cardsRef} className="space-y-4 flex-1">
                   {features.map((feature, index) => (
                     <div
                       key={index}
-                      className={`stagger-item group flex gap-4 p-4 rounded-2xl bg-[hsl(0_0%_100%/0.05)] hover:bg-[hsl(0_0%_100%/0.08)] transition-all duration-300 ${
+                      className={`stagger-item group flex gap-4 p-4 rounded-2xl bg-[hsl(15_5%_15%/0.5)] hover:bg-[hsl(15_5%_20%/0.8)] transition-all duration-300 ${
                         visibleItems[index] ? 'visible' : ''
                       }`}
                     >
-                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[hsl(150_70%_45%/0.2)] flex items-center justify-center group-hover:bg-[hsl(150_70%_45%/0.3)] group-hover:scale-110 transition-all duration-300">
-                        <feature.icon className="text-[hsl(150_70%_50%)] group-hover:rotate-6 transition-transform duration-300" size={24} />
+                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[hsl(5_85%_60%/0.2)] flex items-center justify-center group-hover:bg-[hsl(5_85%_60%/0.3)] group-hover:scale-110 transition-all duration-300">
+                        <feature.icon className="text-[hsl(5_85%_60%)] group-hover:rotate-6 transition-transform duration-300" size={24} />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-white mb-1">
+                        <h4 className="font-semibold text-white mb-1" style={COMMON_STYLES.satoshi}>
                           {feature.title}
                         </h4>
-                        <p className="text-sm text-[hsl(0_0%_100%/0.6)]">
+                        <p className="text-sm text-[hsl(15_10%_60%)]" style={COMMON_STYLES.satoshi}>
                           {feature.description}
                         </p>
                       </div>
@@ -106,19 +107,19 @@ const ProgramSection = () => {
 
             {/* Right: Modules */}
             <div className="relative h-full">
-              <div className="absolute -inset-4 rounded-3xl bg-[hsl(150_70%_45%/0.03)] blur-2xl" />
+              <div className="absolute -inset-4 rounded-3xl bg-[hsl(5_85%_60%/0.03)] blur-2xl" />
               <div className="relative glass-strong rounded-3xl p-8 h-full flex flex-col">
-                <h3 className="text-xl font-bold text-white mb-6">Содержание программы</h3>
+                <h3 className="text-xl font-bold text-white mb-6" style={COMMON_STYLES.clashDisplay}>Содержание программы</h3>
                 <div className="grid gap-3 flex-1">
                   {modules.map((module, index) => (
-                    <div 
+                    <div
                       key={index}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-[hsl(0_0%_100%/0.03)] hover:bg-[hsl(0_0%_100%/0.06)] transition-colors duration-200"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-[hsl(15_5%_15%/0.5)] hover:bg-[hsl(15_5%_20%/0.8)] transition-colors duration-200"
                     >
-                      <div className="w-6 h-6 rounded-full bg-[hsl(150_70%_45%/0.2)] flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3.5 h-3.5 text-[hsl(150_70%_50%)]" />
+                      <div className="w-6 h-6 rounded-full bg-[hsl(5_85%_60%/0.2)] flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3.5 h-3.5 text-[hsl(5_85%_60%)]" />
                       </div>
-                      <span className="text-[hsl(0_0%_100%/0.8)] text-sm">{module}</span>
+                      <span className="text-[hsl(15_10%_80%)] text-sm" style={COMMON_STYLES.satoshi}>{module}</span>
                     </div>
                   ))}
                 </div>
@@ -128,20 +129,20 @@ const ProgramSection = () => {
 
           {/* Bottom: Price card */}
           <div className="relative max-w-3xl mx-auto">
-            <div className="absolute -inset-4 rounded-3xl bg-[hsl(150_70%_45%/0.08)] blur-2xl" />
-            <div className="relative glass-strong rounded-3xl p-8 md:p-10 border border-[hsl(150_70%_45%/0.2)]">
+            <div className="absolute -inset-4 rounded-3xl bg-[hsl(5_85%_60%/0.08)] blur-2xl" />
+            <div className="relative glass-strong rounded-3xl p-8 md:p-10 border border-[hsl(5_85%_60%/0.2)]">
               {/* What's included */}
               <div className="flex flex-wrap justify-center gap-6 mb-8">
                 {includes.map((item, index) => (
-                  <div key={index} className="flex items-center gap-2 text-[hsl(0_0%_100%/0.7)]">
-                    <item.icon className="w-5 h-5 text-[hsl(150_70%_50%)]" />
-                    <span className="text-sm">{item.text}</span>
+                  <div key={index} className="flex items-center gap-2 text-[hsl(15_10%_70%)]">
+                    <item.icon className="w-5 h-5 text-[hsl(5_85%_60%)]" />
+                    <span className="text-sm" style={COMMON_STYLES.satoshi}>{item.text}</span>
                   </div>
                 ))}
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_100%/0.2)] to-transparent mb-8" />
+              <div className="h-px bg-gradient-to-r from-transparent via-[hsl(15_5%_25%)] to-transparent mb-8" />
 
               {/* Guarantee badge */}
               <div className="flex items-center justify-center gap-3 mb-8 p-4 rounded-2xl bg-[hsl(142_76%_36%/0.1)] border border-[hsl(142_76%_36%/0.2)]">
@@ -153,21 +154,21 @@ const ProgramSection = () => {
                 </div>
                 <div>
                   <p className="text-[hsl(142_76%_45%)] font-medium text-sm">3 дня на тест</p>
-                  <p className="text-[hsl(0_0%_100%/0.5)] text-xs">Не зашло — верну деньги без вопросов</p>
+                  <p className="text-[hsl(15_10%_50%)] text-xs" style={COMMON_STYLES.satoshi}>Не зашло — верну деньги без вопросов</p>
                 </div>
               </div>
 
               {/* Price and CTA */}
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <div className="text-center md:text-left">
-                  <p className="text-[hsl(0_0%_100%/0.6)] text-sm mb-1">
+                  <p className="text-[hsl(15_10%_60%)] text-sm mb-1" style={COMMON_STYLES.satoshi}>
                     Текст + видео в Telegram. Доступ навсегда.
                   </p>
                   <div className="flex items-baseline gap-2 justify-center md:justify-start">
-                    <span className="text-5xl font-bold text-white">
+                    <span className="text-5xl font-bold text-white" style={COMMON_STYLES.clashDisplay}>
                       1500₽
                     </span>
-                    <span className="text-[hsl(0_0%_100%/0.5)]">
+                    <span className="text-[hsl(15_10%_50%)]" style={COMMON_STYLES.satoshi}>
                       один раз
                     </span>
                   </div>
@@ -176,7 +177,7 @@ const ProgramSection = () => {
                 <Button
                   asChild
                   size="lg"
-                  className="rounded-full bg-[hsl(150_70%_45%)] hover:bg-[hsl(150_70%_50%)] text-black font-semibold px-8 py-6 text-base shadow-[0_0_30px_hsl(150_70%_45%/0.4)] hover:shadow-[0_0_40px_hsl(150_70%_45%/0.6)] transition-all duration-300"
+                  className="rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-8 py-6 text-base shadow-[0_0_30px_hsl(5_85%_60%/0.4)] hover:shadow-[0_0_40px_hsl(5_85%_60%/0.6)] transition-all duration-300"
                 >
                   <a
                     href="https://t.me/assistemiy?text=Хочу%20программу"
@@ -194,15 +195,15 @@ const ProgramSection = () => {
       </div>
 
       {/* Scroll indicator as divider */}
-      <div className="relative py-12 md:py-16 flex flex-col items-center gap-2 text-[hsl(0_0%_100%/0.4)]">
-        <span className="text-xs uppercase tracking-widest">Листай вниз</span>
+      <div className="relative py-12 md:py-16 flex flex-col items-center gap-2 text-[hsl(15_10%_40%)]">
+        <span className="text-xs uppercase tracking-widest" style={COMMON_STYLES.satoshi}>Листай вниз</span>
         <div className="w-6 h-10 rounded-full border-2 border-current flex justify-center pt-2">
           <div className="w-1 h-2 rounded-full bg-current animate-bounce" />
         </div>
       </div>
 
       {/* Section divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_100%/0.15)] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(15_5%_20%)] to-transparent" />
     </section>
   );
 };

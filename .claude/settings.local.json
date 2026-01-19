@@ -9,7 +9,18 @@
       "Bash(npm view:*)",
       "Bash(claude mcp add:*)",
       "Bash(claude mcp list:*)",
-      "Bash(claude mcp remove:*)"
+      "Bash(claude mcp remove:*)",
+      "mcp__gemini-design-mcp__generate_vibes",
+      "mcp__gemini-design-mcp__modify_frontend",
+      "Bash(npm install)",
+      "Bash(npm ls:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(for:*)",
+      "Bash(do if grep -q \"fontFamily\" \"$file\")",
+      "Bash(then echo \"$file needs update\")",
+      "Bash(fi:*)",
+      "Bash(done:*)",
+      "Bash(grep:*)"
     ]
   }
 }

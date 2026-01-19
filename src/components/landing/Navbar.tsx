@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { COMMON_STYLES } from "./common-styles";
 
 const Navbar = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -8,6 +9,46 @@ const Navbar = () => {
   const [isClosing, setIsClosing] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+
+  const navLinks = useMemo(() => [
+    { href: "#program", label: "Программа" },
+    { href: "#training", label: "Тренировки" },
+    { href: "#about", label: "О себе" },
+    { href: "#faq", label: "FAQ" },
+  ], []);
+
+  const navbarStyle = useMemo(() => ({
+    padding: `${12 - scrollProgress * 4}px ${16 - scrollProgress * 4}px`,
+    backgroundColor: `hsl(15 6% 10% / ${0.85 + scrollProgress * 0.1})`,
+    backdropFilter: `blur(${12 + scrollProgress * 8}px)`,
+    boxShadow: scrollProgress > 0.1
+      ? `0 ${4 + scrollProgress * 8}px ${16 + scrollProgress * 16}px hsl(0 0% 0% / ${0.2 + scrollProgress * 0.1})`
+      : '0 8px 32px hsl(0 0% 0% / 0.4)',
+  }), [scrollProgress]);
+
+  const handleCloseMobileMenu = useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsMobileMenuOpen(false);
+      setIsClosing(false);
+    }, 200);
+  }, []);
+
+  const scrollToSection = useCallback((href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    handleCloseMobileMenu();
+  }, [handleCloseMobileMenu]);
+
+  const toggleMobileMenu = useCallback(() => {
+    if (isMobileMenuOpen) {
+      handleCloseMobileMenu();
+    } else {
+      setIsMobileMenuOpen(true);
+    }
+  }, [isMobileMenuOpen, handleCloseMobileMenu]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,65 +71,22 @@ const Navbar = () => {
         setActiveSection(null);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { href: "#program", label: "Программа" },
-    { href: "#training", label: "Тренировки" },
-    { href: "#about", label: "О себе" },
-    { href: "#faq", label: "FAQ" },
-  ];
-
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    handleCloseMobileMenu();
-  };
-
-  const handleCloseMobileMenu = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setIsMobileMenuOpen(false);
-      setIsClosing(false);
-    }, 200);
-  };
-
-  const toggleMobileMenu = () => {
-    if (isMobileMenuOpen) {
-      handleCloseMobileMenu();
-    } else {
-      setIsMobileMenuOpen(true);
-    }
-  };
-
-  const navbarStyle = {
-    padding: `${12 - scrollProgress * 4}px ${16 - scrollProgress * 4}px`,
-    backgroundColor: `hsl(0 0% 8% / ${0.7 + scrollProgress * 0.25})`,
-    backdropFilter: `blur(${12 + scrollProgress * 8}px)`,
-    boxShadow: scrollProgress > 0.1 
-      ? `0 ${4 + scrollProgress * 8}px ${16 + scrollProgress * 16}px hsl(0 0% 0% / ${0.15 + scrollProgress * 0.15})`
-      : 'none',
-  };
-
-  // Get the current indicator target (hovered or active)
-  const indicatorTarget = hoveredLink || activeSection;
-
   return (
     <>
-      <nav 
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-full border border-[hsl(0_0%_100%/0.1)] transition-all duration-300 ease-out"
+      <nav
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 rounded-full border border-white/10 transition-all duration-500 ease-out"
         style={navbarStyle}
       >
-        <div className="flex items-center gap-1 md:gap-2">
+        <div className="flex items-center gap-2 md:gap-4">
           {/* Logo */}
           <a
             href="#"
-            className="px-3 py-1.5 text-lg md:text-xl text-[hsl(0_0%_98%)] font-medium whitespace-nowrap"
-            style={{ fontFamily: "\"Charlie Don't Surf\", cursive" }}
+            className="px-4 py-2 text-xl md:text-2xl text-white font-bold tracking-tighter uppercase italic whitespace-nowrap hover:text-[hsl(5_85%_60%)] transition-colors"
+            style={COMMON_STYLES.clashDisplay}
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
@@ -97,101 +95,80 @@ const Navbar = () => {
             Armtemiy
           </a>
 
-          {/* Desktop Links with Tubelight Effect */}
-          <div className="hidden md:flex items-center gap-0.5 relative">
+          {/* Cinematic Desktop Links */}
+          <div className="hidden md:flex items-center gap-1 relative px-2">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href;
               const isHovered = hoveredLink === link.href;
-              
+
               return (
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
                   onMouseEnter={() => setHoveredLink(link.href)}
                   onMouseLeave={() => setHoveredLink(null)}
-                  className={`relative px-3 py-1.5 text-sm font-medium transition-all duration-300 rounded-full ${
+                  className={`relative px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-300 ${
                     isActive || isHovered
                       ? 'text-white'
-                      : 'text-[hsl(0_0%_98%/0.7)] hover:text-[hsl(0_0%_98%)]'
+                      : 'text-white/40 hover:text-white/80'
                   }`}
+                  style={COMMON_STYLES.satoshi}
                 >
-                  {/* Background glow for active/hovered */}
-                  <span 
-                    className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                      isActive || isHovered ? 'opacity-100' : 'opacity-0'
+                  {/* Subtle Forge Underglow */}
+                  <span
+                    className={`absolute bottom-1 left-1/2 -translate-x-1/2 h-[2px] bg-[hsl(5_85%_60%)] transition-all duration-300 shadow-[0_0_12px_hsl(5_85%_60%)] ${
+                      isActive || isHovered ? 'w-2/3 opacity-100' : 'w-0 opacity-0'
                     }`}
-                    style={{
-                      background: isActive || isHovered 
-                        ? 'radial-gradient(ellipse at bottom, rgba(54,226,168,0.15) 0%, transparent 70%)'
-                        : 'transparent',
-                    }}
                   />
-                  
-                  {/* Tubelight glow (bottom light) */}
-                  <span 
-                    className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 h-[3px] rounded-full transition-all duration-300 ${
-                      isActive || isHovered ? 'opacity-100 w-8' : 'opacity-0 w-0'
-                    }`}
-                    style={{
-                      background: 'linear-gradient(90deg, transparent, #36E2A8, transparent)',
-                      boxShadow: isActive || isHovered 
-                        ? '0 0 10px #36E2A8, 0 0 20px #36E2A8, 0 0 30px rgba(54,226,168,0.5)'
-                        : 'none',
-                    }}
-                  />
-                  
-                  {/* Text */}
                   <span className="relative z-10">{link.label}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* CTA Button */}
-          <Button asChild variant="cta" size="sm" className="hidden md:inline-flex ml-1 rounded-full text-sm px-4 py-1.5 h-auto">
-            <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer">
-              Написать
+          {/* High-Contrast Red CTA */}
+          <Button
+            asChild
+            className="hidden md:flex bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-bold uppercase tracking-widest px-6 py-2 rounded-full h-auto border-none shadow-[0_0_25px_rgba(239,68,68,0.4)] hover:shadow-[0_0_35px_rgba(239,68,68,0.6)] transition-all duration-300 active:scale-95"
+          >
+            <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
+              Вступить
             </a>
           </Button>
 
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="md:hidden p-2 text-[hsl(0_0%_98%)] hover:bg-[hsl(0_0%_100%/0.1)] rounded-full transition-colors"
+            className="md:hidden p-3 text-white hover:bg-white/10 rounded-full transition-all active:scale-90"
           >
-            {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            {isMobileMenuOpen ? <X size={22} strokeWidth={2.5} /> : <Menu size={22} strokeWidth={2.5} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* Cinematic Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className={`fixed inset-0 z-40 pt-20 px-4 bg-[hsl(0_0%_8%/0.98)] backdrop-blur-xl md:hidden ${isClosing ? 'mobile-menu-exit' : 'mobile-menu-enter'}`}>
-          <div className="flex flex-col">
-            {navLinks.map((link, index) => (
-              <div key={link.href}>
-                <button
-                  onClick={() => scrollToSection(link.href)}
-                  className={`w-full px-6 py-4 text-lg font-medium rounded-xl transition-colors text-left flex items-center gap-3 ${
-                    activeSection === link.href 
-                      ? 'text-[#36E2A8] bg-[#36E2A8]/10' 
-                      : 'text-[hsl(0_0%_98%)] hover:bg-[hsl(0_0%_100%/0.1)]'
-                  }`}
-                >
-                  {activeSection === link.href && (
-                    <span className="w-2 h-2 rounded-full bg-[#36E2A8] animate-pulse" />
-                  )}
-                  {link.label}
-                </button>
-                {index < navLinks.length - 1 && (
-                  <div className="mx-6 h-px bg-[hsl(0_0%_100%/0.1)]" />
-                )}
-              </div>
+        <div className={`fixed inset-0 z-40 flex flex-col justify-center bg-[hsl(15_8%_6%)] transition-opacity duration-300 md:hidden ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.1)_0%,transparent_70%)] pointer-events-none" />
+          <div className="flex flex-col items-center gap-8 relative z-50">
+            {navLinks.map((link) => (
+              <button
+                key={link.href}
+                onClick={() => scrollToSection(link.href)}
+                className={`text-4xl font-bold uppercase tracking-tighter transition-all italic ${
+                  activeSection === link.href
+                    ? 'text-[hsl(5_85%_60%)] scale-110'
+                    : 'text-white/60 hover:text-white'
+                }`}
+                style={COMMON_STYLES.clashDisplay}
+              >
+                {link.label}
+              </button>
             ))}
-            <div className="mx-6 h-px bg-[hsl(0_0%_100%/0.1)]" />
-            <Button asChild variant="cta" size="lg" className="mt-4 mx-6 rounded-full">
-              <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer">
-                Написать в Telegram
+            <div className="w-12 h-1 bg-white/10 rounded-full my-4" />
+            <Button asChild size="lg" className="bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-bold uppercase tracking-widest px-10 py-6 rounded-full shadow-[0_0_30px_rgba(239,68,68,0.4)]">
+              <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
+                Написать в TG
               </a>
             </Button>
           </div>
@@ -201,4 +178,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const MemoizedNavbar = React.memo(Navbar);
+export default MemoizedNavbar;
