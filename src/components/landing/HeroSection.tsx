@@ -40,7 +40,7 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden min-h-[90svh] flex items-center bg-[hsl(15_8%_6%)] pt-16"
+      className="relative overflow-hidden min-h-[90svh] flex items-center bg-[hsl(15_8%_6%)] pt-14 pb-10"
       style={{ perspective: '1200px' }}
     >
       {/* Cinematic atmosphere */}
@@ -74,9 +74,9 @@ const HeroSection = () => {
         style={transformStyles}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10 md:mb-14">
+          <div className="text-center mb-8 md:mb-10">
             <h1
-              className={`font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              className={`font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.85] tracking-tighter transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={COMMON_STYLES.clashDisplay}
             >
               <span className="block text-white mb-4">ВЫИГРЫВАЙ</span>
@@ -96,22 +96,22 @@ const HeroSection = () => {
               </span>
             </h1>
 
-          <p
-            className={`text-center text-base md:text-xl text-white/60 mb-10 md:mb-14 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            style={COMMON_STYLES.satoshi}
-          >
+            <p
+              className={`text-center text-sm sm:text-base md:text-lg text-white/60 mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={COMMON_STYLES.satoshi}
+            >
               а не надейся на удачу
             </p>
           </div>
 
           <div
-            className={`flex flex-col sm:flex-row items-center justify-center gap-6 transition-all duration-1000 delay-600 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            className={`flex flex-col sm:flex-row items-center justify-center gap-5 transition-all duration-1000 delay-600 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
             <div className="relative group">
               <div className="absolute -inset-1.5 bg-gradient-to-r from-[hsl(5_85%_60%)] to-[hsl(15_90%_50%)] rounded-full blur-xl opacity-40 group-hover:opacity-80 transition-opacity duration-500 animate-pulse-slow" />
               <Button
                 asChild
-                className="relative bg-gradient-to-br from-[hsl(5_85%_60%)] to-[hsl(15_90%_50%)] hover:brightness-110 text-white font-black text-xl px-12 py-8 rounded-full shadow-[0_0_50px_rgba(235,68,54,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
+                className="relative bg-gradient-to-br from-[hsl(5_85%_60%)] to-[hsl(15_90%_50%)] hover:brightness-110 text-white font-black text-lg md:text-xl px-10 py-6 md:px-12 md:py-7 rounded-full shadow-[0_0_50px_rgba(235,68,54,0.4)] transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
               >
                 <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer">
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -126,7 +126,7 @@ const HeroSection = () => {
             <Button
               variant="ghost"
               onClick={() => document.querySelector("#training")?.scrollIntoView({ behavior: "smooth" })}
-              className="group px-10 py-8 text-lg font-bold rounded-full text-white/80 hover:text-white bg-white/5 border border-white/10 hover:border-[hsl(5_85%_60%)]/50 transition-all duration-300 relative overflow-hidden"
+              className="group px-9 py-6 text-base md:text-lg font-bold rounded-full text-white/80 hover:text-white bg-white/5 border border-white/10 hover:border-[hsl(5_85%_60%)]/50 transition-all duration-300 relative overflow-hidden"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[hsl(5_85%_60%)]/0 via-[hsl(5_85%_60%)]/10 to-[hsl(5_85%_60%)]/0 opacity-0 group-hover:opacity-100 transition-opacity" />
               <MapPin size={20} className="mr-3 text-[hsl(5_85%_60%)] group-hover:scale-110 transition-transform" />
