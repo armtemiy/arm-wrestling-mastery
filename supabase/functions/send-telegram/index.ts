@@ -164,7 +164,7 @@ function escapeMarkdown(text: string): string {
   // Escape backslash first, then all other special Markdown characters
   return text
     .replace(/\\/g, '\\\\')
-    .replace(/([_*[\]()~`>#+=|{}.!\-])/g, '\\$1');
+    .replace(/([_*[\]()~`>#+=|{}.!-])/g, '\\$1');
 }
 
 function getRequestId(req: Request): string {
