@@ -11,15 +11,15 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'Armtemiy — Программы и тренировки по армрестлингу',
-  description = 'Всё об армрестлинге — от техники до готовых программ. Персональные тренировки в Туле.',
-  keywords = 'армрестлинг, тренировки, техника армрестлинга, программа тренировок, Тула, рукоборье',
-  image = 'https://lovable.dev/opengraph-image-p98pqg.png',
+  title = 'Armtemiy Lab — диагностика и инструменты для армрестлинга',
+  description = 'Armtemiy Lab — мини-приложение в Telegram: быстрый разбор поражений и конкретные рекомендации.',
+  keywords = 'армрестлинг, Armtemiy Lab, диагностика, разбор поражений, техника армрестлинга, тренировки, Тула',
+  image = 'https://armtemiy.ru/images/armtemiy.jpg',
   type = 'website',
   noindex = false,
 }: SEOProps) => {
   const location = useLocation();
-  const url = `https://armtemiy.lovable.app${location.pathname}`;
+  const url = `https://armtemiy.ru${location.pathname}`;
 
   useEffect(() => {
     // Обновляем title

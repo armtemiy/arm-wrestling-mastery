@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { COMMON_STYLES } from "./common-styles";
@@ -9,9 +9,10 @@ const Navbar = () => {
   const [isClosing, setIsClosing] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const closeTimeoutRef = useRef<number | null>(null);
 
   const navLinks = useMemo(() => [
-    { href: "#program", label: "Программа" },
+    { href: "#lab", label: "Лаборатория" },
     { href: "#training", label: "Тренировки" },
     { href: "#about", label: "О себе" },
     { href: "#faq", label: "FAQ" },
@@ -28,9 +29,13 @@ const Navbar = () => {
 
   const handleCloseMobileMenu = useCallback(() => {
     setIsClosing(true);
-    setTimeout(() => {
+    if (closeTimeoutRef.current !== null) {
+      window.clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = window.setTimeout(() => {
       setIsMobileMenuOpen(false);
       setIsClosing(false);
+      closeTimeoutRef.current = null;
     }, 200);
   }, []);
 
@@ -56,7 +61,7 @@ const Navbar = () => {
       setScrollProgress(progress);
 
       // Detect active section
-      const sections = ["program", "training", "about", "faq"];
+      const sections = ["lab", "training", "about", "faq"];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -72,7 +77,13 @@ const Navbar = () => {
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (closeTimeoutRef.current !== null) {
+        window.clearTimeout(closeTimeoutRef.current);
+        closeTimeoutRef.current = null;
+      }
+    };
   }, []);
 
   return (
@@ -131,8 +142,8 @@ const Navbar = () => {
             asChild
             className="hidden md:flex bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-bold uppercase tracking-widest px-6 py-2 rounded-full h-auto border-none shadow-[0_0_25px_rgba(239,68,68,0.4)] hover:shadow-[0_0_35px_rgba(239,68,68,0.6)] transition-all duration-300 active:scale-95"
           >
-            <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
-              Вступить
+            <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
+              Войти в Lab
             </a>
           </Button>
 
@@ -167,8 +178,8 @@ const Navbar = () => {
             ))}
             <div className="w-12 h-1 bg-white/10 rounded-full my-4" />
             <Button asChild size="lg" className="bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-bold uppercase tracking-widest px-10 py-6 rounded-full shadow-[0_0_30px_rgba(239,68,68,0.4)]">
-              <a href="https://t.me/assistemiy" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
-                Написать в TG
+              <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
+                Войти в Lab
               </a>
             </Button>
           </div>

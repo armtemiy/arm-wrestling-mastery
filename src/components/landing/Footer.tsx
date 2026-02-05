@@ -5,7 +5,7 @@ const Footer = () => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   const navLinks = [
-    { label: "Программа", href: "#program" },
+    { label: "Armtemiy Lab", href: "#lab" },
     { label: "Тренировки", href: "#training" },
     { label: "О себе", href: "#about" },
     { label: "FAQ", href: "#faq" },
@@ -95,7 +95,7 @@ const Footer = () => {
                   Armtemiy
                 </span>
                 <p className="text-[hsl(15_10%_60%)] text-sm max-w-xs leading-relaxed" style={COMMON_STYLES.satoshi}>
-                  Побеждай за столом, а не гадай как. Система тренировок и техники армрестлинга.
+                  Armtemiy Lab — диагностика и инструменты для армрестлера. Чётко, без воды.
                 </p>
               </div>
 
@@ -213,21 +213,21 @@ const Footer = () => {
               </p>
               <div className="flex items-center gap-6 text-sm">
                 <a
+                  href="https://t.me/armtemiy_lab_bot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[hsl(15_10%_60%)] hover:text-[hsl(5_85%_60%)] transition-colors duration-300"
+                >
+                  @armtemiy_lab_bot
+                </a>
+                <span className="text-[hsl(15_10%_30%)]">•</span>
+                <a
                   href="https://t.me/armtemiy"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[hsl(15_10%_60%)] hover:text-[hsl(5_85%_60%)] transition-colors duration-300"
                 >
                   @armtemiy
-                </a>
-                <span className="text-[hsl(15_10%_30%)]">•</span>
-                <a
-                  href="https://t.me/assistemiy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[hsl(15_10%_60%)] hover:text-[hsl(5_85%_60%)] transition-colors duration-300"
-                >
-                  @assistemiy
                 </a>
               </div>
             </div>

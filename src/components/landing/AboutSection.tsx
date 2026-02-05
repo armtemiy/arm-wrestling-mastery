@@ -1,5 +1,6 @@
 import { Award, BookOpen, Dumbbell } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { OptimizedImage } from "@/components/OptimizedImage";
 import { COMMON_STYLES } from "./common-styles";
 
 const AboutSection = () => {
@@ -13,10 +14,6 @@ const AboutSection = () => {
     {
       icon: Dumbbell,
       text: "Опыт в пауэрлифтинге и стритлифтинге",
-    },
-    {
-      icon: Award,
-      text: "КМС по акробатическому рок-н-роллу",
     },
   ];
 
@@ -33,19 +30,15 @@ const AboutSection = () => {
       >
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Photo placeholder */}
+            {/* Photo */}
             <div className="relative order-2 md:order-1">
               <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-[hsl(15_8%_12%)] to-[hsl(15_8%_10%)] border border-[hsl(15_5%_20%)] overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[hsl(5_85%_60%/0.15)] flex items-center justify-center">
-                      <span className="text-3xl font-bold text-[hsl(5_85%_60%)]" style={COMMON_STYLES.clashDisplay}>А</span>
-                    </div>
-                    <p className="text-[hsl(15_10%_40%)] text-sm" style={COMMON_STYLES.satoshi}>
-                      Твоё фото
-                    </p>
-                  </div>
-                </div>
+                <OptimizedImage
+                  src="/images/armtemiy.jpg"
+                  alt="Артемий Кривошапов"
+                  className="w-full h-full object-cover object-[50%_20%]"
+                  priority
+                />
               </div>
               {/* Decorative elements */}
               <div className="absolute -top-4 -left-4 w-20 h-20 rounded-2xl bg-[hsl(15_90%_50%/0.1)] -z-10" />

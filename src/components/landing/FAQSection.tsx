@@ -8,37 +8,58 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
 import { COMMON_STYLES } from "./common-styles";
 
-const faqs = [
+const labFaqs = [
   {
-    question: "Я полный ноль в армрестлинге. Мне подойдёт?",
+    question: "Что такое Armtemiy Lab?",
     answer:
-      "Именно для тебя и делал. Программа идёт от основ: как ставить руку, какие мышцы качать, как не травмироваться. Начнёшь с нуля и сразу будешь делать правильно, а не переучиваться потом.",
+      "Это мини-приложение в Telegram с инструментами для армрестлера: диагностика, калькулятор, база подсказок.",
   },
   {
-    question: "А если у меня нет стола и специального оборудования?",
+    question: "Сколько вопросов в диагностике?",
     answer:
-      "Есть целый раздел про тренировки без стола. Конечно, со столом лучше, но начать можно с минимумом — турник, резина, гантели. Главное — понимать что и зачем делаешь.",
+      "Обычно 5–7 вопросов. Цель — быстро определить слабое звено и дать точный фокус.",
   },
   {
-    question: "Как получу доступ после оплаты?",
+    question: "Нужна ли оплата?",
     answer:
-      "Сразу после оплаты получишь ссылку на закрытый Telegram-канал. Там текст, видео, разборы. Доступ навсегда — можешь возвращаться когда угодно.",
+      "Базовые инструменты доступны сразу. Расширенные функции будут открываться постепенно.",
   },
   {
-    question: "Что если не понравится?",
+    question: "Это заменяет тренера?",
     answer:
-      "Если за 3 дня поймёшь, что это не твоё — напиши, верну деньги без вопросов. Мне важно, чтобы программа реально помогала, а не просто продавалась.",
+      "Нет. Lab — быстрый разбор и ориентиры, а тренер закрывает детали и механику на практике.",
+  },
+];
+
+const trainingFaqs = [
+  {
+    question: "Где проходят тренировки?",
+    answer:
+      "Тула. Своя комната с оборудованием и столом.",
   },
   {
-    question: "Чем это лучше бесплатных видео на YouTube?",
+    question: "Сколько стоит тренировка?",
     answer:
-      "На YouTube куча противоречивой информации. Один говорит одно, другой — другое. Здесь всё собрано в систему: что делать, в какой последовательности, почему именно так. Экономишь месяцы проб и ошибок.",
+      "От 500₽ за час работы. Точную цену и формат согласуем перед встречей.",
+  },
+  {
+    question: "Что брать с собой?",
+    answer:
+      "Ничего специального не нужно. У меня дома есть всё для армрестлинга и даже больше: стол, блок, резины всех видов, ручки, стрэпы, магнезия. Воду тоже дам. Достаточно прийти чистым и опрятным в удобной одежде для занятий физической активностью.",
+  },
+  {
+    question: "Как записаться?",
+    answer:
+      "Напиши через форму или в Telegram — отвечу и подберём время.",
   },
 ];
 
 const FAQSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
-  const { containerRef: faqsRef, visibleItems } = useStaggeredReveal(faqs.length, {
+  const { containerRef: labRef, visibleItems: labVisible } = useStaggeredReveal(labFaqs.length, {
+    staggerDelay: 100,
+  });
+  const { containerRef: trainingRef, visibleItems: trainingVisible } = useStaggeredReveal(trainingFaqs.length, {
     staggerDelay: 100,
   });
 
@@ -53,7 +74,7 @@ const FAQSection = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-2 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-6" style={COMMON_STYLES.satoshi}>
@@ -64,30 +85,64 @@ const FAQSection = () => {
             </h2>
           </div>
 
-          {/* Accordion with staggered animations */}
-          <div ref={faqsRef}>
-            <Accordion type="single" collapsible className="space-y-3">
-              {faqs.map((faq, index) => (
-                <div
-                  key={index}
-                  className={`stagger-item ${visibleItems[index] ? 'visible' : ''}`}
-                >
-                  <AccordionItem
-                    value={`item-${index}`}
-                    className="border border-[hsl(15_5%_20%)] rounded-2xl px-6 bg-[hsl(15_8%_8%)] data-[state=open]:bg-[hsl(15_8%_12%)] data-[state=open]:border-[hsl(5_85%_60%/0.4)] transition-all duration-300 hover:border-[hsl(15_5%_25%)] relative overflow-hidden group card-lift"
-                  >
-                    {/* Red glow on hover */}
-                    <div className="absolute inset-0 bg-[hsl(5_85%_60%/0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                    <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-6 text-lg font-medium" style={COMMON_STYLES.satoshi}>
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                </div>
-              ))}
-            </Accordion>
+          <div className="space-y-10">
+            <div>
+              <p className="text-[hsl(15_10%_50%)] text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
+                Armtemiy Lab
+              </p>
+              <div ref={labRef}>
+                <Accordion type="single" collapsible className="space-y-3">
+                  {labFaqs.map((faq, index) => (
+                    <div
+                      key={`lab-${index}`}
+                      className={`stagger-item ${labVisible[index] ? 'visible' : ''}`}
+                    >
+                      <AccordionItem
+                        value={`lab-${index}`}
+                        className="border border-[hsl(15_5%_20%)] rounded-2xl px-6 bg-[hsl(15_8%_8%)] data-[state=open]:bg-[hsl(15_8%_12%)] data-[state=open]:border-[hsl(5_85%_60%/0.4)] transition-all duration-300 hover:border-[hsl(15_5%_25%)] relative overflow-hidden group card-lift"
+                      >
+                        <div className="absolute inset-0 bg-[hsl(5_85%_60%/0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-6 text-lg font-medium" style={COMMON_STYLES.satoshi}>
+                          {faq.question}
+                        </AccordionTrigger>
+                        <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
+                          {faq.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </div>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-[hsl(15_10%_50%)] text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
+                Тренировки
+              </p>
+              <div ref={trainingRef}>
+                <Accordion type="single" collapsible className="space-y-3">
+                  {trainingFaqs.map((faq, index) => (
+                    <div
+                      key={`training-${index}`}
+                      className={`stagger-item ${trainingVisible[index] ? 'visible' : ''}`}
+                    >
+                      <AccordionItem
+                        value={`training-${index}`}
+                        className="border border-[hsl(15_5%_20%)] rounded-2xl px-6 bg-[hsl(15_8%_8%)] data-[state=open]:bg-[hsl(15_8%_12%)] data-[state=open]:border-[hsl(5_85%_60%/0.4)] transition-all duration-300 hover:border-[hsl(15_5%_25%)] relative overflow-hidden group card-lift"
+                      >
+                        <div className="absolute inset-0 bg-[hsl(5_85%_60%/0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-6 text-lg font-medium" style={COMMON_STYLES.satoshi}>
+                          {faq.question}
+                        </AccordionTrigger>
+                        <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
+                          {faq.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </div>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
           </div>
 
         </div>

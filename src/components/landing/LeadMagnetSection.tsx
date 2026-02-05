@@ -18,11 +18,11 @@ const LeadMagnetSection = () => {
 
   const handleDownload = () => {
     setIsDownloading(true);
+    window.open("https://t.me/armtemiy_lab_bot", "_blank");
     setTimeout(() => {
       setIsDownloading(false);
       setDownloaded(true);
-      window.open("https://t.me/armtemiy_bot", "_blank");
-    }, 1000);
+    }, 600);
   };
 
   return (

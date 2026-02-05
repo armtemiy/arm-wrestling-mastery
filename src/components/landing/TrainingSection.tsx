@@ -71,7 +71,7 @@ const TrainingSection = () => {
               </div>
 
                 <a
-                  href="https://t.me/assistemiy?text=Хочу%20на%20тренировку"
+                  href="https://t.me/armtemiy_lab_bot?start=training"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-8 py-4 text-base shadow-[0_0_30px_hsl(5_85%_60%/0.3)] hover:shadow-[0_0_50px_hsl(5_85%_60%/0.5)] transition-all duration-300"

@@ -19,10 +19,18 @@ export const useStaggeredReveal = (
   } = options;
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const timeoutsRef = useRef<number[]>([]);
+  const hasTriggeredRef = useRef(false);
   const [visibleItems, setVisibleItems] = useState<boolean[]>(
     new Array(itemCount).fill(false)
   );
-  const [hasTriggered, setHasTriggered] = useState(false);
+
+  useEffect(() => {
+    setVisibleItems(new Array(itemCount).fill(false));
+    hasTriggeredRef.current = false;
+    timeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
+    timeoutsRef.current = [];
+  }, [itemCount]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -30,19 +38,20 @@ export const useStaggeredReveal = (
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasTriggered) {
+        if (entry.isIntersecting && !hasTriggeredRef.current) {
           // Stagger the visibility of each item
           for (let i = 0; i < itemCount; i++) {
-            setTimeout(() => {
+            const timeoutId = window.setTimeout(() => {
               setVisibleItems((prev) => {
                 const next = [...prev];
                 next[i] = true;
                 return next;
               });
             }, i * staggerDelay);
+            timeoutsRef.current.push(timeoutId);
           }
           if (triggerOnce) {
-            setHasTriggered(true);
+            hasTriggeredRef.current = true;
             observer.unobserve(container);
           }
         } else if (!entry.isIntersecting && !triggerOnce) {
@@ -54,8 +63,12 @@ export const useStaggeredReveal = (
 
     observer.observe(container);
 
-    return () => observer.disconnect();
-  }, [itemCount, threshold, rootMargin, staggerDelay, triggerOnce, hasTriggered]);
+    return () => {
+      observer.disconnect();
+      timeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
+      timeoutsRef.current = [];
+    };
+  }, [itemCount, threshold, rootMargin, staggerDelay, triggerOnce]);
 
   return { containerRef, visibleItems };
 };

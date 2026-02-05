@@ -1,6 +1,6 @@
-# Armtemiy — Лендинг по армрестлингу
+# Armtemiy — лендинг Armtemiy Lab
 
-Лендинг для продажи программы тренировок и записи на персональные тренировки по армрестлингу в Туле.
+Лендинг для Armtemiy Lab и записи на персональные тренировки по армрестлингу в Туле.
 
 🌐 **Сайт:** https://armtemiy.ru/
 
@@ -33,8 +33,7 @@ npm run preview  # предпросмотр сборки
 - **Tailwind CSS** — стилизация
 - **shadcn/ui** — UI компоненты (Radix UI)
 - **React Router** — роутинг
-- **React Query** — управление состоянием
-- **Supabase** — бэкенд (отправка заявок в Telegram)
+- **Telegram** — вход в Armtemiy Lab через бота
 - **Lucide React** — иконки
 
 ## 📁 Структура проекта
@@ -67,20 +66,7 @@ src/
 
 ## ⚙️ Конфигурация
 
-### Переменные окружения (.env)
-
-```env
-VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY=your-anon-key
-```
-
-### Supabase Edge Function
-
-Форма отправляет заявки в Telegram через Supabase Edge Function `send-telegram`.
-
-Необходимые секреты в Supabase:
-- `TELEGRAM_BOT_TOKEN` — токен бота
-- `TELEGRAM_CHAT_ID` — ID чата для уведомлений
+Нужен файл `.env` по примеру `.env.example`.
 
 ## 📱 Деплой на GitHub Pages
 
@@ -140,13 +126,13 @@ npm run deploy   # Деплой на GitHub Pages
 - Open Graph для соцсетей
 - Twitter Cards
 - Structured Data (JSON-LD)
-- robots.txt и sitemap.xml
+- robots.txt и sitemap.xml (lastmod обновляется на build)
 - Оптимизация производительности
 
 ## 📞 Контакты
 
 - Telegram: [@armtemiy](https://t.me/armtemiy)
-- Заявки: [@assistemiy](https://t.me/assistemiy)
+- Armtemiy Lab: [@armtemiy_lab_bot](https://t.me/armtemiy_lab_bot)
 
 ---
 

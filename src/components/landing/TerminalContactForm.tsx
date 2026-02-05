@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
-import { Send, CheckCircle2, Terminal, Loader2, XCircle, ExternalLink } from "lucide-react";
+import { Send, CheckCircle2, Terminal, Loader2, XCircle } from "lucide-react";
 import { COMMON_STYLES } from "./common-styles";
 
 type FormStep = "name" | "phone" | "message" | "sending" | "success" | "error";
@@ -138,35 +138,60 @@ const TerminalContactForm = () => {
 
   const sendToTelegram = useCallback(async () => {
     try {
-      // Build the Telegram message with all form data
-      const telegramMessage = `*Новая заявка с сайта*
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+      const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
 
-*Имя:* ${name.trim()}
-*Телефон:* ${phone.trim()}
-*Сообщение:* ${message.trim()}`;
+      if (!supabaseUrl || !supabaseKey) {
+        throw new Error("Supabase credentials missing");
+      }
 
-      // Open Telegram with pre-filled message
-      const encodedMessage = encodeURIComponent(telegramMessage);
-      const telegramUrl = `https://t.me/assistemiy?text=${encodedMessage}`;
+      const response = await fetch(`${supabaseUrl}/functions/v1/send-telegram`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: phone.trim(),
+          message: message.trim(),
+          pageUrl: window.location.href,
+          referrer: document.referrer || undefined,
+          userAgent: navigator.userAgent,
+          utmSource: new URLSearchParams(window.location.search).get("utm_source") || undefined,
+          utmMedium: new URLSearchParams(window.location.search).get("utm_medium") || undefined,
+          utmCampaign: new URLSearchParams(window.location.search).get("utm_campaign") || undefined,
+          utmContent: new URLSearchParams(window.location.search).get("utm_content") || undefined,
+          utmTerm: new URLSearchParams(window.location.search).get("utm_term") || undefined,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result?.success) {
+        const errorText = result?.error || "Request failed";
+        const error = new Error(errorText);
+        (error as Error & { status?: number }).status = response.status;
+        throw error;
+      }
 
       // Record successful submission for rate limiting
       submissionTimestamps.push(Date.now());
-
-      // Open in new tab after a short delay
-      setTimeout(() => {
-        window.open(telegramUrl, '_blank');
-      }, 1000);
 
       return { success: true };
     } catch (err: unknown) {
       console.error("Telegram send error:", err);
       const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      return { success: false, error: errorMessage };
+      const status = err instanceof Error && "status" in err ? (err as Error & { status?: number }).status : undefined;
+      return { success: false, error: errorMessage, status };
     }
   }, [name, phone, message]);
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLInputElement>) => {
+    if ("preventDefault" in e) {
+      e.preventDefault();
+    }
 
     if (step === "name" && name.trim()) {
       if (!isValidName(name.trim())) {
@@ -187,7 +212,7 @@ const TerminalContactForm = () => {
       addLine({ type: "input", content: `> ${phone}` });
       setTimeout(() => {
         addLine({ type: "system", content: "Записал." });
-        addLine({ type: "prompt", content: "Что тебя интересует? (программа, тренировки, вопрос)" });
+        addLine({ type: "prompt", content: "Что тебя интересует? (Armtemiy Lab, тренировки, вопрос)" });
         setStep("message");
       }, 300);
     } else if (step === "message" && message.trim()) {
@@ -222,19 +247,25 @@ const TerminalContactForm = () => {
       const result = await sendToTelegram();
 
       if (result.success) {
-        addLine({ type: "success", content: "✓ ЗАЯВКА УЛЕТЕЛА" });
-        addLine({ type: "system", content: `${name}, жди ответа в течение дня.` });
-        addLine({ type: "system", content: "Скоро свяжусь!" });
+        addLine({ type: "success", content: "✓ ЗАЯВКА ПРИНЯТА" });
+        addLine({ type: "system", content: `${name}, заявка отправлена в Armtemiy Lab.` });
+        addLine({ type: "system", content: "Скоро напишу." });
         setStep("success");
       } else {
+        if (result.status === 429) {
+          addLine({ type: "error", content: "✗ СЛИШКОМ МНОГО ЗАЯВОК" });
+          addLine({ type: "system", content: "Подожди минуту и попробуй снова." });
+          setStep("error");
+          return;
+        }
         addLine({ type: "error", content: "✗ ЧТО-ТО ПОШЛО НЕ ТАК" });
-        addLine({ type: "system", content: "Напиши напрямую в Telegram: @assistemiy" });
+        addLine({ type: "system", content: "Открой Telegram и напиши боту: @armtemiy_lab_bot" });
         setStep("error");
       }
     }
   }, [step, name, phone, message, addLine, isBot, isRateLimited, sendToTelegram]);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSubmit(e);
     }
@@ -273,7 +304,7 @@ const TerminalContactForm = () => {
     switch (step) {
       case "name": return "Саша";
       case "phone": return "+7 999 123-45-67";
-      case "message": return "Хочу программу / на тренировку";
+      case "message": return "Хочу Armtemiy Lab / на тренировку";
       default: return "";
     }
   }, [step]);

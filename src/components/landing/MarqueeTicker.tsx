@@ -5,7 +5,7 @@ const MarqueeTicker = () => {
     { text: "СИЛА", emoji: "💪" },
     { text: "ТЕХНИКА", emoji: "🎯" },
     { text: "ПОБЕДА", emoji: "🏆" },
-    { text: "НАБОР ОТКРЫТ", emoji: "🔥" },
+    { text: "Armtemiy Lab", emoji: "🧪" },
     { text: "ТУЛА", emoji: "📍" },
     { text: "АРМРЕСТЛИНГ", emoji: "🤝" },
     { text: "РЕЗУЛЬТАТ", emoji: "⚡" },
