@@ -40,7 +40,7 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden min-h-[100svh] flex items-center bg-[hsl(15_8%_6%)] pt-20"
+      className="relative overflow-hidden min-h-screen flex items-center bg-[hsl(15_8%_6%)] pt-16"
       style={{ perspective: '1200px' }}
     >
       {/* Cinematic atmosphere */}
