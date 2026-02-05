@@ -40,7 +40,7 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden min-h-screen flex items-center bg-[hsl(15_8%_6%)] pt-16"
+      className="relative overflow-hidden min-h-[90svh] flex items-center bg-[hsl(15_8%_6%)] pt-16"
       style={{ perspective: '1200px' }}
     >
       {/* Cinematic atmosphere */}
@@ -76,7 +76,7 @@ const HeroSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10 md:mb-14">
             <h1
-              className={`font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black leading-[0.85] tracking-tighter transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              className={`font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.85] tracking-tighter transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={COMMON_STYLES.clashDisplay}
             >
               <span className="block text-white mb-4">ВЫИГРЫВАЙ</span>
@@ -96,10 +96,10 @@ const HeroSection = () => {
               </span>
             </h1>
 
-            <p
-              className={`mt-10 text-2xl md:text-4xl text-white/40 font-light italic tracking-tight transition-all duration-1000 delay-400 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              style={COMMON_STYLES.satoshi}
-            >
+          <p
+            className={`text-center text-base md:text-xl text-white/60 mb-10 md:mb-14 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={COMMON_STYLES.satoshi}
+          >
               а не надейся на удачу
             </p>
           </div>
