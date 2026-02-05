@@ -83,9 +83,6 @@ const TrainingSection = () => {
                   Записаться на тренировку
                   <ArrowRight className="ml-2" size={20} />
                 </a>
-                <p className="mt-3 text-xs text-[hsl(15_10%_60%)]" style={COMMON_STYLES.satoshi}>
-                  Кнопка откроет Telegram
-                </p>
             </div>
           </div>
         </div>

@@ -93,9 +93,6 @@ const LeadMagnetSection = () => {
                   </>
                 )}
               </Button>
-              <p className="mt-3 text-xs text-[hsl(15_10%_60%)]" style={COMMON_STYLES.satoshi}>
-                Кнопка откроет Telegram
-              </p>
             </div>
 
             {/* PDF Preview Card */}

@@ -91,9 +91,6 @@ const ProgramSection = () => {
               <ArrowRight className="ml-2" size={20} />
             </a>
           </Button>
-          <p className="mt-3 text-xs text-[hsl(15_10%_60%)]" style={COMMON_STYLES.satoshi}>
-            Откроется Telegram
-          </p>
         </div>
       </div>
     </section>

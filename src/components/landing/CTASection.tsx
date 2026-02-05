@@ -33,9 +33,6 @@ const CTASection = () => {
             <p className="text-[hsl(15_10%_70%)] text-base sm:text-lg max-w-lg mx-auto" style={COMMON_STYLES.satoshi}>
               Есть вопросы? Не уверен что подойдёт? Просто напиши — отвечу в течение дня
             </p>
-            <p className="mt-4 text-xs text-[hsl(15_10%_60%)]" style={COMMON_STYLES.satoshi}>
-              Ответ приходит в Telegram
-            </p>
           </div>
 
           {/* Terminal Form */}
