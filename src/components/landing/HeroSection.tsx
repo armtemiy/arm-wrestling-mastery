@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import { Button } from "@/components/ui/button";
-import { EnergyButton } from "@/components/ui/energy-button";
 import { ArrowRight, MapPin } from "lucide-react";
 import Particles from "./Particles";
 import { COMMON_STYLES } from "./common-styles";
@@ -41,7 +40,7 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden min-h-[100svh] flex items-center justify-center bg-[hsl(15_8%_6%)] pt-16 pb-20"
+      className="relative overflow-hidden min-h-[100svh] flex items-center bg-[hsl(15_8%_6%)] pt-20"
       style={{ perspective: '1200px' }}
     >
       {/* Cinematic atmosphere */}
@@ -105,6 +104,15 @@ const HeroSection = () => {
             </p>
           </div>
 
+          <p
+            className={`text-center text-lg md:text-2xl text-white/60 mb-12 md:mb-16 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={COMMON_STYLES.satoshi}
+          >
+            Кузнечный цех твоей победы. Система тренировок от практика.
+            <br className="hidden md:block" />
+            <span className="text-white font-medium">Без компромиссов. Только мощь. Только результат.</span>
+          </p>
+
           <div
             className={`flex flex-col sm:flex-row items-center justify-center gap-6 transition-all duration-1000 delay-600 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
@@ -153,6 +161,8 @@ const HeroSection = () => {
           />
         ))}
       </div>
+
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[hsl(15_8%_6%)] to-transparent pointer-events-none" />
 
       <style>{`
         @keyframes gradient-x {
