@@ -104,15 +104,6 @@ const HeroSection = () => {
             </p>
           </div>
 
-          <p
-            className={`text-center text-lg md:text-2xl text-white/60 mb-12 md:mb-16 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            style={COMMON_STYLES.satoshi}
-          >
-            Кузнечный цех твоей победы. Система тренировок от практика.
-            <br className="hidden md:block" />
-            <span className="text-white font-medium">Без компромиссов. Только мощь. Только результат.</span>
-          </p>
-
           <div
             className={`flex flex-col sm:flex-row items-center justify-center gap-6 transition-all duration-1000 delay-600 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
