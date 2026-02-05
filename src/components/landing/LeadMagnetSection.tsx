@@ -40,7 +40,7 @@ const LeadMagnetSection = () => {
         }`}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
             {/* Content */}
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-6" style={COMMON_STYLES.satoshi}>
@@ -48,13 +48,13 @@ const LeadMagnetSection = () => {
                 БЕСПЛАТНО
               </div>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={COMMON_STYLES.clashDisplay}>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4" style={COMMON_STYLES.clashDisplay}>
                 Чек-лист для старта{" "}
                 <span className="text-gradient">в армрестлинге</span>
               </h2>
 
-              <p className="text-[hsl(15_10%_60%)] text-lg mb-8" style={COMMON_STYLES.satoshi}>
-                Скачай бесплатный PDF и узнай, с чего начать тренировки, чтобы не тратить время на ерунду и не травмироваться
+              <p className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-8" style={COMMON_STYLES.satoshi}>
+                Получи бесплатный PDF в Telegram и узнай, с чего начать тренировки, чтобы не тратить время на ерунду и не травмироваться
               </p>
 
               <ul className="space-y-4 mb-8">
@@ -93,6 +93,9 @@ const LeadMagnetSection = () => {
                   </>
                 )}
               </Button>
+              <p className="mt-3 text-xs text-[hsl(15_10%_60%)]" style={COMMON_STYLES.satoshi}>
+                Кнопка откроет Telegram
+              </p>
             </div>
 
             {/* PDF Preview Card */}
@@ -133,7 +136,7 @@ const LeadMagnetSection = () => {
 
                 {/* Label */}
                 <div className="mt-6 pt-4 border-t border-[hsl(15_5%_20%)]">
-                  <p className="text-[hsl(15_10%_50%)] text-sm" style={COMMON_STYLES.satoshi}>
+                  <p className="text-[hsl(15_10%_60%)] text-sm" style={COMMON_STYLES.satoshi}>
                     armtemiy-checklist.pdf
                   </p>
                   <p className="text-[hsl(5_85%_60%)] text-xs mt-1">

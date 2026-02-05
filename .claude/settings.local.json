@@ -20,7 +20,9 @@
       "Bash(then echo \"$file needs update\")",
       "Bash(fi:*)",
       "Bash(done:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git push:*)",
+      "Bash(npm run deploy:*)"
     ]
   }
 }

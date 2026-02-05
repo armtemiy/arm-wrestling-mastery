@@ -5,7 +5,7 @@ const Footer = () => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   const navLinks = [
-    { label: "Armtemiy Lab", href: "#lab" },
+    { label: "Лаборатория", href: "#lab" },
     { label: "Тренировки", href: "#training" },
     { label: "О себе", href: "#about" },
     { label: "FAQ", href: "#faq" },
@@ -208,7 +208,7 @@ const Footer = () => {
             <div className={`mt-12 pt-8 border-t border-[hsl(15_5%_20%)] flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-500 delay-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>
-              <p className="text-[hsl(15_10%_50%)] text-sm" style={COMMON_STYLES.satoshi}>
+              <p className="text-[hsl(15_10%_60%)] text-sm" style={COMMON_STYLES.satoshi}>
                 © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
               <div className="flex items-center gap-6 text-sm">

@@ -98,19 +98,19 @@ const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0], index: nu
 
         {/* Glowing Number */}
         <div className="relative flex items-baseline gap-1 mb-2" style={COMMON_STYLES.clashDisplay}>
-          <span className="text-6xl md:text-7xl font-bold tracking-tight text-white tabular-nums drop-shadow-[0_0_15px_rgba(239,68,68,0.3)] group-hover:text-[hsl(5_85%_60%)] transition-colors duration-500">
+          <span className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white tabular-nums drop-shadow-[0_0_15px_rgba(239,68,68,0.3)] group-hover:text-[hsl(5_85%_60%)] transition-colors duration-500">
             {count}
           </span>
-          <span className="text-3xl md:text-4xl font-bold text-[hsl(5_85%_60%)]">
+          <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-[hsl(5_85%_60%)]">
             {stat.suffix}
           </span>
         </div>
 
-        <div className="text-white text-sm tracking-[0.2em] mb-3 opacity-90" style={COMMON_STYLES.clashDisplay}>
+        <div className="text-white text-xs sm:text-sm tracking-[0.2em] mb-3 opacity-90" style={COMMON_STYLES.clashDisplay}>
           {stat.label}
         </div>
 
-        <div className="text-[hsl(15_8%_60%)] text-xs font-medium uppercase tracking-wider text-center max-w-[140px] leading-relaxed group-hover:text-white transition-colors duration-500" style={COMMON_STYLES.satoshi}>
+        <div className="text-[hsl(15_8%_60%)] text-xs font-medium uppercase tracking-wider text-center max-w-[160px] leading-relaxed group-hover:text-white transition-colors duration-500" style={COMMON_STYLES.satoshi}>
           {stat.description}
         </div>
 
@@ -125,7 +125,7 @@ const StatsSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
 
   return (
-    <section className="relative py-24 bg-[hsl(15_8%_6%)] overflow-hidden">
+    <section className="relative py-20 md:py-24 bg-[hsl(15_8%_6%)] overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[hsl(5_85%_60%)]/5 rounded-full blur-[120px] animate-pulse" />
       </div>

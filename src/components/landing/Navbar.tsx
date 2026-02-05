@@ -89,14 +89,14 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 rounded-full border border-white/10 transition-all duration-500 ease-out"
+        className="fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 rounded-full border border-white/10 transition-all duration-500 ease-out"
         style={navbarStyle}
       >
         <div className="flex items-center gap-2 md:gap-4">
           {/* Logo */}
           <a
             href="#"
-            className="px-4 py-2 text-xl md:text-2xl text-white font-bold tracking-tighter uppercase italic whitespace-nowrap hover:text-[hsl(5_85%_60%)] transition-colors"
+            className="px-4 py-2 text-lg sm:text-xl md:text-2xl text-white font-bold tracking-tighter uppercase italic whitespace-nowrap hover:text-[hsl(5_85%_60%)] transition-colors"
             style={COMMON_STYLES.clashDisplay}
             onClick={(e) => {
               e.preventDefault();
@@ -121,7 +121,7 @@ const Navbar = () => {
                   className={`relative px-4 py-2 text-sm font-bold uppercase tracking-wider transition-all duration-300 ${
                     isActive || isHovered
                       ? 'text-white'
-                      : 'text-white/40 hover:text-white/80'
+                      : 'text-white/60 hover:text-white/90'
                   }`}
                   style={COMMON_STYLES.satoshi}
                 >
@@ -143,7 +143,7 @@ const Navbar = () => {
             className="hidden md:flex bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-bold uppercase tracking-widest px-6 py-2 rounded-full h-auto border-none shadow-[0_0_25px_rgba(239,68,68,0.4)] hover:shadow-[0_0_35px_rgba(239,68,68,0.6)] transition-all duration-300 active:scale-95"
           >
             <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
-              Войти в Lab
+              ВОЙТИ В LAB
             </a>
           </Button>
 
@@ -158,15 +158,15 @@ const Navbar = () => {
       </nav>
 
       {/* Cinematic Mobile Menu */}
-      {isMobileMenuOpen && (
+        {isMobileMenuOpen && (
         <div className={`fixed inset-0 z-40 flex flex-col justify-center bg-[hsl(15_8%_6%)] transition-opacity duration-300 md:hidden ${isClosing ? 'opacity-0' : 'opacity-100'}`}>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(239,68,68,0.1)_0%,transparent_70%)] pointer-events-none" />
-          <div className="flex flex-col items-center gap-8 relative z-50">
+          <div className="flex flex-col items-center gap-6 relative z-50">
             {navLinks.map((link) => (
               <button
                 key={link.href}
                 onClick={() => scrollToSection(link.href)}
-                className={`text-4xl font-bold uppercase tracking-tighter transition-all italic ${
+                className={`text-3xl sm:text-4xl font-bold uppercase tracking-tighter transition-all italic ${
                   activeSection === link.href
                     ? 'text-[hsl(5_85%_60%)] scale-110'
                     : 'text-white/60 hover:text-white'
@@ -176,10 +176,10 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
-            <div className="w-12 h-1 bg-white/10 rounded-full my-4" />
-            <Button asChild size="lg" className="bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-bold uppercase tracking-widest px-10 py-6 rounded-full shadow-[0_0_30px_rgba(239,68,68,0.4)]">
+             <div className="w-12 h-1 bg-white/10 rounded-full my-4" />
+            <Button asChild size="lg" className="bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-bold uppercase tracking-widest px-8 py-5 rounded-full shadow-[0_0_30px_rgba(239,68,68,0.4)]">
               <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
-                Войти в Lab
+                ВОЙТИ В LAB
               </a>
             </Button>
           </div>

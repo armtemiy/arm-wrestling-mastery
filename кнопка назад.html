@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfect Energy Button (Optimized 1-3)</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #050505;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .btn-wrapper {
+      position: relative;
+      padding: 10px;
+      display: inline-block;
+    }
+
+    .glass-btn {
+      position: relative;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 18px 45px;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      outline: none;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+
+    .glass-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    /* Canvas с большим отступом для красивого свечения */
+    .energy-canvas {
+      position: absolute;
+      top: -20px; left: -20px; right: -20px; bottom: -20px;
+      width: calc(100% + 40px);
+      height: calc(100% + 40px);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .glass-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 25px rgba(0, 150, 255, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    .glass-btn:hover .energy-canvas {
+      opacity: 1;
+    }
+
+    .glass-btn:hover svg {
+      transform: translateX(-5px);
+    }
+
+    .glass-btn:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="btn-wrapper">
+    <button class="glass-btn">
+      <canvas class="energy-canvas"></canvas>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span>Назад</span>
+    </button>
+  </div>
+
+  <script>
+    const btn = document.querySelector('.glass-btn');
+    const canvas = btn.querySelector('.energy-canvas');
+    const ctx = canvas.getContext('2d');
+
+    // --- Настройки ---
+    const SPEED = 0.5;
+    const TRAIL_LENGTH = 40;
+    const LINE_WIDTH = 3;
+    const GLOW_AMOUNT = 15;
+
+    let progress = 0;
+    let animationId = null;
+    let trail = [];
+
+    // === (1) Retina / DPR ===
+    // === (2) Кэш геометрии трека ===
+    const INSET = 20; // отступ, как в CSS
+    let cssW = 0, cssH = 0;       // размеры в CSS-пикселях
+    let trackW = 0, trackH = 0;
+    let r = 0;
+    let straightLen = 0, arcLen = 0, perimeter = 0;
+    let dpr = 1;
+
+    function recalcGeometry() {
+      trackW = cssW - (INSET * 2);
+      trackH = cssH - (INSET * 2);
+      r = trackH / 2;
+
+      straightLen = trackW - (2 * r);
+      arcLen = Math.PI * r;
+      perimeter = (straightLen * 2) + (arcLen * 2);
+    }
+
+    function resize() {
+      const rect = btn.getBoundingClientRect();
+
+      cssW = rect.width + 40;
+      cssH = rect.height + 40;
+
+      // мягкий cap (можно убрать, если хочешь максимум четкости)
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      // backing store (в физических пикселях)
+      canvas.width = Math.round(cssW * dpr);
+      canvas.height = Math.round(cssH * dpr);
+
+      // рисуем в CSS-координатах (чтобы вся математика осталась прежней)
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      recalcGeometry();
+    }
+
+    function getPointAtProgress(p) {
+      let dist = (p / 100) * perimeter;
+
+      if (dist <= straightLen) {
+        return { x: INSET + r + dist, y: INSET };
+      }
+      dist -= straightLen;
+
+      if (dist <= arcLen) {
+        const angle = (dist / arcLen) * Math.PI - (Math.PI / 2);
+        return {
+          x: INSET + trackW - r + Math.cos(angle) * r,
+          y: INSET + r + Math.sin(angle) * r
+        };
+      }
+      dist -= arcLen;
+
+      if (dist <= straightLen) {
+        return { x: INSET + trackW - r - dist, y: INSET + trackH };
+      }
+      dist -= straightLen;
+
+      const angle = (dist / arcLen) * Math.PI + (Math.PI / 2);
+      return {
+        x: INSET + r + Math.cos(angle) * r,
+        y: INSET + r + Math.sin(angle) * r
+      };
+    }
+
+    function draw() {
+      // чистим в CSS-координатах (т.к. setTransform)
+      ctx.clearRect(0, 0, cssW, cssH);
+
+      const headPos = getPointAtProgress(progress);
+      trail.unshift(headPos);
+
+      if (trail.length > TRAIL_LENGTH) trail.pop();
+
+      if (trail.length > 1) {
+        const timeHue = (performance.now() / 20) % 360;
+
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        for (let i = 0; i < trail.length - 1; i++) {
+          const point = trail[i];
+          const nextPoint = trail[i + 1];
+          const alpha = 1 - (i / trail.length);
+          const hue = timeHue - (i * 2);
+
+          ctx.beginPath();
+          ctx.moveTo(point.x, point.y);
+          ctx.lineTo(nextPoint.x, nextPoint.y);
+
+          ctx.lineWidth = LINE_WIDTH * alpha;
+          ctx.strokeStyle = `hsla(${hue}, 80%, 60%, ${alpha})`;
+          ctx.shadowBlur = GLOW_AMOUNT * alpha;
+          ctx.shadowColor = `hsla(${hue}, 100%, 50%, 1)`;
+
+          ctx.stroke();
+        }
+
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    }
+
+    function loop() {
+      progress += SPEED;
+      if (progress >= 100) progress = 0;
+      draw();
+      animationId = requestAnimationFrame(loop);
+    }
+
+    // первичный расчёт
+    resize();
+
+    // === (3) ResizeObserver ===
+    // если кнопка меняет размер не только из-за resize окна — мы это поймаем
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(() => {
+        resize();
+        trail = [];
+      });
+      ro.observe(btn);
+    } else {
+      // fallback для старых браузеров
+      window.addEventListener('resize', () => {
+        resize();
+        trail = [];
+      });
+    }
+
+    btn.addEventListener('mouseenter', () => {
+      trail = [];
+      if (!animationId) loop();
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+      ctx.clearRect(0, 0, cssW, cssH);
+    });
+  </script>
+
+</body>
+</html>

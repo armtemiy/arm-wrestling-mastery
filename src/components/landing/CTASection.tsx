@@ -8,7 +8,7 @@ const CTASection = () => {
   return (
     <section
       id="contact"
-      className="relative py-24 md:py-32 bg-[hsl(15_5%_10%)] overflow-hidden"
+      className="relative py-20 md:py-32 bg-[hsl(15_5%_10%)] overflow-hidden"
     >
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
@@ -30,8 +30,11 @@ const CTASection = () => {
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4" style={COMMON_STYLES.clashDisplay}>
               Напиши — разберёмся
             </h2>
-            <p className="text-[hsl(15_10%_70%)] text-lg max-w-lg mx-auto" style={COMMON_STYLES.satoshi}>
+            <p className="text-[hsl(15_10%_70%)] text-base sm:text-lg max-w-lg mx-auto" style={COMMON_STYLES.satoshi}>
               Есть вопросы? Не уверен что подойдёт? Просто напиши — отвечу в течение дня
+            </p>
+            <p className="mt-4 text-xs text-[hsl(15_10%_60%)]" style={COMMON_STYLES.satoshi}>
+              Ответ приходит в Telegram
             </p>
           </div>
 

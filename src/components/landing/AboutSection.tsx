@@ -15,13 +15,21 @@ const AboutSection = () => {
       icon: Dumbbell,
       text: "Опыт в пауэрлифтинге и стритлифтинге",
     },
+    {
+      icon: Award,
+      text: "Тактические разборы и постановка техники",
+    },
   ];
 
   return (
     <section
       id="about"
-      className="relative py-24 md:py-32 bg-[hsl(15_6%_8%)] overflow-hidden"
+      className="relative py-20 md:py-32 bg-[hsl(15_6%_8%)] overflow-hidden"
     >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/3 w-[700px] h-[380px] rounded-full bg-[hsl(5_85%_60%/0.06)] blur-[200px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[300px] rounded-full bg-[hsl(15_90%_50%/0.05)] blur-[160px]" />
+      </div>
       <div
         ref={sectionRef}
         className={`container mx-auto px-4 transition-all duration-700 ${
@@ -36,7 +44,7 @@ const AboutSection = () => {
                 <OptimizedImage
                   src="/images/armtemiy.jpg"
                   alt="Артемий Кривошапов"
-                  className="w-full h-full object-cover object-[50%_20%]"
+                  className="w-full h-full object-cover object-center"
                   priority
                 />
               </div>
@@ -53,27 +61,27 @@ const AboutSection = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6" style={COMMON_STYLES.clashDisplay}>
                 Артемий Кривошапов
               </h2>
-              <p className="text-[hsl(15_10%_60%)] text-lg mb-6" style={COMMON_STYLES.satoshi}>
+              <p className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-6" style={COMMON_STYLES.satoshi}>
                 Я не чемпион мира. Но я перелопатил тонну информации: от учебников по биомеханике до разборов топовых спортсменов. Тренировался сам, общался с профессионалами, набивал шишки.
               </p>
-              <p className="text-[hsl(15_10%_60%)] text-lg mb-8" style={COMMON_STYLES.satoshi}>
+              <p className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-8" style={COMMON_STYLES.satoshi}>
                 Теперь делюсь тем, что реально работает. Без понтов, без «секретных техник» — просто система, которая даёт результат.
               </p>
 
-              <div className="space-y-4">
-                {highlights.map((item, index) => (
-                  <div
-                    key={index}
-                    className="group flex items-center gap-3"
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-[hsl(5_85%_60%/0.15)] flex items-center justify-center group-hover:bg-[hsl(5_85%_60%/0.25)] group-hover:scale-110 transition-all duration-300">
-                      <item.icon className="text-[hsl(5_85%_60%)] group-hover:rotate-6 transition-transform duration-300" size={20} />
+                <div className="space-y-4">
+                  {highlights.map((item, index) => (
+                    <div
+                      key={index}
+                      className="group flex items-center gap-3"
+                      style={{ transitionDelay: `${index * 100}ms` }}
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-[hsl(5_85%_60%/0.15)] flex items-center justify-center group-hover:bg-[hsl(5_85%_60%/0.25)] group-hover:scale-110 transition-all duration-300">
+                        <item.icon className="text-[hsl(5_85%_60%)] group-hover:rotate-6 transition-transform duration-300" size={20} />
+                      </div>
+                      <span className="text-sm sm:text-base text-white" style={COMMON_STYLES.satoshi}>{item.text}</span>
                     </div>
-                    <span className="text-white" style={COMMON_STYLES.satoshi}>{item.text}</span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
             </div>
           </div>
         </div>

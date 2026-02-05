@@ -1,0 +1,57 @@
+CUSTOM CURSOR DEFAULT STATE - TECHNICAL BRIEF
+
+PROJECT CONTEXT
+Project name: Armtemiy Armwrestling Training
+Website style: The Underground Forge - dark, aggressive, powerful, brutalist
+Target audience: Athletes, strength-focused people
+Primary color: Crimson Red hsl(5 85% 60%) - hex #E63946
+Secondary color: Orange-Red hsl(15 90% 50%) - hex #FF4500
+Background: Warm Black hsl(15 8% 6%)
+
+TASK DESCRIPTION
+Create a custom mouse cursor for default state (not hovering over anything).
+The cursor should represent strength, power, focus.
+
+CONCEPT: POWER CROSS
+A minimalist crosshair symbol that represents strength and precision.
+Think of it as a targeting mark but with an aggressive, athletic character.
+
+VISUAL REQUIREMENTS
+Size: 32x32 pixels (export at 128x128 for retina displays)
+Format: PNG with transparent background
+Style: Minimalist, geometric, clean lines
+Hot spot position: Center of the cursor (16, 16)
+
+DESIGN ELEMENTS
+Element 1 (optional): Thin circle outline, 16-18px diameter
+Element 2: Cross shape - either 4 rays or 2 intersecting lines
+Element 3 (optional): Subtle glow or aura around
+
+Line thickness: 1-2 pixels
+Line ends: Sharp or slightly rounded corners
+Color: Pure #E63946 (Crimson Red) or gradient to #FF4500
+
+MOOD REFERENCES
+Think about: minimalist crosshairs in shooter games, sports target symbols, geometric power symbols
+The design should be: geometric, clean, aggressive but not angry, instantly readable at small size
+
+WHAT TO AVOID
+Avoid: realistic details, pixelated edges, complex shapes, multiple colors, comic or playful style
+The cursor must work well on dark background
+
+COLOR SPECIFICATION
+Primary: #E63946 (hsl(5 85% 60%))
+Secondary (optional): #FF4500 (hsl(15 90% 50%))
+Glow (optional): hsl(5 85% 60% 0.3) with 30% opacity
+
+DELIVERABLE
+One PNG file: cursor-default.png
+Size: 128x128px minimum (for 2x retina scaling)
+Transparent background
+
+ADDITIONAL NOTES
+The cursor should feel like a power symbol combined with a targeting mark.
+It represents focus, strength, and athletic precision.
+Keep it minimal - less is more.
+It must be readable at small sizes (32x32 actual display size).
+The design language is Industrial Brutalist - dark red, geometric, powerful.

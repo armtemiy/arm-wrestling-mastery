@@ -1,0 +1,71 @@
+CUSTOM CURSOR HOVER STATE - TECHNICAL BRIEF
+
+PROJECT CONTEXT
+Project name: Armtemiy Armwrestling Training
+Website style: The Underground Forge - dark, aggressive, powerful, brutalist
+Target audience: Athletes, strength-focused people
+Primary color: Crimson Red hsl(5 85% 60%) - hex #E63946
+Secondary color: Orange-Red hsl(15 90% 50%) - hex #FF4500
+Background: Warm Black hsl(15 8% 6%)
+
+TASK DESCRIPTION
+Create a custom mouse cursor for hover state (when hovering over buttons and links).
+The cursor should represent armwrestling grip, struggle, connection.
+
+CONCEPT: HAND GRIP HOOK
+A minimalist outline of two hands in armwrestling hook grip position.
+Think of it as a stylized logo or hieroglyph - instantly recognizable as a grip.
+
+VISUAL REQUIREMENTS
+Size: 48x48 pixels (export at 192x192 for retina displays)
+Format: PNG with transparent background
+Style: Minimalist silhouette, contour lines only
+Hot spot position: Center of the grip (24, 24)
+
+DESIGN ELEMENTS
+Element 1: Left arm/forearm outline - curved into a hook shape
+Element 2: Right arm/forearm outline - mirror image, meeting in center
+Element 3: The connection point where hands lock together (hook grip mechanism)
+Element 4 (optional): Slight tilt or dynamic angle to show tension
+
+Line thickness: 2-3 pixels
+Line ends: Sharp or slightly rounded
+Color: Pure #E63946 (Crimson Red) or gradient to #FF4500 for second arm
+
+STYLE GUIDELINES
+This is NOT a realistic drawing. No fingers, muscles, or detailed anatomy.
+Only the essential outline - like a sports logo or icon.
+The shape should read instantly as "two hands gripping" even at small size.
+Think of it as a geometric symbol, not an illustration.
+
+MOOD REFERENCES
+Think about: minimalist sports logos, olympic pictograms, emoji-style simplicity, tribal symbols
+The design should be: abstract, powerful, instantly readable, iconic
+
+WHAT TO AVOID
+Avoid: realistic muscles or fingers, complex curves, too many details, cartoonish style
+The grip must be recognizable from silhouette alone
+Do not make it look like a handshake - this is a competitive grip, not cooperation
+
+COLOR SPECIFICATION
+Primary arm: #E63946 (hsl(5 85% 60%))
+Secondary arm (optional): #FF4500 (hsl(15 90% 50%))
+Gradient or solid color - both acceptable
+Glow (optional): hsl(5 85% 60% 0.3) with 30% opacity
+
+DELIVERABLE
+One PNG file: cursor-hover.png
+Size: 192x192px minimum (for 2x retina scaling)
+Transparent background
+
+ADDITIONAL NOTES
+The cursor should feel powerful - like two forces locked in struggle.
+It represents competition, strength, and the armwrestling sport.
+Keep it abstract and geometric - think logo, not illustration.
+The design language is Industrial Brutalist - dark red, aggressive, minimalist.
+Less detail is better - if it reads clearly at 48x48 pixels, you succeeded.
+
+VISUAL REFERENCE FOR SHAPE
+Imagine the letter "X" but the top parts are curved like hooks
+Or imagine two "C" shapes facing each other and interlocking
+The hands should meet in the center - that's the focal point

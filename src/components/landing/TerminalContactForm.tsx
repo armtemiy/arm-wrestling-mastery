@@ -321,7 +321,7 @@ const TerminalContactForm = () => {
           <div className="w-3 h-3 rounded-full bg-[hsl(45_70%_50%)]" />
           <div className="w-3 h-3 rounded-full bg-[hsl(142_70%_45%)]" />
         </div>
-        <div className="flex items-center gap-2 ml-4 text-[hsl(0_0%_100%/0.5)] text-sm terminal-form">
+        <div className="flex items-center gap-2 ml-4 text-[hsl(0_0%_100%/0.6)] text-xs sm:text-sm terminal-form">
           <Terminal className="w-4 h-4" />
           <span>armtemiy.contact</span>
         </div>
@@ -330,7 +330,7 @@ const TerminalContactForm = () => {
       {/* Terminal body */}
       <div
         ref={terminalRef}
-        className="bg-[hsl(0_0%_8%)] border border-[hsl(0_0%_100%/0.1)] rounded-b-lg p-4 md:p-6 min-h-[300px] max-h-[400px] overflow-y-auto terminal-form"
+        className="bg-[hsl(0_0%_8%)] border border-[hsl(0_0%_100%/0.1)] rounded-b-lg p-4 sm:p-5 md:p-6 min-h-[260px] sm:min-h-[320px] max-h-[360px] sm:max-h-[420px] overflow-y-auto terminal-form"
       >
         {/* Terminal lines */}
         <div className="space-y-2 text-sm md:text-base">
@@ -394,7 +394,7 @@ const TerminalContactForm = () => {
       </div>
 
       {/* Hints */}
-      <div className="mt-3 flex items-center justify-between text-xs text-[hsl(0_0%_100%/0.3)] terminal-form">
+      <div className="mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-[hsl(0_0%_100%/0.5)] terminal-form">
         <span>Press Enter to submit</span>
         <span>Защита: активна</span>
       </div>

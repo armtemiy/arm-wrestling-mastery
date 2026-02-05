@@ -15,8 +15,12 @@ const TrainingSection = () => {
   return (
     <section
       id="training"
-      className="relative py-24 md:py-32 bg-[hsl(15_7%_9%)] overflow-hidden"
+      className="relative py-20 md:py-32 bg-[hsl(15_7%_9%)] overflow-hidden"
     >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-1/3 w-[700px] h-[400px] rounded-full bg-[hsl(5_85%_60%/0.08)] blur-[200px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[300px] rounded-full bg-[hsl(15_90%_50%/0.06)] blur-[160px]" />
+      </div>
       <div
         ref={sectionRef}
         className={`container mx-auto px-4 transition-all duration-700 ${
@@ -24,16 +28,16 @@ const TrainingSection = () => {
         }`}
       >
         <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
             {/* Image placeholder */}
-            <div className="relative">
+            <div className="relative order-2 md:order-1">
               <div className="aspect-square rounded-3xl bg-gradient-to-br from-[hsl(15_8%_12%)] to-[hsl(15_8%_10%)] border border-[hsl(15_5%_20%)] overflow-hidden">
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="text-center p-8">
                     <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[hsl(5_85%_60%/0.15)] flex items-center justify-center">
                       <MapPin size={28} className="text-[hsl(5_85%_60%)]" />
                     </div>
-                    <p className="text-[hsl(15_10%_40%)] text-sm" style={COMMON_STYLES.satoshi}>
+                    <p className="text-[hsl(15_10%_60%)] text-sm" style={COMMON_STYLES.satoshi}>
                       Фото комнаты/оборудования
                     </p>
                   </div>
@@ -44,14 +48,14 @@ const TrainingSection = () => {
             </div>
 
             {/* Content */}
-            <div>
+            <div className="order-1 md:order-2">
               <span className="inline-block px-4 py-1 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-4" style={COMMON_STYLES.satoshi}>
                 ЖИВЫЕ ТРЕНИРОВКИ
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={COMMON_STYLES.clashDisplay}>
                 Разберём твою технику вживую
               </h2>
-              <p className="text-[hsl(15_10%_60%)] text-lg mb-8" style={COMMON_STYLES.satoshi}>
+              <p className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-8" style={COMMON_STYLES.satoshi}>
                 Видео — это хорошо, но ничто не заменит живую работу. Увижу твои ошибки, поставлю руку, покажу как чувствовать рычаг. За одну тренировку поймёшь больше, чем за месяц самостоятельных попыток.
               </p>
 
@@ -79,6 +83,9 @@ const TrainingSection = () => {
                   Записаться на тренировку
                   <ArrowRight className="ml-2" size={20} />
                 </a>
+                <p className="mt-3 text-xs text-[hsl(15_10%_60%)]" style={COMMON_STYLES.satoshi}>
+                  Кнопка откроет Telegram
+                </p>
             </div>
           </div>
         </div>

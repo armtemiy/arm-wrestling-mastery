@@ -66,8 +66,11 @@ const FAQSection = () => {
   return (
     <section
       id="faq"
-      className="relative py-24 md:py-32 bg-[hsl(15_5%_10%)] overflow-hidden"
+      className="relative py-20 md:py-32 bg-[hsl(15_5%_10%)] overflow-hidden"
     >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-[hsl(5_85%_60%/0.06)] blur-[200px]" />
+      </div>
       <div
         ref={sectionRef}
         className={`container mx-auto px-4 transition-all duration-700 ${
@@ -80,12 +83,12 @@ const FAQSection = () => {
             <span className="inline-block px-4 py-2 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-6" style={COMMON_STYLES.satoshi}>
               ВОПРОСЫ
             </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-white" style={COMMON_STYLES.clashDisplay}>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white" style={COMMON_STYLES.clashDisplay}>
               Отвечаю на главное
             </h2>
           </div>
 
-          <div className="space-y-10">
+          <div className="space-y-8 sm:space-y-10">
             <div>
               <p className="text-[hsl(15_10%_50%)] text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
                 Armtemiy Lab
@@ -102,10 +105,10 @@ const FAQSection = () => {
                         className="border border-[hsl(15_5%_20%)] rounded-2xl px-6 bg-[hsl(15_8%_8%)] data-[state=open]:bg-[hsl(15_8%_12%)] data-[state=open]:border-[hsl(5_85%_60%/0.4)] transition-all duration-300 hover:border-[hsl(15_5%_25%)] relative overflow-hidden group card-lift"
                       >
                         <div className="absolute inset-0 bg-[hsl(5_85%_60%/0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                        <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-6 text-lg font-medium" style={COMMON_STYLES.satoshi}>
+                        <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-5 sm:py-6 text-base sm:text-lg font-medium" style={COMMON_STYLES.satoshi}>
                           {faq.question}
                         </AccordionTrigger>
-                        <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
+                        <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-sm sm:text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
                           {faq.answer}
                         </AccordionContent>
                       </AccordionItem>
@@ -131,10 +134,10 @@ const FAQSection = () => {
                         className="border border-[hsl(15_5%_20%)] rounded-2xl px-6 bg-[hsl(15_8%_8%)] data-[state=open]:bg-[hsl(15_8%_12%)] data-[state=open]:border-[hsl(5_85%_60%/0.4)] transition-all duration-300 hover:border-[hsl(15_5%_25%)] relative overflow-hidden group card-lift"
                       >
                         <div className="absolute inset-0 bg-[hsl(5_85%_60%/0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                        <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-6 text-lg font-medium" style={COMMON_STYLES.satoshi}>
+                        <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-5 sm:py-6 text-base sm:text-lg font-medium" style={COMMON_STYLES.satoshi}>
                           {faq.question}
                         </AccordionTrigger>
-                        <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
+                        <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-sm sm:text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
                           {faq.answer}
                         </AccordionContent>
                       </AccordionItem>
