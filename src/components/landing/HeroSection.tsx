@@ -82,14 +82,14 @@ const HeroSection = () => {
               <span className="block text-white mb-4">ВЫИГРЫВАЙ</span>
               <span className="block relative">
                 <span
-                  className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[hsl(5_85%_60%)] via-[hsl(15_90%_50%)] to-[hsl(5_85%_60%)] animate-gradient-x"
+                  className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-[hsl(5_85%_60%)] via-[hsl(15_90%_50%)] to-[hsl(5_85%_60%)] animate-gradient-x pb-2"
                   style={{ backgroundSize: '200% 100%' }}
                 >
                   БОРЬБУ
                 </span>
                 <div
-                  className={`absolute -bottom-4 left-1/2 h-2 bg-gradient-to-r from-transparent via-[hsl(5_85%_60%)] to-transparent rounded-full transition-all duration-1000 delay-500 ${
-                    isLoaded ? 'w-64 -translate-x-1/2 opacity-100' : 'w-0 -translate-x-1/2 opacity-0'
+                  className={`absolute -bottom-4 left-1/2 h-2 bg-gradient-to-r from-transparent via-[hsl(5_85%_60%)] to-transparent rounded-full transition-all duration-1000 delay-500 blur-sm ${
+                    isLoaded ? 'w-64 -translate-x-1/2 opacity-80' : 'w-0 -translate-x-1/2 opacity-0'
                   }`}
                   style={{ boxShadow: '0 0 30px hsl(5_85%_60%), 0 0 60px hsl(15_90%_50%)' }}
                 />
@@ -111,7 +111,7 @@ const HeroSection = () => {
               <div className="absolute -inset-1.5 bg-gradient-to-r from-[hsl(5_85%_60%)] to-[hsl(15_90%_50%)] rounded-full blur-xl opacity-40 group-hover:opacity-80 transition-opacity duration-500 animate-pulse-slow" />
               <Button
                 asChild
-                className="relative bg-gradient-to-br from-[hsl(5_85%_60%)] to-[hsl(15_90%_50%)] hover:brightness-110 text-white font-black text-base md:text-lg px-8 py-5 md:px-10 md:py-6 rounded-full shadow-[0_0_40px_rgba(235,68,54,0.38)] transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
+                className="relative bg-gradient-to-br from-[hsl(5_85%_60%)] to-[hsl(15_90%_50%)] hover:brightness-110 text-white font-black text-base md:text-lg px-8 py-5 md:px-10 md:py-6 rounded-full shadow-[0_0_20px_rgba(235,68,54,0.3)] transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden"
               >
                 <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer">
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
