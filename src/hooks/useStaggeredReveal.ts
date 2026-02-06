@@ -1,74 +1,69 @@
 import { useEffect, useRef, useState } from "react";
 
-interface UseStaggeredRevealOptions {
-  threshold?: number;
-  rootMargin?: string;
-  staggerDelay?: number;
-  triggerOnce?: boolean;
-}
+type UseStaggeredRevealOptions = IntersectionObserverInit & {
+  itemCount: number;
+  once?: boolean;
+  staggerMs?: number;
+};
 
-export const useStaggeredReveal = (
-  itemCount: number,
-  options: UseStaggeredRevealOptions = {}
-) => {
+export function useStaggeredReveal(options: UseStaggeredRevealOptions) {
   const {
+    itemCount,
+    once = true,
+    staggerMs = 80,
     threshold = 0.1,
-    rootMargin = "0px 0px -50px 0px",
-    staggerDelay = 100,
-    triggerOnce = true,
+    root = null,
+    rootMargin = "0px",
   } = options;
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const timeoutsRef = useRef<number[]>([]);
-  const hasTriggeredRef = useRef(false);
+  const containerRef = useRef<HTMLElement | null>(null);
   const [visibleItems, setVisibleItems] = useState<boolean[]>(
-    new Array(itemCount).fill(false)
+    Array.from({ length: itemCount }, () => false)
   );
 
   useEffect(() => {
-    setVisibleItems(new Array(itemCount).fill(false));
-    hasTriggeredRef.current = false;
-    timeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
-    timeoutsRef.current = [];
+    setVisibleItems(Array.from({ length: itemCount }, () => false));
   }, [itemCount]);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    const node = containerRef.current;
+    if (!node) return;
+
+    let timeouts: number[] = [];
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasTriggeredRef.current) {
-          // Stagger the visibility of each item
-          for (let i = 0; i < itemCount; i++) {
-            const timeoutId = window.setTimeout(() => {
+        if (entry.isIntersecting) {
+          timeouts = Array.from({ length: itemCount }, (_, i) =>
+            window.setTimeout(() => {
               setVisibleItems((prev) => {
                 const next = [...prev];
                 next[i] = true;
                 return next;
               });
-            }, i * staggerDelay);
-            timeoutsRef.current.push(timeoutId);
-          }
-          if (triggerOnce) {
-            hasTriggeredRef.current = true;
-            observer.unobserve(container);
-          }
-        } else if (!entry.isIntersecting && !triggerOnce) {
-          setVisibleItems(new Array(itemCount).fill(false));
+            }, i * staggerMs)
+          );
+
+          if (once) observer.unobserve(entry.target);
+        } else if (!once) {
+          setVisibleItems(Array.from({ length: itemCount }, () => false));
         }
       },
-      { threshold, rootMargin }
+      { threshold, root, rootMargin }
     );
 
-    observer.observe(container);
+    observer.observe(node);
 
     return () => {
       observer.disconnect();
-      timeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
-      timeoutsRef.current = [];
+      timeouts.forEach((id) => clearTimeout(id));
     };
-  }, [itemCount, threshold, rootMargin, staggerDelay, triggerOnce]);
+  }, [itemCount, once, staggerMs, threshold, root, rootMargin]);
 
-  return { containerRef, visibleItems };
-};
+  return {
+    containerRef,
+    visibleItems,
+  };
+}
+
+export default useStaggeredReveal;

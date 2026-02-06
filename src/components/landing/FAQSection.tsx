@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useStaggeredReveal } from "@/hooks/useStaggeredReveal";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { COMMON_STYLES } from "./common-styles";
 
 const labFaqs = [
@@ -56,41 +57,49 @@ const trainingFaqs = [
 
 const FAQSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
-  const { containerRef: labRef, visibleItems: labVisible } = useStaggeredReveal(labFaqs.length, {
-    staggerDelay: 100,
+  const prefersReducedMotion = useReducedMotion();
+
+  // Correct API usage for useStaggeredReveal
+  const { containerRef: labRef, visibleItems: labVisible } = useStaggeredReveal({
+    itemCount: labFaqs.length,
+    staggerMs: prefersReducedMotion ? 0 : 100,
   });
-  const { containerRef: trainingRef, visibleItems: trainingVisible } = useStaggeredReveal(trainingFaqs.length, {
-    staggerDelay: 100,
+
+  const { containerRef: trainingRef, visibleItems: trainingVisible } = useStaggeredReveal({
+    itemCount: trainingFaqs.length,
+    staggerMs: prefersReducedMotion ? 0 : 100,
   });
 
   return (
     <section
       id="faq"
-      className="relative py-20 md:py-32 bg-[hsl(15_5%_10%)] overflow-hidden"
+      className="relative py-20 md:py-32 bg-background overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-[hsl(5_85%_60%/0.06)] blur-[200px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-primary/5 blur-[200px]" />
       </div>
       <div
         ref={sectionRef}
-        className={`container mx-auto px-4 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        className={`container mx-auto px-4 ${
+          prefersReducedMotion ? 'opacity-100' : `transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`
         }`}
       >
           <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-6" style={COMMON_STYLES.satoshi}>
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6" style={COMMON_STYLES.satoshi}>
               ВОПРОСЫ
             </span>
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white" style={COMMON_STYLES.clashDisplay}>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-foreground" style={COMMON_STYLES.clashDisplay}>
               Отвечаю на главное
             </h2>
           </div>
 
           <div className="space-y-8 sm:space-y-10">
             <div>
-              <p className="text-[hsl(15_10%_50%)] text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
+              <p className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
                 Armtemiy Lab
               </p>
               <div ref={labRef}>
@@ -98,17 +107,22 @@ const FAQSection = () => {
                   {labFaqs.map((faq, index) => (
                     <div
                       key={`lab-${index}`}
-                      className={`stagger-item ${labVisible[index] ? 'visible' : ''}`}
+                      className={prefersReducedMotion ? '' : `stagger-item ${labVisible[index] ? 'visible' : ''}`}
+                      style={{ transitionDelay: prefersReducedMotion ? '0ms' : undefined }}
                     >
                       <AccordionItem
                         value={`lab-${index}`}
-                        className="border border-[hsl(15_5%_20%)] rounded-2xl px-6 bg-[hsl(15_8%_8%)] data-[state=open]:bg-[hsl(15_8%_12%)] data-[state=open]:border-[hsl(5_85%_60%/0.4)] transition-all duration-300 hover:border-[hsl(15_5%_25%)] relative overflow-hidden group card-lift"
+                        className={`border border-border rounded-2xl px-6 bg-card data-[state=open]:bg-accent/5 data-[state=open]:border-primary/40 relative overflow-hidden group ${
+                          prefersReducedMotion ? '' : 'transition-all duration-300 hover:border-primary/20 card-lift'
+                        }`}
                       >
-                        <div className="absolute inset-0 bg-[hsl(5_85%_60%/0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                        <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-5 sm:py-6 text-base sm:text-lg font-medium" style={COMMON_STYLES.satoshi}>
+                        {!prefersReducedMotion && (
+                          <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        )}
+                        <AccordionTrigger className="relative z-10 text-left text-foreground hover:no-underline py-5 sm:py-6 text-base sm:text-lg font-medium" style={COMMON_STYLES.satoshi}>
                           {faq.question}
                         </AccordionTrigger>
-                        <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-sm sm:text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
+                        <AccordionContent className="relative z-10 text-muted-foreground pb-6 text-sm sm:text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
                           {faq.answer}
                         </AccordionContent>
                       </AccordionItem>
@@ -119,7 +133,7 @@ const FAQSection = () => {
             </div>
 
             <div>
-              <p className="text-[hsl(15_10%_50%)] text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
+              <p className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-5" style={COMMON_STYLES.satoshi}>
                 Тренировки
               </p>
               <div ref={trainingRef}>
@@ -127,17 +141,22 @@ const FAQSection = () => {
                   {trainingFaqs.map((faq, index) => (
                     <div
                       key={`training-${index}`}
-                      className={`stagger-item ${trainingVisible[index] ? 'visible' : ''}`}
+                      className={prefersReducedMotion ? '' : `stagger-item ${trainingVisible[index] ? 'visible' : ''}`}
+                      style={{ transitionDelay: prefersReducedMotion ? '0ms' : undefined }}
                     >
                       <AccordionItem
                         value={`training-${index}`}
-                        className="border border-[hsl(15_5%_20%)] rounded-2xl px-6 bg-[hsl(15_8%_8%)] data-[state=open]:bg-[hsl(15_8%_12%)] data-[state=open]:border-[hsl(5_85%_60%/0.4)] transition-all duration-300 hover:border-[hsl(15_5%_25%)] relative overflow-hidden group card-lift"
+                        className={`border border-border rounded-2xl px-6 bg-card data-[state=open]:bg-accent/5 data-[state=open]:border-primary/40 relative overflow-hidden group ${
+                          prefersReducedMotion ? '' : 'transition-all duration-300 hover:border-primary/20 card-lift'
+                        }`}
                       >
-                        <div className="absolute inset-0 bg-[hsl(5_85%_60%/0.03)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                        <AccordionTrigger className="relative z-10 text-left text-white hover:no-underline py-5 sm:py-6 text-base sm:text-lg font-medium" style={COMMON_STYLES.satoshi}>
+                        {!prefersReducedMotion && (
+                          <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        )}
+                        <AccordionTrigger className="relative z-10 text-left text-foreground hover:no-underline py-5 sm:py-6 text-base sm:text-lg font-medium" style={COMMON_STYLES.satoshi}>
                           {faq.question}
                         </AccordionTrigger>
-                        <AccordionContent className="relative z-10 text-[hsl(15_10%_70%)] pb-6 text-sm sm:text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
+                        <AccordionContent className="relative z-10 text-muted-foreground pb-6 text-sm sm:text-base leading-relaxed" style={COMMON_STYLES.satoshi}>
                           {faq.answer}
                         </AccordionContent>
                       </AccordionItem>
@@ -152,7 +171,7 @@ const FAQSection = () => {
       </div>
 
       {/* Section divider */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(15_5%_20%)] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
     </section>
   );
 };
