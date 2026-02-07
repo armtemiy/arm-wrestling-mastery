@@ -2,16 +2,18 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Sparkles, Brain, Users, Calculator, Crosshair, ArrowRight, Activity, BarChart3 } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { COMMON_STYLES } from "./common-styles";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 
 const ProgramSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
       id="lab"
-      className="relative pt-20 pb-12 md:pt-28 md:pb-20 bg-[hsl(15_6%_8%)] overflow-hidden"
+      className="relative py-12 md:py-20 lg:py-28 bg-[hsl(15_6%_8%)] overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full bg-[hsl(5_85%_60%/0.08)] blur-[200px]" />
@@ -20,16 +22,16 @@ const ProgramSection = () => {
       
       <div
         ref={sectionRef}
-        className={`container mx-auto px-4 transition-all duration-700 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        className={`container mx-auto px-4 ${prefersReducedMotion ? '' : 'transition-all duration-700'} ${
+          prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-4" style={COMMON_STYLES.satoshi}>
             <Sparkles size={14} />
             Armtemiy Lab
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-3" style={COMMON_STYLES.clashDisplay}>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-3" style={COMMON_STYLES.clashDisplay}>
             Карманная лаборатория
           </h2>
           <p className="text-[hsl(15_10%_60%)] text-base sm:text-lg max-w-2xl mx-auto" style={COMMON_STYLES.satoshi}>
@@ -37,7 +39,7 @@ const ProgramSection = () => {
           </p>
         </div>
 
-        <BentoGrid className="max-w-4xl mx-auto mb-12">
+        <BentoGrid className="max-w-4xl mx-auto mb-8 md:mb-12">
           <BentoGridItem
             title="Диагностический движок"
             description="5–7 вопросов и точный разбор, где теряется сила."
@@ -80,7 +82,7 @@ const ProgramSection = () => {
            <Button
             asChild
             size="lg"
-            className="rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-8 py-5 text-base shadow-[0_0_30px_hsl(5_85%_60%/0.4)] hover:shadow-[0_0_40px_hsl(5_85%_60%/0.6)] transition-all duration-300"
+            className={`min-h-[48px] min-w-[48px] w-full sm:w-auto rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-6 sm:px-8 py-4 sm:py-5 text-base shadow-[0_0_30px_hsl(5_85%_60%/0.4)] hover:shadow-[0_0_40px_hsl(5_85%_60%/0.6)] ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
           >
             <a
               href="https://t.me/armtemiy_lab_bot"
