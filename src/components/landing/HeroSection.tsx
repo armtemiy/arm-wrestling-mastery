@@ -82,7 +82,7 @@ const HeroSection = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h1
-              className={`font-display text-[clamp(2rem,8vw,4.5rem)] font-black leading-[0.9] tracking-tighter ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-200'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              className={`font-display text-[clamp(2rem,10vw,4.5rem)] sm:text-[clamp(3rem,8vw,5.5rem)] font-black leading-[0.9] tracking-tighter ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-200'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={COMMON_STYLES.clashDisplay}
             >
               <span className="block text-foreground mb-3 sm:mb-4">ВЫИГРЫВАЙ</span>
@@ -113,7 +113,7 @@ const HeroSection = () => {
           <div
             className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 px-4 sm:px-0 ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-600'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
-            <div className="relative group w-full sm:w-auto">
+            <div className="relative group w-full xs:w-auto min-w-[200px] sm:min-w-0">
               <div className={`absolute -inset-1.5 bg-gradient-to-r from-primary to-secondary rounded-full blur-xl opacity-40 ${prefersReducedMotion ? '' : 'group-hover:opacity-80 transition-opacity duration-500 animate-pulse-slow'}`} />
               <Button
                 asChild
@@ -132,7 +132,7 @@ const HeroSection = () => {
             <Button
               variant="ghost"
               onClick={() => document.querySelector("#training")?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" })}
-              className={`group w-full sm:w-auto min-h-[52px] px-6 sm:px-8 py-5 text-base font-bold rounded-full text-foreground/90 hover:text-foreground bg-white/8 border border-white/20 hover:border-primary/55 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
+              className={`group w-full xs:w-auto min-w-[200px] sm:min-w-0 min-h-[52px] px-6 sm:px-8 py-5 text-base font-bold rounded-full text-foreground/90 hover:text-foreground bg-white/8 border border-white/20 hover:border-primary/55 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
             >
               <span className={`absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 ${prefersReducedMotion ? 'opacity-0' : 'opacity-0 group-hover:opacity-100 transition-opacity'}`} />
               <MapPin size={18} className={`mr-2 sm:mr-2.5 text-primary ${prefersReducedMotion ? '' : 'group-hover:scale-110 transition-transform'}`} />
