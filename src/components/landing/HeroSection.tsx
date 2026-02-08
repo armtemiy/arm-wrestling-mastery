@@ -47,10 +47,10 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden min-h-[85svh] sm:min-h-[88svh] flex items-center bg-background pt-20 sm:pt-16 md:pt-12 pb-8 sm:pb-10"
-      style={{ perspective: '1200px' }}
+      className="relative min-h-[85svh] sm:min-h-[88svh] flex items-center bg-background pt-20 sm:pt-16 md:pt-12 pb-8 sm:pb-10"
+      style={{ perspective: '1200px', overflow: 'hidden' }}
     >
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.05]"
           style={{

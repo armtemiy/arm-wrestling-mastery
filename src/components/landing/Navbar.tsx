@@ -182,7 +182,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-2 sm:top-3 left-1/2 -translate-x-1/2 z-50 rounded-full border border-border/40 w-[calc(100%-16px)] max-w-fit md:w-auto ${prefersReducedMotion ? '' : 'transition-all duration-500 ease-out'}`}
+        className={`fixed top-2 sm:top-3 left-1/2 -translate-x-1/2 z-50 rounded-full border border-border/40 w-full max-w-fit md:w-auto ${prefersReducedMotion ? '' : 'transition-all duration-500 ease-out'}`}
         style={navbarStyle}
         role="navigation"
         aria-label="Главная навигация"
