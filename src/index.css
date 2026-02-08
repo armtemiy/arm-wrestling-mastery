@@ -38,6 +38,15 @@
     /* Accent colors - RED theme */
     --accent-red: hsl(5 85% 60%);      /* Primary crimson */
     --accent-orange: hsl(15 90% 50%);  /* Secondary orange-red */
+
+    /* Scroll offset for sticky navbar */
+    --header-offset: 80px;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --header-offset: 100px;
+    }
   }
 }
 
@@ -329,4 +338,58 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Scroll offset for anchor navigation using CSS variable */
+section[id] {
+  scroll-margin-top: var(--header-offset);
+}
+
+/* Reduced motion - targeted approach */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  /* Disable decorative/heavy animations only */
+  .marquee-track,
+  .animate-shine,
+  .animate-float,
+  .animate-gradient-x,
+  .animate-pulse-slow,
+  .pulse-dot,
+  .terminal-cursor {
+    animation: none !important;
+  }
+  
+  /* Keep essential UI transitions but make them instant */
+  .stagger-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .stagger-item.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Reduce but don't eliminate card hover feedback */
+  .card-lift:hover {
+    transform: none;
+  }
+
+  /* Keep focus states visible */
+  *:focus-visible {
+    outline: 2px solid hsl(5 85% 60%);
+    outline-offset: 2px;
+  }
+}
+
+/* Mobile marquee speed adjustment */
+@media (max-width: 640px) {
+  .marquee-track {
+    animation-duration: 45s;
+  }
 }

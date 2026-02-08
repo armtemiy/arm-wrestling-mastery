@@ -56,6 +56,7 @@ Agents automatically load patterns from `.opencode/context/` to follow this repo
 - React Router DOM (minimal routing)
 - shadcn/ui components (Radix UI primitives)
 - Lucide React (icons)
+- Framer Motion (animations)
 
 ## Import Patterns
 
@@ -69,6 +70,7 @@ import { cn } from "@/lib/utils";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { IconName } from "lucide-react";
+import { motion } from "framer-motion";
 ```
 
 ## Naming Conventions

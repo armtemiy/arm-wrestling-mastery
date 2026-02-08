@@ -124,16 +124,52 @@ const Navbar = () => {
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
-    const handleEscape = (e: KeyboardEvent) => {
+    const focusableSelector = 'button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])';
+    const panel = menuRef.current;
+
+    const focusableElements = panel?.querySelectorAll<HTMLElement>(focusableSelector);
+    focusableElements?.[0]?.focus();
+
+    const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
+        e.preventDefault();
         handleCloseMobileMenu();
+        return;
+      }
+
+      if (e.key !== 'Tab' || !panel) return;
+
+      const candidates = Array.from(panel.querySelectorAll<HTMLElement>(focusableSelector)).filter(
+        (element) => !element.hasAttribute('disabled') && element.getAttribute('aria-hidden') !== 'true'
+      );
+
+      if (candidates.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const firstElement = candidates[0];
+      const lastElement = candidates[candidates.length - 1];
+      const activeElement = document.activeElement as HTMLElement | null;
+
+      if (e.shiftKey) {
+        if (!activeElement || activeElement === firstElement || !panel.contains(activeElement)) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+        return;
+      }
+
+      if (!activeElement || activeElement === lastElement || !panel.contains(activeElement)) {
+        e.preventDefault();
+        firstElement.focus();
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleKeydown);
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('keydown', handleKeydown);
     };
   }, [isMobileMenuOpen, handleCloseMobileMenu]);
 

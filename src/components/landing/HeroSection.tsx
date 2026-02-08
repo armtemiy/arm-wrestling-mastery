@@ -29,7 +29,6 @@ const HeroSection = () => {
     }
   }, [handleScroll, prefersReducedMotion]);
 
-  // 3D transform values based on scroll - useMemo for optimization
   const transformStyles = useMemo(() => {
     if (prefersReducedMotion) return {};
     
@@ -48,46 +47,45 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden min-h-[88svh] flex items-center bg-background pt-12 pb-8"
+      className="relative overflow-hidden min-h-[85svh] sm:min-h-[88svh] flex items-center bg-background pt-20 sm:pt-16 md:pt-12 pb-8 sm:pb-10"
       style={{ perspective: '1200px' }}
     >
-      {/* Cinematic atmosphere */}
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`,
-            backgroundSize: '80px 80px',
+            backgroundSize: '60px 60px',
           }}
         />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-primary rounded-full blur-[250px] opacity-[0.1]" />
-        <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-secondary rounded-full blur-[200px] opacity-[0.08]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] sm:w-[900px] lg:w-[1200px] h-[400px] sm:h-[600px] lg:h-[800px] bg-primary rounded-full blur-[150px] sm:blur-[200px] lg:blur-[250px] opacity-[0.1]" />
+        <div className="absolute bottom-0 right-0 w-[400px] sm:w-[600px] lg:w-[800px] h-[400px] sm:h-[600px] lg:h-[800px] bg-secondary rounded-full blur-[120px] sm:blur-[160px] lg:blur-[200px] opacity-[0.08]" />
       </div>
 
       {!prefersReducedMotion && <Particles />}
 
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden sm:block">
         <div
-          className="absolute top-0 right-1/4 w-[1px] h-[500px] bg-gradient-to-b from-primary/40 to-transparent"
+          className="absolute top-0 right-1/4 w-[1px] h-[300px] md:h-[500px] bg-gradient-to-b from-primary/40 to-transparent"
           style={{ transform: 'rotate(-35deg)' }}
         />
         <div
-          className="absolute bottom-0 left-1/4 w-[1px] h-[400px] bg-gradient-to-t from-secondary/30 to-transparent"
+          className="absolute bottom-0 left-1/4 w-[1px] h-[250px] md:h-[400px] bg-gradient-to-t from-secondary/30 to-transparent"
           style={{ transform: 'rotate(-35deg)' }}
         />
       </div>
 
       <div
-        className="relative container mx-auto px-4 transition-transform duration-100 ease-out"
+        className="relative container mx-auto px-4 sm:px-6 transition-transform duration-100 ease-out"
         style={transformStyles}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-6 md:mb-8">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
             <h1
-              className={`font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tighter ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-200'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              className={`font-display text-[clamp(2rem,8vw,4.5rem)] font-black leading-[0.9] tracking-tighter ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-200'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={COMMON_STYLES.clashDisplay}
             >
-              <span className="block text-foreground mb-4">ВЫИГРЫВАЙ</span>
+              <span className="block text-foreground mb-3 sm:mb-4">ВЫИГРЫВАЙ</span>
               <span className="block relative">
                 <span
                   className={`relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary ${prefersReducedMotion ? '' : 'animate-gradient-x'} pb-2`}
@@ -96,8 +94,8 @@ const HeroSection = () => {
                   БОРЬБУ
                 </span>
                 <div
-                  className={`absolute -bottom-4 left-1/2 h-2 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full blur-sm ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-500'} ${
-                    prefersReducedMotion || isLoaded ? 'w-64 -translate-x-1/2 opacity-80' : 'w-0 -translate-x-1/2 opacity-0'
+                  className={`absolute -bottom-2 sm:-bottom-4 left-1/2 h-1.5 sm:h-2 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full blur-sm ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-500'} ${
+                    prefersReducedMotion || isLoaded ? 'w-32 sm:w-48 md:w-64 -translate-x-1/2 opacity-80' : 'w-0 -translate-x-1/2 opacity-0'
                   }`}
                   style={{ boxShadow: '0 0 30px hsl(var(--primary)), 0 0 60px hsl(var(--secondary))' }}
                 />
@@ -105,7 +103,7 @@ const HeroSection = () => {
             </h1>
 
             <p
-              className={`text-center text-sm md:text-base text-muted-foreground mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-500'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`text-center text-base sm:text-lg text-muted-foreground mt-6 sm:mt-8 mb-8 sm:mb-10 max-w-md sm:max-w-xl md:max-w-3xl mx-auto leading-relaxed px-2 ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-500'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={COMMON_STYLES.satoshi}
             >
               а не надейся на удачу
@@ -113,17 +111,17 @@ const HeroSection = () => {
           </div>
 
           <div
-            className={`flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-5 ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-600'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            className={`flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 px-4 sm:px-0 ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-600'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
-            <div className="relative group">
+            <div className="relative group w-full sm:w-auto">
               <div className={`absolute -inset-1.5 bg-gradient-to-r from-primary to-secondary rounded-full blur-xl opacity-40 ${prefersReducedMotion ? '' : 'group-hover:opacity-80 transition-opacity duration-500 animate-pulse-slow'}`} />
               <Button
                 asChild
-                className={`relative bg-gradient-to-br from-primary to-secondary hover:brightness-110 text-primary-foreground font-black text-base md:text-lg px-8 py-5 md:px-10 md:py-6 rounded-full shadow-[0_0_20px_hsl(var(--primary)/0.3)] overflow-hidden ${prefersReducedMotion ? '' : 'transition-all duration-300 hover:scale-105 active:scale-95'}`}
+                className={`relative w-full sm:w-auto bg-gradient-to-br from-primary to-secondary hover:brightness-110 text-primary-foreground font-black text-base sm:text-lg px-6 sm:px-8 md:px-10 py-5 sm:py-6 rounded-full shadow-[0_0_20px_hsl(var(--primary)/0.3)] overflow-hidden min-h-[52px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300 hover:scale-105 active:scale-95'}`}
               >
                 <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer">
                   <span className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${prefersReducedMotion ? 'translate-x-0 opacity-0' : '-translate-x-full group-hover:translate-x-full transition-transform duration-1000'}`} />
-                  <span className="relative flex items-center gap-3">
+                  <span className="relative flex items-center justify-center gap-2 sm:gap-3">
                     СТАТЬ СИЛЬНЕЕ
                     <ArrowRight size={20} strokeWidth={3} className={prefersReducedMotion ? '' : 'group-hover:translate-x-2 transition-transform'} />
                   </span>
@@ -134,17 +132,17 @@ const HeroSection = () => {
             <Button
               variant="ghost"
               onClick={() => document.querySelector("#training")?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" })}
-              className={`group px-8 py-5 text-sm md:text-base font-bold rounded-full text-foreground/90 hover:text-foreground bg-white/8 border border-white/20 hover:border-primary/55 relative overflow-hidden ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
+              className={`group w-full sm:w-auto min-h-[52px] px-6 sm:px-8 py-5 text-base font-bold rounded-full text-foreground/90 hover:text-foreground bg-white/8 border border-white/20 hover:border-primary/55 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
             >
               <span className={`absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 ${prefersReducedMotion ? 'opacity-0' : 'opacity-0 group-hover:opacity-100 transition-opacity'}`} />
-              <MapPin size={18} className={`mr-2.5 text-primary ${prefersReducedMotion ? '' : 'group-hover:scale-110 transition-transform'}`} />
+              <MapPin size={18} className={`mr-2 sm:mr-2.5 text-primary ${prefersReducedMotion ? '' : 'group-hover:scale-110 transition-transform'}`} />
               <span className="relative">АРМ НА ДОМУ</span>
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden hidden sm:block">
         {!prefersReducedMotion && [0, 1, 2, 3].map((i) => (
           <div
             key={i}
@@ -161,7 +159,7 @@ const HeroSection = () => {
         ))}
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-36 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-36 bg-gradient-to-t from-background to-transparent pointer-events-none" />
 
       <style>{`
         @keyframes gradient-x {
@@ -179,6 +177,11 @@ const HeroSection = () => {
           50% { transform: scale(1.05); opacity: 0.6; }
         }
         .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-gradient-x, .animate-float, .animate-pulse-slow {
+            animation: none;
+          }
+        }
       `}</style>
     </section>
   );

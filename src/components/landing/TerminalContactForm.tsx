@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { Send, CheckCircle2, Terminal, Loader2, XCircle } from "lucide-react";
 import { COMMON_STYLES } from "./common-styles";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 type FormStep = "name" | "phone" | "message" | "sending" | "success" | "error";
 
@@ -88,6 +89,27 @@ const TerminalContactForm = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
+  const pendingTimeoutsRef = useRef<number[]>([]);
+  const prefersReducedMotion = useReducedMotion();
+
+  const clearPendingTimeouts = useCallback(() => {
+    pendingTimeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
+    pendingTimeoutsRef.current = [];
+  }, []);
+
+  const scheduleAction = useCallback((callback: () => void, delay: number) => {
+    if (prefersReducedMotion || delay <= 0) {
+      callback();
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      pendingTimeoutsRef.current = pendingTimeoutsRef.current.filter((id) => id !== timeoutId);
+      callback();
+    }, delay);
+
+    pendingTimeoutsRef.current.push(timeoutId);
+  }, [prefersReducedMotion]);
 
   function getCurrentTime() {
     return new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
@@ -115,6 +137,12 @@ const TerminalContactForm = () => {
       terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
   }, [lines]);
+
+  useEffect(() => {
+    return () => {
+      clearPendingTimeouts();
+    };
+  }, [clearPendingTimeouts]);
 
   const addLine = useCallback((line: TerminalLine) => {
     setLines(prev => [...prev, line]);
@@ -199,7 +227,7 @@ const TerminalContactForm = () => {
         return;
       }
       addLine({ type: "input", content: `> ${name}` });
-      setTimeout(() => {
+      scheduleAction(() => {
         addLine({ type: "system", content: `Приятно познакомиться, ${name}!` });
         addLine({ type: "prompt", content: "Куда позвонить или написать?" });
         setStep("phone");
@@ -210,7 +238,7 @@ const TerminalContactForm = () => {
         return;
       }
       addLine({ type: "input", content: `> ${phone}` });
-      setTimeout(() => {
+      scheduleAction(() => {
         addLine({ type: "system", content: "Записал." });
         addLine({ type: "prompt", content: "Что тебя интересует? (Armtemiy Lab, тренировки, вопрос)" });
         setStep("message");
@@ -240,7 +268,7 @@ const TerminalContactForm = () => {
 
       addLine({ type: "system", content: "Отправляю..." });
 
-      setTimeout(() => {
+      scheduleAction(() => {
         addLine({ type: "system", content: "Почти готово..." });
       }, 600);
 
@@ -263,7 +291,7 @@ const TerminalContactForm = () => {
         setStep("error");
       }
     }
-  }, [step, name, phone, message, addLine, isBot, isRateLimited, sendToTelegram]);
+  }, [step, name, phone, message, addLine, isBot, isRateLimited, sendToTelegram, scheduleAction]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -272,6 +300,7 @@ const TerminalContactForm = () => {
   }, [handleSubmit]);
 
   const resetForm = useCallback(() => {
+    clearPendingTimeouts();
     setStep("name");
     setName("");
     setPhone("");
@@ -281,7 +310,7 @@ const TerminalContactForm = () => {
       { type: "system", content: "Начинаем заново. Готов." },
       { type: "prompt", content: "Как тебя зовут?" },
     ]);
-  }, []);
+  }, [clearPendingTimeouts]);
 
   const getCurrentValue = useCallback(() => {
     switch (step) {
@@ -315,14 +344,14 @@ const TerminalContactForm = () => {
   return (
     <div className="w-full max-w-2xl mx-auto">
       {/* Terminal header */}
-      <div className="flex items-center gap-2 px-4 py-3 bg-[hsl(0_0%_12%)] rounded-t-lg border border-b-0 border-[hsl(0_0%_100%/0.1)]">
+      <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 bg-[hsl(0_0%_12%)] rounded-t-lg border border-b-0 border-[hsl(0_0%_100%/0.1)]">
         <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-[hsl(0_70%_50%)]" />
-          <div className="w-3 h-3 rounded-full bg-[hsl(45_70%_50%)]" />
-          <div className="w-3 h-3 rounded-full bg-[hsl(142_70%_45%)]" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[hsl(0_70%_50%)]" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[hsl(45_70%_50%)]" />
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[hsl(142_70%_45%)]" />
         </div>
-        <div className="flex items-center gap-2 ml-4 text-[hsl(0_0%_100%/0.6)] text-xs sm:text-sm terminal-form">
-          <Terminal className="w-4 h-4" />
+        <div className="flex items-center gap-2 ml-3 sm:ml-4 text-[hsl(0_0%_100%/0.6)] text-xs sm:text-sm terminal-form">
+          <Terminal className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           <span>armtemiy.contact</span>
         </div>
       </div>
@@ -330,7 +359,7 @@ const TerminalContactForm = () => {
       {/* Terminal body */}
       <div
         ref={terminalRef}
-        className="bg-[hsl(0_0%_8%)] border border-[hsl(0_0%_100%/0.1)] rounded-b-lg p-4 sm:p-5 md:p-6 min-h-[260px] sm:min-h-[320px] max-h-[360px] sm:max-h-[420px] overflow-y-auto terminal-form"
+        className="bg-[hsl(0_0%_8%)] border border-[hsl(0_0%_100%/0.1)] rounded-b-lg p-4 sm:p-5 md:p-6 min-h-[240px] sm:min-h-[280px] md:min-h-[320px] max-h-[320px] sm:max-h-[380px] md:max-h-[420px] overflow-y-auto terminal-form"
       >
         {/* Terminal lines */}
         <div className="space-y-2 text-sm md:text-base">
@@ -351,7 +380,7 @@ const TerminalContactForm = () => {
               onChange={(e) => setCurrentValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={placeholder}
-              className="terminal-input flex-1 text-[hsl(0_0%_100%)] text-sm md:text-base placeholder:text-[hsl(0_0%_100%/0.2)]"
+              className="terminal-input flex-1 text-[hsl(0_0%_100%)] text-base placeholder:text-[hsl(0_0%_100%/0.2)] min-h-[44px]"
               autoComplete="off"
             />
             {/* Honeypot field - invisible to users */}
@@ -367,9 +396,10 @@ const TerminalContactForm = () => {
             <span className="terminal-cursor w-2 h-5 bg-[hsl(150_70%_50%)]" />
             <button
               type="submit"
-              className="ml-2 p-2 rounded bg-[hsl(150_70%_45%/0.2)] hover:bg-[hsl(150_70%_45%/0.3)] text-[hsl(150_70%_50%)] transition-colors"
+              className="ml-2 p-2.5 sm:p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-[hsl(150_70%_45%/0.2)] hover:bg-[hsl(150_70%_45%/0.3)] text-[hsl(150_70%_50%)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(150_70%_50%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(0_0%_8%)]"
+              aria-label="Отправить"
             >
-              <Send className="w-4 h-4" />
+              <Send className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </form>
         )}
@@ -377,7 +407,7 @@ const TerminalContactForm = () => {
         {/* Sending state */}
         {step === "sending" && (
           <div className="mt-4 flex items-center gap-2 text-[hsl(0_0%_100%/0.6)]">
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <Loader2 className={`w-4 h-4 ${prefersReducedMotion ? '' : 'animate-spin'}`} />
             <span>Обработка...</span>
           </div>
         )}
@@ -386,7 +416,7 @@ const TerminalContactForm = () => {
         {(step === "success" || step === "error") && (
           <button
             onClick={resetForm}
-            className="mt-6 text-sm text-[hsl(0_0%_100%/0.4)] hover:text-[hsl(0_0%_100%/0.7)] transition-colors underline underline-offset-4"
+            className="mt-6 min-h-[44px] px-4 py-2 text-sm text-[hsl(0_0%_100%/0.4)] hover:text-[hsl(0_0%_100%/0.7)] transition-colors underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(0_0%_8%)] rounded-lg"
           >
             [Начать новую сессию]
           </button>
@@ -394,8 +424,8 @@ const TerminalContactForm = () => {
       </div>
 
       {/* Hints */}
-      <div className="mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-[hsl(0_0%_100%/0.5)] terminal-form">
-        <span>Press Enter to submit</span>
+      <div className="mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-[hsl(0_0%_100%/0.5)] terminal-form px-1">
+        <span>Enter — отправить</span>
         <span>Защита: активна</span>
       </div>
     </div>
