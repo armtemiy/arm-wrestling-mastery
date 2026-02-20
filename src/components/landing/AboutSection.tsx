@@ -1,28 +1,23 @@
 import React from "react";
-import { Award, BookOpen, Dumbbell } from "lucide-react";
+import { Award, BookOpen, Dumbbell, type LucideIcon } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { OptimizedImage } from "@/components/OptimizedImage";
 import { COMMON_STYLES } from "./common-styles";
+import {
+  aboutHighlights,
+  type AboutHighlightIconKey,
+} from "@/data/features";
+
+const aboutIconMap = {
+  bookOpen: BookOpen,
+  dumbbell: Dumbbell,
+  award: Award,
+} satisfies Record<AboutHighlightIconKey, LucideIcon>;
 
 const AboutSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
   const prefersReducedMotion = useReducedMotion();
-
-  const highlights = [
-    {
-      icon: BookOpen,
-      text: "3 года изучения армрестлинга от и до",
-    },
-    {
-      icon: Dumbbell,
-      text: "Опыт в пауэрлифтинге и стритлифтинге",
-    },
-    {
-      icon: Award,
-      text: "Тактические разборы и постановка техники",
-    },
-  ];
 
   return (
     <section
@@ -36,8 +31,8 @@ const AboutSection = () => {
       <div
         ref={sectionRef}
         className={`container mx-auto px-4 sm:px-6 ${
-          prefersReducedMotion ? 'opacity-100' : `transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          prefersReducedMotion ? "opacity-100" : `transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`
         }`}
       >
@@ -57,44 +52,48 @@ const AboutSection = () => {
             </div>
 
             <div className="order-1 md:order-2">
-              <span 
-                className="inline-block px-3 sm:px-4 py-1 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-xs sm:text-sm font-medium mb-4" 
+              <span
+                className="inline-block px-3 sm:px-4 py-1 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-xs sm:text-sm font-medium mb-4"
                 style={COMMON_STYLES.satoshi}
               >
                 КТО Я
               </span>
-              <h2 
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6" 
+              <h2
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6"
                 style={COMMON_STYLES.clashDisplay}
               >
                 Артемий Кривошапов
               </h2>
-              <p 
-                className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-4 sm:mb-6 leading-relaxed" 
+              <p
+                className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-4 sm:mb-6 leading-relaxed"
                 style={COMMON_STYLES.satoshi}
               >
                 Я не чемпион мира. Но я перелопатил тонну информации: от учебников по биомеханике до разборов топовых спортсменов. Тренировался сам, общался с профессионалами, набивал шишки.
               </p>
-              <p 
-                className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed" 
+              <p
+                className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed"
                 style={COMMON_STYLES.satoshi}
               >
                 Теперь делюсь тем, что реально работает. Без понтов, без «секретных техник» — просто система, которая даёт результат.
               </p>
 
               <div className="space-y-3 sm:space-y-4">
-                {highlights.map((item, index) => (
-                  <div
-                    key={index}
-                    className={`group flex items-center gap-3 ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
-                    style={{ transitionDelay: prefersReducedMotion ? '0ms' : `${index * 100}ms` }}
-                  >
-                    <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[hsl(5_85%_60%/0.15)] flex items-center justify-center shrink-0 ${prefersReducedMotion ? '' : 'group-hover:bg-[hsl(5_85%_60%/0.25)] group-hover:scale-110 transition-all duration-300'}`}>
-                      <item.icon className={`text-[hsl(5_85%_60%)] w-5 h-5 ${prefersReducedMotion ? '' : 'group-hover:rotate-6 transition-transform duration-300'}`} />
+                {aboutHighlights.map((item, index) => {
+                  const Icon = aboutIconMap[item.icon];
+
+                  return (
+                    <div
+                      key={item.id}
+                      className={`group flex items-center gap-3 ${prefersReducedMotion ? "" : "transition-all duration-300"}`}
+                      style={{ transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100}ms` }}
+                    >
+                      <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[hsl(5_85%_60%/0.15)] flex items-center justify-center shrink-0 ${prefersReducedMotion ? "" : "group-hover:bg-[hsl(5_85%_60%/0.25)] group-hover:scale-110 transition-all duration-300"}`}>
+                        <Icon className={`text-[hsl(5_85%_60%)] w-5 h-5 ${prefersReducedMotion ? "" : "group-hover:rotate-6 transition-transform duration-300"}`} />
+                      </div>
+                      <span className="text-sm sm:text-base text-white" style={COMMON_STYLES.satoshi}>{item.text}</span>
                     </div>
-                    <span className="text-sm sm:text-base text-white" style={COMMON_STYLES.satoshi}>{item.text}</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>

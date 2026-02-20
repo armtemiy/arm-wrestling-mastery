@@ -4,13 +4,7 @@ import { Download, CheckCircle, FileText, Zap } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { COMMON_STYLES } from "./common-styles";
-
-const benefits = [
-  "5 главных ошибок новичков за столом",
-  "Чек-лист разминки перед борьбой",
-  "3 упражнения для взрывного старта",
-  "Как не травмировать локоть",
-];
+import { leadMagnetBenefits } from "@/data/features";
 
 const LeadMagnetSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
@@ -36,8 +30,8 @@ const LeadMagnetSection = () => {
 
       <div
         ref={sectionRef}
-        className={`relative container mx-auto px-4 ${prefersReducedMotion ? '' : 'transition-all duration-700'} ${
-          prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        className={`relative container mx-auto px-4 ${prefersReducedMotion ? "" : "transition-all duration-700"} ${
+          prefersReducedMotion || isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
         <div className="max-w-5xl mx-auto">
@@ -58,14 +52,14 @@ const LeadMagnetSection = () => {
               </p>
 
               <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                {benefits.map((benefit, index) => (
+                {leadMagnetBenefits.map((benefit, index) => (
                   <li
-                    key={index}
+                    key={benefit.id}
                     className="flex items-start gap-3"
-                    style={{ transitionDelay: prefersReducedMotion ? '0ms' : `${index * 100}ms` }}
+                    style={{ transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100}ms` }}
                   >
                     <CheckCircle className="w-5 h-5 text-[hsl(5_85%_60%)] flex-shrink-0 mt-0.5" />
-                    <span className="text-[hsl(15_10%_80%)]" style={COMMON_STYLES.satoshi}>{benefit}</span>
+                    <span className="text-[hsl(15_10%_80%)]" style={COMMON_STYLES.satoshi}>{benefit.text}</span>
                   </li>
                 ))}
               </ul>
@@ -74,11 +68,11 @@ const LeadMagnetSection = () => {
                 onClick={handleDownload}
                 disabled={isDownloading}
                 size="lg"
-                className={`min-h-[48px] min-w-[48px] w-full sm:w-auto rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-6 sm:px-8 py-5 sm:py-6 text-base shadow-[0_0_30px_hsl(5_85%_60%/0.3)] hover:shadow-[0_0_40px_hsl(5_85%_60%/0.5)] disabled:opacity-70 ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
+                className={`min-h-[48px] min-w-[48px] w-full sm:w-auto rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-6 sm:px-8 py-5 sm:py-6 text-base shadow-[0_0_30px_hsl(5_85%_60%/0.3)] hover:shadow-[0_0_40px_hsl(5_85%_60%/0.5)] disabled:opacity-70 ${prefersReducedMotion ? "" : "transition-all duration-300"}`}
               >
                 {isDownloading ? (
                   <>
-                    <div className={`w-5 h-5 border-2 border-white/30 border-t-white rounded-full mr-2 ${prefersReducedMotion ? '' : 'animate-spin'}`} />
+                    <div className={`w-5 h-5 border-2 border-white/30 border-t-white rounded-full mr-2 ${prefersReducedMotion ? "" : "animate-spin"}`} />
                     Загрузка...
                   </>
                 ) : downloaded ? (

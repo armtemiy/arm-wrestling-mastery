@@ -1,18 +1,22 @@
 import React from "react";
-import { MapPin, Clock, Users, ArrowRight } from "lucide-react";
+import { MapPin, Clock, Users, ArrowRight, type LucideIcon } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { COMMON_STYLES } from "./common-styles";
+import {
+  trainingDetails,
+  type TrainingDetailIconKey,
+} from "@/data/features";
+
+const trainingIconMap = {
+  mapPin: MapPin,
+  clock: Clock,
+  users: Users,
+} satisfies Record<TrainingDetailIconKey, LucideIcon>;
 
 const TrainingSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
   const prefersReducedMotion = useReducedMotion();
-
-  const details = [
-    { icon: MapPin, text: "Тула, своя комната с оборудованием" },
-    { icon: Clock, text: "От 500₽ за час работы" },
-    { icon: Users, text: "Можно прийти с другом" },
-  ];
 
   return (
     <section
@@ -26,8 +30,8 @@ const TrainingSection = () => {
       <div
         ref={sectionRef}
         className={`container mx-auto px-4 sm:px-6 ${
-          prefersReducedMotion ? 'opacity-100' : `transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          prefersReducedMotion ? "opacity-100" : `transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`
         }`}
       >
@@ -50,46 +54,50 @@ const TrainingSection = () => {
             </div>
 
             <div className="order-1 md:order-2">
-              <span 
-                className="inline-block px-3 sm:px-4 py-1 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-xs sm:text-sm font-medium mb-4" 
+              <span
+                className="inline-block px-3 sm:px-4 py-1 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-xs sm:text-sm font-medium mb-4"
                 style={COMMON_STYLES.satoshi}
               >
                 ЖИВЫЕ ТРЕНИРОВКИ
               </span>
-              <h2 
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-5" 
+              <h2
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-5"
                 style={COMMON_STYLES.clashDisplay}
               >
                 Разберём твою технику вживую
               </h2>
-              <p 
-                className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed" 
+              <p
+                className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed"
                 style={COMMON_STYLES.satoshi}
               >
                 Видео — это хорошо, но ничто не заменит живую работу. Увижу твои ошибки, поставлю руку, покажу как чувствовать рычаг. За одну тренировку поймёшь больше, чем за месяц самостоятельных попыток.
               </p>
 
               <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                {details.map((detail, index) => (
-                  <div
-                    key={index}
-                    className={`group flex items-center gap-3 ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
-                    style={{ transitionDelay: prefersReducedMotion ? '0ms' : `${index * 100}ms` }}
-                  >
-                    <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[hsl(5_85%_60%/0.15)] flex items-center justify-center shrink-0 ${prefersReducedMotion ? '' : 'group-hover:bg-[hsl(5_85%_60%/0.25)] group-hover:scale-110 transition-all duration-300'}`}>
-                      <detail.icon className={`text-[hsl(5_85%_60%)] w-5 h-5 ${prefersReducedMotion ? '' : 'group-hover:rotate-6 transition-transform duration-300'}`} />
+                {trainingDetails.map((detail, index) => {
+                  const Icon = trainingIconMap[detail.icon];
+
+                  return (
+                    <div
+                      key={detail.id}
+                      className={`group flex items-center gap-3 ${prefersReducedMotion ? "" : "transition-all duration-300"}`}
+                      style={{ transitionDelay: prefersReducedMotion ? "0ms" : `${index * 100}ms` }}
+                    >
+                      <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[hsl(5_85%_60%/0.15)] flex items-center justify-center shrink-0 ${prefersReducedMotion ? "" : "group-hover:bg-[hsl(5_85%_60%/0.25)] group-hover:scale-110 transition-all duration-300"}`}>
+                        <Icon className={`text-[hsl(5_85%_60%)] w-5 h-5 ${prefersReducedMotion ? "" : "group-hover:rotate-6 transition-transform duration-300"}`} />
+                      </div>
+                      <span className="text-white text-sm sm:text-base" style={COMMON_STYLES.satoshi}>{detail.text}</span>
                     </div>
-                    <span className="text-white text-sm sm:text-base" style={COMMON_STYLES.satoshi}>{detail.text}</span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
 
               <a
                 href="https://t.me/armtemiy_lab_bot?start=training"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base min-h-[48px] shadow-[0_0_30px_hsl(5_85%_60%/0.3)] hover:shadow-[0_0_50px_hsl(5_85%_60%/0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(5_85%_60%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_7%_9%)] ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
-              >
+                className={`inline-flex items-center justify-center rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base min-h-[48px] shadow-[0_0_30px_hsl(5_85%_60%/0.3)] hover:shadow-[0_0_50px_hsl(5_85%_60%/0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(5_85%_60%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_7%_9%)] ${prefersReducedMotion ? "" : "transition-all duration-300"}`}
+>
                 Записаться на тренировку
                 <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
               </a>
