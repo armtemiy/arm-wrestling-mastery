@@ -21,14 +21,14 @@ const NeurotypologyPage = () => {
                 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-5 tracking-tight"
                 style={COMMON_STYLES.clashDisplay}
               >
-                Нейротипология
+                Нейротипология в армрестлинге
               </h1>
               
               <p 
                 className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8"
                 style={COMMON_STYLES.satoshi}
               >
-                Новый инструмент для армрестлинга. Связь типов нервной системы и стиля борьбы.
+                Вводный гайд по нейротипологии с интерактивной 3D‑моделью: связь типов нервной системы и стиля борьбы.
               </p>
 
               <div className="flex items-center justify-center gap-4">
