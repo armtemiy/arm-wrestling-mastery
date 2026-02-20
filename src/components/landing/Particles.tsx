@@ -12,7 +12,8 @@ interface Particle {
 const Particles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
+  const isInViewRef = useRef(false);
 
   const resizeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
@@ -38,15 +39,34 @@ const Particles = () => {
         opacity: Math.random() * 0.5 + 0.1,
       });
     }
+
     particlesRef.current = particles;
   }, []);
 
+  const stopAnimation = useCallback(() => {
+    if (animationRef.current !== null) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+    }
+  }, []);
+
   const animate = useCallback(() => {
+    if (!isInViewRef.current) {
+      stopAnimation();
+      return;
+    }
+
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      stopAnimation();
+      return;
+    }
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) {
+      stopAnimation();
+      return;
+    }
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -54,7 +74,6 @@ const Particles = () => {
       particle.x += particle.speedX;
       particle.y += particle.speedY;
 
-      // Wrap around edges
       if (particle.x > canvas.width) particle.x = 0;
       if (particle.x < 0) particle.x = canvas.width;
       if (particle.y > canvas.height) particle.y = 0;
@@ -67,12 +86,19 @@ const Particles = () => {
     });
 
     animationRef.current = requestAnimationFrame(animate);
-  }, []);
+  }, [stopAnimation]);
+
+  const startAnimation = useCallback(() => {
+    if (!isInViewRef.current || animationRef.current !== null) {
+      return;
+    }
+
+    animationRef.current = requestAnimationFrame(animate);
+  }, [animate]);
 
   useEffect(() => {
     resizeCanvas();
     createParticles();
-    animate();
 
     const handleResize = () => {
       resizeCanvas();
@@ -81,13 +107,40 @@ const Particles = () => {
 
     window.addEventListener("resize", handleResize);
 
+    const canvas = canvasRef.current;
+    let observer: IntersectionObserver | null = null;
+
+    if (canvas && "IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          const isInView = entry?.isIntersecting ?? false;
+          isInViewRef.current = isInView;
+
+          if (isInView) {
+            startAnimation();
+            return;
+          }
+
+          stopAnimation();
+        },
+        {
+          threshold: 0.01,
+          rootMargin: "50px 0px 50px 0px",
+        }
+      );
+
+      observer.observe(canvas);
+    } else {
+      isInViewRef.current = true;
+      startAnimation();
+    }
+
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      stopAnimation();
+      observer?.disconnect();
       window.removeEventListener("resize", handleResize);
     };
-  }, [resizeCanvas, createParticles, animate]);
+  }, [resizeCanvas, createParticles, startAnimation, stopAnimation]);
 
   return (
     <canvas
