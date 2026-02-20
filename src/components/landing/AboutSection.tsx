@@ -44,7 +44,6 @@ const AboutSection = () => {
                   src="/images/armtemiy.jpg"
                   alt="Артемий Кривошапов"
                   className="w-full h-full object-cover object-center"
-                  priority
                 />
               </div>
               <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-[hsl(15_90%_50%/0.1)] -z-10" />

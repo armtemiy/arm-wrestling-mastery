@@ -1,76 +1,9 @@
 /**
  * TYPOGRAPHY SYSTEM
  * =================
- * Font face declarations for Clash Display, Satoshi, and JetBrains Mono
+ * Font loading via official providers
  */
 
-/* ============================================
-   FONT FACE DECLARATIONS
-   ============================================ */
-
-/* Clash Display - Display font for headings */
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/WNZPLTBMGJSGPPMGA6IOVVJZWU3QPEHK/YZFHXHKLMNEOTPF7AGLXV6UXCY6PKPVG.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/WNZPLTBMGJSGPPMGA6IOVVJZWU3QPEHK/YZFHXHKLMNEOTPF7AGLXV6UXCY6PKPVG.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/WNZPLTBMGJSGPPMGA6IOVVJZWU3QPEHK/YZFHXHKLMNEOTPF7AGLXV6UXCY6PKPVG.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/WNZPLTBMGJSGPPMGA6IOVVJZWU3QPEHK/YZFHXHKLMNEOTPF7AGLXV6UXCY6PKPVG.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Satoshi - Body font for paragraphs and UI */
-@font-face {
-  font-family: 'Satoshi';
-  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/GXPUQZS3BMHFPNHQK5YPTXQT3SPNPDHK/SATOSHI-VARIABLE.woff2') format('woff2');
-  font-weight: 300 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Satoshi';
-  src: url('https://cdn.fontshare.com/wf/RVPXLMWNQJQPJBVWAD6SOVBCJY2QNSHX/GXPUQZS3BMHFPNHQK5YPTXQT3SPNPDHK/SATOSHI-VARIABLEITALIC.woff2') format('woff2');
-  font-weight: 300 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* JetBrains Mono - Monospace font for code and technical details */
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('https://fonts.gstatic.com/s/jetbrainsmono/v15/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnTcRDJNYK0.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'JetBrains Mono';
-  src: url('https://fonts.gstatic.com/s/jetbrainsmono/v15/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnTcRDJNZK0.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
