@@ -30,7 +30,7 @@ const ConsultationSection = () => {
   return (
     <section
       id="consultations"
-      className="relative py-12 sm:py-16 md:py-24 lg:py-32 bg-[hsl(15_7%_9%)]"
+      className="relative py-8 sm:py-12 md:py-16 lg:py-20 bg-[hsl(15_7%_9%)]"
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 right-1/3 w-[400px] sm:w-[700px] h-[250px] sm:h-[400px] rounded-full bg-[hsl(5_85%_60%/0.08)] blur-[120px] sm:blur-[200px]" />
@@ -46,7 +46,7 @@ const ConsultationSection = () => {
         }`}
       >
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <div className="text-center mb-5 sm:mb-6">
             <span
               className="inline-block px-3 sm:px-4 py-1.5 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-xs sm:text-sm font-medium mb-4 sm:mb-5"
               style={COMMON_STYLES.satoshi}
@@ -63,40 +63,40 @@ const ConsultationSection = () => {
               className="text-[hsl(15_10%_70%)] text-lg sm:text-xl md:text-2xl"
               style={COMMON_STYLES.satoshi}
             >
-              Индивидуальный разбор твоей ситуации в армрестлинге
+              Индивидуальный стратегический разбор под твои реальные условия
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto mb-8 sm:mb-10">
+          <div className="max-w-3xl mx-auto mb-5 sm:mb-6">
             <p
-              className="text-[hsl(15_10%_70%)] text-base sm:text-lg mb-4 leading-relaxed text-center"
+              className="text-[hsl(15_10%_70%)] text-sm sm:text-base md:text-lg mb-2 leading-relaxed text-center"
               style={COMMON_STYLES.satoshi}
             >
-              Это не «шаблонная программа». Я вхожу в твою ситуацию: где ты тренируешься, что у тебя есть из оборудования, какие цели, опыт, травмы/ограничения — и даю конкретные шаги под тебя.
+              Это не шаблон и не «общая программа». Я вхожу в твою ситуацию: цели, доступный инвентарь, опыт, антропометрия, ограничения — и выстраиваю стратегию под тебя.
             </p>
             <p
-              className="text-[hsl(15_10%_70%)] text-base sm:text-lg leading-relaxed text-center"
+              className="text-[hsl(15_10%_70%)] text-sm sm:text-base md:text-lg leading-relaxed text-center"
               style={COMMON_STYLES.satoshi}
             >
-              Можно разобрать технику, подобрать стиль борьбы под антропометрию, собрать тренировочную программу и план прогресса, настроить восстановление и питание. Без воды — только то, что даст результат именно в твоих условиях.
+              Разбираем технику, стиль борьбы, нейротип, слабые звенья и точки роста. Без воды. Только то, что даст реальный прирост.
             </p>
           </div>
 
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-4 sm:mb-5">
             <p
-              className="text-[hsl(15_10%_50%)] text-xs uppercase tracking-[0.15em] font-medium mb-4 text-center"
+              className="text-[hsl(5_85%_60%)] text-sm sm:text-base font-medium mb-3 text-center"
               style={COMMON_STYLES.satoshi}
             >
-              Куда можем углубиться
+              Выбери направления, которые хочешь разобрать — и нажми «Записаться в Telegram»
             </p>
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-3xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-2 max-w-3xl mx-auto">
               {consultationOptions.map((option) => {
                 const isSelected = selectedIds.includes(option.id);
                 return (
                   <button
                     key={option.id}
                     onClick={() => toggleOption(option.id)}
-                    className={`group relative inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium min-h-[40px] sm:min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(5_85%_60%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_7%_9%)] ${
+                    className={`group relative inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium min-h-[36px] sm:min-h-[40px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(5_85%_60%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_7%_9%)] ${
                       prefersReducedMotion ? "" : "transition-all duration-300"
                     } ${
                       isSelected
@@ -110,24 +110,29 @@ const ConsultationSection = () => {
                       <Check size={14} className="shrink-0" />
                     )}
                     <span>{option.label}</span>
+                    {option.link && (
+                      <a
+                        href={option.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[hsl(15_10%_50%)] hover:text-[hsl(5_85%_60%)] text-[10px]"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        ↗
+                      </a>
+                    )}
                   </button>
                 );
               })}
             </div>
-            <p
-              className="text-[hsl(15_10%_50%)] text-xs sm:text-sm mt-4 text-center"
-              style={COMMON_STYLES.satoshi}
-            >
-              Не обязательно выбирать пункты — можешь просто нажать «Записаться» и описать запрос своими словами.
-            </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-3">
             <a
               href={telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center justify-center rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base min-h-[48px] min-w-[48px] shadow-[0_0_30px_hsl(5_85%_60%/0.3)] hover:shadow-[0_0_50px_hsl(5_85%_60%/0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(5_85%_60%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_7%_9%)] ${
+              className={`inline-flex items-center justify-center rounded-full bg-[hsl(5_85%_60%)] hover:bg-[hsl(5_95%_65%)] text-white font-semibold px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base min-h-[44px] min-w-[44px] shadow-[0_0_30px_hsl(5_85%_60%/0.3)] hover:shadow-[0_0_50px_hsl(5_85%_60%/0.5)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(5_85%_60%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_7%_9%)] ${
                 prefersReducedMotion ? "" : "transition-all duration-300"
               }`}
               style={COMMON_STYLES.satoshi}
@@ -138,7 +143,7 @@ const ConsultationSection = () => {
 
             <button
               onClick={handleScrollToContact}
-              className={`inline-flex items-center justify-center rounded-full bg-transparent text-[hsl(15_10%_80%)] font-medium px-6 sm:px-8 py-3.5 sm:py-4 text-sm sm:text-base min-h-[48px] min-w-[48px] border border-[hsl(15_5%_30%)] hover:border-[hsl(5_85%_60%/0.5)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(5_85%_60%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_7%_9%)] ${
+              className={`inline-flex items-center justify-center rounded-full bg-transparent text-[hsl(15_10%_80%)] font-medium px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base min-h-[44px] min-w-[44px] border border-[hsl(15_5%_30%)] hover:border-[hsl(5_85%_60%/0.5)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(5_85%_60%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_7%_9%)] ${
                 prefersReducedMotion ? "" : "transition-all duration-300"
               }`}
               style={COMMON_STYLES.satoshi}
@@ -148,18 +153,13 @@ const ConsultationSection = () => {
             </button>
           </div>
 
-          {selectedIds.length > 0 && (
-            <div
-              className={`mt-6 text-center ${prefersReducedMotion ? "" : "animate-fade-in"}`}
-            >
-              <p
-                className="text-[hsl(5_85%_60%)] text-sm"
-                style={COMMON_STYLES.satoshi}
-              >
-                Выбрано: {selectedIds.length} {selectedIds.length === 1 ? "пункт" : selectedIds.length < 5 ? "пункта" : "пунктов"}
-              </p>
-            </div>
-          )}
+          <p
+            className="text-[hsl(15_10%_50%)] text-xs sm:text-sm text-center"
+            style={COMMON_STYLES.satoshi}
+          >
+            После нажатия откроется Telegram с уже сформированным запросом
+          </p>
+
         </div>
       </div>
 

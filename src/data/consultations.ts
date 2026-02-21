@@ -1,18 +1,17 @@
 export interface ConsultationOption {
   id: string;
   label: string;
+  link?: string;
 }
 
 export const consultationOptions: ConsultationOption[] = [
-  { id: "location", label: "Где тренируюсь и какой инвентарь доступен" },
-  { id: "anthropometry", label: "Антропометрия и подбор стиля борьбы" },
-  { id: "technique", label: "Техника: старт, позиция, связки, ошибки" },
-  { id: "background", label: "Спортивный бэкграунд: что уже сильное, что подтянуть" },
-  { id: "injuries", label: "Травмы/ограничения и адаптация нагрузки" },
-  { id: "program", label: "Программа тренировок под мои условия" },
-  { id: "nutrition", label: "Питание и восстановление" },
-  { id: "supplements", label: "БАДы (в рамках общих рекомендаций)" },
-  { id: "strategy", label: "Стратегия прогресса на 4–8 недель" },
+  { id: "anthropometry", label: "Антропометрический разбор и подбор стилей борьбы" },
+  { id: "neurotypology", label: "Нейротипология в армрестлинге", link: "/neurotypology" },
+  { id: "strategy", label: "Стратегии под твой темперамент и психику" },
+  { id: "technique", label: "Теория: биомеханика, контр-матрица, хитрости" },
+  { id: "injuries", label: "Индивидуальная адаптация под травмы и ограничения" },
+  { id: "mindset", label: "Мышление под давлением и позиционная логика" },
+  { id: "nutrition", label: "Питание и восстановление под твой режим" },
 ];
 
 export const DEFAULT_TELEGRAM_TEXT = "Привет! Хочу крафтовую консультацию. Моя цель: ____. Тренируюсь: ____ (дом/воркаут/фитнес/арм-зал). Что хочу разобрать: ____.";
