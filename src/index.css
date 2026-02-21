@@ -40,12 +40,12 @@
     --accent-orange: hsl(15 90% 50%);  /* Secondary orange-red */
 
     /* Scroll offset for sticky navbar */
-    --header-offset: 80px;
+    --header-offset: 78px;
   }
 
   @media (min-width: 768px) {
     :root {
-      --header-offset: 100px;
+      --header-offset: 84px;
     }
   }
 }

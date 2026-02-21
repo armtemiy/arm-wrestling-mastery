@@ -18,7 +18,7 @@ const Navbar = () => {
   const navLinks = useMemo(
     () => [
       { href: "#lab", label: "Лаборатория" },
-      { href: "#training", label: "Тренировки" },
+      { href: "#consultations", label: "Консультации" },
       { href: "#about", label: "О\u00A0себе" },
       { href: "#faq", label: "FAQ" },
     ],
@@ -30,20 +30,21 @@ const Navbar = () => {
       if (prefersReducedMotion) {
         return {
           padding: '12px 16px',
-          backgroundColor: 'hsl(var(--background) / 0.95)',
-          borderBottom: '1px solid hsl(var(--border))',
-          boxShadow: 'none',
+          backgroundColor: 'hsl(0 0% 100% / 0.14)',
+          backdropFilter: 'blur(16px)',
+          border: '1px solid hsl(0 0% 100% / 0.24)',
+          boxShadow: '0 10px 32px hsl(var(--background) / 0.45), inset 0 1px 0 hsl(0 0% 100% / 0.16)',
         };
       }
       return {
         padding: `${12 - scrollProgress * 4}px ${16 - scrollProgress * 4}px`,
-        backgroundColor: `hsl(var(--background) / ${0.85 + scrollProgress * 0.1})`,
-        backdropFilter: `blur(${12 + scrollProgress * 8}px)`,
-        border: `1px solid hsl(var(--border) / ${0.4 + scrollProgress * 0.2})`,
+        backgroundColor: `hsl(0 0% 100% / ${0.1 + scrollProgress * 0.08})`,
+        backdropFilter: `blur(${14 + scrollProgress * 10}px)`,
+        border: `1px solid hsl(0 0% 100% / ${0.2 + scrollProgress * 0.12})`,
         boxShadow:
           scrollProgress > 0.1
-            ? `0 ${4 + scrollProgress * 8}px ${16 + scrollProgress * 16}px hsl(var(--background) / ${0.45 + scrollProgress * 0.1})`
-            : "0 8px 32px hsl(var(--background) / 0.6)",
+            ? `0 ${6 + scrollProgress * 10}px ${20 + scrollProgress * 18}px hsl(var(--background) / ${0.42 + scrollProgress * 0.08}), inset 0 1px 0 hsl(0 0% 100% / ${0.14 + scrollProgress * 0.08})`
+            : '0 10px 32px hsl(var(--background) / 0.48), inset 0 1px 0 hsl(0 0% 100% / 0.16)',
       };
     },
     [scrollProgress, prefersReducedMotion]
@@ -94,7 +95,7 @@ const Navbar = () => {
       const progress = Math.min(window.scrollY / 200, 1);
       setScrollProgress(progress);
 
-      const sections = ["lab", "training", "about", "faq"];
+      const sections = ["lab", "consultations", "about", "faq"];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {

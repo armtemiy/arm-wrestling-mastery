@@ -13,7 +13,7 @@ interface SEOProps {
 export const SEO = ({
   title = 'Armtemiy Lab — диагностика и инструменты для армрестлинга',
   description = 'Armtemiy Lab — мини-приложение в Telegram: быстрый разбор поражений и конкретные рекомендации.',
-  keywords = 'армрестлинг, Armtemiy Lab, диагностика, разбор поражений, техника армрестлинга, тренировки, Тула',
+  keywords = 'армрестлинг, Armtemiy Lab, диагностика, разбор поражений, техника армрестлинга, консультация, тренировочная программа, Тула',
   image = 'https://armtemiy.ru/images/og-image-1200x630.jpg',
   type = 'website',
   noindex = false,

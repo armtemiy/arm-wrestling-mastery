@@ -20,8 +20,8 @@ const FAQSection = () => {
     staggerMs: prefersReducedMotion ? 0 : 100,
   });
 
-  const { containerRef: trainingRef, visibleItems: trainingVisible } = useStaggeredReveal({
-    itemCount: faqData.training.items.length,
+  const { containerRef: consultationsRef, visibleItems: consultationsVisible } = useStaggeredReveal({
+    itemCount: faqData.consultations.items.length,
     staggerMs: prefersReducedMotion ? 0 : 100,
   });
 
@@ -108,18 +108,18 @@ const FAQSection = () => {
                 className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-4 sm:mb-5"
                 style={COMMON_STYLES.satoshi}
               >
-                {faqData.training.title}
+                {faqData.consultations.title}
               </p>
-              <div ref={trainingRef}>
+              <div ref={consultationsRef}>
                 <Accordion type="single" collapsible className="space-y-3">
-                  {faqData.training.items.map((faq, index) => (
+                  {faqData.consultations.items.map((faq, index) => (
                     <div
-                      key={`training-${index}`}
-                      className={prefersReducedMotion ? "" : `stagger-item ${trainingVisible[index] ? "visible" : ""}`}
+                      key={`consultations-${index}`}
+                      className={prefersReducedMotion ? "" : `stagger-item ${consultationsVisible[index] ? "visible" : ""}`}
                       style={{ transitionDelay: prefersReducedMotion ? "0ms" : undefined }}
                     >
                       <AccordionItem
-                        value={`training-${index}`}
+                        value={`consultations-${index}`}
                         className={`border border-border rounded-xl sm:rounded-2xl px-4 sm:px-6 bg-card data-[state=open]:bg-accent/5 data-[state=open]:border-primary/40 relative overflow-hidden group ${
                           prefersReducedMotion
                             ? ""

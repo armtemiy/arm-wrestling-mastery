@@ -207,7 +207,7 @@ const TerminalContactForm = () => {
         addLine({ type: "input", content: `> ${phone}` });
         scheduleAction(() => {
           addLine({ type: "system", content: "Записал." });
-          addLine({ type: "prompt", content: "Что тебя интересует? (Armtemiy Lab, тренировки, вопрос)" });
+          addLine({ type: "prompt", content: "Что тебя интересует? (Armtemiy Lab, консультация, вопрос)" });
           setStep("message");
         }, 300);
         return;
@@ -353,7 +353,7 @@ const TerminalContactForm = () => {
       case "phone":
         return "+7 999 123-45-67";
       case "message":
-        return "Хочу Armtemiy Lab / на тренировку";
+        return "Хочу Armtemiy Lab / на консультацию";
       default:
         return "";
     }

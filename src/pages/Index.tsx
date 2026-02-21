@@ -2,11 +2,10 @@ import { Suspense, lazy } from "react";
 import Navbar from "@/components/landing/Navbar";
 import HeroSection from "@/components/landing/HeroSection";
 import StatsSection from "@/components/landing/StatsSection";
+import ConsultationSection from "@/components/landing/ConsultationSection";
 import { SEO } from "@/components/SEO";
 
 const ProgramSection = lazy(() => import("@/components/landing/ProgramSection"));
-const TrainingSection = lazy(() => import("@/components/landing/TrainingSection"));
-const LeadMagnetSection = lazy(() => import("@/components/landing/LeadMagnetSection"));
 const AboutSection = lazy(() => import("@/components/landing/AboutSection"));
 const MarqueeTicker = lazy(() => import("@/components/landing/MarqueeTicker"));
 const FAQSection = lazy(() => import("@/components/landing/FAQSection"));
@@ -71,13 +70,14 @@ const Index = () => {
     <>
       <SEO
         title="Armtemiy Lab — диагностика и инструменты для армрестлинга | Тула"
-        description="Armtemiy Lab — мини-приложение в Telegram: быстрый разбор поражений, понятные рекомендации и инструменты для армрестлера."
-        keywords="армрестлинг, Armtemiy Lab, диагностика, разбор поражений, техника армрестлинга, тренировки, Тула"
+        description="Armtemiy Lab — мини-приложение в Telegram: быстрый разбор поражений, понятные рекомендации и инструменты для армрестлера. Крафтовые консультации по технике и программе."
+        keywords="армрестлинг, Armtemiy Lab, диагностика, разбор поражений, техника армрестлинга, консультация, тренировочная программа, Тула"
       />
       <div className="min-h-screen">
         <Navbar />
         <HeroSection />
         <StatsSection />
+        <ConsultationSection />
 
         <Suspense
           fallback={
@@ -88,28 +88,6 @@ const Index = () => {
           }
         >
           <ProgramSection />
-        </Suspense>
-
-        <Suspense
-          fallback={
-            <LazySectionFallback
-              id="training"
-              className="bg-[hsl(15_7%_9%)] min-h-[920px] md:min-h-[700px] lg:min-h-[640px]"
-            />
-          }
-        >
-          <TrainingSection />
-        </Suspense>
-
-        <Suspense
-          fallback={
-            <LazySectionFallback
-              id="lead-magnet"
-              className="bg-[hsl(15_8%_8%)] min-h-[900px] md:min-h-[700px] lg:min-h-[640px]"
-            />
-          }
-        >
-          <LeadMagnetSection />
         </Suspense>
 
         <Suspense
