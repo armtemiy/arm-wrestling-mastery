@@ -29,7 +29,7 @@ const Navbar = () => {
     () => {
       if (prefersReducedMotion) {
         return {
-          padding: '12px 16px',
+          padding: '10px 14px',
           backgroundColor: 'hsl(0 0% 100% / 0.14)',
           backdropFilter: 'blur(16px)',
           border: '1px solid hsl(0 0% 100% / 0.24)',
@@ -37,7 +37,7 @@ const Navbar = () => {
         };
       }
       return {
-        padding: `${12 - scrollProgress * 4}px ${16 - scrollProgress * 4}px`,
+        padding: `${10 - scrollProgress * 3}px ${14 - scrollProgress * 3}px`,
         backgroundColor: `hsl(0 0% 100% / ${0.1 + scrollProgress * 0.08})`,
         backdropFilter: `blur(${14 + scrollProgress * 10}px)`,
         border: `1px solid hsl(0 0% 100% / ${0.2 + scrollProgress * 0.12})`,
@@ -191,7 +191,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between gap-2 md:gap-4">
           <button
             type="button"
-            className="min-h-[44px] min-w-[44px] flex items-center justify-center px-3 py-2 text-base sm:text-lg md:text-xl lg:text-2xl text-foreground font-bold tracking-tighter uppercase italic whitespace-nowrap hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full"
+            className="min-h-[40px] min-w-[40px] flex items-center justify-center px-2.5 py-1.5 text-sm sm:text-base md:text-lg lg:text-xl text-foreground font-bold tracking-tighter uppercase italic whitespace-nowrap hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full"
             style={COMMON_STYLES.clashDisplay}
             onClick={() => {
               window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
@@ -212,7 +212,7 @@ const Navbar = () => {
                   onClick={() => scrollToSection(link.href)}
                   onMouseEnter={() => setHoveredLink(link.href)}
                   onMouseLeave={() => setHoveredLink(null)}
-                  className={`relative min-h-[44px] px-4 py-2 text-sm font-bold uppercase tracking-wider whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full ${prefersReducedMotion ? '' : 'transition-all duration-300'} ${
+                  className={`relative min-h-[38px] px-3 py-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-full ${prefersReducedMotion ? '' : 'transition-all duration-300'} ${
                     isActive || isHovered ? "text-foreground" : "text-muted-foreground hover:text-foreground/90"
                   }`}
                   style={COMMON_STYLES.satoshi}
@@ -231,7 +231,7 @@ const Navbar = () => {
 
           <Button
             asChild
-            className={`hidden md:flex bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-6 py-2 rounded-full h-auto min-h-[44px] border-none shadow-[0_0_25px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
+            className={`hidden md:flex bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-5 py-1.5 rounded-full h-auto min-h-[38px] text-xs sm:text-sm border-none shadow-[0_0_25px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
           >
             <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
               ВОЙТИ В LAB
@@ -241,12 +241,12 @@ const Navbar = () => {
           <button
             ref={menuButtonRef}
             onClick={toggleMobileMenu}
-            className={`md:hidden min-h-[44px] min-w-[44px] flex items-center justify-center p-2.5 text-foreground hover:bg-accent/50 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all active:scale-90'}`}
+            className={`md:hidden min-h-[40px] min-w-[40px] flex items-center justify-center p-2 text-foreground hover:bg-accent/50 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all active:scale-90'}`}
             aria-label={isMobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-menu"
           >
-            {isMobileMenuOpen ? <X size={24} strokeWidth={2.5} /> : <Menu size={24} strokeWidth={2.5} />}
+            {isMobileMenuOpen ? <X size={20} strokeWidth={2.5} /> : <Menu size={20} strokeWidth={2.5} />}
           </button>
         </div>
       </nav>

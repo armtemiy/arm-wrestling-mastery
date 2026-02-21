@@ -80,7 +80,7 @@ const HeroSection = () => {
         style={transformStyles}
       >
         <div className="mx-auto flex w-full max-w-[980px] flex-col items-center">
-          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <div className="text-center mb-4 sm:mb-6 md:mb-8">
             <h1
               className={`font-display font-black leading-[0.95] tracking-[-0.01em] ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-200'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={COMMON_STYLES.clashDisplay}
@@ -103,7 +103,7 @@ const HeroSection = () => {
             </h1>
 
             <p
-              className={`text-center text-base sm:text-lg md:text-xl text-foreground/80 mt-6 sm:mt-8 mb-8 sm:mb-10 max-w-[34rem] md:max-w-[38rem] mx-auto leading-relaxed px-2 ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-500'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`text-center text-base sm:text-lg md:text-xl text-foreground/80 mt-4 sm:mt-5 mb-5 sm:mb-6 max-w-[34rem] md:max-w-[38rem] mx-auto leading-relaxed px-2 ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-500'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={COMMON_STYLES.satoshi}
             >
               а не надейся на удачу

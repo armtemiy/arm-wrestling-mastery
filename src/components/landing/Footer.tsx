@@ -38,7 +38,7 @@ const Footer = () => {
   return (
     <footer
       ref={ref}
-      className="relative overflow-hidden py-8 sm:py-10 md:py-12 bg-background"
+      className="relative overflow-hidden py-6 sm:py-8 md:py-10 bg-background"
     >
       <div
         className={`relative max-w-4xl mx-4 sm:mx-auto rounded-2xl sm:rounded-3xl overflow-hidden ${prefersReducedMotion ? '' : 'transition-all duration-700 ease-out'} ${
@@ -52,20 +52,20 @@ const Footer = () => {
         <div className="absolute top-0 left-1/4 w-[200px] sm:w-[300px] h-[100px] sm:h-[150px] rounded-full bg-primary/10 blur-[60px] sm:blur-[80px]" />
         <div className="absolute bottom-0 right-1/4 w-[150px] sm:w-[200px] h-[75px] sm:h-[100px] rounded-full bg-secondary/10 blur-[45px] sm:blur-[60px]" />
 
-        <div className="relative px-5 sm:px-6 md:px-10 py-8 sm:py-10 md:py-14">
+        <div className="relative px-5 sm:px-6 md:px-8 py-6 sm:py-8">
           <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-3 md:gap-12 items-start">
-              <div className={`flex flex-col gap-3 sm:gap-4 text-center md:text-left ${prefersReducedMotion ? '' : 'transition-all duration-500 delay-100'} ${
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3 md:gap-10 items-start">
+              <div className={`flex flex-col gap-2 sm:gap-3 text-center md:text-left ${prefersReducedMotion ? '' : 'transition-all duration-500 delay-100'} ${
                 prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}>
                 <span
-                  className="text-3xl sm:text-4xl text-foreground font-bold"
+                  className="text-2xl sm:text-3xl text-foreground font-bold"
                   style={COMMON_STYLES.clashDisplay}
                 >
                   Armtemiy
                 </span>
-                <p className="text-muted-foreground text-sm sm:text-base max-w-xs mx-auto md:mx-0 leading-relaxed" style={COMMON_STYLES.satoshi}>
-                  Armtemiy Lab — диагностика и инструменты для армрестлера. Чётко, без воды.
+                <p className="text-muted-foreground text-xs sm:text-sm max-w-xs mx-auto md:mx-0 leading-relaxed" style={COMMON_STYLES.satoshi}>
+                  Armtemiy Lab — инструменты + крафтовые консультации для армрестлера.
                 </p>
               </div>
 
@@ -124,7 +124,7 @@ const Footer = () => {
                         />
                       </span>
 
-                      <span className={`relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-card border border-border overflow-hidden ${prefersReducedMotion ? '' : 'transition-all duration-300 group-hover:scale-110 group-hover:border-primary'}`}
+                      <span className={`relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-card border border-border overflow-hidden ${prefersReducedMotion ? '' : 'transition-all duration-300 group-hover:scale-110 group-hover:border-primary'}`}
                         style={{
                           boxShadow: 'inset 0 -2px 4px hsl(var(--background) / 0.25)',
                         }}
@@ -166,18 +166,18 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className={`mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-8 border-t border-border flex flex-col items-center gap-4 sm:gap-5 md:flex-row md:justify-between ${prefersReducedMotion ? '' : 'transition-all duration-500 delay-500'} ${
+            <div className={`mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border flex flex-col items-center gap-3 sm:gap-4 md:flex-row md:justify-between ${prefersReducedMotion ? '' : 'transition-all duration-500 delay-500'} ${
               prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>
-              <p className="text-muted-foreground text-sm text-center md:text-left" style={COMMON_STYLES.satoshi}>
+              <p className="text-muted-foreground text-xs sm:text-sm text-center md:text-left" style={COMMON_STYLES.satoshi}>
                 © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-sm">
+              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                 <a
                   href="https://t.me/armtemiy_lab_bot"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="min-h-[44px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
+                  className="min-h-[36px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
                 >
                   @armtemiy_lab_bot
                 </a>
@@ -186,7 +186,7 @@ const Footer = () => {
                   href="https://t.me/armtemiy"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="min-h-[44px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
+                  className="min-h-[36px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
                 >
                   @armtemiy
                 </a>
