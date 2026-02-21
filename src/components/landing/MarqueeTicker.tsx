@@ -16,7 +16,7 @@ const MarqueeTicker = () => {
 
   return (
     <div className="relative w-full overflow-hidden bg-background" aria-hidden="true">
-      <div className={`relative ${prefersReducedMotion ? 'py-4' : '-rotate-2 scale-[1.02] sm:scale-110 my-4 sm:my-6'}`}>
+      <div className={`relative ${prefersReducedMotion ? 'py-4' : 'sm:-rotate-2 sm:scale-110 my-4 sm:my-6'}`}>
         <div className={`relative bg-gradient-to-r from-primary via-secondary to-primary py-4 sm:py-5 ${prefersReducedMotion ? '' : 'shadow-[0_0_40px_hsl(var(--primary)/0.3)] sm:shadow-[0_0_80px_hsl(var(--primary)/0.4)]'}`}>
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/50 to-transparent" />
 
