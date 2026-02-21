@@ -47,7 +47,7 @@ const HeroSection = () => {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-[84svh] sm:min-h-[88svh] items-center bg-background pt-[calc(var(--header-offset)+clamp(24px,3vw,40px))] pb-10 sm:pb-12 lg:pb-16 scroll-mt-[var(--header-offset)]"
+      className="relative flex min-h-[84svh] sm:min-h-[88svh] items-center bg-background pt-[calc(var(--header-offset)+clamp(24px,3vw,40px))] pb-16 sm:pb-20 lg:pb-24 scroll-mt-[var(--header-offset)]"
       style={{ perspective: '1200px', overflow: 'hidden' }}
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -119,7 +119,7 @@ const HeroSection = () => {
                 asChild
                 className={`relative h-14 w-full sm:w-auto sm:min-w-[236px] bg-gradient-to-br from-primary to-secondary hover:brightness-110 text-primary-foreground font-black text-[0.95rem] sm:text-base px-7 sm:px-9 rounded-full shadow-[0_0_20px_hsl(var(--primary)/0.3)] overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300 hover:scale-105 active:scale-95'}`}
               >
-                <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer">
+                <a href="https://t.me/armtemiy" target="_blank" rel="noopener noreferrer">
                   <span className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${prefersReducedMotion ? 'translate-x-0 opacity-0' : '-translate-x-full group-hover:translate-x-full transition-transform duration-1000'}`} />
                   <span className="relative flex items-center justify-center gap-2 sm:gap-3">
                     СТАТЬ СИЛЬНЕЕ
