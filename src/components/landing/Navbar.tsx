@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const navLinks = useMemo(
     () => [
-      { href: "#lab", label: "Лаборатория" },
+      { href: "#product", label: "Продукт" },
       { href: "#consultations", label: "Консультации" },
       { href: "#about", label: "О\u00A0себе" },
       { href: "#faq", label: "FAQ" },
@@ -95,7 +95,7 @@ const Navbar = () => {
       const progress = Math.min(window.scrollY / 200, 1);
       setScrollProgress(progress);
 
-      const sections = ["lab", "consultations", "about", "faq"];
+      const sections = ["product", "consultations", "about", "faq"];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -152,6 +152,11 @@ const Navbar = () => {
       const firstElement = candidates[0];
       const lastElement = candidates[candidates.length - 1];
       const activeElement = document.activeElement as HTMLElement | null;
+
+      if (!firstElement || !lastElement) {
+        e.preventDefault();
+        return;
+      }
 
       if (e.shiftKey) {
         if (!activeElement || activeElement === firstElement || !panel.contains(activeElement)) {
@@ -233,8 +238,15 @@ const Navbar = () => {
             asChild
             className={`hidden md:flex bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-5 py-1.5 rounded-full h-auto min-h-[38px] text-xs sm:text-sm border-none shadow-[0_0_25px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300'}`}
           >
-            <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
-              ВОЙТИ В LAB
+            <a
+              href="#product"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToSection("#product");
+              }}
+              style={COMMON_STYLES.clashDisplay}
+            >
+              ОТКРЫТЬ БАЗУ
             </a>
           </Button>
 
@@ -292,13 +304,12 @@ const Navbar = () => {
             <div className="w-12 h-1 bg-border/60 rounded-full my-3 sm:my-4" aria-hidden="true" />
 
             <Button
-              asChild
               size="lg"
               className="min-h-[52px] bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-8 py-4 rounded-full shadow-[0_0_30px_hsl(var(--primary)/0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              onClick={() => scrollToSection("#product")}
+              style={COMMON_STYLES.clashDisplay}
             >
-              <a href="https://t.me/armtemiy_lab_bot" target="_blank" rel="noopener noreferrer" style={COMMON_STYLES.clashDisplay}>
-                ВОЙТИ В LAB
-              </a>
+              ОТКРЫТЬ БАЗУ
             </Button>
           </div>
         </div>

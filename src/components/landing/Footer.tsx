@@ -8,7 +8,7 @@ const Footer = () => {
   const prefersReducedMotion = useReducedMotion();
 
   const navLinks = [
-    { label: "Лаборатория", href: "#lab" },
+    { label: "Продукт", href: "#product" },
     { label: "Консультации", href: "#consultations" },
     { label: "О себе", href: "#about" },
     { label: "FAQ", href: "#faq" },
@@ -65,7 +65,7 @@ const Footer = () => {
                   Armtemiy
                 </span>
                 <p className="text-muted-foreground text-xs sm:text-sm max-w-xs mx-auto md:mx-0 leading-relaxed" style={COMMON_STYLES.satoshi}>
-                  Armtemiy Lab — инструменты + крафтовые консультации для армрестлера.
+                  База Армтемия, крафтовые консультации и Armtemiy Lab для системного армрестлинга.
                 </p>
               </div>
 

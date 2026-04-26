@@ -38,7 +38,7 @@ const ConsultationSection = () => {
       </div>
 
       <div
-        ref={sectionRef}
+        ref={sectionRef as React.RefObject<HTMLDivElement>}
         className={`container mx-auto px-4 sm:px-6 ${
           prefersReducedMotion ? "opacity-100" : `transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -68,6 +68,12 @@ const ConsultationSection = () => {
           </div>
 
           <div className="max-w-3xl mx-auto mb-5 sm:mb-6">
+            <p
+              className="text-[hsl(15_10%_76%)] text-sm sm:text-base md:text-lg mb-3 leading-relaxed text-center"
+              style={COMMON_STYLES.satoshi}
+            >
+              Если База Армтемия дает систему и общую оптику, то крафтовая консультация — это уже точная настройка под твою реальность.
+            </p>
             <p
               className="text-[hsl(15_10%_70%)] text-sm sm:text-base md:text-lg mb-2 leading-relaxed text-center"
               style={COMMON_STYLES.satoshi}

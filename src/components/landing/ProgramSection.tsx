@@ -99,7 +99,7 @@ const ProgramSection = () => {
       </div>
 
       <div
-        ref={sectionRef}
+        ref={sectionRef as React.RefObject<HTMLDivElement>}
         className={`container mx-auto px-4 ${prefersReducedMotion ? "" : "transition-all duration-700"} ${
           prefersReducedMotion || isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
@@ -107,13 +107,13 @@ const ProgramSection = () => {
         <div className="text-center mb-8 md:mb-12">
           <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[hsl(5_85%_60%/0.15)] text-[hsl(5_85%_60%)] text-sm font-medium mb-4" style={COMMON_STYLES.satoshi}>
             <Sparkles size={14} />
-            Armtemiy Lab
+            ВСПОМОГАТЕЛЬНЫЕ ИНСТРУМЕНТЫ
           </span>
           <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-3" style={COMMON_STYLES.clashDisplay}>
-            Карманная лаборатория
+            Armtemiy Lab
           </h2>
           <p className="text-[hsl(15_10%_60%)] text-base sm:text-lg max-w-2xl mx-auto" style={COMMON_STYLES.satoshi}>
-            Инструменты для диагностики и быстрых решений.
+            Быстрые ориентиры, диагностика и прикладные инструменты. Карманный выручатель армрестлера и полезное дополнение к Базе Армтемия.
           </p>
         </div>
 
@@ -148,7 +148,7 @@ const ProgramSection = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Открыть Lab
+              ОТКРЫТЬ LAB
               <ArrowRight className="ml-2" size={20} />
             </a>
           </Button>

@@ -29,7 +29,7 @@ const AboutSection = () => {
         <div className="absolute bottom-0 left-0 w-[300px] sm:w-[500px] h-[180px] sm:h-[300px] rounded-full bg-[hsl(15_90%_50%/0.05)] blur-[100px] sm:blur-[160px]" />
       </div>
       <div
-        ref={sectionRef}
+        ref={sectionRef as React.RefObject<HTMLDivElement>}
         className={`container mx-auto px-4 sm:px-6 ${
           prefersReducedMotion ? "opacity-100" : `transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -73,7 +73,7 @@ const AboutSection = () => {
                 className="text-[hsl(15_10%_60%)] text-base sm:text-lg mb-6 sm:mb-8 leading-relaxed"
                 style={COMMON_STYLES.satoshi}
               >
-                Теперь делюсь тем, что реально работает. Без понтов, без «секретных техник» — просто система, которая даёт результат.
+                Теперь делюсь тем, что реально работает. Без понтов, без «секретных техник» — просто система, которая даёт результат. Можно сказать, эндоктринолог армрестлинга: ищу, где в системе сбилась регуляция, а не лечу симптомы случайными советами.
               </p>
 
               <div className="space-y-3 sm:space-y-4">

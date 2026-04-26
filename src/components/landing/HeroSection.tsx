@@ -27,6 +27,8 @@ const HeroSection = () => {
       window.addEventListener("scroll", handleScroll, { passive: true });
       return () => window.removeEventListener("scroll", handleScroll);
     }
+
+    return undefined;
   }, [handleScroll, prefersReducedMotion]);
 
   const transformStyles = useMemo(() => {
@@ -106,7 +108,7 @@ const HeroSection = () => {
               className={`text-center text-base sm:text-lg md:text-xl text-foreground/80 mt-4 sm:mt-5 mb-5 sm:mb-6 max-w-[34rem] md:max-w-[38rem] mx-auto leading-relaxed px-2 ${prefersReducedMotion ? '' : 'transition-all duration-1000 delay-500'} ${prefersReducedMotion || isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={COMMON_STYLES.satoshi}
             >
-              а не надейся на удачу
+              База Армтемия: система, материалы и сообщество для армрестлинга без случайных шаблонов.
             </p>
           </div>
 
@@ -119,10 +121,16 @@ const HeroSection = () => {
                 asChild
                 className={`relative h-14 w-full sm:w-auto sm:min-w-[236px] bg-gradient-to-br from-primary to-secondary hover:brightness-110 text-primary-foreground font-black text-[0.95rem] sm:text-base px-7 sm:px-9 rounded-full shadow-[0_0_20px_hsl(var(--primary)/0.3)] overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? '' : 'transition-all duration-300 hover:scale-105 active:scale-95'}`}
               >
-                <a href="https://t.me/armtemiy" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="#product"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    document.querySelector("#product")?.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+                  }}
+                >
                   <span className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${prefersReducedMotion ? 'translate-x-0 opacity-0' : '-translate-x-full group-hover:translate-x-full transition-transform duration-1000'}`} />
                   <span className="relative flex items-center justify-center gap-2 sm:gap-3">
-                    СТАТЬ СИЛЬНЕЕ
+                    ОТКРЫТЬ БАЗУ
                     <ArrowRight size={20} strokeWidth={3} className={prefersReducedMotion ? '' : 'group-hover:translate-x-2 transition-transform'} />
                   </span>
                 </a>

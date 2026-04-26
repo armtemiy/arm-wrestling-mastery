@@ -15,13 +15,18 @@ const FAQSection = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal();
   const prefersReducedMotion = useReducedMotion();
 
-  const { containerRef: labRef, visibleItems: labVisible } = useStaggeredReveal({
-    itemCount: faqData.lab.items.length,
+  const { containerRef: productRef, visibleItems: productVisible } = useStaggeredReveal({
+    itemCount: faqData.product.items.length,
     staggerMs: prefersReducedMotion ? 0 : 100,
   });
 
   const { containerRef: consultationsRef, visibleItems: consultationsVisible } = useStaggeredReveal({
     itemCount: faqData.consultations.items.length,
+    staggerMs: prefersReducedMotion ? 0 : 100,
+  });
+
+  const { containerRef: labRef, visibleItems: labVisible } = useStaggeredReveal({
+    itemCount: faqData.lab.items.length,
     staggerMs: prefersReducedMotion ? 0 : 100,
   });
 
@@ -34,7 +39,7 @@ const FAQSection = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] sm:w-[800px] h-[250px] sm:h-[400px] rounded-full bg-primary/5 blur-[120px] sm:blur-[200px]" />
       </div>
       <div
-        ref={sectionRef}
+        ref={sectionRef as React.RefObject<HTMLDivElement>}
         className={`container mx-auto px-4 sm:px-6 ${
           prefersReducedMotion ? "opacity-100" : `transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -63,18 +68,18 @@ const FAQSection = () => {
                 className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-4 sm:mb-5"
                 style={COMMON_STYLES.satoshi}
               >
-                {faqData.lab.title}
+                {faqData.product.title}
               </p>
-              <div ref={labRef}>
+              <div ref={productRef as React.RefObject<HTMLDivElement>}>
                 <Accordion type="single" collapsible className="space-y-3">
-                  {faqData.lab.items.map((faq, index) => (
+                  {faqData.product.items.map((faq, index) => (
                     <div
-                      key={`lab-${index}`}
-                      className={prefersReducedMotion ? "" : `stagger-item ${labVisible[index] ? "visible" : ""}`}
+                      key={`product-${index}`}
+                      className={prefersReducedMotion ? "" : `stagger-item ${productVisible[index] ? "visible" : ""}`}
                       style={{ transitionDelay: prefersReducedMotion ? "0ms" : undefined }}
                     >
                       <AccordionItem
-                        value={`lab-${index}`}
+                        value={`product-${index}`}
                         className={`border border-border rounded-xl sm:rounded-2xl px-4 sm:px-6 bg-card data-[state=open]:bg-accent/5 data-[state=open]:border-primary/40 relative overflow-hidden group ${
                           prefersReducedMotion
                             ? ""
@@ -110,7 +115,7 @@ const FAQSection = () => {
               >
                 {faqData.consultations.title}
               </p>
-              <div ref={consultationsRef}>
+              <div ref={consultationsRef as React.RefObject<HTMLDivElement>}>
                 <Accordion type="single" collapsible className="space-y-3">
                   {faqData.consultations.items.map((faq, index) => (
                     <div
@@ -120,6 +125,51 @@ const FAQSection = () => {
                     >
                       <AccordionItem
                         value={`consultations-${index}`}
+                        className={`border border-border rounded-xl sm:rounded-2xl px-4 sm:px-6 bg-card data-[state=open]:bg-accent/5 data-[state=open]:border-primary/40 relative overflow-hidden group ${
+                          prefersReducedMotion
+                            ? ""
+                            : "transition-all duration-300 hover:border-primary/20 card-lift"
+                        }`}
+                      >
+                        {!prefersReducedMotion && (
+                          <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                        )}
+                        <AccordionTrigger
+                          className="relative z-10 text-left text-foreground hover:no-underline py-4 sm:py-5 md:py-6 text-base sm:text-lg font-medium min-h-[56px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
+                          style={COMMON_STYLES.satoshi}
+                        >
+                          {faq.question}
+                        </AccordionTrigger>
+                        <AccordionContent
+                          className="relative z-10 text-muted-foreground pb-5 sm:pb-6 text-sm sm:text-base leading-relaxed"
+                          style={COMMON_STYLES.satoshi}
+                        >
+                          {faq.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </div>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
+
+            <div>
+              <p
+                className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-4 sm:mb-5"
+                style={COMMON_STYLES.satoshi}
+              >
+                {faqData.lab.title}
+              </p>
+              <div ref={labRef as React.RefObject<HTMLDivElement>}>
+                <Accordion type="single" collapsible className="space-y-3">
+                  {faqData.lab.items.map((faq, index) => (
+                    <div
+                      key={`lab-${index}`}
+                      className={prefersReducedMotion ? "" : `stagger-item ${labVisible[index] ? "visible" : ""}`}
+                      style={{ transitionDelay: prefersReducedMotion ? "0ms" : undefined }}
+                    >
+                      <AccordionItem
+                        value={`lab-${index}`}
                         className={`border border-border rounded-xl sm:rounded-2xl px-4 sm:px-6 bg-card data-[state=open]:bg-accent/5 data-[state=open]:border-primary/40 relative overflow-hidden group ${
                           prefersReducedMotion
                             ? ""

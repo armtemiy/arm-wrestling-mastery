@@ -5,6 +5,7 @@ import StatsSection from "@/components/landing/StatsSection";
 import ConsultationSection from "@/components/landing/ConsultationSection";
 import { SEO } from "@/components/SEO";
 
+const ProductSection = lazy(() => import("@/components/landing/ProductSection"));
 const ProgramSection = lazy(() => import("@/components/landing/ProgramSection"));
 const AboutSection = lazy(() => import("@/components/landing/AboutSection"));
 const MarqueeTicker = lazy(() => import("@/components/landing/MarqueeTicker"));
@@ -69,14 +70,26 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="Armtemiy Lab — диагностика и инструменты для армрестлинга | Тула"
-        description="Armtemiy Lab — мини-приложение в Telegram: быстрый разбор поражений, понятные рекомендации и инструменты для армрестлера. Крафтовые консультации по технике и программе."
-        keywords="армрестлинг, Armtemiy Lab, диагностика, разбор поражений, техника армрестлинга, консультация, тренировочная программа, Тула"
+        title="База Армтемия — Армрестлинг Релиз, сообщество и консультации"
+        description="База Армтемия — закрытая библиотека материалов и сообщество по армрестлингу. Ядро — Армрестлинг Релиз: система мышления, биомеханика, техники и анализ без шаблонов. Отдельно — крафтовые консультации и Armtemiy Lab."
+        keywords="армрестлинг, База Армтемия, Армрестлинг Релиз, техника армрестлинга, биомеханика армрестлинга, консультации по армрестлингу, Telegram сообщество армрестлинг"
       />
       <div className="min-h-screen">
         <Navbar />
         <HeroSection />
         <StatsSection />
+
+        <Suspense
+          fallback={
+            <LazySectionFallback
+              id="product"
+              className="bg-[hsl(15_7%_9%)] min-h-[1400px] md:min-h-[1180px] lg:min-h-[1080px]"
+            />
+          }
+        >
+          <ProductSection />
+        </Suspense>
+
         <ConsultationSection />
 
         <Suspense
