@@ -1,6 +1,11 @@
-import React, { useState, useRef, useEffect, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 import { Send, CheckCircle2, Terminal, Loader2, XCircle } from "lucide-react";
-import { COMMON_STYLES } from "./common-styles";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSubmitLead } from "@/hooks/useSubmitLead";
 
@@ -27,7 +32,8 @@ const isValidPhone = (phone: string): boolean => {
 
 const isValidName = (name: string): boolean => {
   if (name.length < 2 || name.length > 50) return false;
-  const suspicious = /<|>|javascript:|http:|https:|www\.|SELECT|INSERT|DELETE|DROP|UNION/i;
+  const suspicious =
+    /<|>|javascript:|http:|https:|www\.|SELECT|INSERT|DELETE|DROP|UNION/i;
   return !suspicious.test(name);
 };
 
@@ -38,42 +44,51 @@ const isValidMessage = (message: string): boolean => {
 };
 
 function getCurrentTime() {
-  return new Date().toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit" });
+  return new Date().toLocaleTimeString("ru-RU", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
-const TerminalLineComponent = React.memo(({ line, index }: { line: TerminalLine; index: number }) => (
-  <div
-    className="terminal-line"
-    style={{ animationDelay: `${index * 50}ms` }}
-  >
-    {line.type === "system" && (
-      <div className="flex gap-2">
-        {line.timestamp && (
-          <span className="text-[hsl(0_0%_100%/0.3)]">[{line.timestamp}]</span>
-        )}
-        <span className="text-[hsl(0_0%_100%/0.6)]">{line.content}</span>
-      </div>
-    )}
-    {line.type === "prompt" && (
-      <div className="text-[hsl(150_70%_50%)] mt-3">{line.content}</div>
-    )}
-    {line.type === "input" && (
-      <div className="text-[hsl(0_0%_100%/0.9)] font-medium">{line.content}</div>
-    )}
-    {line.type === "success" && (
-      <div className="text-[hsl(142_76%_45%)] font-bold mt-3 flex items-center gap-2">
-        <CheckCircle2 className="w-4 h-4" />
-        {line.content}
-      </div>
-    )}
-    {line.type === "error" && (
-      <div className="text-[hsl(0_70%_50%)] font-bold mt-3 flex items-center gap-2">
-        <XCircle className="w-4 h-4" />
-        {line.content}
-      </div>
-    )}
-  </div>
-));
+const TerminalLineComponent = React.memo(
+  ({ line, index }: { line: TerminalLine; index: number }) => (
+    <div
+      className="terminal-line"
+      style={{ animationDelay: `${index * 50}ms` }}
+    >
+      {line.type === "system" && (
+        <div className="flex gap-2">
+          {line.timestamp && (
+            <span className="text-[hsl(0_0%_100%/0.3)]">
+              [{line.timestamp}]
+            </span>
+          )}
+          <span className="text-[hsl(0_0%_100%/0.6)]">{line.content}</span>
+        </div>
+      )}
+      {line.type === "prompt" && (
+        <div className="text-[hsl(150_70%_50%)] mt-3">{line.content}</div>
+      )}
+      {line.type === "input" && (
+        <div className="text-[hsl(0_0%_100%/0.9)] font-medium">
+          {line.content}
+        </div>
+      )}
+      {line.type === "success" && (
+        <div className="text-[hsl(142_76%_45%)] font-bold mt-3 flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4" />
+          {line.content}
+        </div>
+      )}
+      {line.type === "error" && (
+        <div className="text-[hsl(0_70%_50%)] font-bold mt-3 flex items-center gap-2">
+          <XCircle className="w-4 h-4" />
+          {line.content}
+        </div>
+      )}
+    </div>
+  ),
+);
 
 const TerminalContactForm = () => {
   const [step, setStep] = useState<FormStep>("name");
@@ -85,9 +100,13 @@ const TerminalContactForm = () => {
   const [honeypot, setHoneypot] = useState("");
   const [formLoadTime] = useState(Date.now());
   const [lines, setLines] = useState<TerminalLine[]>([
-    { type: "system", content: "ARMTEMIY // Форма связи", timestamp: getCurrentTime() },
+    {
+      type: "system",
+      content: "ARMTEMIY // Форма связи",
+      timestamp: getCurrentTime(),
+    },
     { type: "system", content: "Подключение..." },
-    { type: "system", content: "Готов. Давай знакомиться." },
+    { type: "system", content: "Готов. Давай познакомимся." },
     { type: "prompt", content: "Как тебя зовут?" },
   ]);
 
@@ -98,7 +117,9 @@ const TerminalContactForm = () => {
   const { submitLead, isSubmitting } = useSubmitLead();
 
   const clearPendingTimeouts = useCallback(() => {
-    pendingTimeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
+    pendingTimeoutsRef.current.forEach((timeoutId) =>
+      window.clearTimeout(timeoutId),
+    );
     pendingTimeoutsRef.current = [];
   }, []);
 
@@ -110,13 +131,15 @@ const TerminalContactForm = () => {
       }
 
       const timeoutId = window.setTimeout(() => {
-        pendingTimeoutsRef.current = pendingTimeoutsRef.current.filter((id) => id !== timeoutId);
+        pendingTimeoutsRef.current = pendingTimeoutsRef.current.filter(
+          (id) => id !== timeoutId,
+        );
         callback();
       }, delay);
 
       pendingTimeoutsRef.current.push(timeoutId);
     },
-    [prefersReducedMotion]
+    [prefersReducedMotion],
   );
 
   useEffect(() => {
@@ -142,11 +165,12 @@ const TerminalContactForm = () => {
     }
   }, [lines]);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       clearPendingTimeouts();
-    };
-  }, [clearPendingTimeouts]);
+    },
+    [clearPendingTimeouts],
+  );
 
   useEffect(() => {
     setFieldError(null);
@@ -158,7 +182,13 @@ const TerminalContactForm = () => {
 
   const isRateLimited = useCallback((): boolean => {
     const now = Date.now();
-    while (submissionTimestamps.length > 0 && submissionTimestamps[0] < now - RATE_LIMIT_WINDOW) {
+    while (submissionTimestamps.length > 0) {
+      const oldestTimestamp = submissionTimestamps[0];
+      if (
+        oldestTimestamp === undefined ||
+        oldestTimestamp >= now - RATE_LIMIT_WINDOW
+      )
+        break;
       submissionTimestamps.shift();
     }
     return submissionTimestamps.length >= MAX_SUBMISSIONS_PER_WINDOW;
@@ -170,7 +200,11 @@ const TerminalContactForm = () => {
   }, [formLoadTime, honeypot]);
 
   const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement> | React.KeyboardEvent<HTMLInputElement>) => {
+    async (
+      e:
+        | React.FormEvent<HTMLFormElement>
+        | React.KeyboardEvent<HTMLInputElement>,
+    ) => {
       e.preventDefault();
 
       if (isSubmitting || step === "sending") {
@@ -183,13 +217,16 @@ const TerminalContactForm = () => {
         if (!isValidName(name.trim())) {
           const errorText = "Хм, что-то не так с именем. Попробуй ещё раз.";
           setFieldError(errorText);
-          addLine({ type: "error", content: `✗ ${errorText}` });
+          addLine({ type: "error", content: `✕ ${errorText}` });
           return;
         }
 
         addLine({ type: "input", content: `> ${name}` });
         scheduleAction(() => {
-          addLine({ type: "system", content: `Приятно познакомиться, ${name}!` });
+          addLine({
+            type: "system",
+            content: `Приятно познакомиться, ${name}!`,
+          });
           addLine({ type: "prompt", content: "Куда позвонить или написать?" });
           setStep("phone");
         }, 300);
@@ -200,14 +237,18 @@ const TerminalContactForm = () => {
         if (!isValidPhone(phone.trim())) {
           const errorText = "Не похоже на номер. Пример: +7 999 123-45-67";
           setFieldError(errorText);
-          addLine({ type: "error", content: `✗ ${errorText}` });
+          addLine({ type: "error", content: `✕ ${errorText}` });
           return;
         }
 
         addLine({ type: "input", content: `> ${phone}` });
         scheduleAction(() => {
           addLine({ type: "system", content: "Записал." });
-          addLine({ type: "prompt", content: "Что тебя интересует? (Armtemiy Lab, консультация, вопрос)" });
+          addLine({
+            type: "prompt",
+            content:
+              "Что тебя интересует? (База, чат, консультация, Armtemiy Lab)",
+          });
           setStep("message");
         }, 300);
         return;
@@ -217,18 +258,21 @@ const TerminalContactForm = () => {
         if (!isValidMessage(message.trim())) {
           const errorText = "Что-то пошло не так. Попробуй переформулировать.";
           setFieldError(errorText);
-          addLine({ type: "error", content: `✗ ${errorText}` });
+          addLine({ type: "error", content: `✕ ${errorText}` });
           return;
         }
 
         if (isBot()) {
-          addLine({ type: "error", content: "✗ Ошибка проверки." });
+          addLine({ type: "error", content: "✕ Ошибка проверки." });
           setStep("error");
           return;
         }
 
         if (isRateLimited()) {
-          addLine({ type: "error", content: "✗ Слишком много заявок. Подожди минутку." });
+          addLine({
+            type: "error",
+            content: "✕ Слишком много заявок. Подожди минутку.",
+          });
           setStep("error");
           return;
         }
@@ -258,21 +302,30 @@ const TerminalContactForm = () => {
         if (result.success) {
           submissionTimestamps.push(Date.now());
           addLine({ type: "success", content: "✓ ЗАЯВКА ПРИНЯТА" });
-          addLine({ type: "system", content: `${name}, заявка отправлена в Armtemiy Lab.` });
+          addLine({
+            type: "system",
+            content: `${name}, заявка отправлена в Armtemiy.`,
+          });
           addLine({ type: "system", content: "Скоро напишу." });
           setStep("success");
           return;
         }
 
         if (result.status === 429) {
-          addLine({ type: "error", content: "✗ СЛИШКОМ МНОГО ЗАЯВОК" });
-          addLine({ type: "system", content: "Подожди минуту и попробуй снова." });
+          addLine({ type: "error", content: "✕ СЛИШКОМ МНОГО ЗАЯВОК" });
+          addLine({
+            type: "system",
+            content: "Подожди минуту и попробуй снова.",
+          });
           setStep("error");
           return;
         }
 
-        addLine({ type: "error", content: "✗ ЧТО-ТО ПОШЛО НЕ ТАК" });
-        addLine({ type: "system", content: "Открой Telegram и напиши боту: @armtemiy_lab_bot" });
+        addLine({ type: "error", content: "✕ ЧТО-ТО ПОШЛО НЕ ТАК" });
+        addLine({
+          type: "system",
+          content: "Открой Telegram и напиши боту: @armtemiy_lab_bot",
+        });
         setStep("error");
       }
     },
@@ -287,7 +340,7 @@ const TerminalContactForm = () => {
       isRateLimited,
       scheduleAction,
       submitLead,
-    ]
+    ],
   );
 
   const handleKeyDown = useCallback(
@@ -296,7 +349,7 @@ const TerminalContactForm = () => {
         handleSubmit(e);
       }
     },
-    [handleSubmit]
+    [handleSubmit],
   );
 
   const resetForm = useCallback(() => {
@@ -307,7 +360,11 @@ const TerminalContactForm = () => {
     setMessage("");
     setFieldError(null);
     setLines([
-      { type: "system", content: "ARMTEMIY // Форма связи", timestamp: getCurrentTime() },
+      {
+        type: "system",
+        content: "ARMTEMIY // Форма связи",
+        timestamp: getCurrentTime(),
+      },
       { type: "system", content: "Начинаем заново. Готов." },
       { type: "prompt", content: "Как тебя зовут?" },
     ]);
@@ -343,7 +400,7 @@ const TerminalContactForm = () => {
           break;
       }
     },
-    [step]
+    [step],
   );
 
   const getPlaceholder = useCallback(() => {
@@ -353,7 +410,7 @@ const TerminalContactForm = () => {
       case "phone":
         return "+7 999 123-45-67";
       case "message":
-        return "Хочу Armtemiy Lab / на консультацию";
+        return "Хочу в Базу / чат / на консультацию";
       default:
         return "";
     }
@@ -385,14 +442,15 @@ const TerminalContactForm = () => {
     }
   }, [step]);
 
-  const getInputMode = useCallback((): React.HTMLAttributes<HTMLInputElement>["inputMode"] => {
-    switch (step) {
-      case "phone":
-        return "tel";
-      default:
-        return "text";
-    }
-  }, [step]);
+  const getInputMode =
+    useCallback((): React.HTMLAttributes<HTMLInputElement>["inputMode"] => {
+      switch (step) {
+        case "phone":
+          return "tel";
+        default:
+          return "text";
+      }
+    }, [step]);
 
   const placeholder = useMemo(() => getPlaceholder(), [getPlaceholder]);
   const currentValue = useMemo(() => getCurrentValue(), [getCurrentValue]);
@@ -451,7 +509,10 @@ const TerminalContactForm = () => {
         )}
 
         {step !== "sending" && step !== "success" && step !== "error" && (
-          <form onSubmit={handleSubmit} className="mt-4 flex items-center gap-2">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-4 flex items-center gap-2"
+          >
             <label htmlFor={INPUT_ID} className="sr-only">
               {inputLabel}
             </label>
@@ -484,15 +545,20 @@ const TerminalContactForm = () => {
               Нажмите Enter или кнопку отправки для перехода к следующему шагу.
             </span>
             {fieldError && (
-              <p id={INPUT_ERROR_ID} className="sr-only" role="alert" aria-live="assertive">
+              <p
+                id={INPUT_ERROR_ID}
+                className="sr-only"
+                role="alert"
+                aria-live="assertive"
+              >
                 {fieldError}
               </p>
             )}
             <span className="terminal-cursor w-2 h-5 bg-[hsl(150_70%_50%)]" />
             <button
               type="submit"
-              disabled={isSubmitting || step === "sending"}
-              aria-disabled={isSubmitting || step === "sending"}
+              disabled={isSubmitting}
+              aria-disabled={isSubmitting}
               className="ml-2 p-2.5 sm:p-3 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg bg-[hsl(150_70%_45%/0.2)] hover:bg-[hsl(150_70%_45%/0.3)] text-[hsl(150_70%_50%)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(150_70%_50%)] focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(0_0%_8%)] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-[hsl(150_70%_45%/0.2)]"
               aria-label="Отправить"
             >
@@ -502,8 +568,14 @@ const TerminalContactForm = () => {
         )}
 
         {step === "sending" && (
-          <div className="mt-4 flex items-center gap-2 text-[hsl(0_0%_100%/0.6)]" role="status" aria-live="polite">
-            <Loader2 className={`w-4 h-4 ${prefersReducedMotion ? "" : "animate-spin"}`} />
+          <div
+            className="mt-4 flex items-center gap-2 text-[hsl(0_0%_100%/0.6)]"
+            role="status"
+            aria-live="polite"
+          >
+            <Loader2
+              className={`w-4 h-4 ${prefersReducedMotion ? "" : "animate-spin"}`}
+            />
             <span>Обработка...</span>
           </div>
         )}
@@ -519,7 +591,7 @@ const TerminalContactForm = () => {
       </div>
 
       <div className="mt-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-[hsl(0_0%_100%/0.5)] terminal-form px-1">
-        <span>Enter — отправить</span>
+        <span>Enter - отправить</span>
         <span>Защита: активна</span>
       </div>
     </div>

@@ -21,6 +21,8 @@ export function useScrollReveal(options: UseScrollRevealOptions = {}) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
+        if (!entry) return;
+
         if (entry.isIntersecting) {
           setIsVisible(true);
           if (once) observer.unobserve(entry.target);
@@ -28,7 +30,7 @@ export function useScrollReveal(options: UseScrollRevealOptions = {}) {
           setIsVisible(false);
         }
       },
-      { threshold, root, rootMargin }
+      { threshold, root, rootMargin },
     );
 
     observer.observe(node);

@@ -2,6 +2,59 @@ import React from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { COMMON_STYLES } from "./common-styles";
+import {
+  SOCIAL_LINKS,
+  footerSocialLinks,
+  type FooterSocialId,
+} from "@/data/social";
+
+const socialIconMap: Record<FooterSocialId, React.ReactNode> = {
+  telegram: (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5 fill-current"
+      aria-hidden="true"
+    >
+      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+    </svg>
+  ),
+  tiktok: (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5 fill-current"
+      aria-hidden="true"
+    >
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 5 20.21a6.34 6.34 0 0 0 10.86-4.43V8.86a8.16 8.16 0 0 0 4.77 1.52V6.95c-.35.001-.7-.034-1.04-.26Z" />
+    </svg>
+  ),
+  instagram: (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5 fill-current"
+      aria-hidden="true"
+    >
+      <path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 2A3.75 3.75 0 0 0 4 7.75v8.5A3.75 3.75 0 0 0 7.75 20h8.5A3.75 3.75 0 0 0 20 16.25v-8.5A3.75 3.75 0 0 0 16.25 4h-8.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-2.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z" />
+    </svg>
+  ),
+  threads: (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-5 w-5 fill-current"
+      aria-hidden="true"
+    >
+      <path d="M12.21 2C6.61 2 3 5.62 3 11.49v.02C3 17.38 6.6 21 12.31 21c4.92 0 8.25-2.57 8.25-6.41 0-2.78-1.73-4.73-4.76-5.39-.48-2.17-1.93-3.45-4.17-3.45-1.82 0-3.33.75-4.38 2.16l1.73 1.2c.67-.9 1.52-1.34 2.56-1.34 1.14 0 1.85.58 2.14 1.74-.48-.02-.96-.03-1.45-.03-3.05 0-4.94 1.3-4.94 3.42 0 2.03 1.62 3.32 4.16 3.32 2.64 0 4.24-1.36 4.54-3.83 1.53.49 2.32 1.45 2.32 2.8 0 2.29-2.28 3.78-5.96 3.78-4.37 0-7.04-2.83-7.04-7.46v-.02c0-4.65 2.65-7.46 6.95-7.46 3.29 0 5.62 1.55 6.68 4.42l2.04-.85C19.57 4.01 16.46 2 12.21 2Zm-.63 12.26c-1.25 0-2.03-.52-2.03-1.35 0-.92.91-1.43 2.65-1.43.56 0 1.12.03 1.67.09-.15 1.74-.93 2.69-2.29 2.69Z" />
+    </svg>
+  ),
+  articles: (
+    <span
+      className="text-[0.82rem] font-black tracking-[-0.08em]"
+      style={COMMON_STYLES.clashDisplay}
+      aria-hidden="true"
+    >
+      Ст
+    </span>
+  ),
+};
 
 const Footer = () => {
   const { ref, isVisible } = useScrollReveal({ threshold: 0.1 });
@@ -14,24 +67,18 @@ const Footer = () => {
     { label: "FAQ", href: "#faq" },
   ];
 
-  const socialLinks = [
-    {
-      name: "Telegram",
-      href: "https://t.me/armtemiy",
-      color: "#26A5E4",
-      icon: (
-        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
-          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-        </svg>
-      )
-    }
-  ];
+  const socialLinks = footerSocialLinks;
 
-  const handleNavClick = (e: React.MouseEvent<HTMLButtonElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    href: string,
+  ) => {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+      element.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+      });
     }
   };
 
@@ -41,8 +88,10 @@ const Footer = () => {
       className="relative overflow-hidden py-6 sm:py-8 md:py-10 bg-background"
     >
       <div
-        className={`relative max-w-4xl mx-4 sm:mx-auto rounded-2xl sm:rounded-3xl overflow-hidden ${prefersReducedMotion ? '' : 'transition-all duration-700 ease-out'} ${
-          prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        className={`relative max-w-4xl mx-4 sm:mx-auto rounded-2xl sm:rounded-3xl overflow-hidden ${prefersReducedMotion ? "" : "transition-all duration-700 ease-out"} ${
+          prefersReducedMotion || isVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
         }`}
       >
         <div className="absolute inset-0 bg-background/60 backdrop-blur-xl" />
@@ -54,25 +103,40 @@ const Footer = () => {
 
         <div className="relative px-5 sm:px-6 md:px-8 py-6 sm:py-8">
           <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3 md:gap-10 items-start">
-              <div className={`flex flex-col gap-2 sm:gap-3 text-center md:text-left ${prefersReducedMotion ? '' : 'transition-all duration-500 delay-100'} ${
-                prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}>
+            <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-[1.15fr_0.85fr_1fr] md:gap-10 items-start">
+              <div
+                className={`flex flex-col gap-2 sm:gap-3 text-center md:text-left ${prefersReducedMotion ? "" : "transition-all duration-500 delay-100"} ${
+                  prefersReducedMotion || isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                }`}
+              >
                 <span
                   className="text-2xl sm:text-3xl text-foreground font-bold"
                   style={COMMON_STYLES.clashDisplay}
                 >
                   Armtemiy
                 </span>
-                <p className="text-muted-foreground text-xs sm:text-sm max-w-xs mx-auto md:mx-0 leading-relaxed" style={COMMON_STYLES.satoshi}>
-                  База Армтемия, крафтовые консультации и Armtemiy Lab для системного армрестлинга.
+                <p
+                  className="text-muted-foreground text-xs sm:text-sm max-w-xs mx-auto md:mx-0 leading-relaxed"
+                  style={COMMON_STYLES.satoshi}
+                >
+                  База Армтемия, крафтовые консультации, закрытое комьюнити и
+                  Armtemiy Lab для системного армрестлинга.
                 </p>
               </div>
 
-              <div className={`space-y-4 text-center md:text-left ${prefersReducedMotion ? '' : 'transition-all duration-500 delay-200'} ${
-                prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}>
-                <p className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-4 sm:mb-5" style={COMMON_STYLES.satoshi}>
+              <div
+                className={`space-y-4 text-center md:text-left ${prefersReducedMotion ? "" : "transition-all duration-500 delay-200"} ${
+                  prefersReducedMotion || isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                }`}
+              >
+                <p
+                  className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-4 sm:mb-5"
+                  style={COMMON_STYLES.satoshi}
+                >
                   Навигация
                 </p>
                 <nav className="flex flex-row flex-wrap justify-center md:flex-col md:justify-start gap-3 sm:gap-4 md:space-y-3">
@@ -82,25 +146,37 @@ const Footer = () => {
                       onClick={(e) => handleNavClick(e, link.href)}
                       className="group relative text-center md:text-left w-fit mx-auto md:mx-0 overflow-hidden min-h-[44px] min-w-[44px] flex items-center justify-center md:justify-start px-3 md:px-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
                     >
-                      <span className={`relative inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base font-medium text-muted-foreground group-hover:text-foreground ${prefersReducedMotion ? '' : 'transition-all duration-300'}`} style={COMMON_STYLES.satoshi}>
+                      <span
+                        className={`relative inline-flex items-center gap-2 sm:gap-3 text-sm sm:text-base font-medium text-muted-foreground group-hover:text-foreground ${prefersReducedMotion ? "" : "transition-all duration-300"}`}
+                        style={COMMON_STYLES.satoshi}
+                      >
                         <span className="text-xs font-mono text-primary/60 group-hover:text-primary transition-colors duration-300">
                           0{index + 1}
                         </span>
                         {link.label}
-                        <span className={`absolute -bottom-1 left-5 sm:left-7 w-0 h-[2px] bg-gradient-to-r from-primary to-secondary ${prefersReducedMotion ? '' : 'group-hover:w-[calc(100%-1.25rem)] sm:group-hover:w-[calc(100%-1.75rem)] transition-all duration-300 ease-out'}`} />
+                        <span
+                          className={`absolute -bottom-1 left-5 sm:left-7 w-0 h-[2px] bg-gradient-to-r from-primary to-secondary ${prefersReducedMotion ? "" : "group-hover:w-[calc(100%-1.25rem)] sm:group-hover:w-[calc(100%-1.75rem)] transition-all duration-300 ease-out"}`}
+                        />
                       </span>
                     </button>
                   ))}
                 </nav>
               </div>
 
-              <div className={`space-y-4 sm:space-y-5 text-center md:text-left ${prefersReducedMotion ? '' : 'transition-all duration-500 delay-300'} ${
-                prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}>
-                <p className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-4 sm:mb-5" style={COMMON_STYLES.satoshi}>
+              <div
+                className={`space-y-4 sm:space-y-5 text-center md:text-left ${prefersReducedMotion ? "" : "transition-all duration-500 delay-300"} ${
+                  prefersReducedMotion || isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                }`}
+              >
+                <p
+                  className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-4 sm:mb-5"
+                  style={COMMON_STYLES.satoshi}
+                >
                   Связаться
                 </p>
-                <div className="flex justify-center md:justify-start gap-3">
+                <div className="flex flex-wrap justify-center md:justify-start gap-3">
                   {socialLinks.map((social, index) => (
                     <a
                       key={social.name}
@@ -109,12 +185,17 @@ const Footer = () => {
                       rel="noopener noreferrer"
                       className="group relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-xl"
                       style={{
-                        transitionDelay: prefersReducedMotion ? '0ms' : isVisible ? `${350 + index * 50}ms` : '0ms',
-                        ['--social-color' as string]: social.color,
+                        transitionDelay: prefersReducedMotion
+                          ? "0ms"
+                          : isVisible
+                            ? `${350 + index * 50}ms`
+                            : "0ms",
+                        ["--social-color" as string]: social.color,
                       }}
-                      aria-label={`${social.name} - @armtemiy`}
+                      aria-label={social.label}
                     >
-                      <span className={`absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg text-xs font-medium text-white whitespace-nowrap opacity-0 pointer-events-none ${prefersReducedMotion ? '' : 'group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-300'}`}
+                      <span
+                        className={`absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg text-xs font-medium text-white whitespace-nowrap opacity-0 pointer-events-none ${prefersReducedMotion ? "" : "group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0 transition-all duration-300"}`}
                         style={{ backgroundColor: social.color }}
                       >
                         {social.name}
@@ -124,20 +205,22 @@ const Footer = () => {
                         />
                       </span>
 
-                      <span className={`relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-card border border-border overflow-hidden ${prefersReducedMotion ? '' : 'transition-all duration-300 group-hover:scale-110 group-hover:border-primary'}`}
+                      <span
+                        className={`relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-card border border-border overflow-hidden ${prefersReducedMotion ? "" : "transition-all duration-300 group-hover:scale-110 group-hover:border-primary"}`}
                         style={{
-                          boxShadow: 'inset 0 -2px 4px hsl(var(--background) / 0.25)',
+                          boxShadow:
+                            "inset 0 -2px 4px hsl(var(--background) / 0.25)",
                         }}
                       >
                         <span
-                          className={`absolute inset-0 opacity-0 ${prefersReducedMotion ? '' : 'group-hover:opacity-100 transition-opacity duration-300'}`}
+                          className={`absolute inset-0 opacity-0 ${prefersReducedMotion ? "" : "group-hover:opacity-100 transition-opacity duration-300"}`}
                           style={{
                             background: `radial-gradient(circle at center, ${social.color}30 0%, transparent 70%)`,
                           }}
                         />
 
                         <span
-                          className={`absolute bottom-0 left-0 right-0 h-[2px] opacity-0 ${prefersReducedMotion ? '' : 'group-hover:opacity-100 transition-all duration-300'}`}
+                          className={`absolute bottom-0 left-0 right-0 h-[2px] opacity-0 ${prefersReducedMotion ? "" : "group-hover:opacity-100 transition-all duration-300"}`}
                           style={{
                             background: `linear-gradient(90deg, transparent, ${social.color}, transparent)`,
                             boxShadow: `0 0 10px ${social.color}, 0 0 20px ${social.color}`,
@@ -145,18 +228,18 @@ const Footer = () => {
                         />
 
                         <span
-                          className={`relative z-10 text-muted-foreground ${prefersReducedMotion ? '' : 'group-hover:text-white transition-all duration-300 group-hover:scale-110'}`}
+                          className={`relative z-10 text-muted-foreground ${prefersReducedMotion ? "" : "group-hover:text-white transition-all duration-300 group-hover:scale-110"}`}
                           style={{
-                            filter: 'drop-shadow(0 0 0px transparent)',
+                            filter: "drop-shadow(0 0 0px transparent)",
                           }}
                         >
                           <span
                             className="block transition-all duration-300"
                             style={{
-                              color: 'currentColor',
+                              color: "currentColor",
                             }}
                           >
-                            {social.icon}
+                            {socialIconMap[social.id]}
                           </span>
                         </span>
                       </span>
@@ -166,29 +249,55 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className={`mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border flex flex-col items-center gap-3 sm:gap-4 md:flex-row md:justify-between ${prefersReducedMotion ? '' : 'transition-all duration-500 delay-500'} ${
-              prefersReducedMotion || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}>
-              <p className="text-muted-foreground text-xs sm:text-sm text-center md:text-left" style={COMMON_STYLES.satoshi}>
+            <div
+              className={`mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border flex flex-col items-center gap-3 sm:gap-4 md:flex-row md:justify-between ${prefersReducedMotion ? "" : "transition-all duration-500 delay-500"} ${
+                prefersReducedMotion || isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-4"
+              }`}
+            >
+              <p
+                className="text-muted-foreground text-xs sm:text-sm text-center md:text-left"
+                style={COMMON_STYLES.satoshi}
+              >
                 © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
               <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm">
                 <a
-                  href="https://t.me/armtemiy_lab_bot"
+                  href={SOCIAL_LINKS.telegramBot}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="min-h-[36px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
                 >
                   @armtemiy_lab_bot
                 </a>
-                <span className="hidden sm:inline text-muted-foreground/50" aria-hidden="true">•</span>
+                <span
+                  className="hidden sm:inline text-muted-foreground/50"
+                  aria-hidden="true"
+                >
+                  •
+                </span>
                 <a
-                  href="https://t.me/armtemiy"
+                  href={SOCIAL_LINKS.telegramProfile}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="min-h-[36px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
                 >
                   @armtemiy
+                </a>
+                <span
+                  className="hidden sm:inline text-muted-foreground/50"
+                  aria-hidden="true"
+                >
+                  •
+                </span>
+                <a
+                  href={SOCIAL_LINKS.telegramChat}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-[36px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
+                >
+                  Чат по заявкам
                 </a>
               </div>
             </div>

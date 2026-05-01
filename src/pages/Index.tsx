@@ -5,8 +5,15 @@ import StatsSection from "@/components/landing/StatsSection";
 import ConsultationSection from "@/components/landing/ConsultationSection";
 import { SEO } from "@/components/SEO";
 
-const ProductSection = lazy(() => import("@/components/landing/ProductSection"));
-const ProgramSection = lazy(() => import("@/components/landing/ProgramSection"));
+const ProductSection = lazy(
+  () => import("@/components/landing/ProductSection"),
+);
+const CommunitySection = lazy(
+  () => import("@/components/landing/CommunitySection"),
+);
+const ProgramSection = lazy(
+  () => import("@/components/landing/ProgramSection"),
+);
 const AboutSection = lazy(() => import("@/components/landing/AboutSection"));
 const MarqueeTicker = lazy(() => import("@/components/landing/MarqueeTicker"));
 const FAQSection = lazy(() => import("@/components/landing/FAQSection"));
@@ -39,7 +46,10 @@ const LazySectionFallback = ({ id, className }: LazySectionFallbackProps) => {
 
 const MarqueeFallback = () => {
   return (
-    <div className="w-full bg-background py-6 sm:py-8 min-h-[110px] sm:min-h-[130px]" aria-hidden="true">
+    <div
+      className="w-full bg-background py-6 sm:py-8 min-h-[110px] sm:min-h-[130px]"
+      aria-hidden="true"
+    >
       <div className="container mx-auto px-4">
         <div className="h-12 sm:h-14 rounded-xl bg-white/5 animate-pulse" />
       </div>
@@ -49,7 +59,10 @@ const MarqueeFallback = () => {
 
 const FooterFallback = () => {
   return (
-    <div className="bg-background min-h-[520px] md:min-h-[420px] lg:min-h-[360px]" aria-hidden="true">
+    <div
+      className="bg-background min-h-[520px] md:min-h-[420px] lg:min-h-[360px]"
+      aria-hidden="true"
+    >
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12">
         <div className="mx-auto max-w-4xl rounded-2xl sm:rounded-3xl border border-border/60 bg-card/30 p-6 sm:p-8 md:p-10 animate-pulse space-y-6">
           <div className="h-8 w-40 rounded-lg bg-white/10" />
@@ -88,6 +101,17 @@ const Index = () => {
           }
         >
           <ProductSection />
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <LazySectionFallback
+              id="community"
+              className="bg-[hsl(15_7%_9%)] min-h-[720px] md:min-h-[580px] lg:min-h-[520px]"
+            />
+          }
+        >
+          <CommunitySection />
         </Suspense>
 
         <ConsultationSection />

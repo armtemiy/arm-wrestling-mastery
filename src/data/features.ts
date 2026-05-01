@@ -10,16 +10,16 @@ export const aboutHighlights: AboutHighlightItem[] = [
   {
     id: "armwrestling-study",
     icon: "bookOpen",
-    text: "3 года изучения армрестлинга от и до",
+    text: "Систематизация армрестлинга через технику и биомеханику",
   },
   {
     id: "lifting-experience",
     icon: "dumbbell",
-    text: "Опыт в пауэрлифтинге и стритлифтинге",
+    text: "Силовой бэкграунд: пауэрлифтинг и стритлифтинг",
   },
   {
     id: "tactical-analysis",
     icon: "award",
-    text: "Тактические разборы и постановка техники",
+    text: "Личный бренд, консультации и закрытое комьюнити вокруг борьбы",
   },
 ];
