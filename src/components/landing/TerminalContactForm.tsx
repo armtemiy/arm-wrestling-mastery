@@ -247,7 +247,7 @@ const TerminalContactForm = () => {
           addLine({
             type: "prompt",
             content:
-              "Что тебя интересует? (База, чат, консультация, Armtemiy Lab)",
+              "Что тебя интересует? (Armtemiy Lab, консультация, вопрос)",
           });
           setStep("message");
         }, 300);
@@ -304,7 +304,7 @@ const TerminalContactForm = () => {
           addLine({ type: "success", content: "✓ ЗАЯВКА ПРИНЯТА" });
           addLine({
             type: "system",
-            content: `${name}, заявка отправлена в Armtemiy.`,
+            content: `${name}, заявка отправлена в Armtemiy Lab.`,
           });
           addLine({ type: "system", content: "Скоро напишу." });
           setStep("success");
@@ -410,7 +410,7 @@ const TerminalContactForm = () => {
       case "phone":
         return "+7 999 123-45-67";
       case "message":
-        return "Хочу в Базу / чат / на консультацию";
+        return "Хочу Armtemiy Lab / на консультацию";
       default:
         return "";
     }

@@ -176,7 +176,7 @@ const Footer = () => {
                 >
                   Связаться
                 </p>
-                <div className="flex flex-wrap justify-center md:justify-start gap-3">
+                <div className="flex flex-nowrap justify-center md:justify-start gap-2 sm:gap-2.5">
                   {socialLinks.map((social, index) => (
                     <a
                       key={social.name}
@@ -206,7 +206,7 @@ const Footer = () => {
                       </span>
 
                       <span
-                        className={`relative flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-card border border-border overflow-hidden ${prefersReducedMotion ? "" : "transition-all duration-300 group-hover:scale-110 group-hover:border-primary"}`}
+                        className={`relative flex items-center justify-center w-10 h-10 rounded-xl bg-card border border-border overflow-hidden ${prefersReducedMotion ? "" : "transition-all duration-300 group-hover:scale-110 group-hover:border-primary"}`}
                         style={{
                           boxShadow:
                             "inset 0 -2px 4px hsl(var(--background) / 0.25)",

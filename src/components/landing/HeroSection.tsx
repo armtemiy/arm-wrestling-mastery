@@ -6,8 +6,7 @@ import React, {
   useMemo,
 } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, LockKeyhole, MessageCircle } from "lucide-react";
-import { SOCIAL_LINKS } from "@/data/social";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import Particles from "./Particles";
 import { COMMON_STYLES } from "./common-styles";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -93,13 +92,6 @@ const HeroSection = () => {
       >
         <div className="mx-auto flex w-full max-w-[980px] flex-col items-center">
           <div className="text-center mb-4 sm:mb-6 md:mb-8">
-            <div
-              className={`mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-primary ${prefersReducedMotion ? "" : "transition-all duration-1000 delay-100"} ${prefersReducedMotion || isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-              style={COMMON_STYLES.satoshi}
-            >
-              <LockKeyhole size={14} />
-              база знаний • комьюнити • консультации
-            </div>
             <h1
               className={`font-display font-black leading-[0.95] tracking-[-0.01em] ${prefersReducedMotion ? "" : "transition-all duration-1000 delay-200"} ${prefersReducedMotion || isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
               style={COMMON_STYLES.clashDisplay}
@@ -138,22 +130,6 @@ const HeroSection = () => {
           </div>
 
           <div
-            className={`mb-5 flex flex-wrap items-center justify-center gap-2 px-2 ${prefersReducedMotion ? "" : "transition-all duration-1000 delay-550"} ${prefersReducedMotion || isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          >
-            {["биомеханика", "техника", "контры", "закрытый чат"].map(
-              (item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-white/10 bg-white/[0.045] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-foreground/70"
-                  style={COMMON_STYLES.satoshi}
-                >
-                  {item}
-                </span>
-              ),
-            )}
-          </div>
-
-          <div
             className={`flex w-full max-w-[760px] flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center sm:gap-5 ${prefersReducedMotion ? "" : "transition-all duration-1000 delay-600"} ${prefersReducedMotion || isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
             <div className="relative group w-full sm:w-auto">
@@ -168,11 +144,9 @@ const HeroSection = () => {
                   href="#product"
                   onClick={(event) => {
                     event.preventDefault();
-                    document
-                      .querySelector("#product")
-                      ?.scrollIntoView({
-                        behavior: prefersReducedMotion ? "auto" : "smooth",
-                      });
+                    document.querySelector("#product")?.scrollIntoView({
+                      behavior: prefersReducedMotion ? "auto" : "smooth",
+                    });
                   }}
                 >
                   <span
@@ -197,11 +171,9 @@ const HeroSection = () => {
             <Button
               variant="ghost"
               onClick={() =>
-                document
-                  .querySelector("#consultations")
-                  ?.scrollIntoView({
-                    behavior: prefersReducedMotion ? "auto" : "smooth",
-                  })
+                document.querySelector("#consultations")?.scrollIntoView({
+                  behavior: prefersReducedMotion ? "auto" : "smooth",
+                })
               }
               className={`group h-14 w-full sm:w-auto sm:min-w-[210px] px-7 sm:px-9 text-[0.95rem] sm:text-base font-bold rounded-full text-foreground/90 hover:text-foreground bg-white/8 border border-white/20 hover:border-primary/55 relative overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? "" : "transition-all duration-300"}`}
             >
@@ -215,17 +187,6 @@ const HeroSection = () => {
               <span className="relative">КОНСУЛЬТАЦИИ</span>
             </Button>
           </div>
-
-          <a
-            href={SOCIAL_LINKS.telegramChat}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`mt-5 inline-flex min-h-[44px] items-center justify-center rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-wider text-foreground/65 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? "" : "transition-all duration-300 hover:bg-white/[0.04]"}`}
-            style={COMMON_STYLES.satoshi}
-          >
-            или подать заявку в закрытый чат
-            <ArrowRight size={16} className="ml-2" />
-          </a>
         </div>
       </div>
 
