@@ -174,7 +174,7 @@ const Footer = () => {
                   className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-semibold mb-4 sm:mb-5"
                   style={COMMON_STYLES.satoshi}
                 >
-                  Связаться
+                  Ресурсы
                 </p>
                 <div className="flex flex-nowrap justify-center md:justify-start gap-2 sm:gap-2.5">
                   {socialLinks.map((social, index) => (
