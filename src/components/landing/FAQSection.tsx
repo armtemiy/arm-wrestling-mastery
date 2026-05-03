@@ -33,9 +33,9 @@ const FAQSection = () => {
   return (
     <section
       id="faq"
-      className="relative overflow-hidden py-12 sm:py-16 md:py-24 lg:py-32 bg-background"
+      className="relative max-md:overflow-hidden py-12 sm:py-16 md:py-24 lg:py-32 bg-background"
     >
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none max-md:overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] sm:w-[800px] h-[250px] sm:h-[400px] rounded-full bg-primary/5 blur-[120px] sm:blur-[200px]" />
       </div>
       <div
