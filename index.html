@@ -95,6 +95,28 @@
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
 
+        <!-- Critical CSS for LCP - Hero section styles inlined -->
+        <style>
+            /* Critical styles for Hero LCP element */
+            *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+            html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+            body{font-family:system-ui,-apple-system,sans-serif;background:#0d0b0a;color:#f5f2f0;line-height:1.5;min-height:100vh;margin:0}
+            #root{min-height:100vh}
+            /* Hero section critical styles */
+            .hero-container{display:flex;min-height:84svh;align-items:center;background:#0d0b0a;padding-top:118px;padding-bottom:64px;position:relative;overflow:hidden}
+            .hero-content{position:relative;width:100%;max-width:1120px;margin:0 auto;padding:0 16px;display:flex;flex-direction:column;align-items:center}
+            .hero-title-wrapper{max-width:980px;text-align:center;margin:0 auto}
+            .hero-h1{font-family:system-ui,-apple-system,sans-serif;font-weight:900;line-height:0.95;letter-spacing:-0.01em;color:#f5f2f0;font-size:clamp(2.2rem,8vw,5rem);margin-bottom:0.5rem}
+            .hero-h1-accent{font-family:system-ui,-apple-system,sans-serif;font-weight:900;line-height:0.94;font-size:clamp(2.5rem,9vw,5.6rem);background:linear-gradient(90deg,#e63946 0%,#ff4500 50%,#e63946 100%);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%}
+            .hero-description{font-size:clamp(1rem,2.5vw,1.25rem);color:rgba(245,242,240,0.8);max-width:38rem;margin:1.25rem auto 1.5rem;text-align:center;line-height:1.6;padding:0 8px}
+            .hero-cta{display:flex;flex-direction:column;gap:1rem;max-width:760px;margin:0 auto;align-items:stretch}
+            @media(min-width:640px){.hero-cta{flex-direction:row;justify-content:center;align-items:center;gap:1.25rem}.hero-h1{font-size:clamp(3.1rem,7vw,5.8rem)}.hero-h1-accent{font-size:clamp(3.4rem,7.8vw,6.4rem)}}
+            @media(min-width:768px){.hero-container{min-height:88svh;padding-top:124px;padding-bottom:80px}.hero-content{padding:0 24px}}
+            @media(min-width:1024px){.hero-container{padding-bottom:96px}}
+            /* Background glow effect */
+            .hero-bg-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(1200px,100vw);height:min(800px,50vh);background:radial-gradient(ellipse at center top,rgba(230,57,70,0.15) 0%,transparent 50%);pointer-events:none}
+        </style>
+
         <!-- Structured Data (JSON-LD) - Enhanced for new content -->
         <script type="application/ld+json">
             {
@@ -154,9 +176,9 @@
                 "description": "Бесплатное Telegram Mini App для спарринг-профиля, поиска партнёров и прикладных инструментов армрестлера."
             }
         </script>
-      <script type="module" crossorigin src="/assets/index-X457t7E2.js"></script>
-      <link rel="modulepreload" crossorigin href="/assets/react-vendor-Do4jymGq.js">
-      <link rel="modulepreload" crossorigin href="/assets/ui-vendor-zMs-6b1z.js">
+      <script type="module" crossorigin src="/assets/index-BR1y9CUv.js"></script>
+      <link rel="modulepreload" crossorigin href="/assets/react-vendor-D_9ENjCb.js">
+      <link rel="modulepreload" crossorigin href="/assets/ui-vendor-BHUXhO-S.js">
       <link rel="stylesheet" crossorigin href="/assets/index-DszPAlhj.css">
     </head>
 
@@ -181,9 +203,28 @@
             })(window.location);
         </script>
 
-        <div id="root"></div>
+        <div id="root">
+            <!-- Pre-rendered Hero for instant LCP - React will hydrate over this -->
+            <div class="hero-container" id="hero-prerender" style="opacity:1;transition:opacity 0.3s ease">
+                <div class="hero-bg-glow"></div>
+                <div class="hero-content">
+                    <div class="hero-title-wrapper">
+                        <h1 class="hero-h1">ВЫИГРЫВАЙ</h1>
+                        <h1 class="hero-h1-accent">БОРЬБУ</h1>
+                        <p class="hero-description">База Армтемия — закрытая система материалов, мышления и комьюнити для тех, кто хочет понимать борьбу, а не копировать чужие шаблоны.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Hide prerendered content after hydration starts to prevent duplicate -->
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                // Mark that hydration is starting
+                document.body.setAttribute('data-hydrating', 'true');
+            });
+        </script>
         <!-- Priority hints for LCP -->
-        <link rel="modulepreload" href="data:application/octet-stream;base64,aW1wb3J0IHsgY3JlYXRlUm9vdCB9IGZyb20gInJlYWN0LWRvbS9jbGllbnQiOwppbXBvcnQgQXBwIGZyb20gIi4vQXBwLnRzeCI7CmltcG9ydCAiLi9pbmRleC5jc3MiOwoKY3JlYXRlUm9vdChkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicm9vdCIpISkucmVuZGVyKDxBcHAgLz4pOwo=" fetchpriority="high" />
+        <link rel="modulepreload" href="data:application/octet-stream;base64,aW1wb3J0IHsgaHlkcmF0ZVJvb3QgfSBmcm9tICJyZWFjdC1kb20vY2xpZW50IjsKaW1wb3J0IEFwcCBmcm9tICIuL0FwcC50c3giOwppbXBvcnQgIi4vaW5kZXguY3NzIjsKCi8vIEh5ZHJhdGUgdGhlIHNlcnZlci1yZW5kZXJlZCBIVE1MIGZvciBiZXR0ZXIgTENQIHBlcmZvcm1hbmNlCmNvbnN0IHJvb3RFbGVtZW50ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInJvb3QiKTsKaWYgKHJvb3RFbGVtZW50KSB7CiAgaHlkcmF0ZVJvb3Qocm9vdEVsZW1lbnQsIDxBcHAgLz4pOwp9Cg==" fetchpriority="high" />
 
     </body>
 </html>
