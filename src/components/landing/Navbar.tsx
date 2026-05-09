@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const navLinks = useMemo(
     () => [
-      { href: "#product", label: "Продукт" },
+      { href: "#product", label: "База" },
       { href: "#consultations", label: "Консультации" },
       { href: "#lab", label: "Лаборатория" },
       { href: "#faq", label: "FAQ" },

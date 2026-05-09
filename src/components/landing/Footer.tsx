@@ -3,7 +3,6 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { COMMON_STYLES } from "./common-styles";
 import {
-  SOCIAL_LINKS,
   footerSocialLinks,
   type FooterSocialId,
 } from "@/data/social";
@@ -61,7 +60,7 @@ const Footer = () => {
   const prefersReducedMotion = useReducedMotion();
 
   const navLinks = [
-    { label: "Продукт", href: "#product" },
+    { label: "База", href: "#product" },
     { label: "Консультации", href: "#consultations" },
     { label: "Лаборатория", href: "#lab" },
     { label: "Чат по заявкам", href: "#community" },
@@ -263,44 +262,6 @@ const Footer = () => {
               >
                 © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm">
-                <a
-                  href={SOCIAL_LINKS.telegramBot}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="min-h-[36px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
-                >
-                  @armtemiy_lab_bot
-                </a>
-                <span
-                  className="hidden sm:inline text-muted-foreground/50"
-                  aria-hidden="true"
-                >
-                  •
-                </span>
-                <a
-                  href={SOCIAL_LINKS.telegramProfile}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="min-h-[36px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
-                >
-                  @armtemiy
-                </a>
-                <span
-                  className="hidden sm:inline text-muted-foreground/50"
-                  aria-hidden="true"
-                >
-                  •
-                </span>
-                <a
-                  href={SOCIAL_LINKS.telegramChat}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="min-h-[36px] flex items-center text-muted-foreground hover:text-primary transition-colors duration-300 px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-lg"
-                >
-                  Чат по заявкам
-                </a>
-              </div>
             </div>
           </div>
         </div>

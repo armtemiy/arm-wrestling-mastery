@@ -25,7 +25,7 @@ export const programCards: ProgramCard[] = [
     description:
       "Найди людей для практики рядом с тобой через Telegram.",
     icon: "users",
-    className: "md:col-span-2",
+    className: "md:col-span-1",
     status: "Доступно",
     tone: "ready",
     preview: "partners",
