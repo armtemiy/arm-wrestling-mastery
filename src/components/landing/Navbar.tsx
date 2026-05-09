@@ -25,7 +25,6 @@ const Navbar = () => {
     () => [
       { href: "#product", label: "База" },
       { href: "#consultations", label: "Консультации" },
-      { href: "#lab", label: "Lab" },
       { href: "#faq", label: "FAQ" },
     ],
     [],
@@ -101,7 +100,7 @@ const Navbar = () => {
       const progress = Math.min(window.scrollY / 200, 1);
       setScrollProgress(progress);
 
-      const sections = ["product", "consultations", "lab", "faq"];
+      const sections = ["product", "consultations", "faq"];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -266,14 +265,14 @@ const Navbar = () => {
             className={`hidden md:flex bg-primary hover:bg-primary/90 text-primary-foreground font-bold uppercase tracking-widest px-5 py-1.5 rounded-full h-auto min-h-[38px] text-xs sm:text-sm border-none shadow-[0_0_25px_hsl(var(--primary)/0.4)] hover:shadow-[0_0_35px_hsl(var(--primary)/0.6)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background ${prefersReducedMotion ? "" : "transition-all duration-300"}`}
           >
             <a
-              href="#product"
+              href="#lab"
               onClick={(event) => {
                 event.preventDefault();
-                scrollToSection("#product");
+                scrollToSection("#lab");
               }}
               style={COMMON_STYLES.clashDisplay}
             >
-              ОТКРЫТЬ БАЗУ
+              ОТКРЫТЬ LAB
             </a>
           </Button>
 
@@ -438,7 +437,7 @@ const Navbar = () => {
               <Button
                 size="lg"
                 className={`group relative z-10 min-h-[54px] w-full overflow-hidden rounded-full bg-[hsl(5_85%_60%)] px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-white shadow-[0_0_30px_hsl(var(--primary)/0.38)] hover:bg-[hsl(5_95%_65%)] hover:shadow-[0_0_48px_hsl(var(--primary)/0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[hsl(15_8%_8%)] ${prefersReducedMotion ? "" : "transition-all duration-300 active:scale-[0.98]"}`}
-                onClick={() => scrollToSection("#product")}
+                onClick={() => scrollToSection("#lab")}
                 style={{
                   ...COMMON_STYLES.clashDisplay,
                   animation: prefersReducedMotion
@@ -455,7 +454,7 @@ const Navbar = () => {
                   className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:translate-x-full transition-transform duration-700"
                   aria-hidden="true"
                 />
-                <span className="relative z-10">ОТКРЫТЬ БАЗУ</span>
+                <span className="relative z-10">ОТКРЫТЬ LAB</span>
               </Button>
             </div>
           </div>

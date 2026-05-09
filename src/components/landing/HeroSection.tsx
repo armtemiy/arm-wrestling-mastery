@@ -153,7 +153,7 @@ const HeroSection = () => {
                     className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent ${prefersReducedMotion ? "translate-x-0 opacity-0" : "-translate-x-full group-hover:translate-x-full transition-transform duration-1000"}`}
                   />
                   <span className="relative flex items-center justify-center gap-2 sm:gap-3">
-                    ОТКРЫТЬ БАЗУ
+                    ВОЙТИ В БАЗУ
                     <ArrowRight
                       size={20}
                       strokeWidth={3}

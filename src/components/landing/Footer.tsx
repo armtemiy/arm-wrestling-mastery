@@ -258,23 +258,18 @@ const Footer = () => {
             </div>
 
             <div
-              className={`mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border flex flex-col items-center gap-3 sm:gap-4 md:flex-row md:justify-between ${prefersReducedMotion ? "" : "transition-all duration-500 delay-500"} ${
+              className={`mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-border flex items-center justify-center ${prefersReducedMotion ? "" : "transition-all duration-500 delay-500"} ${
                 prefersReducedMotion || isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-4"
               }`}
             >
               <p
-                className="text-muted-foreground text-xs sm:text-sm text-center md:text-left"
+                className="text-muted-foreground text-xs sm:text-sm text-center"
                 style={COMMON_STYLES.satoshi}
               >
                 © {new Date().getFullYear()} Armtemiy. Все права защищены.
               </p>
-              <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs sm:text-sm">
-                <span className="text-muted-foreground">
-                  © {new Date().getFullYear()} Armtemiy
-                </span>
-              </div>
             </div>
           </div>
         </div>
