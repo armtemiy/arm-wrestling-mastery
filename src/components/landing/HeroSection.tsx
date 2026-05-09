@@ -17,6 +17,17 @@ const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
+  // Remove prerendered hero placeholder after hydration
+  useEffect(() => {
+    const prerender = document.getElementById('hero-prerender');
+    if (prerender && prerender.parentElement) {
+      prerender.style.opacity = '0';
+      setTimeout(() => {
+        prerender.remove();
+      }, 300);
+    }
+  }, []);
+
   const handleScroll = useCallback(() => {
     if (prefersReducedMotion) return;
 

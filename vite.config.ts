@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => ({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: mode === 'production',
+        drop_console: false,
         drop_debugger: mode === 'production',
       },
     },
@@ -37,9 +37,12 @@ export default defineConfig(({ mode }) => ({
     // Увеличиваем лимит для предупреждений о размере
     chunkSizeWarningLimit: 1000,
     // Оптимизация ассетов
-    assetsInlineLimit: 4096,
+    assetsInlineLimit: 8192, // Увеличиваем для инлайнинга мелких ассетов
     cssCodeSplit: true,
     sourcemap: mode === 'development',
+    // Оптимизации для LCP
+    reportCompressedSize: false, // Ускоряет сборку
+    target: 'es2020', // Современные браузеры = меньше полифилов
   },
   // Оптимизация зависимостей
   optimizeDeps: {

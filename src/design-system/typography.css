@@ -1,9 +1,32 @@
 /**
  * TYPOGRAPHY SYSTEM
  * =================
- * Font loading via official providers
+ * Font loading via official providers with font-display: swap
  */
 
+/* Critical fonts are preloaded in index.html - these @import serve as fallback */
+/* Clash Display - hero/display font */
 @import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+/* Satoshi - body font */
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+/* JetBrains Mono - monospace for terminal/technical elements */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* Font-face overrides with explicit font-display for browsers that need it */
+@font-face {
+  font-family: 'Clash Display';
+  font-display: swap;
+  src: local('Clash Display');
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  font-display: swap;
+  src: local('Satoshi');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-display: swap;
+  src: local('JetBrains Mono');
+}

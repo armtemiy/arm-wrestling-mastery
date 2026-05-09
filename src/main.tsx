@@ -1,5 +1,9 @@
-import { createRoot } from "react-dom/client";
+import { hydrateRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-createRoot(document.getElementById("root")!).render(<App />);
+// Hydrate the server-rendered HTML for better LCP performance
+const rootElement = document.getElementById("root");
+if (rootElement) {
+  hydrateRoot(rootElement, <App />);
+}

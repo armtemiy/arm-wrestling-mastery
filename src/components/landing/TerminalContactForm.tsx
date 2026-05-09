@@ -11,6 +11,11 @@ import { useSubmitLead } from "@/hooks/useSubmitLead";
 
 // Debug version marker - check console to verify code update
 console.log("[TerminalContactForm] Loaded v2 - debug enabled");
+// eslint-disable-next-line no-debugger
+if (typeof window !== "undefined" && window.location.hostname === "armtemiy.ru") {
+  // Alert for debug - remove after fixing
+  // alert("Terminal v2 loaded");
+}
 
 type FormStep = "name" | "phone" | "message" | "sending" | "success" | "error";
 
@@ -225,8 +230,12 @@ const TerminalContactForm = () => {
     }
 
     const firstInteractionAt = firstInteractionAtRef.current;
-    if (!firstInteractionAt || Date.now() - firstInteractionAt < 3000) {
-      return "Подожди пару секунд и попробуй снова.";
+    // DEBUG: Log the timing check values
+    const timeSinceFirstInteraction = firstInteractionAt ? Date.now() - firstInteractionAt : 0;
+    console.log("[BotCheck] time since first interaction:", timeSinceFirstInteraction, "ms");
+
+    if (!firstInteractionAt || Date.now() - firstInteractionAt < 1000) {
+      return "Форма заполнена слишком быстро. Подожди секунду и попробуй снова.";
     }
 
     return null;
