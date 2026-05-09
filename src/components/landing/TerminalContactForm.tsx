@@ -330,6 +330,15 @@ const TerminalContactForm = () => {
           utmTerm: searchParams.get("utm_term") || undefined,
         });
 
+        // Debug logging for troubleshooting
+        if (!result.success) {
+          console.error("[TerminalContactForm] Submit failed:", {
+            status: result.status,
+            error: result.error,
+            origin: window.location.origin,
+          });
+        }
+
         if (result.success) {
           submissionTimestamps.push(Date.now());
           addLine({ type: "success", content: "✓ ЗАЯВКА ПРИНЯТА" });
@@ -352,10 +361,11 @@ const TerminalContactForm = () => {
           return;
         }
 
+        const errorHint = getSubmitErrorHint(result.status, result.error);
         addLine({ type: "error", content: "✕ ЧТО-ТО ПОШЛО НЕ ТАК" });
         addLine({
           type: "system",
-          content: getSubmitErrorHint(result.status, result.error),
+          content: errorHint,
         });
         setStep("error");
       }
@@ -571,6 +581,7 @@ const TerminalContactForm = () => {
             />
             <input
               type="text"
+              name="website"
               value={honeypot}
               onChange={(e) => setHoneypot(e.target.value)}
               className="absolute -left-[9999px] opacity-0 pointer-events-none"

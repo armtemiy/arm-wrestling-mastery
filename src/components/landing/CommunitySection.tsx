@@ -145,62 +145,59 @@ const CommunitySection = () => {
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="rounded-[1.65rem] border border-[hsl(15_5%_24%)] bg-[hsl(15_8%_10%/0.92)] p-4 sm:p-5">
-                  <div className="mb-5 flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[hsl(5_85%_60%/0.16)] text-[hsl(5_85%_60%)]">
-                          <Users size={21} />
-                        </div>
-                        <div>
-                          <p className="text-sm font-bold text-white" style={COMMON_STYLES.satoshi}>
-                            Armtemiy Community
-                          </p>
-                          <p className="text-xs text-[hsl(15_10%_56%)]" style={COMMON_STYLES.satoshi}>
-                            закрытый чат • вход по заявкам
-                          </p>
-                        </div>
+              <div className="rounded-[1.65rem] border border-[hsl(15_5%_24%)] bg-[hsl(15_8%_10%/0.92)] p-4 sm:p-5">
+                <div className="mb-5 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[hsl(5_85%_60%/0.16)] text-[hsl(5_85%_60%)]">
+                        <Users size={21} />
                       </div>
-                      <ShieldCheck size={22} className="text-[hsl(5_85%_60%)]" />
-                    </div>
-
-                    <div className="space-y-3">
-                      {chatPreview.map((item, index) => (
-                        <div
-                          key={item.label}
-                          className="rounded-2xl border border-white/[0.06] bg-white/[0.045] p-4"
-                          style={{ opacity: 1 - index * 0.08 }}
-                        >
-                          <div className="mb-2 flex items-center gap-2">
-                            <span className="h-2 w-2 rounded-full bg-[hsl(5_85%_60%)]" />
-                            <span
-                              className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[hsl(5_85%_60%)]"
-                              style={COMMON_STYLES.jetBrainsMono}
-                            >
-                              {item.label}
-                            </span>
-                          </div>
-                          <p className="text-sm leading-relaxed text-[hsl(15_10%_72%)]" style={COMMON_STYLES.satoshi}>
-                            {item.text}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="mt-5 flex items-center justify-between rounded-2xl border border-[hsl(5_85%_60%/0.22)] bg-[hsl(5_85%_60%/0.08)] px-4 py-3">
-                      <div className="flex items-center gap-2 text-[hsl(15_10%_80%)]">
-                        <MessageCircle size={17} className="text-[hsl(5_85%_60%)]" />
-                        <span className="text-sm font-medium" style={COMMON_STYLES.satoshi}>
-                          Заявка вместо автоприёма
-                        </span>
+                      <div>
+                        <p className="text-sm font-bold text-white" style={COMMON_STYLES.satoshi}>
+                          Armtemiy Community
+                        </p>
+                        <p className="text-xs text-[hsl(15_10%_56%)]" style={COMMON_STYLES.satoshi}>
+                          закрытый чат • вход по заявкам
+                        </p>
                       </div>
-                      <span className="text-xs font-bold uppercase tracking-[0.16em] text-[hsl(5_85%_60%)]" style={COMMON_STYLES.satoshi}>
-                        filter
+                    </div>
+                    <ShieldCheck size={22} className="text-[hsl(5_85%_60%)]" />
+                  </div>
+
+                  <div className="space-y-3">
+                    {chatPreview.map((item, index) => (
+                      <div
+                        key={item.label}
+                        className="rounded-2xl border border-white/[0.06] bg-white/[0.045] p-4"
+                        style={{ opacity: 1 - index * 0.08 }}
+                      >
+                        <div className="mb-2 flex items-center gap-2">
+                          <span className="h-2 w-2 rounded-full bg-[hsl(5_85%_60%)]" />
+                          <span
+                            className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[hsl(5_85%_60%)]"
+                            style={COMMON_STYLES.jetBrainsMono}
+                          >
+                            {item.label}
+                          </span>
+                        </div>
+                        <p className="text-sm leading-relaxed text-[hsl(15_10%_72%)]" style={COMMON_STYLES.satoshi}>
+                          {item.text}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 rounded-2xl border border-[hsl(5_85%_60%/0.22)] bg-[hsl(5_85%_60%/0.08)] px-4 py-3">
+                    <div className="flex items-center gap-2 text-[hsl(15_10%_80%)]">
+                      <MessageCircle size={17} className="text-[hsl(5_85%_60%)] shrink-0" />
+                      <span className="text-sm font-medium leading-snug" style={COMMON_STYLES.satoshi}>
+                        Заявка вместо автоприёма
                       </span>
                     </div>
+                    <span className="text-xs font-bold uppercase tracking-[0.16em] text-[hsl(5_85%_60%)] shrink-0 self-start sm:self-center" style={COMMON_STYLES.satoshi}>
+                      filter
+                    </span>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
