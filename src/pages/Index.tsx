@@ -14,7 +14,6 @@ const CommunitySection = lazy(
 const ProgramSection = lazy(
   () => import("@/components/landing/ProgramSection"),
 );
-const AboutSection = lazy(() => import("@/components/landing/AboutSection"));
 const MarqueeTicker = lazy(() => import("@/components/landing/MarqueeTicker"));
 const FAQSection = lazy(() => import("@/components/landing/FAQSection"));
 const CTASection = lazy(() => import("@/components/landing/CTASection"));
@@ -127,16 +126,6 @@ const Index = () => {
           <ProgramSection />
         </Suspense>
 
-        <Suspense
-          fallback={
-            <LazySectionFallback
-              id="about"
-              className="bg-[hsl(15_6%_8%)] min-h-[900px] md:min-h-[700px] lg:min-h-[640px]"
-            />
-          }
-        >
-          <AboutSection />
-        </Suspense>
 
         <Suspense fallback={<MarqueeFallback />}>
           <MarqueeTicker />

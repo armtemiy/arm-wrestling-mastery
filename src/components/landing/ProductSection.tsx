@@ -475,16 +475,6 @@ const ProductSection = () => {
             </div>
           </div>
 
-          <div className="mt-10 rounded-3xl border border-[hsl(5_85%_60%/0.22)] bg-[linear-gradient(135deg,hsl(5_85%_60%/0.10),hsl(15_8%_11%/0.74))] p-5 text-center sm:p-6">
-            <p
-              className="mx-auto max-w-3xl text-sm leading-relaxed text-[hsl(15_10%_78%)] sm:text-base"
-              style={COMMON_STYLES.satoshi}
-            >
-              Если тебе нужна не база и не комьюнити, а точная подгонка под твою
-              антропометрию, инвентарь, стиль, ограничения и задачи — ниже
-              крафтовые консультации.
-            </p>
-          </div>
         </div>
       </div>
 
