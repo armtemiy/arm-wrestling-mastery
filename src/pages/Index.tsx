@@ -14,7 +14,6 @@ const CommunitySection = lazy(
 const ProgramSection = lazy(
   () => import("@/components/landing/ProgramSection"),
 );
-const AboutSection = lazy(() => import("@/components/landing/AboutSection"));
 const MarqueeTicker = lazy(() => import("@/components/landing/MarqueeTicker"));
 const FAQSection = lazy(() => import("@/components/landing/FAQSection"));
 const CTASection = lazy(() => import("@/components/landing/CTASection"));
@@ -84,8 +83,8 @@ const Index = () => {
     <>
       <SEO
         title="База Армтемия — Армрестлинг Релиз, сообщество и консультации"
-        description="База Армтемия — закрытая библиотека материалов и сообщество по армрестлингу. Ядро — Армрестлинг Релиз: система мышления, биомеханика, техники и анализ без шаблонов. Отдельно — крафтовые консультации и бесплатный Armtemiy Lab для поиска спарринг-партнёров."
-        keywords="армрестлинг, База Армтемия, Армрестлинг Релиз, техника армрестлинга, биомеханика армрестлинга, консультации по армрестлингу, Telegram сообщество армрестлинг, Armtemiy Lab, спарринг-партнеры"
+        description="База Армтемия — закрытая библиотека материалов и сообщество по армрестлингу. Ядро — Армрестлинг Релиз: система мышления, биомеханика, техники и анализ без шаблонов. Отдельно — крафтовые консультации и бесплатная Лаборатория Армтемия для поиска спарринг-партнёров."
+        keywords="армрестлинг, База Армтемия, Армрестлинг Релиз, техника армрестлинга, биомеханика армрестлинга, консультации по армрестлингу, Telegram сообщество армрестлинг, Лаборатория Армтемия, спарринг-партнеры"
       />
       <div className="min-h-screen">
         <Navbar />
@@ -125,17 +124,6 @@ const Index = () => {
           }
         >
           <ProgramSection />
-        </Suspense>
-
-        <Suspense
-          fallback={
-            <LazySectionFallback
-              id="about"
-              className="bg-[hsl(15_6%_8%)] min-h-[900px] md:min-h-[700px] lg:min-h-[640px]"
-            />
-          }
-        >
-          <AboutSection />
         </Suspense>
 
         <Suspense fallback={<MarqueeFallback />}>

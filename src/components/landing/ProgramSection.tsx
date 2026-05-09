@@ -127,14 +127,14 @@ const ProgramSection = () => {
             className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-3"
             style={COMMON_STYLES.clashDisplay}
           >
-            Armtemiy Lab
+            Лаборатория Армтемия
           </h2>
           <p
             className="text-[hsl(15_10%_60%)] text-base sm:text-lg max-w-2xl mx-auto"
             style={COMMON_STYLES.satoshi}
           >
             Бесплатный Telegram Mini App через @armtemiy_lab_bot. Главный
-            v1-сценарий — спарринг-профиль и поиск партнёров рядом; дальше —
+            сценарий — спарринг-профиль и поиск партнёров рядом; дальше —
             карманные инструменты без лишней платформенности.
           </p>
         </div>

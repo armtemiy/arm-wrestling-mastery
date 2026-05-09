@@ -24,23 +24,12 @@ export const programCards: ProgramCard[] = [
     id: "sparring-search",
     title: "Спарринг-профиль и поиск",
     description:
-      "Главный v1-сценарий: найти людей для практики рядом с тобой через Telegram.",
+      "Главный сценарий: найти людей для практики рядом с тобой через Telegram.",
     icon: "users",
     className: "md:col-span-2",
-    status: "Доступно в v1",
+    status: "Доступно",
     tone: "ready",
     preview: "partners",
-  },
-  {
-    id: "pocket-tools",
-    title: "Карманные инструменты",
-    description:
-      "Быстрые прикладные подсказки без лишней платформенности и магии.",
-    icon: "brain",
-    className: "md:col-span-1",
-    status: "Доступно в v1",
-    tone: "ready",
-    preview: "toolkit",
   },
   {
     id: "periodization-calculator",
@@ -57,9 +46,9 @@ export const programCards: ProgramCard[] = [
     id: "counter-moves-matrix",
     title: "Матрица контр-приёмов",
     description:
-      "Короткие подсказки против базовых стилей соперника — в развитии после v1.",
+      "Короткие подсказки против базовых стилей соперника — в развитии.",
     icon: "crosshair",
-    className: "md:col-span-2",
+    className: "md:col-span-1",
     status: "Roadmap",
     tone: "soon",
     preview: "counterMoves",
