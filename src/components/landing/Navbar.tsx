@@ -25,6 +25,7 @@ const Navbar = () => {
     () => [
       { href: "#product", label: "Продукт" },
       { href: "#consultations", label: "Консультации" },
+      { href: "#lab", label: "Lab" },
       { href: "#about", label: "О\u00A0себе" },
       { href: "#faq", label: "FAQ" },
     ],
@@ -101,7 +102,7 @@ const Navbar = () => {
       const progress = Math.min(window.scrollY / 200, 1);
       setScrollProgress(progress);
 
-      const sections = ["product", "consultations", "about", "faq"];
+      const sections = ["product", "consultations", "lab", "about", "faq"];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {

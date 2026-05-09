@@ -3,9 +3,9 @@ export type ProgramIconKey = "brain" | "calculator" | "users" | "crosshair";
 export type ProgramTone = "ready" | "soon";
 
 export type ProgramPreviewKey =
-  | "diagnostic"
-  | "periodization"
   | "partners"
+  | "toolkit"
+  | "periodization"
   | "counterMoves";
 
 export interface ProgramCard {
@@ -21,42 +21,46 @@ export interface ProgramCard {
 
 export const programCards: ProgramCard[] = [
   {
-    id: "diagnostic-engine",
-    title: "Диагностический движок",
-    description: "5–7 вопросов и точный разбор, где теряется сила.",
-    icon: "brain",
+    id: "sparring-search",
+    title: "Спарринг-профиль и поиск",
+    description:
+      "Главный v1-сценарий: найти людей для практики рядом с тобой через Telegram.",
+    icon: "users",
     className: "md:col-span-2",
-    status: "Рабочий",
+    status: "Доступно в v1",
     tone: "ready",
-    preview: "diagnostic",
+    preview: "partners",
+  },
+  {
+    id: "pocket-tools",
+    title: "Карманные инструменты",
+    description:
+      "Быстрые прикладные подсказки без лишней платформенности и магии.",
+    icon: "brain",
+    className: "md:col-span-1",
+    status: "Доступно в v1",
+    tone: "ready",
+    preview: "toolkit",
   },
   {
     id: "periodization-calculator",
     title: "Калькулятор периодизации",
-    description: "План на 4 недели для силы в базовых упражнениях.",
+    description:
+      "Простой ориентир по 4-недельной силовой работе — как вспомогательный слой Lab.",
     icon: "calculator",
     className: "md:col-span-1",
-    status: "Рабочий",
-    tone: "ready",
-    preview: "periodization",
-  },
-  {
-    id: "sparring-search",
-    title: "Поиск спарринг-партнёров",
-    description: "Подбор людей для практики рядом с тобой.",
-    icon: "users",
-    className: "md:col-span-1",
-    status: "В разработке",
+    status: "Roadmap",
     tone: "soon",
-    preview: "partners",
+    preview: "periodization",
   },
   {
     id: "counter-moves-matrix",
     title: "Матрица контр-приёмов",
-    description: "Подсказки, чем отвечать на стили соперников.",
+    description:
+      "Короткие подсказки против базовых стилей соперника — в развитии после v1.",
     icon: "crosshair",
     className: "md:col-span-2",
-    status: "В разработке",
+    status: "Roadmap",
     tone: "soon",
     preview: "counterMoves",
   },

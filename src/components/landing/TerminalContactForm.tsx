@@ -50,6 +50,22 @@ function getCurrentTime() {
   });
 }
 
+function getSubmitErrorHint(status: number | undefined, error: string) {
+  if (status === 403 || error.toLowerCase().includes("cors")) {
+    return "Не прошёл доступ с этого домена. Напиши напрямую в Telegram: @armtemiy";
+  }
+
+  if (status === 429) {
+    return "Подожди минуту и попробуй снова.";
+  }
+
+  if (error.toLowerCase().includes("network")) {
+    return "Похоже на сетевую ошибку. Если не уйдёт — напиши напрямую в Telegram: @armtemiy";
+  }
+
+  return "Открой Telegram и напиши напрямую: @armtemiy";
+}
+
 const TerminalLineComponent = React.memo(
   ({ line, index }: { line: TerminalLine; index: number }) => (
     <div
@@ -98,7 +114,6 @@ const TerminalContactForm = () => {
   const [message, setMessage] = useState("");
   const [fieldError, setFieldError] = useState<string | null>(null);
   const [honeypot, setHoneypot] = useState("");
-  const [formLoadTime] = useState(Date.now());
   const [lines, setLines] = useState<TerminalLine[]>([
     {
       type: "system",
@@ -113,6 +128,7 @@ const TerminalContactForm = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const pendingTimeoutsRef = useRef<number[]>([]);
+  const firstInteractionAtRef = useRef<number | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const { submitLead, isSubmitting } = useSubmitLead();
 
@@ -180,6 +196,12 @@ const TerminalContactForm = () => {
     setLines((prev) => [...prev, line]);
   }, []);
 
+  const markInteraction = useCallback(() => {
+    if (firstInteractionAtRef.current === null) {
+      firstInteractionAtRef.current = Date.now();
+    }
+  }, []);
+
   const isRateLimited = useCallback((): boolean => {
     const now = Date.now();
     while (submissionTimestamps.length > 0) {
@@ -194,10 +216,18 @@ const TerminalContactForm = () => {
     return submissionTimestamps.length >= MAX_SUBMISSIONS_PER_WINDOW;
   }, []);
 
-  const isBot = useCallback((): boolean => {
-    const timeSinceLoad = Date.now() - formLoadTime;
-    return timeSinceLoad < 3000 || honeypot.length > 0;
-  }, [formLoadTime, honeypot]);
+  const getBotCheckError = useCallback((): string | null => {
+    if (honeypot.length > 0) {
+      return "Ошибка проверки. Обнови форму и попробуй снова.";
+    }
+
+    const firstInteractionAt = firstInteractionAtRef.current;
+    if (!firstInteractionAt || Date.now() - firstInteractionAt < 3000) {
+      return "Подожди пару секунд и попробуй снова.";
+    }
+
+    return null;
+  }, [honeypot]);
 
   const handleSubmit = useCallback(
     async (
@@ -262,9 +292,10 @@ const TerminalContactForm = () => {
           return;
         }
 
-        if (isBot()) {
-          addLine({ type: "error", content: "✕ Ошибка проверки." });
-          setStep("error");
+        const botCheckError = getBotCheckError();
+        if (botCheckError) {
+          setFieldError(botCheckError);
+          addLine({ type: "error", content: `✕ ${botCheckError}` });
           return;
         }
 
@@ -304,7 +335,7 @@ const TerminalContactForm = () => {
           addLine({ type: "success", content: "✓ ЗАЯВКА ПРИНЯТА" });
           addLine({
             type: "system",
-            content: `${name}, заявка отправлена в Armtemiy Lab.`,
+            content: `${name}, заявка отправлена Артемию.`,
           });
           addLine({ type: "system", content: "Скоро напишу." });
           setStep("success");
@@ -324,7 +355,7 @@ const TerminalContactForm = () => {
         addLine({ type: "error", content: "✕ ЧТО-ТО ПОШЛО НЕ ТАК" });
         addLine({
           type: "system",
-          content: "Открой Telegram и напиши боту: @armtemiy_lab_bot",
+          content: getSubmitErrorHint(result.status, result.error),
         });
         setStep("error");
       }
@@ -336,7 +367,7 @@ const TerminalContactForm = () => {
       phone,
       message,
       addLine,
-      isBot,
+      getBotCheckError,
       isRateLimited,
       scheduleAction,
       submitLead,
@@ -345,11 +376,13 @@ const TerminalContactForm = () => {
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
+      markInteraction();
+
       if (e.key === "Enter") {
         handleSubmit(e);
       }
     },
-    [handleSubmit],
+    [handleSubmit, markInteraction],
   );
 
   const resetForm = useCallback(() => {
@@ -358,7 +391,9 @@ const TerminalContactForm = () => {
     setName("");
     setPhone("");
     setMessage("");
+    setHoneypot("");
     setFieldError(null);
+    firstInteractionAtRef.current = null;
     setLines([
       {
         type: "system",
@@ -385,6 +420,7 @@ const TerminalContactForm = () => {
 
   const setCurrentValue = useCallback(
     (value: string) => {
+      markInteraction();
       setFieldError(null);
       switch (step) {
         case "name":
@@ -400,7 +436,7 @@ const TerminalContactForm = () => {
           break;
       }
     },
-    [step],
+    [step, markInteraction],
   );
 
   const getPlaceholder = useCallback(() => {
@@ -523,6 +559,7 @@ const TerminalContactForm = () => {
               type={step === "phone" ? "tel" : "text"}
               value={currentValue}
               onFocus={() => setIsActive(true)}
+              onPointerDown={markInteraction}
               onChange={(e) => setCurrentValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={placeholder}

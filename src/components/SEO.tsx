@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 interface SEOProps {
   title?: string;
@@ -11,11 +11,11 @@ interface SEOProps {
 }
 
 export const SEO = ({
-  title = 'Armtemiy Lab — диагностика и инструменты для армрестлинга',
-  description = 'Armtemiy Lab — мини-приложение в Telegram: быстрый разбор поражений и конкретные рекомендации.',
-  keywords = 'армрестлинг, Armtemiy Lab, диагностика, разбор поражений, техника армрестлинга, консультация, тренировочная программа, Тула',
-  image = 'https://armtemiy.ru/images/og-image-1200x630.jpg',
-  type = 'website',
+  title = "База Армтемия — армрестлинг, комьюнити и Armtemiy Lab",
+  description = "База Армтемия, крафтовые консультации и бесплатный Armtemiy Lab в Telegram: спарринг-профиль, поиск партнёров и прикладные инструменты для армрестлинга.",
+  keywords = "армрестлинг, База Армтемия, Armtemiy Lab, спарринг-партнеры, техника армрестлинга, консультация, тренировочная программа, Тула",
+  image = "https://armtemiy.ru/images/og-image-1200x630.jpg",
+  type = "website",
   noindex = false,
 }: SEOProps) => {
   const location = useLocation();
@@ -26,44 +26,51 @@ export const SEO = ({
     document.title = title;
 
     // Обновляем мета-теги
-    const updateMetaTag = (name: string, content: string, isProperty = false) => {
-      const attribute = isProperty ? 'property' : 'name';
+    const updateMetaTag = (
+      name: string,
+      content: string,
+      isProperty = false,
+    ) => {
+      const attribute = isProperty ? "property" : "name";
       let element = document.querySelector(`meta[${attribute}="${name}"]`);
-      
+
       if (!element) {
-        element = document.createElement('meta');
+        element = document.createElement("meta");
         element.setAttribute(attribute, name);
         document.head.appendChild(element);
       }
-      
-      element.setAttribute('content', content);
+
+      element.setAttribute("content", content);
     };
 
     // Основные мета-теги
-    updateMetaTag('description', description);
-    updateMetaTag('keywords', keywords);
-    updateMetaTag('robots', noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large');
+    updateMetaTag("description", description);
+    updateMetaTag("keywords", keywords);
+    updateMetaTag(
+      "robots",
+      noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large",
+    );
 
     // Open Graph
-    updateMetaTag('og:title', title, true);
-    updateMetaTag('og:description', description, true);
-    updateMetaTag('og:image', image, true);
-    updateMetaTag('og:url', url, true);
-    updateMetaTag('og:type', type, true);
+    updateMetaTag("og:title", title, true);
+    updateMetaTag("og:description", description, true);
+    updateMetaTag("og:image", image, true);
+    updateMetaTag("og:url", url, true);
+    updateMetaTag("og:type", type, true);
 
     // Twitter
-    updateMetaTag('twitter:title', title);
-    updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', image);
+    updateMetaTag("twitter:title", title);
+    updateMetaTag("twitter:description", description);
+    updateMetaTag("twitter:image", image);
 
     // Обновляем canonical
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', url);
+    canonical.setAttribute("href", url);
   }, [title, description, keywords, image, type, url, noindex]);
 
   return null;

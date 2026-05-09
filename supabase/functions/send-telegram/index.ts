@@ -1,7 +1,17 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { z } from "npm:zod@3.23.8";
 
-const DEFAULT_ALLOWED_ORIGINS = ["https://armtemiy.ru"];
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://armtemiy.ru",
+  "https://www.armtemiy.ru",
+  "https://armtemiy.github.io",
+  "http://localhost:3000",
+  "http://localhost:4173",
+  "http://localhost:5173",
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:4173",
+  "http://127.0.0.1:5173",
+];
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 const RATE_LIMIT_MAX_REQUESTS = 3;
 
@@ -33,16 +43,25 @@ type ApiErrorCode =
   | "internal_error";
 
 function getRequestId(req: Request): string {
-  return req.headers.get("x-request-id") || req.headers.get("sb-request-id") || crypto.randomUUID();
+  return (
+    req.headers.get("x-request-id") ||
+    req.headers.get("sb-request-id") ||
+    crypto.randomUUID()
+  );
 }
 
 function getAllowedOrigins(): string[] {
   const raw = Deno.env.get("CORS_ALLOWED_ORIGINS");
   if (!raw) return DEFAULT_ALLOWED_ORIGINS;
-  return raw
+
+  const configuredOrigins = raw
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
+
+  return Array.from(
+    new Set([...DEFAULT_ALLOWED_ORIGINS, ...configuredOrigins]),
+  );
 }
 
 function isOriginAllowed(origin: string | null): boolean {
@@ -53,7 +72,8 @@ function isOriginAllowed(origin: string | null): boolean {
 
 function buildCorsHeaders(origin: string | null): Record<string, string> {
   const headers: Record<string, string> = {
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-request-id",
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type, x-request-id",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     Vary: "Origin",
   };
@@ -65,7 +85,11 @@ function buildCorsHeaders(origin: string | null): Record<string, string> {
   return headers;
 }
 
-function jsonResponse(body: Record<string, unknown>, status: number, origin: string | null): Response {
+function jsonResponse(
+  body: Record<string, unknown>,
+  status: number,
+  origin: string | null,
+): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
@@ -84,7 +108,7 @@ function apiError(
     retryAfter?: number;
   },
   status: number,
-  origin: string | null
+  origin: string | null,
 ): Response {
   return jsonResponse(
     {
@@ -96,7 +120,7 @@ function apiError(
       requestId: params.requestId,
     },
     status,
-    origin
+    origin,
   );
 }
 
@@ -104,7 +128,9 @@ function getClientIp(req: Request): string {
   const forwarded = req.headers.get("x-forwarded-for") || "";
   const cfConnectingIp = req.headers.get("cf-connecting-ip") || "";
   const realIp = req.headers.get("x-real-ip") || "";
-  return forwarded.split(",")[0].trim() || cfConnectingIp || realIp || "unknown";
+  return (
+    forwarded.split(",")[0].trim() || cfConnectingIp || realIp || "unknown"
+  );
 }
 
 async function sha256(input: string): Promise<string> {
@@ -122,19 +148,22 @@ async function checkRateLimit(params: {
   windowSeconds: number;
   maxRequests: number;
 }): Promise<{ allowed: boolean; retryAfter: number }> {
-  const response = await fetch(`${params.supabaseUrl}/rest/v1/rpc/check_rate_limit`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      apikey: params.supabaseServiceKey,
-      Authorization: `Bearer ${params.supabaseServiceKey}`,
+  const response = await fetch(
+    `${params.supabaseUrl}/rest/v1/rpc/check_rate_limit`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: params.supabaseServiceKey,
+        Authorization: `Bearer ${params.supabaseServiceKey}`,
+      },
+      body: JSON.stringify({
+        p_key: params.key,
+        p_window_seconds: params.windowSeconds,
+        p_max_requests: params.maxRequests,
+      }),
     },
-    body: JSON.stringify({
-      p_key: params.key,
-      p_window_seconds: params.windowSeconds,
-      p_max_requests: params.maxRequests,
-    }),
-  });
+  );
 
   if (!response.ok) {
     throw new Error(`rate_limit_rpc_failed_${response.status}`);
@@ -148,9 +177,13 @@ async function checkRateLimit(params: {
   };
 }
 
-function escapeMarkdown(text: string): string {
-  if (!text) return "";
-  return text.replace(/\\/g, "\\\\").replace(/([_*[\]()~`>#+=|{}.!-])/g, "\\$1");
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 async function insertLead(params: {
@@ -190,9 +223,10 @@ async function insertLead(params: {
       JSON.stringify({
         level: "error",
         msg: "insert_lead_failed",
+        requestId: params.payload.request_id,
         status: response.status,
         details: text.slice(0, 300),
-      })
+      }),
     );
   }
 }
@@ -216,7 +250,7 @@ serve(async (req: Request): Promise<Response> => {
         requestId,
       },
       405,
-      origin
+      origin,
     );
   }
 
@@ -228,7 +262,7 @@ serve(async (req: Request): Promise<Response> => {
         requestId,
       },
       403,
-      origin
+      origin,
     );
   }
 
@@ -248,13 +282,14 @@ serve(async (req: Request): Promise<Response> => {
           requestId,
         },
         400,
-        origin
+        origin,
       );
     }
 
     const payload: ContactRequest = parsed.data;
     const ip = getClientIp(req);
-    const userAgent = payload.userAgent || req.headers.get("user-agent") || "unknown";
+    const userAgent =
+      payload.userAgent || req.headers.get("user-agent") || "unknown";
 
     const supabaseUrl = Deno.env.get("SB_URL");
     const supabaseServiceKey = Deno.env.get("SB_SERVICE_ROLE_KEY");
@@ -281,12 +316,14 @@ serve(async (req: Request): Promise<Response> => {
           requestId,
         },
         429,
-        origin
+        origin,
       );
     }
 
-    const botToken = Deno.env.get("TELEGRAM_BOT_TOKEN");
-    const chatId = Deno.env.get("TELEGRAM_CHAT_ID");
+    const botToken =
+      Deno.env.get("TELEGRAM_BOT_TOKEN") || Deno.env.get("TG_BOT_TOKEN");
+    const chatId =
+      Deno.env.get("TELEGRAM_CHAT_ID") || Deno.env.get("TG_ADMIN_CHAT_ID");
 
     if (!botToken || !chatId) {
       throw new Error("telegram_not_configured");
@@ -314,24 +351,27 @@ serve(async (req: Request): Promise<Response> => {
     });
 
     const telegramMessage = `
-🔔 *Новая заявка с сайта*
+🔔 <b>Новая заявка с сайта</b>
 
-👤 *Имя:* ${escapeMarkdown(payload.name)}
-📞 *Телефон:* ${escapeMarkdown(payload.phone)}
-💬 *Сообщение:* ${escapeMarkdown(payload.message)}
+👤 <b>Имя:</b> ${escapeHtml(payload.name)}
+📞 <b>Телефон:</b> ${escapeHtml(payload.phone)}
+💬 <b>Сообщение:</b> ${escapeHtml(payload.message)}
 
-📅 _${new Date().toLocaleString("ru-RU", { timeZone: "Europe/Moscow" })}_
+📅 <i>${new Date().toLocaleString("ru-RU", { timeZone: "Europe/Moscow" })}</i>
     `.trim();
 
-    const telegramResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: telegramMessage,
-        parse_mode: "Markdown",
-      }),
-    });
+    const telegramResponse = await fetch(
+      `https://api.telegram.org/bot${botToken}/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: telegramMessage,
+          parse_mode: "HTML",
+        }),
+      },
+    );
 
     const telegramResult = await telegramResponse.json();
 
@@ -347,11 +387,18 @@ serve(async (req: Request): Promise<Response> => {
         requestId,
       },
       200,
-      origin
+      origin,
     );
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "unknown_error";
-    console.error(JSON.stringify({ level: "error", msg: "send_telegram_failed", requestId, error: message }));
+    console.error(
+      JSON.stringify({
+        level: "error",
+        msg: "send_telegram_failed",
+        requestId,
+        error: message,
+      }),
+    );
 
     return apiError(
       {
@@ -360,7 +407,7 @@ serve(async (req: Request): Promise<Response> => {
         requestId,
       },
       500,
-      origin
+      origin,
     );
   }
 });

@@ -22,6 +22,26 @@ interface RequestError extends Error {
   status?: number;
 }
 
+interface SubmitLeadResponse {
+  success?: boolean;
+  ok?: boolean;
+  error?: string;
+  message?: string;
+}
+
+function parseResponse(rawResponse: string): SubmitLeadResponse | null {
+  if (!rawResponse) return null;
+
+  try {
+    const result: unknown = JSON.parse(rawResponse);
+    return typeof result === "object" && result !== null
+      ? (result as SubmitLeadResponse)
+      : null;
+  } catch {
+    return null;
+  }
+}
+
 export function useSubmitLead() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -30,7 +50,9 @@ export function useSubmitLead() {
       setIsSubmitting(true);
 
       try {
-        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as
+          | string
+          | undefined;
         const supabaseKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as
           | string
           | undefined;
@@ -39,30 +61,39 @@ export function useSubmitLead() {
           throw new Error("Supabase credentials missing");
         }
 
-        const response = await fetch(`${supabaseUrl}/functions/v1/send-telegram`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            apikey: supabaseKey,
-            Authorization: `Bearer ${supabaseKey}`,
+        const response = await fetch(
+          `${supabaseUrl}/functions/v1/send-telegram`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              apikey: supabaseKey,
+              Authorization: `Bearer ${supabaseKey}`,
+            },
+            body: JSON.stringify(payload),
           },
-          body: JSON.stringify(payload),
-        });
+        );
 
-        const result: unknown = await response.json();
-        const typedResult =
-          typeof result === "object" && result !== null
-            ? (result as { success?: boolean; error?: string })
-            : null;
+        const rawResponse = await response.text();
+        const result = parseResponse(rawResponse);
 
-        if (!response.ok || !typedResult?.success) {
-          const error = new Error(typedResult?.error || "Request failed") as RequestError;
+        if (!response.ok || (!result?.success && !result?.ok)) {
+          const error = new Error(
+            result?.error || result?.message || "Request failed",
+          ) as RequestError;
           error.status = response.status;
           throw error;
         }
 
         return { success: true };
       } catch (error: unknown) {
+        if (error instanceof TypeError) {
+          return {
+            success: false,
+            error: "Network error. Check CORS settings or internet connection.",
+          };
+        }
+
         const message =
           error instanceof Error ? error.message : "Unknown error";
         const status =
@@ -75,7 +106,7 @@ export function useSubmitLead() {
         setIsSubmitting(false);
       }
     },
-    []
+    [],
   );
 
   return { submitLead, isSubmitting };

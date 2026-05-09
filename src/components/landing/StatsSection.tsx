@@ -17,7 +17,7 @@ const stats = [
     value: 50,
     suffix: "+",
     label: "УЧЕНИКОВ",
-    description: "прошли диагностику и разбор",
+    description: "получили разбор и ориентиры",
     icon: Users,
   },
   {
