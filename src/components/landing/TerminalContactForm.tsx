@@ -9,6 +9,9 @@ import { Send, CheckCircle2, Terminal, Loader2, XCircle } from "lucide-react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useSubmitLead } from "@/hooks/useSubmitLead";
 
+// Debug version marker - check console to verify code update
+console.log("[TerminalContactForm] Loaded v2 - debug enabled");
+
 type FormStep = "name" | "phone" | "message" | "sending" | "success" | "error";
 
 interface TerminalLine {
@@ -285,6 +288,8 @@ const TerminalContactForm = () => {
       }
 
       if (step === "message" && message.trim()) {
+        console.log("[TerminalContactForm] Submitting message step...");
+
         if (!isValidMessage(message.trim())) {
           const errorText = "Что-то пошло не так. Попробуй переформулировать.";
           setFieldError(errorText);
@@ -293,13 +298,16 @@ const TerminalContactForm = () => {
         }
 
         const botCheckError = getBotCheckError();
+        console.log("[TerminalContactForm] Bot check:", { botCheckError, honeypot, firstInteractionAt: firstInteractionAtRef.current });
         if (botCheckError) {
           setFieldError(botCheckError);
           addLine({ type: "error", content: `✕ ${botCheckError}` });
           return;
         }
 
-        if (isRateLimited()) {
+        const rateLimited = isRateLimited();
+        console.log("[TerminalContactForm] Rate limit check:", { rateLimited });
+        if (rateLimited) {
           addLine({
             type: "error",
             content: "✕ Слишком много заявок. Подожди минутку.",
