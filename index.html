@@ -25,6 +25,9 @@
             name="robots"
             content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <meta http-equiv="Expires" content="0" />
         <link rel="canonical" href="https://armtemiy.ru/" />
 
         <!-- Geographic Meta Tags -->
@@ -83,11 +86,7 @@
         <meta name="msapplication-TileColor" content="#0a0a0a" />
 
         <!-- Preconnect for performance -->
-        <link
-            rel="preconnect"
-            href="https://fonts.googleapis.com"
-            crossorigin
-        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
         <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
@@ -179,6 +178,9 @@
         </script>
 
         <div id="root"></div>
+        <!-- Priority hints for LCP -->
+        <link rel="modulepreload" href="/src/main.tsx" fetchpriority="high" />
+
         <script type="module" src="/src/main.tsx"></script>
     </body>
 </html>
