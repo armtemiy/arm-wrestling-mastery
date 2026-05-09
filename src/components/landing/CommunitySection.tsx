@@ -146,9 +146,8 @@ const CommunitySection = () => {
               </div>
 
               <div className="relative">
-                <div className="rounded-[1.65rem] border border-white/[0.10] bg-black/24 p-3 shadow-[inset_0_1px_0_hsl(0_0%_100%/0.08)] sm:p-4">
-                  <div className="rounded-[1.35rem] border border-[hsl(15_5%_24%)] bg-[hsl(15_8%_10%/0.92)] p-4 sm:p-5">
-                    <div className="mb-5 flex items-center justify-between gap-4">
+                <div className="rounded-[1.65rem] border border-[hsl(15_5%_24%)] bg-[hsl(15_8%_10%/0.92)] p-4 sm:p-5">
+                  <div className="mb-5 flex items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
                         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[hsl(5_85%_60%/0.16)] text-[hsl(5_85%_60%)]">
                           <Users size={21} />
