@@ -57,27 +57,34 @@ export function useSubmitLead() {
           | string
           | undefined;
 
+        console.log("[useSubmitLead] Starting submission...", { supabaseUrl: supabaseUrl?.slice(0, 20) + "..." });
+
         if (!supabaseUrl || !supabaseKey) {
+          console.error("[useSubmitLead] Missing credentials");
           throw new Error("Supabase credentials missing");
         }
 
-        const response = await fetch(
-          `${supabaseUrl}/functions/v1/send-telegram`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              apikey: supabaseKey,
-              Authorization: `Bearer ${supabaseKey}`,
-            },
-            body: JSON.stringify(payload),
+        const endpoint = `${supabaseUrl}/functions/v1/send-telegram`;
+        console.log("[useSubmitLead] Calling endpoint:", endpoint);
+
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: supabaseKey,
+            Authorization: `Bearer ${supabaseKey}`,
           },
-        );
+          body: JSON.stringify(payload),
+        });
+
+        console.log("[useSubmitLead] Response status:", response.status);
 
         const rawResponse = await response.text();
+        console.log("[useSubmitLead] Raw response:", rawResponse.slice(0, 200));
         const result = parseResponse(rawResponse);
 
         if (!response.ok || (!result?.success && !result?.ok)) {
+          console.error("[useSubmitLead] Response not OK:", { status: response.status, result });
           const error = new Error(
             result?.error || result?.message || "Request failed",
           ) as RequestError;
@@ -85,8 +92,12 @@ export function useSubmitLead() {
           throw error;
         }
 
+        console.log("[useSubmitLead] Success!");
+
         return { success: true };
       } catch (error: unknown) {
+        console.error("[useSubmitLead] Catch error:", error);
+
         if (error instanceof TypeError) {
           return {
             success: false,
