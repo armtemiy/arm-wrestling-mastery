@@ -329,6 +329,7 @@ const TerminalContactForm = () => {
           utmContent: searchParams.get("utm_content") || undefined,
           utmTerm: searchParams.get("utm_term") || undefined,
         });
+        clearPendingTimeouts();
 
         if (result.success) {
           submissionTimestamps.push(Date.now());
@@ -371,6 +372,7 @@ const TerminalContactForm = () => {
       isRateLimited,
       scheduleAction,
       submitLead,
+      clearPendingTimeouts,
     ],
   );
 

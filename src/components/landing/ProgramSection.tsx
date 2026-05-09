@@ -2,12 +2,10 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Sparkles,
-  Brain,
   Users,
   Calculator,
   Crosshair,
   ArrowRight,
-  Activity,
   BarChart3,
   type LucideIcon,
 } from "lucide-react";
@@ -20,21 +18,6 @@ import {
   type ProgramIconKey,
   type ProgramPreviewKey,
 } from "@/data/program";
-
-function SkeletonOne() {
-  return (
-    <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800 border border-white/10 p-4 relative overflow-hidden">
-      <div className="absolute inset-0 flex items-center justify-center opacity-30">
-        <Activity size={80} className="text-[hsl(5_85%_60%)]" />
-      </div>
-      <div className="z-10 space-y-2">
-        <div className="h-2 w-1/2 bg-white/20 rounded-full" />
-        <div className="h-2 w-3/4 bg-white/20 rounded-full" />
-        <div className="h-2 w-1/3 bg-[hsl(5_85%_60%)] rounded-full" />
-      </div>
-    </div>
-  );
-}
 
 function SkeletonTwo() {
   return (
@@ -80,7 +63,6 @@ function SkeletonFour() {
 }
 
 const programIconMap = {
-  brain: Brain,
   calculator: Calculator,
   users: Users,
   crosshair: Crosshair,
@@ -88,7 +70,6 @@ const programIconMap = {
 
 const programPreviewMap = {
   partners: SkeletonThree,
-  toolkit: SkeletonOne,
   periodization: SkeletonTwo,
   counterMoves: SkeletonFour,
 } satisfies Record<ProgramPreviewKey, React.ComponentType>;
@@ -127,15 +108,14 @@ const ProgramSection = () => {
             className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-3"
             style={COMMON_STYLES.clashDisplay}
           >
-            Armtemiy Lab
+            Лаборатория Армтемия
           </h2>
           <p
             className="text-[hsl(15_10%_60%)] text-base sm:text-lg max-w-2xl mx-auto"
             style={COMMON_STYLES.satoshi}
           >
-            Бесплатный Telegram Mini App через @armtemiy_lab_bot. Главный
-            v1-сценарий — спарринг-профиль и поиск партнёров рядом; дальше —
-            карманные инструменты без лишней платформенности.
+            Бесплатный Telegram Mini App через @armtemiy_lab_bot. Спарринг-профиль,
+            поиск партнёров рядом и вспомогательные инструменты для практики.
           </p>
         </div>
 

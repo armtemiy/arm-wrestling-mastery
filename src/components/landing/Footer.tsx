@@ -63,8 +63,8 @@ const Footer = () => {
   const navLinks = [
     { label: "Продукт", href: "#product" },
     { label: "Консультации", href: "#consultations" },
-    { label: "Lab", href: "#lab" },
-    { label: "О себе", href: "#about" },
+    { label: "Лаборатория", href: "#lab" },
+    { label: "Чат по заявкам", href: "#community" },
     { label: "FAQ", href: "#faq" },
   ];
 
