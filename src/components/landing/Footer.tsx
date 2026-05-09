@@ -60,7 +60,7 @@ const Footer = () => {
   const prefersReducedMotion = useReducedMotion();
 
   const navLinks = [
-    { label: "База", href: "#product" },
+    { label: "База Армтемия", href: "#product" },
     { label: "Консультации", href: "#consultations" },
     { label: "Лаборатория", href: "#lab" },
     { label: "Чат по заявкам", href: "#community" },
